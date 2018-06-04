@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Product} from '../../model/product.model';
 
 @Component({
     selector: 'uparis-product-card',
@@ -9,7 +8,7 @@ import {Product} from '../../model/product.model';
 export class ProductCardComponent implements OnInit {
 
     @Input()
-    private product: Product;
+    private product;
 
     constructor() {
     }

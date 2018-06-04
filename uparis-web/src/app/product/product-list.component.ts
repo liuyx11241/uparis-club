@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {ProductService} from '../../service/product.service';
-import {Product} from "../../model/product.model";
+import {Product} from "./product.model";
+import {ProductService} from "./product.service";
 
 @Component({
     selector: 'uparis-product-list',
@@ -10,15 +9,15 @@ import {Product} from "../../model/product.model";
 })
 export class ProductListComponent implements OnInit {
 
-    private products: Product[];
+    listProduct: Product[];
 
-    constructor(private router: Router, private service: ProductService) {
+    constructor(private service: ProductService) {
     }
 
     ngOnInit() {
         this.service.getAllProducts().subscribe(
             data => {
-                this.products = data;
+                this.listProduct = data;
             }
         );
     }

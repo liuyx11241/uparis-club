@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:4200"}, maxAge = 3000)
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
