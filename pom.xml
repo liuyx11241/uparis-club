@@ -23,8 +23,31 @@
     </properties>
 
     <modules>
-        <module>uparis-core</module>
         <module>uparis-web</module>
+        <module>uparis-core</module>
     </modules>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.uparisclub.UparisCoreApplication</mainClass>
+                    <layout>WAR</layout>
+                </configuration>
+            </plugin>
 
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>../uparis-web/target</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
