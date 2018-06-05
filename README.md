@@ -21,4 +21,21 @@
     * 通过formLogin()定义当需要用户登录时候，转到的登录页面。
 * configureGlobal(AuthenticationManagerBuilder auth)方法，在内存中创建了一个用户，该用户的名称为user，密码为password，用户角色为USER。
 
+### JPA naming strategy
+* spring.jpa.hibernate.naming.implicit-strategy= # Hibernate 5 implicit naming strategy fully qualified name.
+    1. 第一：org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl效果等同于hibernate4中的DefaultNamingStrategy这个直接映射，不会做过多的处理（前提没有设置@Table，@Column等属性的时候）。如果有@Column则以@Column为准
+    1. 第二：org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy效果等同于hibernate4中的ImprovedNamingStrategy 表名，字段为小写，当有大写字母的时候会转换为分隔符号“_”。
+* spring.jpa.hibernate.naming.physical-strategy= # Hibernate 5 physical naming strategy fully qualified name.
+    1. 第一：org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImp外键关联字段由关联对象的主键相对路径构成，例如关联对象User的主键为id，则此策略下，将User作为外键的表使用User_id作为列名。
+    2. 第二：org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl外键关联字段不拆分，即上例中直接用User做为列名
+    3. 第三：org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl等同1
+
+### ddl-auto
+* **none** This is the default for MySQL, no change to the database structure.
+* **update** Hibernate changes the database according to the given Entity structures.
+* **create** Creates the database every time, but don’t drop it when close.
+* **create-drop** Creates the database then drops it when the SessionFactory closes.
+
+We here begin with create because we don’t have the database structure yet. After the first run, we could switch it to update or none according to program requirements. Use update when you want to make some change to the database structure.
+
 ##FRONT END
