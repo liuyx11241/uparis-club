@@ -1,12 +1,10 @@
 package com.uparisclub.db.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Product {
+@Table(name = "product")
+public class ProductPo {
 
     @Id
     @GeneratedValue
@@ -15,11 +13,11 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    public Product() {
+    public ProductPo() {
         // Empty Constructor
     }
 
-    public Product(String name) {
+    public ProductPo(String name) {
         this.name = name;
     }
 
@@ -41,7 +39,7 @@ public class Product {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Product{");
+        final StringBuilder sb = new StringBuilder("ProductPo{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append('}');

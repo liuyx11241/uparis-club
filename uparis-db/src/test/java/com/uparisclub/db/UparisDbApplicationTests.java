@@ -1,6 +1,6 @@
 package com.uparisclub.db;
 
-import com.uparisclub.db.entity.Product;
+import com.uparisclub.db.entity.ProductPo;
 import com.uparisclub.db.repo.ProductRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,9 +22,10 @@ public class UparisDbApplicationTests {
 
     @Test
     public void testJpaProduct() {
-        Product product = null;
+        // fixme Danger because of create-drop
+        ProductPo product = null;
         for (int i = 0; i < 10; i++) {
-            product = productRepository.save(new Product("name" + i));
+            product = productRepository.save(new ProductPo("name" + i));
         }
 
 
