@@ -38,19 +38,43 @@
                 </configuration>
             </plugin>
 
+            <!--<plugin>-->
+            <!--<artifactId>maven-war-plugin</artifactId>-->
+            <!--<version>3.2.0</version>-->
+            <!--<configuration>-->
+            <!--<webResources>-->
+            <!--<resource>-->
+            <!--<directory>../uparis-web/target</directory>-->
+            <!--</resource>-->
+            <!--</webResources>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+
             <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <webResources>
-                        <resource>
-                            <directory>../uparis-web/target</directory>
-                        </resource>
-                        <resource>
-                            <directory>../uparis-db/target</directory>
-                        </resource>
-                    </webResources>
-                </configuration>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${build.directory}/classes/static/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../uparis-web/dist/uparis-web</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>1.9.60</version>
             </plugin>
         </plugins>
     </build>
