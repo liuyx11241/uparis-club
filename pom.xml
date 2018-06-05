@@ -25,6 +25,7 @@
     <modules>
         <module>uparis-web</module>
         <module>uparis-core</module>
+        <module>uparis-db</module>
     </modules>
     <build>
         <plugins>
@@ -44,6 +45,9 @@
                     <webResources>
                         <resource>
                             <directory>../uparis-web/target</directory>
+                        </resource>
+                        <resource>
+                            <directory>../uparis-db/target</directory>
                         </resource>
                     </webResources>
                 </configuration>
