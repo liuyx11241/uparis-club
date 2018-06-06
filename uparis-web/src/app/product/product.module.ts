@@ -18,6 +18,5 @@ import {HttpClientModule} from "@angular/common/http";
     exports: [ProductListComponent, ProductCardComponent],
     bootstrap: [ProductListComponent]
 })
-
 export class ProductModule {
 }
