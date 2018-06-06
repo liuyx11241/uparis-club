@@ -1,6 +1,5 @@
 # uparis-club
-
-##BACK END
+## BACK END
 ### application.properties
 在Spring Boot中多环境配置文件名需要满足application-{profile}.properties的格式，其中{profile}对应你的环境标识，比如：
 * application-dev.properties：开发环境
@@ -38,4 +37,27 @@
 
 We here begin with create because we don’t have the database structure yet. After the first run, we could switch it to update or none according to program requirements. Use update when you want to make some change to the database structure.
 
-##FRONT END
+## FRONT END
+
+### install angular material
+#### 1. npm install angular-material & hammerjs
+> npm install --save @angular/material @angular/animations @angular/cdk
+> npm install --save hammerjs
+
+Hammer.js is an optional dependency and helps with touch support for a few of the components.
+
+#### 2. Modify angular.json
+>"scripts": [
+>   "../node_modules/hammerjs/hammer.min.js"
+> ],
+
+#### 3. Import a pre-built theme and Material icons into styles.css
+> @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+#### 4. Localize Mat Icons
+Install material icons
+> npm install material-design-icons --save
+
+Insert into styles.css
+> import materialIcons from 'material-design-icons/iconfont/material-icons.css'
