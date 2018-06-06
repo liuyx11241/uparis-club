@@ -1,7 +1,7 @@
-package com.uparisclub.mvc;
+package com.uparis.mvc;
 
-import com.uparisclub.db.repo.ProductRepository;
-import com.uparisclub.dto.ProductDto;
+import com.uparis.db.repo.ProductRepository;
+import com.uparis.dto.ProductDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -11,7 +11,7 @@
     <description>UParis Client Web</description>
 
     <parent>
-        <groupId>com.uparisclub</groupId>
+        <groupId>com.uparis</groupId>
         <artifactId>uparis-club</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -74,7 +74,7 @@
 
         <resources>
             <resource>
-                <directory>target/client</directory>
+                <directory>target</directory>
                 <targetPath>static</targetPath>
             </resource>
         </resources>

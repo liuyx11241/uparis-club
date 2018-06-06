@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.uparisclub</groupId>
+    <groupId>com.uparis</groupId>
     <artifactId>uparis-club</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -33,7 +33,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.uparisclub.UparisCoreApplication</mainClass>
+                    <mainClass>com.uparis.UparisCoreApplication</mainClass>
                     <layout>WAR</layout>
                 </configuration>
             </plugin>

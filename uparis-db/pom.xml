@@ -10,10 +10,10 @@
 	<description>UParis Database Module</description>
 
 	<parent>
-		<groupId>com.uparisclub</groupId>
+		<groupId>com.uparis</groupId>
 		<artifactId>uparis-club</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
 	<dependencies>

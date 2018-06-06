@@ -1,4 +1,4 @@
-package com.uparisclub;
+package com.uparis;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -10,7 +10,7 @@
     <description>UParis Server Core</description>
 
     <parent>
-        <groupId>com.uparisclub</groupId>
+        <groupId>com.uparis</groupId>
         <artifactId>uparis-club</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -18,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.uparisclub</groupId>
+            <groupId>com.uparis</groupId>
             <artifactId>uparis-db</artifactId>
             <version>${project.version}</version>
         </dependency>

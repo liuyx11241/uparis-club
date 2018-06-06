@@ -1,4 +1,4 @@
-package com.uparisclub.dto;
+package com.uparis.dto;
 
 import java.io.Serializable;
 

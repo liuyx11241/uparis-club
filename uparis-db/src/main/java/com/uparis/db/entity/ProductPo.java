@@ -1,4 +1,4 @@
-package com.uparisclub.db.entity;
+package com.uparis.db.entity;
 
 import javax.persistence.*;
 

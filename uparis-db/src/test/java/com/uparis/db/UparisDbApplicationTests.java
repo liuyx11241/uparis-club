@@ -1,7 +1,7 @@
-package com.uparisclub.db;
+package com.uparis.db;
 
-import com.uparisclub.db.entity.ProductPo;
-import com.uparisclub.db.repo.ProductRepository;
+import com.uparis.db.entity.ProductPo;
+import com.uparis.db.repo.ProductRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
