@@ -1,9 +1,10 @@
 package com.uparis.db.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Table(name = "product")
+@Table(name = "t_product")
 public class ProductPo {
 
     @Id
@@ -35,6 +36,19 @@ public class ProductPo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductPo productPo = (ProductPo) o;
+        return Objects.equals(id, productPo.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
