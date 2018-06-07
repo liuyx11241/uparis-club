@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {ProductListComponent} from "./product/product-list.component";
+import {PageNotFoundComponent} from "./error/page-not-found.component";
 
 const ROUTES: Routes = [
-    {path: '', redirectTo: '', pathMatch: 'full'},
-    {path: 'product', component: ProductListComponent},
+    {path: '', redirectTo: '/eshop', pathMatch: 'full'},
+    {path: '**', component: PageNotFoundComponent},
 ];
 
 @NgModule({

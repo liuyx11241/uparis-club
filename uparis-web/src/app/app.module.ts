@@ -3,22 +3,22 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {AppMaterialModule} from './app-material.module';
-import {ProductModule} from "./product/product.module";
+import {EshopModule} from './eshop/eshop.module';
+import {ErrorModule} from './error/error.module';
 
 @NgModule({
     declarations: [
         AppComponent
     ],
     imports: [
-        AppRoutingModule,
         BrowserModule,
         BrowserAnimationsModule,
+        ErrorModule,
 
-        AppMaterialModule,
+        EshopModule,
 
-        // Business Modules
-        ProductModule,
+        // Routing Base
+        AppRoutingModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
