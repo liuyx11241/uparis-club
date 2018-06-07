@@ -21,5 +21,5 @@ import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbar
         MatCardModule,
     ]
 })
-export class MaterialModule {
+export class AppMaterialModule {
 }
