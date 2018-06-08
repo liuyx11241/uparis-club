@@ -1,7 +1,9 @@
 package com.uparis.db;
 
 import com.uparis.db.entity.ProductPo;
+import com.uparis.db.entity.TripPo;
 import com.uparis.db.repo.ProductRepository;
+import com.uparis.db.repo.TripRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +17,9 @@ public class UparisDbApplicationTests {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    TripRepository tripRepository;
 
     @Test
     public void contextLoads() {
@@ -40,5 +45,16 @@ public class UparisDbApplicationTests {
         productRepository.delete(productRepository.findByName("name9"));
 
         Assert.assertEquals(9, productRepository.findAll().size());
+    }
+
+    @Test
+    public void testJpaJourney() {
+        ProductPo productPo = productRepository.save(new ProductPo("test", 7));
+
+        TripPo tripPo = new TripPo();
+        tripPo.setDateStart("18/05/2018");
+        tripPo.setDateEnd("19/05/2018");
+        tripPo.setProduct(productPo);
+        tripRepository.save(tripPo);
     }
 }
