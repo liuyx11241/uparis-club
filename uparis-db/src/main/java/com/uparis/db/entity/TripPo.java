@@ -1,9 +1,10 @@
 package com.uparis.db.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "t_trip")
+@Table(name = "T_TRIP")
 public class TripPo {
 
     @Id
@@ -19,10 +20,12 @@ public class TripPo {
     @ManyToOne(optional = false)
     private ProductPo product;
 
+    @OneToMany(mappedBy = "trip", orphanRemoval = true)
+    private List<TripItinerary> listItinerary;
+
     public TripPo() {
         // Empty Constructor
     }
-
 
     public Long getId() {
         return id;

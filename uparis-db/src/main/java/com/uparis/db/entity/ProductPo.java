@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "t_product")
+@Table(name = "T_PRODUCT")
 public class ProductPo {
 
     @Id
@@ -27,9 +27,15 @@ public class ProductPo {
     @Column(nullable = false)
     private Integer duration;
 
+    @Column(nullable = false)
+    private CategoryPo category;
+
     // Relationship
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")
     private List<TripPo> listJourney;
+
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")
+    private List<ProductItinerary> listItinerary;
 
     public ProductPo() {
         // Empty Constructor
@@ -62,8 +68,10 @@ public class ProductPo {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         ProductPo productPo = (ProductPo) o;
         return Objects.equals(id, productPo.id);
     }
