@@ -1,4 +1,11 @@
+import {Trip} from "./trip.dto";
+
 export class Product {
-    id: string;
+    id: number;
     name: string;
+    alias: string
+    shortDescription: string;
+    longDescription: string;
+    duration: number;
+    listTrip: Trip[];
 }

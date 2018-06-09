@@ -1,2 +1,156 @@
-<div>{{product$.id}}</div>
-<div>{{product$.name}}</div>
+<mat-sidenav-container>
+    <mat-sidenav #snav [mode]="'side'" [fixedInViewport]="true" [opened]="true" position="end">
+        <mat-card>
+            <mat-card-title>ORDER</mat-card-title>
+            <mat-card-actions>
+                <button mat-raised-button color="accent">
+                    <mat-icon>add_shopping_cart</mat-icon>Command</button>
+                <button mat-fab color="accent">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>product$.name</mat-card-title>
+                <mat-card-subtitle>product$.alias</mat-card-subtitle>
+            </mat-card-header>
+
+            <ngb-carousel>
+                <ng-template ngbSlide>
+                    <img mat-card-image src="https://source.unsplash.com/random/900x900">
+                    <div class="carousel-caption">
+                        <h3>10 seconds between slides...</h3>
+                        <p>This carousel uses customized default values.</p>
+                    </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                    <img mat-card-image src="https://source.unsplash.com/random/900x900">
+                    <div class="carousel-caption">
+                        <h3>No keyboard...</h3>
+                        <p>This carousel uses customized default values.</p>
+                    </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                    <img mat-card-image src="https://source.unsplash.com/random/900x900">
+                    <div class="carousel-caption">
+                        <h3>And no wrap after last slide.</h3>
+                        <p>This carousel uses customized default values.</p>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+
+            <mat-card-content>
+                <mat-tab-group>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon>schedule</mat-icon>
+                            Schedule
+                        </ng-template>
+                        <p>
+                            Day 1 巴黎－卡塔尼亚 （6.16）
+
+                            – 巴黎集合戴高乐机场出发
+
+                            – 乘坐7：00的飞机前往卡塔尼亚
+
+                            – 乘水陆交通，抵达利帕里岛
+
+                            – 利帕里岛环岛徒步，高处可观赏海上众火山岛风光。
+
+                            – 3h30徒步，海拔升降400米
+                            Day 2 利帕里岛－火山岛（6.17）
+
+                            – 乘船前往以硫磺气孔出名的火山岛
+
+                            – 途中观赏巍峨火山岩石，远观大海一路爬升
+
+                            – 徒步至山顶会看到壮观的硫磺气孔，以及闻到浓浓的硫磺味
+
+                            – 下午享受天然火山泥浴后乘船回利帕里
+
+
+                            – 4h徒步，海拔升降450米
+
+                            Day 3 利帕里岛－斯特魔波利岛（6.18）
+
+                            – 乘船前往意大利最活跃的火山岛斯特魔波利岛，远处便看到山顶浓烟滚滚，每20分钟喷发一次的小岛，会给你带来前所未有的震撼
+
+                            – 跟当地向导汇合后租赁装备登顶火山口
+
+                            – 天黑后在山顶火山口守候火山喷发出的红色岩浆，感受大地的脉动
+
+                            – 7h徒步，海拔升降900米
+
+                            Day 4 斯特魔波利岛－卡塔尼亚（6.19）
+
+                            – 乘水陆回程卡塔尼亚，欣赏西西里众岛的美丽海景。
+
+                            Day 5 埃特纳火山徒步（6.20）
+                            – 乘车前往埃特纳火山下
+
+                            – 跟随专业向导火山溶岩洞穴探险
+
+                            – 埃特纳火山徒步，感受埃特纳火山的惊艳景色。
+
+                            – 3h徒步，海拔升降400米
+
+                            Day 6 卡塔尼亚 – 陶尔米纳 – 卡塔尼亚（6.21）
+                            – 乘火车前往陶尔米纳海边小镇
+
+                            – 陶尔米纳小镇徒步，享受美食、海水与阳光
+
+                            – 下午乘火车返回卡塔尼亚
+
+                            – 卡塔尼亚城市观光
+
+                            Day 7 卡塔尼亚－返程巴黎（6.22）
+
+                            – 白天继续卡塔尼亚城市观光
+
+                            – 傍晚乘飞机返回巴黎
+                        </p>
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon>portrait</mat-icon>
+                            Leaders
+                        </ng-template>
+                        <p>...</p>
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon>euro_symbol</mat-icon>
+                            Price
+                        </ng-template>
+                        <p>...</p>
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon>card_travel</mat-icon>
+                            Equipment
+                        </ng-template>
+                        <p>...</p>
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon>info</mat-icon>
+                            Tips
+                        </ng-template>
+                        <p>...</p>
+                    </mat-tab>
+                </mat-tab-group>
+            </mat-card-content>
+        </mat-card>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
+
+

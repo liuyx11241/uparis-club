@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+    <span>Welcome Admin {{user}}</span>
+    <button mat-icon-button [mat-menu-trigger-for]="menu">
+        <mat-icon>list</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-menu x-position="after" #menu="matMenu">
+    <button mat-menu-item [routerLink]="['products']">Product</button>
+    <button mat-menu-item routerLink="dashboard">DashBoard</button>
+</mat-menu>
+
+<mat-card>
+    <mat-card-header></mat-card-header>
+    <mat-card-content>
+        <router-outlet></router-outlet>
+    </mat-card-content>
+    <mat-card-footer></mat-card-footer>
+</mat-card>

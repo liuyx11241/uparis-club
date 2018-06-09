@@ -1,6 +1,16 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbarModule} from '@angular/material';
+import {
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatListModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatToolbarModule
+} from '@angular/material';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
     imports: [
@@ -11,6 +21,11 @@ import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbar
         MatToolbarModule,
         MatIconModule,
         MatCardModule,
+        MatTabsModule,
+        MatSidenavModule,
+        MatListModule,
+
+        NgbModule
     ],
     declarations: [],
     exports: [
@@ -19,6 +34,10 @@ import {MatButtonModule, MatCardModule, MatIconModule, MatMenuModule, MatToolbar
         MatToolbarModule,
         MatIconModule,
         MatCardModule,
+        MatTabsModule,
+        MatSidenavModule,
+        MatListModule,
+        NgbModule
     ]
 })
 export class AppMaterialModule {

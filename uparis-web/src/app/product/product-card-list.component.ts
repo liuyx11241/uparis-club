@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ProductService} from "./product.service";
+import {Product} from "./product.dto";
 
 @Component({
     selector: 'uparis-product-card-list',
@@ -7,21 +9,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ProductCardListComponent implements OnInit {
 
-    productList$: [
-        {
-            id: 'id1'
-            name: 'name1'
-        },
-        {
-            id: 'id2',
-            name: 'name2'
-        }
-        ]
+    listProduct$: Product[];
 
-    constructor() {
+    constructor(private service: ProductService) {
     }
 
     ngOnInit() {
+        this.service.getAllProducts().subscribe(data => {
+            this.listProduct$ = data;
+        })
     }
-
 }
