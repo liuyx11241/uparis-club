@@ -11,17 +11,25 @@ public class TripPo {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "date_start")
     private String dateStart;
 
     @Column(nullable = false)
     private String dateEnd;
 
+    @Column(nullable = false)
+    private Integer stock;
+
     @ManyToOne(optional = false)
     private ProductPo product;
 
     @OneToMany(mappedBy = "trip", orphanRemoval = true)
-    private List<TripItinerary> listItinerary;
+    @OrderBy("numOrder asc")
+    private List<ItineraryRlt> listItinerary;
+
+    @OneToMany(mappedBy = "trip", orphanRemoval = true)
+    @OrderBy("numOrder asc")
+    private List<TripOption> listOption;
 
     public TripPo() {
         // Empty Constructor
@@ -57,5 +65,29 @@ public class TripPo {
 
     public void setProduct(ProductPo product) {
         this.product = product;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public List<ItineraryRlt> getListItinerary() {
+        return listItinerary;
+    }
+
+    public void setListItinerary(List<ItineraryRlt> listItinerary) {
+        this.listItinerary = listItinerary;
+    }
+
+    public List<TripOption> getListOption() {
+        return listOption;
+    }
+
+    public void setListOption(List<TripOption> listOption) {
+        this.listOption = listOption;
     }
 }

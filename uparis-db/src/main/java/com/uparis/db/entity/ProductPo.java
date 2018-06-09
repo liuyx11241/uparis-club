@@ -27,15 +27,18 @@ public class ProductPo {
     @Column(nullable = false)
     private Integer duration;
 
-    @Column(nullable = false)
-    private CategoryPo category;
-
     // Relationship
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")
-    private List<TripPo> listJourney;
+    @OrderBy("date_start")
+    private List<TripPo> listTrip;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")
-    private List<ProductItinerary> listItinerary;
+    @OrderBy("numOrder asc")
+    private List<ItineraryRlt> listItinerary;
+
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")
+    @OrderBy("level asc, numOrder asc")
+    private List<ProductOptionGroup> listOptionGroup;
 
     public ProductPo() {
         // Empty Constructor
@@ -64,6 +67,62 @@ public class ProductPo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public List<TripPo> getListTrip() {
+        return listTrip;
+    }
+
+    public void setListTrip(List<TripPo> listTrip) {
+        this.listTrip = listTrip;
+    }
+
+    public List<ItineraryRlt> getListItinerary() {
+        return listItinerary;
+    }
+
+    public void setListItinerary(List<ItineraryRlt> listItinerary) {
+        this.listItinerary = listItinerary;
+    }
+
+    public List<ProductOptionGroup> getListOptionGroup() {
+        return listOptionGroup;
+    }
+
+    public void setListOptionGroup(List<ProductOptionGroup> listOptionGroup) {
+        this.listOptionGroup = listOptionGroup;
     }
 
     @Override

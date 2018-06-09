@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "T_PRICE")
-@MappedSuperclass
 public class PricePo {
 
     @Id
@@ -15,5 +14,14 @@ public class PricePo {
     private BigDecimal value;
 
     private String currency;
+
+    @ManyToOne
+    private ProductPo product;
+
+    @ManyToOne
+    private TripPo trip;
+
+    @ManyToOne
+    private TripOption tripOption;
 
 }
