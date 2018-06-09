@@ -1,16 +1,32 @@
 package com.uparis.dto;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 public class ProductDto implements Serializable {
-    private String id;
+    private Long id;
+    @NotNull
     private String name;
+    @Length(max = 32)
+    private String alias;
+    @Length(max = 128)
+    private String shortDescription;
+    @Length(max = 512)
+    private String longDescription;
+    @Min(1L)
+    private Integer duration;
 
-    public String getId() {
+    private List<TripDto> listTrip;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -20,5 +36,37 @@ public class ProductDto implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 }
