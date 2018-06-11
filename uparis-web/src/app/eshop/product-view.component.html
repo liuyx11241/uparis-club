@@ -23,21 +23,21 @@
 
             <ngb-carousel>
                 <ng-template ngbSlide>
-                    <img mat-card-image src="https://source.unsplash.com/random/900x900">
+                    <img mat-card-image src="https://source.unsplash.com/random/900x600">
                     <div class="carousel-caption">
                         <h3>10 seconds between slides...</h3>
                         <p>This carousel uses customized default values.</p>
                     </div>
                 </ng-template>
                 <ng-template ngbSlide>
-                    <img mat-card-image src="https://source.unsplash.com/random/900x900">
+                    <img mat-card-image src="https://source.unsplash.com/random/900x600">
                     <div class="carousel-caption">
                         <h3>No keyboard...</h3>
                         <p>This carousel uses customized default values.</p>
                     </div>
                 </ng-template>
                 <ng-template ngbSlide>
-                    <img mat-card-image src="https://source.unsplash.com/random/900x900">
+                    <img mat-card-image src="https://source.unsplash.com/random/900x600">
                     <div class="carousel-caption">
                         <h3>And no wrap after last slide.</h3>
                         <p>This carousel uses customized default values.</p>
@@ -53,7 +53,7 @@
                             Schedule
                         </ng-template>
                         <ng-template matTabContent>
-                            <uparis-itinerary-item-list [listItinerary$]="product$.listItinerary"></uparis-itinerary-item-list>
+                            <uparis-itinerary-list-view [listItinerary$]="product$.listItinerary"></uparis-itinerary-list-view>
                         </ng-template>
                     </mat-tab>
                     <mat-tab>

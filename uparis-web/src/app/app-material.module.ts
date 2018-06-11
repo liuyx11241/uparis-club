@@ -5,6 +5,7 @@ import {
     MatCardModule,
     MatExpansionModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
     MatMenuModule,
     MatSidenavModule,
@@ -26,6 +27,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
         MatSidenavModule,
         MatListModule,
         MatExpansionModule,
+        MatInputModule,
 
         NgbModule
     ],
@@ -40,6 +42,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
         MatSidenavModule,
         MatListModule,
         MatExpansionModule,
+        MatInputModule,
 
         NgbModule
     ]

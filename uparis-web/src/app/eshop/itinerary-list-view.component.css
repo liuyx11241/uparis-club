@@ -6,5 +6,17 @@
 .mat-expansion-panel-header-description {
     justify-content: space-between;
     align-items: center;
-    flex-grow: 8;
+    flex-grow: 6;
+}
+
+.mat-action-row {
+    padding: 0px;
+}
+
+mat-list {
+    padding-top: 0px;
+}
+
+mat-list .mat-list-item {
+    height: 32px;
 }

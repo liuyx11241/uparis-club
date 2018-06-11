@@ -1,7 +1,7 @@
 package com.uparis.dto;
 
 public class TripDto {
-    private Long id;
+    private String id;
 
     private String dateStart;
 
@@ -9,11 +9,21 @@ public class TripDto {
 
     private Integer stock;
 
-    public Long getId() {
+    public TripDto() {
+        // Empty Constructor
+    }
+
+    public TripDto(String dateStart, String dateEnd, Integer stock) {
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+        this.stock = stock;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

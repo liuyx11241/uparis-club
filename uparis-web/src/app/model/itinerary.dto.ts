@@ -1,3 +1,5 @@
+import {Schedule} from "./schedule.dto";
+
 export class Itinerary {
     id: string;
     dayStart: number;
@@ -7,12 +9,4 @@ export class Itinerary {
     idTrip: string;
 
     listSchedule: Schedule[];
-}
-
-export class Schedule {
-    id: string;
-    idItinerary: string;
-    time: string;
-    numOrder: number;
-    activity: string;
 }

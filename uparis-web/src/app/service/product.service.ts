@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Product} from "./product.dto";
+import {Product} from "../model/product.dto";
 import {Observable} from "rxjs/index";
 
 const httpOptions = {headers: new HttpHeaders({'ContentType': 'application/json'})}

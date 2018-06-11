@@ -1,19 +1,21 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {EshopComponent} from "./eshop.component";
-import {ProductCardComponent} from "../product/product-card.component";
-import {ProductCardListComponent} from "../product/product-card-list.component";
-import {ProductCardResolver} from "../product/product-card-resolver.service";
+import {ProductViewComponent} from "./product-view.component";
+import {ProductListViewComponent} from "./product-list-view.component";
+import {ProductViewResolver} from "./product-view-resolver.service";
 
 const routes: Routes = [
     {
         path: 'eshop', component: EshopComponent,
         children: [
-            {path: 'products', component: ProductCardListComponent},
-            {path: 'products/:id', component: ProductCardComponent,
-                resolve:{
-                    product:ProductCardResolver
-                }},
+            {path: '', component: ProductListViewComponent},
+            {path: 'products', component: ProductListViewComponent},
+            {path: 'products/:id', component: ProductViewComponent,
+                resolve: {
+                    product: ProductViewResolver
+                }
+            },
         ]
     },
 ];

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDto implements Serializable {
-    private Long id;
+    private String id;
 
     @NotNull
     private String name;
@@ -26,15 +26,15 @@ public class ProductDto implements Serializable {
     @Min(1L)
     private Integer duration;
 
-    private List<TripDto> listTrip;
+    private List<TripDto> listTrip = new ArrayList<>();
 
     private List<ItineraryDto> listItinerary = new ArrayList<>();
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

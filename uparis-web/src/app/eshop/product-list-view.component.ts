@@ -1,15 +1,15 @@
 import {Component, HostBinding, OnInit} from '@angular/core';
-import {ProductService} from "./product.service";
-import {Product} from "./product.dto";
+import {ProductService} from "../service/product.service";
+import {Product} from "../model/product.dto";
 import {slideInDownAnimation} from "../app-animation";
 
 @Component({
-    selector: 'uparis-product-card-list',
-    templateUrl: './product-card-list.component.html',
-    styleUrls: ['./product-card-list.component.css'],
+    selector: 'uparis-product-list-view',
+    templateUrl: './product-list-view.component.html',
+    styleUrls: ['./product-list-view.component.css'],
     animations: [slideInDownAnimation]
 })
-export class ProductCardListComponent implements OnInit {
+export class ProductListViewComponent implements OnInit {
     @HostBinding('@routeAnimation') routeAnimation = true;
 
     listProduct$: Product[];

@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Itinerary} from "./itinerary.dto";
 import {Observable} from "rxjs/index";
+import {Itinerary} from "../model/itinerary.dto";
 
 @Component({
-    selector: 'uparis-itinerary-item-list',
-    templateUrl: './itinerary-item-list.component.html',
-    styleUrls: ['./itinerary-item-list.component.css']
+    selector: 'uparis-itinerary-list-view',
+    templateUrl: './itinerary-list-view.component.html',
+    styleUrls: ['./itinerary-list-view.component.css']
 })
-export class ItineraryItemListComponent implements OnInit {
+export class ItineraryListViewComponent implements OnInit {
 
     private _listItinerary$: Itinerary[] | Observable<Itinerary[]>;
 

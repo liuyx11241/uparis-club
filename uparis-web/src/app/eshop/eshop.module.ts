@@ -3,17 +3,22 @@ import {CommonModule} from '@angular/common';
 
 import {EshopRoutingModule} from './eshop-routing.module';
 import {EshopComponent} from './eshop.component';
-import {ProductModule} from "../product/product.module";
 import {AppMaterialModule} from "../app-material.module";
+import {ProductListViewComponent} from "./product-list-view.component";
+import {ProductViewComponent} from "./product-view.component";
+import {ItineraryListViewComponent} from "./itinerary-list-view.component";
+import {ProductViewResolver} from "./product-view-resolver.service";
+import {ServiceModule} from "../service/service.module";
 
 @NgModule({
     imports: [
-        AppMaterialModule,
         CommonModule,
+        AppMaterialModule,
         EshopRoutingModule,
-        ProductModule
+        ServiceModule,
     ],
-    declarations: [EshopComponent],
+    providers: [ProductViewResolver],
+    declarations: [EshopComponent, ProductListViewComponent, ProductViewComponent, ItineraryListViewComponent],
     exports: [EshopComponent],
     bootstrap: [EshopComponent]
 })
