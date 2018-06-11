@@ -1,8 +1,11 @@
 package com.uparis.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItineraryDto {
 
-    private Long id;
+    private String id;
 
     private String movement;
 
@@ -10,17 +13,17 @@ public class ItineraryDto {
 
     private Integer dayEnd;
 
-    private String description;
-
     private String idProduct;
 
     private String idTrip;
 
-    public Long getId() {
+    private List<ScheduleDto> listSchedule = new ArrayList<>();
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -48,14 +51,6 @@ public class ItineraryDto {
         this.dayEnd = dayEnd;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getIdProduct() {
         return idProduct;
     }
@@ -70,5 +65,13 @@ public class ItineraryDto {
 
     public void setIdTrip(String idTrip) {
         this.idTrip = idTrip;
+    }
+
+    public List<ScheduleDto> getListSchedule() {
+        return listSchedule;
+    }
+
+    public void setListSchedule(List<ScheduleDto> listSchedule) {
+        this.listSchedule = listSchedule;
     }
 }

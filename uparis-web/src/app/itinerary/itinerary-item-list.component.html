@@ -12,7 +12,10 @@
             </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <p>{{itinerary.description}}</p>
+        <mat-list>
+            <mat-list-item *ngFor="let schedule of itinerary.listSchedule">{{schedule.activity}}</mat-list-item>
+        </mat-list>
+
         <mat-action-row>
             <button mat-button color="warn" (click)="prevDay()" *ngIf="i!==0">Previous</button>
             <button mat-button color="primary" (click)="nextDay()" *ngIf="i!==listItinerary$.length-1">Next</button>
