@@ -24,7 +24,7 @@ public class TripPo {
     private ProductPo product;
 
     @OneToMany(mappedBy = "trip", orphanRemoval = true)
-    @OrderBy("numOrder asc")
+    @OrderBy("dayStart asc")
     private List<ItineraryRlt> listItinerary;
 
     @OneToMany(mappedBy = "trip", orphanRemoval = true)

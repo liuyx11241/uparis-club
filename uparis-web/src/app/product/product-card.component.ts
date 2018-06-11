@@ -14,8 +14,7 @@ export class ProductCardComponent implements OnInit {
     @HostBinding('@routeAnimation') routeAnimation = true;
     @HostBinding('style.display') display = 'uparis-product-card';
 
-    @Input()
-    private product$: Product;
+    private _product$: Product;
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
@@ -23,8 +22,18 @@ export class ProductCardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.route.data.subscribe((data: Product) => {
-            this.product$ = data;
+        this.route.data.subscribe((data: { product: Product }) => {
+            this._product$ = data.product;
         });
+    }
+
+
+    get product$(): Product {
+        return this._product$;
+    }
+
+    @Input()
+    set product$(value: Product) {
+        this._product$ = value;
     }
 }

@@ -33,7 +33,7 @@ public class ProductPo {
     private List<TripPo> listTrip;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")
-    @OrderBy("numOrder asc")
+    @OrderBy("dayStart asc")
     private List<ItineraryRlt> listItinerary;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")

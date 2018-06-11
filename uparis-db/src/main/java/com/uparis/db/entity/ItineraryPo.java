@@ -16,6 +16,8 @@ public class ItineraryPo {
 
     private String movement;
 
+    private String description;
+
     public Long getId() {
         return id;
     }
@@ -34,8 +36,10 @@ public class ItineraryPo {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         ItineraryPo that = (ItineraryPo) o;
         return Objects.equals(id, that.id);
     }

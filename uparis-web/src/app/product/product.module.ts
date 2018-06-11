@@ -8,13 +8,16 @@ import {ProductCardListComponent} from './product-card-list.component';
 import {AppMaterialModule} from "../app-material.module";
 import {RouterModule} from "@angular/router";
 import {ProductCardResolver} from "./product-card-resolver.service";
+import {ItineraryModule} from "../itinerary/itinerary.module";
 
 @NgModule({
     imports: [
         CommonModule,
         HttpClientModule,
         AppMaterialModule,
-        RouterModule
+        RouterModule,
+
+        ItineraryModule
     ],
     providers: [ProductService, ProductCardResolver],
     declarations: [ProductCardComponent, ProductCardListComponent],

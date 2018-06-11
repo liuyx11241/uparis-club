@@ -11,7 +11,10 @@ public class ItineraryRlt {
     private Long id;
 
     @Column(nullable = false)
-    private Integer numOrder;
+    private Integer dayStart;
+
+    @Column(nullable = false)
+    private Integer dayEnd;
 
     @ManyToOne(optional = false)
     private ItineraryPo itinerary;
@@ -30,12 +33,20 @@ public class ItineraryRlt {
         this.id = id;
     }
 
-    public Integer getNumOrder() {
-        return numOrder;
+    public Integer getDayStart() {
+        return dayStart;
     }
 
-    public void setNumOrder(Integer numOrder) {
-        this.numOrder = numOrder;
+    public void setDayStart(Integer dayStart) {
+        this.dayStart = dayStart;
+    }
+
+    public Integer getDayEnd() {
+        return dayEnd;
+    }
+
+    public void setDayEnd(Integer dayEnd) {
+        this.dayEnd = dayEnd;
     }
 
     public ItineraryPo getItinerary() {

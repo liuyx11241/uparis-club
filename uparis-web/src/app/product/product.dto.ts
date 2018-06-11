@@ -1,3 +1,5 @@
+import {Itinerary} from "../itinerary/itinerary.dto";
+
 export class Product {
     id: number;
     name: string;
@@ -5,4 +7,6 @@ export class Product {
     shortDescription: string;
     longDescription: string;
     duration: number;
+
+    listItinerary: Itinerary[];
 }

@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {
     MatButtonModule,
     MatCardModule,
+    MatExpansionModule,
     MatIconModule,
     MatListModule,
     MatMenuModule,
@@ -24,6 +25,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
         MatTabsModule,
         MatSidenavModule,
         MatListModule,
+        MatExpansionModule,
 
         NgbModule
     ],
@@ -37,6 +39,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
         MatTabsModule,
         MatSidenavModule,
         MatListModule,
+        MatExpansionModule,
+
         NgbModule
     ]
 })

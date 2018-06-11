@@ -1,0 +1,21 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let itinerary of listItinerary$; let i = index" [expanded]="currentIndex===i" (opened)="currentIndex=i">
+        <mat-expansion-panel-header>
+            <mat-panel-title *ngIf="itinerary.dayStart !== itinerary.dayEnd">
+                Day {{itinerary.dayStart}} ~ Day {{itinerary.dayEnd}}
+            </mat-panel-title>
+            <mat-panel-title *ngIf="itinerary.dayStart === itinerary.dayEnd">
+                Day {{itinerary.dayStart}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{itinerary.movement}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <p>{{itinerary.description}}</p>
+        <mat-action-row>
+            <button mat-button color="warn" (click)="prevDay()" *ngIf="i!==0">Previous</button>
+            <button mat-button color="primary" (click)="nextDay()" *ngIf="i!==listItinerary$.length-1">Next</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>
