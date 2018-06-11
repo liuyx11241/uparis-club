@@ -33,11 +33,11 @@ public class ProductPo {
     private List<TripPo> listTrip;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")
-    @OrderBy("dayStart asc")
-    private List<ItineraryRlt> listItinerary;
+    @OrderBy("day_start asc")
+    private List<ItineraryPo> listItinerary;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")
-    @OrderBy("level asc, numOrder asc")
+    @OrderBy("level asc, num_order asc")
     private List<ProductOptionGroup> listOptionGroup;
 
     public ProductPo() {
@@ -109,11 +109,11 @@ public class ProductPo {
         this.listTrip = listTrip;
     }
 
-    public List<ItineraryRlt> getListItinerary() {
+    public List<ItineraryPo> getListItinerary() {
         return listItinerary;
     }
 
-    public void setListItinerary(List<ItineraryRlt> listItinerary) {
+    public void setListItinerary(List<ItineraryPo> listItinerary) {
         this.listItinerary = listItinerary;
     }
 

@@ -1,11 +1,9 @@
 package com.uparis.db;
 
 import com.uparis.db.entity.ItineraryPo;
-import com.uparis.db.entity.ItineraryRlt;
 import com.uparis.db.entity.ProductPo;
 import com.uparis.db.entity.TripPo;
 import com.uparis.db.repo.ItineraryRepository;
-import com.uparis.db.repo.ItineraryRltRepository;
 import com.uparis.db.repo.ProductRepository;
 import com.uparis.db.repo.TripRepository;
 import org.junit.Assert;
@@ -29,9 +27,6 @@ public class JpaProductTests {
     @Autowired
     ItineraryRepository itineraryRepository;
 
-    @Autowired
-    ItineraryRltRepository itineraryRltRepository;
-
     @Test
     public void contextLoads() {
     }
@@ -43,7 +38,6 @@ public class JpaProductTests {
         for (int i = 0; i < 10; i++) {
             product = productRepository.save(new ProductPo("name" + i));
         }
-
 
         Assert.assertEquals(10, productRepository.findAll().size());
 
@@ -80,12 +74,5 @@ public class JpaProductTests {
 
         ProductPo product = new ProductPo("name");
         productRepository.saveAndFlush(product);
-
-        ItineraryRlt itineraryRlt = new ItineraryRlt();
-        itineraryRlt.setItinerary(itinerary1);
-        itineraryRlt.setNumOrder(1);
-        itineraryRlt.setProduct(product);
-        itineraryRltRepository.saveAndFlush(itineraryRlt);
-
     }
 }

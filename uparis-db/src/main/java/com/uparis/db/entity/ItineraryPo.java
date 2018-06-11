@@ -1,9 +1,7 @@
 package com.uparis.db.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +14,21 @@ public class ItineraryPo {
 
     private String movement;
 
-    private String description;
+    @Column(nullable = false, name = "day_start")
+    private Integer dayStart;
+
+    @Column(nullable = false)
+    private Integer dayEnd;
+
+    @ManyToOne
+    private ProductPo product;
+
+    @ManyToOne
+    private TripPo trip;
+
+    @OneToMany(mappedBy = "itinerary", orphanRemoval = true)
+    @OrderBy("num_order asc")
+    private List<SchedulePo> listSchedule;
 
     public Long getId() {
         return id;
@@ -32,6 +44,46 @@ public class ItineraryPo {
 
     public void setMovement(String movement) {
         this.movement = movement;
+    }
+
+    public Integer getDayStart() {
+        return dayStart;
+    }
+
+    public void setDayStart(Integer dayStart) {
+        this.dayStart = dayStart;
+    }
+
+    public Integer getDayEnd() {
+        return dayEnd;
+    }
+
+    public void setDayEnd(Integer dayEnd) {
+        this.dayEnd = dayEnd;
+    }
+
+    public ProductPo getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductPo product) {
+        this.product = product;
+    }
+
+    public TripPo getTrip() {
+        return trip;
+    }
+
+    public void setTrip(TripPo trip) {
+        this.trip = trip;
+    }
+
+    public List<SchedulePo> getListSchedule() {
+        return listSchedule;
+    }
+
+    public void setListSchedule(List<SchedulePo> listSchedule) {
+        this.listSchedule = listSchedule;
     }
 
     @Override

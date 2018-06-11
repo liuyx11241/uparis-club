@@ -14,7 +14,7 @@ public class OptionPo {
 
     private String description;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "num_order")
     private Integer numOrder;
 
     @ManyToOne(optional = false)

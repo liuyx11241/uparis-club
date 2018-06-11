@@ -15,7 +15,7 @@ public class OptionGroupPo {
     private String description;
 
     @OneToMany(mappedBy = "optionGroup", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @OrderBy("numOrder asc")
+    @OrderBy("num_order asc")
     private List<OptionPo> listOption;
 
     public Long getId() {

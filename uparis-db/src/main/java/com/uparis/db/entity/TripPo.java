@@ -24,11 +24,11 @@ public class TripPo {
     private ProductPo product;
 
     @OneToMany(mappedBy = "trip", orphanRemoval = true)
-    @OrderBy("dayStart asc")
-    private List<ItineraryRlt> listItinerary;
+    @OrderBy("day_start asc")
+    private List<ItineraryPo> listItinerary;
 
     @OneToMany(mappedBy = "trip", orphanRemoval = true)
-    @OrderBy("numOrder asc")
+    @OrderBy("level asc, num_order asc")
     private List<TripOption> listOption;
 
     public TripPo() {
@@ -75,11 +75,11 @@ public class TripPo {
         this.stock = stock;
     }
 
-    public List<ItineraryRlt> getListItinerary() {
+    public List<ItineraryPo> getListItinerary() {
         return listItinerary;
     }
 
-    public void setListItinerary(List<ItineraryRlt> listItinerary) {
+    public void setListItinerary(List<ItineraryPo> listItinerary) {
         this.listItinerary = listItinerary;
     }
 

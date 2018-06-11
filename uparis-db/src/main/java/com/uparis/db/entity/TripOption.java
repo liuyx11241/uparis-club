@@ -14,7 +14,7 @@ public class TripOption {
     @Column(nullable = false)
     private Integer level;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "num_order")
     private Integer numOrder;
 
     @ManyToOne(optional = false)
