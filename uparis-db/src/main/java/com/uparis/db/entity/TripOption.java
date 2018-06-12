@@ -11,6 +11,8 @@ public class TripOption {
 
     private String type;
 
+    private Integer stock;
+
     @Column(nullable = false)
     private Integer level;
 

@@ -3,21 +3,23 @@ package com.uparis.db.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "T_STOCK")
-public class StockPo {
-
+@Table(name = "R_TRIP_OPTION_GROUP")
+public class TripOptionGroup {
     @Id
     @GeneratedValue
     private Long id;
 
     @Column(nullable = false)
-    private Integer value;
+    private Integer level;
 
-    @ManyToOne(optional = false)
-    private TripPo trip;
+    @Column(nullable = false, name = "num_order")
+    private Integer numOrder;
 
     @ManyToOne(optional = false)
     private OptionGroupPo optionGroup;
+
+    @ManyToOne(optional = false)
+    private TripPo trip;
 
     public Long getId() {
         return id;
@@ -27,20 +29,20 @@ public class StockPo {
         this.id = id;
     }
 
-    public Integer getValue() {
-        return value;
+    public Integer getLevel() {
+        return level;
     }
 
-    public void setValue(Integer value) {
-        this.value = value;
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
-    public TripPo getTrip() {
-        return trip;
+    public Integer getNumOrder() {
+        return numOrder;
     }
 
-    public void setTrip(TripPo trip) {
-        this.trip = trip;
+    public void setNumOrder(Integer numOrder) {
+        this.numOrder = numOrder;
     }
 
     public OptionGroupPo getOptionGroup() {
@@ -50,4 +52,5 @@ public class StockPo {
     public void setOptionGroup(OptionGroupPo optionGroup) {
         this.optionGroup = optionGroup;
     }
+
 }

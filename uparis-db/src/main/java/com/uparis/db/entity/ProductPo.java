@@ -36,10 +36,6 @@ public class ProductPo {
     @OrderBy("day_start asc")
     private List<ItineraryPo> listItinerary;
 
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")
-    @OrderBy("level asc, num_order asc")
-    private List<ProductOptionGroup> listOptionGroup;
-
     public ProductPo() {
         // Empty Constructor
     }
@@ -115,14 +111,6 @@ public class ProductPo {
 
     public void setListItinerary(List<ItineraryPo> listItinerary) {
         this.listItinerary = listItinerary;
-    }
-
-    public List<ProductOptionGroup> getListOptionGroup() {
-        return listOptionGroup;
-    }
-
-    public void setListOptionGroup(List<ProductOptionGroup> listOptionGroup) {
-        this.listOptionGroup = listOptionGroup;
     }
 
     @Override

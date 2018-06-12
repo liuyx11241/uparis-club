@@ -27,9 +27,16 @@ public class TripPo {
     @OrderBy("day_start asc")
     private List<ItineraryPo> listItinerary;
 
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "trip")
+    @OrderBy("level asc, num_order asc")
+    private List<TripOptionGroup> listOptionGroup;
+
     @OneToMany(mappedBy = "trip", orphanRemoval = true)
     @OrderBy("level asc, num_order asc")
     private List<TripOption> listOption;
+
+    @OneToMany(mappedBy = "trip", orphanRemoval = true)
+    private List<OrderPo> listOrder;
 
     public TripPo() {
         // Empty Constructor
