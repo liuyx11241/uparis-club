@@ -1,5 +1,5 @@
 <mat-sidenav-container>
-    <mat-sidenav #snav [mode]="'side'" [fixedInViewport]="true" [opened]="true" position="end" [fixedTopGap]="64">
+    <mat-sidenav mode="side" [fixedInViewport]="true" [opened]="!media$.isMobileMode" position="end" [fixedTopGap]="64">
         <mat-card>
             <mat-card-title>ORDER</mat-card-title>
             <mat-card-actions>
@@ -89,10 +89,3 @@
         </mat-card>
     </mat-sidenav-content>
 </mat-sidenav-container>
-
-
-<!-- Copyright 2018 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->
-
-

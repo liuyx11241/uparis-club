@@ -22,4 +22,8 @@ export class ProductListViewComponent implements OnInit {
             this.listProduct$ = data;
         })
     }
+
+    trackByProducts(index: number, product: Product): string {
+        return product.id;
+    };
 }

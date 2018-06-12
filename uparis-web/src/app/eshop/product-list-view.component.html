@@ -1,4 +1,4 @@
-<mat-card *ngFor="let product$ of listProduct$">
+<mat-card *ngFor="let product$ of listProduct$; trackBy: trackByProducts">
     <mat-card-header>
         <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
         <mat-card-title>{{product$.name}}</mat-card-title>
