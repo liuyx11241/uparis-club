@@ -3,9 +3,9 @@ import {Observable} from "rxjs/index";
 import {Itinerary} from "../model/itinerary.dto";
 
 @Component({
-    selector: 'uparis-itinerary-list-view',
-    templateUrl: './itinerary-list-view.component.html',
-    styleUrls: ['./itinerary-list-view.component.css']
+    selector: 'uparis-itinerary-list',
+    templateUrl: './itinerary-list.component.html',
+    styleUrls: ['./itinerary-list.component.css']
 })
 export class ItineraryListViewComponent implements OnInit {
 

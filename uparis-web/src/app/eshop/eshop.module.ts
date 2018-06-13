@@ -6,9 +6,10 @@ import {EshopComponent} from './eshop.component';
 import {AppMaterialModule} from "../app-material.module";
 import {ProductListViewComponent} from "./product-list-view.component";
 import {ProductViewComponent} from "./product-view.component";
-import {ItineraryListViewComponent} from "./itinerary-list-view.component";
+import {ItineraryListViewComponent} from "./itinerary-list.component";
 import {ProductViewResolver} from "./product-view-resolver.service";
 import {ServiceModule} from "../service/service.module";
+import { ShoppingCartComponent } from './shopping-cart.component';
 
 @NgModule({
     imports: [
@@ -18,7 +19,7 @@ import {ServiceModule} from "../service/service.module";
         ServiceModule,
     ],
     providers: [ProductViewResolver],
-    declarations: [EshopComponent, ProductListViewComponent, ProductViewComponent, ItineraryListViewComponent],
+    declarations: [EshopComponent, ProductListViewComponent, ProductViewComponent, ItineraryListViewComponent, ShoppingCartComponent],
     exports: [EshopComponent],
     bootstrap: [EshopComponent]
 })

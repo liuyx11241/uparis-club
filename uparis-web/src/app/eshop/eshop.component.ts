@@ -1,17 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import { Component } from '@angular/core';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'uparis-eshop',
     templateUrl: './eshop.component.html',
     styleUrls: ['./eshop.component.css']
 })
-export class EshopComponent implements OnInit {
+export class EshopComponent {
 
-    constructor(private router: Router) {
-    }
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches)
+    );
 
-    ngOnInit() {
-    }
+  title="UPARIS"
 
-}
+  constructor(private breakpointObserver: BreakpointObserver) {}
+
+  }

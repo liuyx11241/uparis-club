@@ -1,91 +1,67 @@
-<mat-sidenav-container>
-    <mat-sidenav mode="side" [fixedInViewport]="true" [opened]="!media$.isMobileMode" position="end" [fixedTopGap]="64">
-        <mat-card>
-            <mat-card-title>ORDER</mat-card-title>
-            <mat-card-actions>
-                <button mat-raised-button color="accent">
-                    <mat-icon>add_shopping_cart</mat-icon>
-                    Command
-                </button>
-                <button mat-fab color="accent">
-                    <mat-icon>add_shopping_cart</mat-icon>
-                </button>
-            </mat-card-actions>
-        </mat-card>
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>{{product$.name}}</mat-card-title>
-                <mat-card-subtitle>{{product$.alias}}</mat-card-subtitle>
-            </mat-card-header>
-
-            <ngb-carousel>
-                <ng-template ngbSlide>
-                    <img mat-card-image src="https://source.unsplash.com/random/900x600">
-                    <div class="carousel-caption">
-                        <h3>10 seconds between slides...</h3>
-                        <p>This carousel uses customized default values.</p>
-                    </div>
+<mat-card>
+    <ngb-carousel>
+        <ng-template ngbSlide>
+            <img mat-card-image src="https://source.unsplash.com/random/900x600">
+            <div class="carousel-caption">
+                <h3>10 seconds between slides...</h3>
+                <p>This carousel uses customized default values.</p>
+            </div>
+        </ng-template>
+        <ng-template ngbSlide>
+            <img mat-card-image src="https://source.unsplash.com/random/900x600">
+            <div class="carousel-caption">
+                <h3>No keyboard...</h3>
+                <p>This carousel uses customized default values.</p>
+            </div>
+        </ng-template>
+        <ng-template ngbSlide>
+            <img mat-card-image src="https://source.unsplash.com/random/900x600">
+            <div class="carousel-caption">
+                <h3>And no wrap after last slide.</h3>
+                <p>This carousel uses customized default values.</p>
+            </div>
+        </ng-template>
+    </ngb-carousel>
+    <uparis-shopping-cart></uparis-shopping-cart>
+    <mat-card-content>
+        <mat-tab-group>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>schedule</mat-icon>
+                    Schedule
                 </ng-template>
-                <ng-template ngbSlide>
-                    <img mat-card-image src="https://source.unsplash.com/random/900x600">
-                    <div class="carousel-caption">
-                        <h3>No keyboard...</h3>
-                        <p>This carousel uses customized default values.</p>
-                    </div>
+                <ng-template matTabContent>
+                    <uparis-itinerary-list [listItinerary$]="product$.listItinerary"></uparis-itinerary-list>
                 </ng-template>
-                <ng-template ngbSlide>
-                    <img mat-card-image src="https://source.unsplash.com/random/900x600">
-                    <div class="carousel-caption">
-                        <h3>And no wrap after last slide.</h3>
-                        <p>This carousel uses customized default values.</p>
-                    </div>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>portrait</mat-icon>
+                    Leaders
                 </ng-template>
-            </ngb-carousel>
-
-            <mat-card-content>
-                <mat-tab-group>
-                    <mat-tab>
-                        <ng-template mat-tab-label>
-                            <mat-icon>schedule</mat-icon>
-                            Schedule
-                        </ng-template>
-                        <ng-template matTabContent>
-                            <uparis-itinerary-list-view [listItinerary$]="product$.listItinerary"></uparis-itinerary-list-view>
-                        </ng-template>
-                    </mat-tab>
-                    <mat-tab>
-                        <ng-template mat-tab-label>
-                            <mat-icon>portrait</mat-icon>
-                            Leaders
-                        </ng-template>
-                        <p>...</p>
-                    </mat-tab>
-                    <mat-tab>
-                        <ng-template mat-tab-label>
-                            <mat-icon>euro_symbol</mat-icon>
-                            Price
-                        </ng-template>
-                        <p>...</p>
-                    </mat-tab>
-                    <mat-tab>
-                        <ng-template mat-tab-label>
-                            <mat-icon>card_travel</mat-icon>
-                            Equipment
-                        </ng-template>
-                        <p>...</p>
-                    </mat-tab>
-                    <mat-tab>
-                        <ng-template mat-tab-label>
-                            <mat-icon>info</mat-icon>
-                            Tips
-                        </ng-template>
-                        <p>...</p>
-                    </mat-tab>
-                </mat-tab-group>
-            </mat-card-content>
-        </mat-card>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+                <p>...</p>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>euro_symbol</mat-icon>
+                    Price
+                </ng-template>
+                <p>...</p>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>card_travel</mat-icon>
+                    Equipment
+                </ng-template>
+                <p>...</p>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>info</mat-icon>
+                    Tips
+                </ng-template>
+                <p>...</p>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>
