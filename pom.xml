@@ -26,6 +26,7 @@
         <module>uparis-web</module>
         <module>uparis-core</module>
         <module>uparis-db</module>
+        <module>uparis-mdb</module>
     </modules>
     <build>
         <plugins>
