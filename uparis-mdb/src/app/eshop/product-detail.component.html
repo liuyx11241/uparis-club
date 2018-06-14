@@ -1,0 +1,63 @@
+<mat-card>
+    <mat-card-content>
+        <mat-grid-list cols="2" class="z-depth-2">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <mdb-carousel>
+                    <mdb-slide *ngFor="let slide of product.listPicture">
+                        <div class="view">
+                            <img class="d-block w-100 rounded-circle" [src]="slide.srcUrl">
+                            <div class="mask waves-light" mdbWavesEffect></div>
+                        </div>
+                        <div class="carousel-caption">
+                            <h4>{{slide.title}}</h4>
+                            <p>{{slide.description}}</p>
+                        </div>
+                    </mdb-slide>
+                </mdb-carousel>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <div>Shipping Card</div>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-tab-group color="accent" class="mt-4">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>schedule</mat-icon>
+                    Schedule
+                </ng-template>
+                <ng-template matTabContent>
+                    <uparis-itinerary-list [listItinerary]="product.listItinerary"></uparis-itinerary-list>
+                </ng-template>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>portrait</mat-icon>
+                    Leaders
+                </ng-template>
+                <p>...</p>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>euro_symbol</mat-icon>
+                    Price
+                </ng-template>
+                <p>...</p>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>card_travel</mat-icon>
+                    Equipment
+                </ng-template>
+                <p>...</p>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon>info</mat-icon>
+                    Tips
+                </ng-template>
+                <p>...</p>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>

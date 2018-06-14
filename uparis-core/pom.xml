@@ -17,11 +17,11 @@
     </parent>
 
     <dependencies>
-        <dependency>
-            <groupId>com.uparis</groupId>
-            <artifactId>uparis-db</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.uparis</groupId>-->
+            <!--<artifactId>uparis-db</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

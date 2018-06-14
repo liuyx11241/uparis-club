@@ -30,6 +30,8 @@ public class ProductDto implements Serializable {
 
     private List<ItineraryDto> listItinerary = new ArrayList<>();
 
+    private List<PictureDto> listPicture = new ArrayList<>();
+
     public String getId() {
         return id;
     }
@@ -92,5 +94,13 @@ public class ProductDto implements Serializable {
 
     public void setListItinerary(List<ItineraryDto> listItinerary) {
         this.listItinerary = listItinerary;
+    }
+
+    public List<PictureDto> getListPicture() {
+        return listPicture;
+    }
+
+    public void setListPicture(List<PictureDto> listPicture) {
+        this.listPicture = listPicture;
     }
 }

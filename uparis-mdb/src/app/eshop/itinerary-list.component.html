@@ -1,0 +1,30 @@
+<mat-accordion>
+    <mat-expansion-panel
+        *ngFor="let itinerary of listItinerary; let i = index"
+        [expanded]="currentIndex===i"
+        (opened)="currentIndex=i"
+        [hideToggle]="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>date_range</mat-icon>
+                Day {{itinerary.dayStart}}
+                <ng-container *ngIf="itinerary.dayStart !== itinerary.dayEnd">
+                    ~ Day {{itinerary.dayEnd}}
+                </ng-container>
+            </mat-panel-title>
+            <mat-panel-description>
+                <mat-icon>map</mat-icon>
+                {{itinerary.movement}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-list>
+            <mat-list-item *ngFor="let schedule of itinerary.listSchedule">{{schedule.activity}}</mat-list-item>
+        </mat-list>
+
+        <mat-action-row>
+            <button mat-button color="warn" (click)="prevDay()" *ngIf="i!==0">Previous</button>
+            <button mat-button color="accent" (click)="nextDay()" *ngIf="i!==listItinerary.length-1">Next</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,20 @@
+<mat-card *ngFor="let product of listProduct$; trackBy: trackByProducts">
+    <mat-card-header>
+        <img mat-card-avatar src="https://source.unsplash.com/random/200x200">
+        <mat-card-title>{{product.name}}</mat-card-title>
+        <mat-card-subtitle>{{product.alias}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mdb-carousel [isControls]="true" [animation]="'slide'">
+        <mdb-slide *ngFor="let slide of product.listPicture">
+            <img class="d-block w-100" [src]="slide.srcUrl" alt="First slide">
+        </mdb-slide>
+    </mdb-carousel>
+
+    <mat-card-content>
+        <p>{{product.shortDescription}}</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-raised-button color="primary" [routerLink]="['/eshop/products', product.id]">Details</button>
+    </mat-card-actions>
+</mat-card>

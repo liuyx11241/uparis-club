@@ -23,7 +23,6 @@
     </properties>
 
     <modules>
-        <module>uparis-web</module>
         <module>uparis-core</module>
         <module>uparis-db</module>
         <module>uparis-mdb</module>
@@ -52,7 +51,7 @@
                             <outputDirectory>${build.directory}/classes/static/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>../uparis-web/dist/uparis-web</directory>
+                                    <directory>../uparis-mdb/dist/uparis-mdb</directory>
                                 </resource>
                             </resources>
                         </configuration>
