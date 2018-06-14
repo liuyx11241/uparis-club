@@ -19,7 +19,6 @@ export class ProductResolver implements Resolve<Product> {
             take(1),
             map(product => {
                 if (product) {
-                    console.info(JSON.stringify(product));
                     return product;
                 }
                 else {

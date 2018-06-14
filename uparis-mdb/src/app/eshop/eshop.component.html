@@ -1,6 +1,6 @@
 <header class="h-100">
-    <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark indigo scrolling-navbar intro-fixed-nav container"
-                [containerInside]="false">
+    <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar"
+                [containerInside]="true">
         <logo>
             <a class="logo navbar-brand" href="#"><strong>UPARIS</strong></a>
         </logo>
@@ -10,10 +10,7 @@
                     <a class="nav-link">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item waves-light" mdbWavesEffect>
-                    <a class="nav-link">Link</a>
-                </li>
-                <li class="nav-item waves-light" mdbWavesEffect>
-                    <a class="nav-link">Profile</a>
+                    <a class="nav-link" routerLink="products">Products</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto mav-flex-icons">
@@ -26,7 +23,7 @@
         </links>
     </mdb-navbar>
 </header>
-<main class="text-center container">
+<main class="text-center container" [style.marginTop.px]="90">
     <router-outlet></router-outlet>
 </main>
 
@@ -39,11 +36,13 @@
             <i class="fa fa-envelope white-text ml-2"> </i>
         </a>
         <!--Newsletter-->
-        <a href="/mdb-affiliate-program/" class="border rounded p-2 px-3 mr-4 d-none d-md-inline-block">Affiliate program
+        <a href="/mdb-affiliate-program/" class="border rounded p-2 px-3 mr-4 d-none d-md-inline-block">Affiliate
+            program
             <i class="fa fa-money white-text ml-2"> </i>
         </a>
         <!--Contact-->
-        <a href="/contact" data-toggle="modal" data-target="#contactForm" class="border rounded p-2 px-3 mr-4 d-none d-md-inline-block">Contact
+        <a href="/contact" data-toggle="modal" data-target="#contactForm"
+           class="border rounded p-2 px-3 mr-4 d-none d-md-inline-block">Contact
             <i class="fa fa-envelope white-text ml-2"> </i>
         </a>
         <!--GitHub-->
