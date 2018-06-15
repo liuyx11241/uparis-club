@@ -6,11 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "T_CONTACT")
-public class ContactPo {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class ContactPo extends AbstractPo {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private TypeContact type;

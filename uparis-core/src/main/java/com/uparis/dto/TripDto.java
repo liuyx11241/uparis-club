@@ -1,13 +1,21 @@
 package com.uparis.dto;
 
+import java.math.BigDecimal;
+
 public class TripDto {
     private String id;
+
+    private String idProduct;
 
     private String dateStart;
 
     private String dateEnd;
 
     private Integer stock;
+
+    private BigDecimal price;
+
+    private String priceCurrency;
 
     public TripDto() {
         // Empty Constructor

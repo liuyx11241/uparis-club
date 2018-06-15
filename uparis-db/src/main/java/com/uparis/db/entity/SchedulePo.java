@@ -4,10 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "T_Schedule")
-public class SchedulePo {
-    @Id
-    @GeneratedValue
-    private Long id;
+public class SchedulePo extends AbstractPo {
 
     private String time;
 

@@ -5,12 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "T_TRIP")
-public class TripPo {
-
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class TripPo extends AbstractPo {
     @Column(nullable = false, name = "date_start")
     private String dateStart;
 
@@ -22,6 +17,9 @@ public class TripPo {
 
     @ManyToOne(optional = false)
     private ProductPo product;
+
+    @OneToMany(mappedBy = "trip")
+    private List<PricePo> listPrice;
 
     @OneToMany(mappedBy = "trip", orphanRemoval = true)
     @OrderBy("day_start asc")
@@ -40,61 +38,5 @@ public class TripPo {
 
     public TripPo() {
         // Empty Constructor
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDateStart() {
-        return dateStart;
-    }
-
-    public void setDateStart(String dateStart) {
-        this.dateStart = dateStart;
-    }
-
-    public String getDateEnd() {
-        return dateEnd;
-    }
-
-    public void setDateEnd(String dateEnd) {
-        this.dateEnd = dateEnd;
-    }
-
-    public ProductPo getProduct() {
-        return product;
-    }
-
-    public void setProduct(ProductPo product) {
-        this.product = product;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public List<ItineraryPo> getListItinerary() {
-        return listItinerary;
-    }
-
-    public void setListItinerary(List<ItineraryPo> listItinerary) {
-        this.listItinerary = listItinerary;
-    }
-
-    public List<TripOption> getListOption() {
-        return listOption;
-    }
-
-    public void setListOption(List<TripOption> listOption) {
-        this.listOption = listOption;
     }
 }

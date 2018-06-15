@@ -1,15 +1,14 @@
 package com.uparis.db.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
 @Table(name = "T_PERSON")
-public class PersonPo {
-
-    @Id
-    @GeneratedValue
-    private Long id;
+public class PersonPo extends AbstractPo {
 
     @Column(nullable = false)
     private String firstName;
