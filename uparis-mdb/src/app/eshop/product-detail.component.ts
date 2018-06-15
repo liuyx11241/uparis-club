@@ -2,11 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../model/product.dto";
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs/index";
+import {MatTabChangeEvent} from "@angular/material";
 
 @Component({
     selector: 'eshop/product-detail',
     templateUrl: './product-detail.component.html',
-    styleUrls: ['./product-detail.component.css']
+    styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
     private _product$: Product | Observable<Product>;

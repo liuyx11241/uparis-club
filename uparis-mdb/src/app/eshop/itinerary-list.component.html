@@ -23,8 +23,12 @@
         </mat-list>
 
         <mat-action-row>
-            <button mat-button color="warn" (click)="prevDay()" *ngIf="i!==0">Previous</button>
-            <button mat-button color="primary" (click)="nextDay()" *ngIf="i!==listItinerary.length-1">Next</button>
+            <button mat-button color="warn" (click)="prevDay()" *ngIf="i!==0">
+                <i class="fa fa-angle-double-left ml-2" aria-hidden="true"></i>
+            </button>
+            <button mat-button color="primary" (click)="nextDay()" *ngIf="i!==listItinerary.length-1">
+                <i class="fa fa-angle-double-right mr-2" aria-hidden="true"></i>
+            </button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>

@@ -14,44 +14,87 @@
                 </mdb-slide>
             </mdb-carousel>
         </div>
-        <div class="col-lg-6 text-center text-md-left"></div>
+        <div class="col-lg-5 mx-3 text-center text-md-left">
+            <h2 class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
+                <strong>{{product.name}}</strong>
+            </h2>
+            <span class="badge badge-danger product mb-4 ml-xl-0 ml-4">{{product.alias}}</span>
+            <span class="badge badge-success product mb-4 ml-2">tags</span>
+
+            <h3 class="h3-responsive text-center text-md-left ml-xl-0 ml-4">
+                <span class="red-text font-weight-bold">
+                    <strong>Price Range</strong>
+                </span>
+                <span class="grey-text">
+                    <small><s>$1789</s></small>
+                </span>
+            </h3>
+
+            <h5 class="h5-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+                <span class="amber-text font-weight-bold">
+                    <strong>stock</strong>
+                </span>
+            </h5>
+
+            <p class="ml-xl-0 ml-4">
+                <strong>Date : </strong>64GB</p>
+            <p class="ml-xl-0 ml-4">
+                <strong>Option 1: </strong>9.6-inch</p>
+            <p class="ml-xl-0 ml-4">
+                <strong>Option 2 : </strong>2048 x 1536</p>
+
+            <!-- Add to Cart -->
+            <section class="color">
+                <div class="mt-5">
+                    <div class="row mt-3 mb-4">
+                        <div class="col-md-12 text-right text-md-right">
+                            <button mat-raised-button color="primary">
+                                <mat-icon>add_shopping_cart</mat-icon>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.Add to Cart -->
+        </div>
     </div>
 </div>
 <mat-tab-group color="primary" class="mt-5">
-    <mat-tab>
+    <mat-tab #tabSchedule>
         <ng-template mat-tab-label>
-            <mat-icon>schedule</mat-icon>
-            Schedule
+            <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>
+            <span [class.amber-text]="tabSchedule.isActive">Schedule</span>
         </ng-template>
         <ng-template matTabContent>
             <uparis-itinerary-list [listItinerary]="product.listItinerary"></uparis-itinerary-list>
         </ng-template>
     </mat-tab>
-    <mat-tab>
+    <mat-tab #tabPortrait>
         <ng-template mat-tab-label>
-            <mat-icon>portrait</mat-icon>
-            Leaders
+            <mat-icon [class.amber-text]="tabPortrait.isActive">portrait</mat-icon>
+            <span [class.amber-text]="tabPortrait.isActive">Leaders</span>
         </ng-template>
         <p>...</p>
     </mat-tab>
-    <mat-tab>
+    <mat-tab #tabPrice>
         <ng-template mat-tab-label>
-            <mat-icon>euro_symbol</mat-icon>
-            Price
+            <mat-icon [class.amber-text]="tabPrice.isActive">euro_symbol</mat-icon>
+            <span [class.amber-text]="tabPrice.isActive">Price</span>
         </ng-template>
         <p>...</p>
     </mat-tab>
-    <mat-tab>
+    <mat-tab #tabEquipment>
         <ng-template mat-tab-label>
-            <mat-icon>card_travel</mat-icon>
-            Equipment
+            <mat-icon [class.amber-text]="tabEquipment.isActive">card_travel</mat-icon>
+            <span [class.amber-text]="tabEquipment.isActive">Equipment</span>
         </ng-template>
         <p>...</p>
     </mat-tab>
-    <mat-tab>
+    <mat-tab #tabInfo>
         <ng-template mat-tab-label>
-            <mat-icon>info</mat-icon>
-            Tips
+            <mat-icon [class.amber-text]="tabInfo.isActive">info</mat-icon>
+            <span [class.amber-text]="tabInfo.isActive">Tips</span>
         </ng-template>
         <p>...</p>
     </mat-tab>
