@@ -17,9 +17,6 @@ public class ItineraryPo extends AbstractPo {
     @ManyToOne
     private ProductPo product;
 
-    @ManyToOne
-    private TripPo trip;
-
     @OneToMany(mappedBy = "itinerary", orphanRemoval = true)
     @OrderBy("num_order asc")
     private List<SchedulePo> listSchedule;

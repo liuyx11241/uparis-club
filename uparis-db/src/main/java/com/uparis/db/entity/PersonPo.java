@@ -2,9 +2,7 @@ package com.uparis.db.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "T_PERSON")
@@ -31,7 +29,18 @@ public class PersonPo extends AbstractPo {
     @Column(nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "person", orphanRemoval = true)
-    private List<AddressPo> listAddress;
+    @Column(nullable = false)
+    private String address;
+
+    private String addressComplement;
+
+    @Column(nullable = false)
+    private String zipCode;
+
+    @Column(nullable = false)
+    private String city;
+
+    @Column(nullable = false)
+    private String country;
 
 }

@@ -22,21 +22,45 @@ public class TripPo extends AbstractPo {
     private List<PricePo> listPrice;
 
     @OneToMany(mappedBy = "trip", orphanRemoval = true)
-    @OrderBy("day_start asc")
-    private List<ItineraryPo> listItinerary;
-
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "trip")
     @OrderBy("level asc, num_order asc")
-    private List<TripOptionGroup> listOptionGroup;
-
-    @OneToMany(mappedBy = "trip", orphanRemoval = true)
-    @OrderBy("level asc, num_order asc")
-    private List<TripOption> listOption;
+    private List<OptionPo> listOption;
 
     @OneToMany(mappedBy = "trip", orphanRemoval = true)
     private List<OrderPo> listOrder;
 
     public TripPo() {
         // Empty Constructor
+    }
+
+    public String getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(String dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public String getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public ProductPo getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductPo product) {
+        this.product = product;
     }
 }

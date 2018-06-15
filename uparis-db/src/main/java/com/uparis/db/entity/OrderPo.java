@@ -1,9 +1,6 @@
 package com.uparis.db.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -19,6 +16,13 @@ public class OrderPo extends AbstractPo {
 
     private BigDecimal amount;
 
-    @OneToMany(mappedBy = "order")
-    private List<OrderDetailPo> listOrderDetail;
+    @ManyToOne(optional = false)
+    private PersonPo participant;
+
+    @ManyToMany
+    @JoinTable(name = "R_ORDER_OPTION",
+            joinColumns = @JoinColumn(name = "OPTION_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ORDER_ID"))
+    private List<OptionPo> listSelectedOption;
+
 }

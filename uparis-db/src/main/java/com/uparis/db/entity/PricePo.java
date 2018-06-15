@@ -17,6 +17,6 @@ public class PricePo extends AbstractPo {
     private TripPo trip;
 
     @ManyToOne
-    private TripOption tripOption;
+    private OptionPo option;
 
 }

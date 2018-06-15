@@ -1,9 +1,7 @@
 package com.uparis.db.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "T_OPTION")
@@ -15,6 +13,15 @@ public class OptionPo extends AbstractPo {
     @Column(nullable = false, name = "num_order")
     private Integer numOrder;
 
+    @Column(nullable = false)
+    private Integer level;
+
     @ManyToOne(optional = false)
-    private OptionGroupPo optionGroup;
+    private TripPo trip;
+
+    @ManyToOne
+    private StockPo stock;
+
+    @OneToMany(mappedBy = "tripOption")
+    private List<PricePo> listPriceFactor;
 }
