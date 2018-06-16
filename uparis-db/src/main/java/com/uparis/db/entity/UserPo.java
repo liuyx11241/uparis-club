@@ -1,6 +1,7 @@
 package com.uparis.db.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -9,6 +10,9 @@ import javax.persistence.Table;
 public class UserPo extends AbstractPo {
     @OneToOne(optional = false, orphanRemoval = true)
     private PersonPo person;
+
+    @ManyToOne
+    private PicturePo portrait;
 
     private String login;
 

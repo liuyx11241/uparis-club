@@ -1,0 +1,63 @@
+<section class="ml-xl-0 ml-4">
+    <h2 class="h2-responsive text-center text-md-left font-weight-bold dark-grey-text">
+        <strong>{{product$.name}}</strong>
+    </h2>
+
+    <ng-container *ngIf="!product$.listTrip">
+        <span class="badge badge-danger">暂无活动安排</span>
+    </ng-container>
+    <span class="badge badge-success">tags</span>
+
+    <h4 class="h4-responsive text-center text-md-left mt-4">
+        <span class="amber-text font-weight-bold">
+            <strong>price range</strong>
+        </span>
+    </h4>
+
+    <p>{{product$.longDescription}}</p>
+</section>
+
+<section *ngIf="product$.listTrip" class="mt-4 ml-xl-0 ml-4">
+    <p class="row" *ngFor="let trip of product$.listTrip">
+        <span class="col-6 text-left"><strong class="amber-text">{{trip.dateStart}}</strong>出发</span>
+        <span class="col-6 text-right">
+            <ng-container *ngIf="trip.stock===0">
+                <strong class="red">售罄</strong>
+            </ng-container>
+            <ng-container *ngIf="trip.stock<10">
+                最后<strong class="red-text">{{trip.stock}}个</strong>名额
+            </ng-container>
+            <ng-container *ngIf="trip.stock>=10">
+                还有<strong class="amber-text">{{trip.stock}}个</strong>名额
+            </ng-container>
+        </span>
+    </p>
+
+    <div class="row">
+        <div class="col-12 text-right text-md-right">
+            <uparis-trip-selector
+                [placeholder$]="'活动时间'"
+                [listTrip$]="product$.listTrip"
+                (selection)="selectTrip($event)"
+            ></uparis-trip-selector>
+        </div>
+    </div>
+
+    <div class="row ml-4 ml-xl-0 mt-4" *ngIf="selectedTrip$">
+        <p class="text-center text-md-left">
+            当前还有<span class="amber-text font-weight-bold"><strong>{{calcStock()}}</strong></span>个名额
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-6 text-center text-md-left">
+            <uparis-number-picker [min]="1" [max]="selectedTrip$?.stock"
+                                  (onChange)="numberParticipant$=$event"></uparis-number-picker>
+        </div>
+        <div class="col-md-6 text-center text-md-right mt-md-0 mt-4">
+            <button mat-raised-button color="primary" [disabled]="!isTripValid()">
+                <mat-icon>group_add</mat-icon>
+                立即报名
+            </button>
+        </div>
+    </div>
+</section>

@@ -1,13 +1,19 @@
-import {Itinerary} from "./itinerary.dto";
+import {Option} from "./option";
 
 export class Trip {
     id: string;
+
     idProduct: string;
+
     dateStart: string;
 
     dateEnd: string;
 
     stock: number;
 
-    listItinerary: Itinerary[];
+    price: number;
+
+    priceCurrency: string;
+
+    mappedListOption: { key: number, listOption: Option[] };
 }

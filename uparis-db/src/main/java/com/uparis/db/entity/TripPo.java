@@ -28,6 +28,12 @@ public class TripPo extends AbstractPo {
     @OneToMany(mappedBy = "trip", orphanRemoval = true)
     private List<OrderPo> listOrder;
 
+    @ManyToMany
+    @JoinTable(name = "R_TRIP_LEADER",
+            joinColumns = @JoinColumn(name = "ID_USER"),
+            inverseJoinColumns = @JoinColumn(name = "ID_TRIP"))
+    private List<UserPo> listLeader;
+
     public TripPo() {
         // Empty Constructor
     }
