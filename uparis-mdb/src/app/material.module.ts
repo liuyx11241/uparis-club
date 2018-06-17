@@ -3,12 +3,15 @@ import {CommonModule} from '@angular/common';
 import {
     MatButtonModule,
     MatCardModule,
+    MatDatepickerModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatNativeDateModule,
+    MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
     MatTabsModule,
@@ -35,6 +38,8 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
+        MatRadioModule,
+        MatDatepickerModule,
 
     ],
     exports: [
@@ -53,6 +58,8 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
         MatFormFieldModule,
         MatInputModule,
         MatSelectModule,
+        MatRadioModule,
+        MatDatepickerModule,
     ]
 })
 export class MaterialModule {

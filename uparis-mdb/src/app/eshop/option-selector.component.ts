@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Option} from "../model/option";
+import {Option} from "../model/option.dto";
 
 @Component({
     selector: 'uparis-option-selector',

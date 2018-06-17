@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Product} from "../model/product.dto";
 import {Trip} from "../model/trip.dto";
-import {Option} from "../model/option";
+import {Option} from "../model/option.dto";
 
 @Component({
     selector: 'uparis-shopping-cart',

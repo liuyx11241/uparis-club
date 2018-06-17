@@ -4,6 +4,7 @@ import {EshopComponent} from "./eshop.component";
 import {ProductListComponent} from "./product-list.component";
 import {ProductDetailComponent} from "./product-detail.component";
 import {ProductResolver} from "./product-resolver.service";
+import {PersonFormComponent} from "./person-form.component";
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     children: [
         {path: '', component: ProductListComponent},
         {path: 'products', component: ProductListComponent},
+        {path: 'person', component: PersonFormComponent},
         {path: 'products/:id', component: ProductDetailComponent, resolve: {
             product: ProductResolver
         }},

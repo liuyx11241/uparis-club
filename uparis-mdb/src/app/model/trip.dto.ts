@@ -1,4 +1,4 @@
-import {Option} from "./option";
+import {Option} from "./option.dto";
 
 export class Trip {
     id: string;

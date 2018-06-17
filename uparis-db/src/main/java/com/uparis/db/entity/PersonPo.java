@@ -1,12 +1,18 @@
 package com.uparis.db.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import com.uparis.db.constant.TypeGender;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "T_PERSON")
 public class PersonPo extends AbstractPo {
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TypeGender gender;
+
+    private String fullName;
 
     @Column(nullable = false)
     private String firstName;
@@ -24,7 +30,7 @@ public class PersonPo extends AbstractPo {
     private String wechat;
 
     @Column(nullable = false)
-    private String phone;
+    private String telephone;
 
     @Column(nullable = false)
     private String email;

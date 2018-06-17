@@ -12,8 +12,10 @@ import {ProductResolver} from "./product-resolver.service";
 import {ShoppingCartComponent} from './shopping-cart.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OptionSelectorComponent} from './option-selector.component';
-import { TripSelectorComponent } from './trip-selector.component';
-import { NumberPickerComponent } from './number-picker.component';
+import {TripSelectorComponent} from './trip-selector.component';
+import {NumberPickerComponent} from './number-picker.component';
+import {PersonFormComponent} from './person-form.component';
+import {MatNativeDateModule} from "@angular/material";
 
 @NgModule({
     imports: [
@@ -21,7 +23,7 @@ import { NumberPickerComponent } from './number-picker.component';
         FormsModule,
         ReactiveFormsModule,
         EshopRoutingModule,
-
+        MatNativeDateModule,
         MaterialModule,
         ServiceModule,
     ],
@@ -34,7 +36,8 @@ import { NumberPickerComponent } from './number-picker.component';
         ShoppingCartComponent,
         OptionSelectorComponent,
         TripSelectorComponent,
-        NumberPickerComponent],
+        NumberPickerComponent,
+        PersonFormComponent],
     bootstrap: [EshopComponent]
 })
 export class EshopModule {
