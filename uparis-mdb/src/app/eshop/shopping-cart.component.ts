@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Product} from "../model/product.dto";
 import {Trip} from "../model/trip.dto";
-import {Option} from "../model/option.dto";
+import {NavigationExtras, Router} from "@angular/router";
 
 @Component({
     selector: 'uparis-shopping-cart',
@@ -19,7 +19,7 @@ export class ShoppingCartComponent {
 
     private _numberParticipant$ = 1;
 
-    constructor() {
+    constructor(private router: Router) {
 
     }
 
@@ -49,23 +49,8 @@ export class ShoppingCartComponent {
         // this._selectedOption$.clear();
     }
 
-    selectOption(option: Option) {
-        // this._selectedOption$.set(option.level, option);
-    }
-
-    keys(map: { level: number, listOption: Option[] }): string[] {
-        return Object.keys(map);
-    }
-
     calcStock(): number {
         let stock = this.selectedTrip$ ? this.selectedTrip$.stock : 0;
-        // if (this._selectedOption$) {
-        //     Object.keys(this._selectedOption$).map(key => this._selectedOption$[key]).forEach(
-        //         option => {
-        //             stock = option.quantity ? Math.min(stock, option.quantity) : stock;
-        //         }
-        //     );
-        // }
         return stock;
     }
 
@@ -73,7 +58,13 @@ export class ShoppingCartComponent {
         return this._selectedTrip$ && this._numberParticipant$ > 0;
     }
 
-    onSubmit() {
-
+    checkout() {
+        let navigationExtras: NavigationExtras = {
+            queryParams: {
+                'idTrip': this._selectedTrip$.id,
+                'number': this._numberParticipant$
+            }
+        };
+        this.router.navigate(['/eshop/checkout'], navigationExtras);
     }
 }

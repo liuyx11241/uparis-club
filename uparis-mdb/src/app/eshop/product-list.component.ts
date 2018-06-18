@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../model/product.dto";
 import {ProductService} from "../service/product.service";
+import {NavigationExtras, Router} from "@angular/router";
 
 @Component({
     selector: 'uparis-product-list',
@@ -10,7 +11,7 @@ import {ProductService} from "../service/product.service";
 export class ProductListComponent implements OnInit {
     private _listProduct$: Product[];
 
-    constructor(private service: ProductService) {
+    constructor(private service: ProductService, private router: Router) {
     }
 
     ngOnInit() {
@@ -31,4 +32,14 @@ export class ProductListComponent implements OnInit {
     trackByProducts(index: number, product: Product): string {
         return product.id;
     };
+
+    gotoDetail(idProduct: string) {
+        let navigationExtras: NavigationExtras = {
+            queryParams: {
+                'id': idProduct
+            }
+        };
+
+        this.router.navigate(['/eshop/products'], navigationExtras);
+    }
 }

@@ -54,7 +54,7 @@
                                   (onChange)="numberParticipant$=$event"></uparis-number-picker>
         </div>
         <div class="col-md-6 text-center text-md-right mt-md-0 mt-4">
-            <button mat-raised-button color="primary" [disabled]="!isTripValid()">
+            <button mat-raised-button color="primary" [disabled]="!isTripValid()" (click)="checkout()">
                 <mat-icon>group_add</mat-icon>
                 立即报名
             </button>

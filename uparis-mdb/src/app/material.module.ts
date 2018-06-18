@@ -11,7 +11,7 @@ import {
     MatListModule,
     MatRadioModule,
     MatSelectModule,
-    MatSidenavModule,
+    MatSidenavModule, MatStepperModule,
     MatTabsModule,
     MatToolbarModule
 } from "@angular/material";
@@ -38,6 +38,7 @@ import {BsDatepickerModule} from "ngx-bootstrap";
         MatInputModule,
         MatSelectModule,
         MatRadioModule,
+        MatStepperModule,
         BsDatepickerModule.forRoot(),
 
     ],
@@ -58,6 +59,7 @@ import {BsDatepickerModule} from "ngx-bootstrap";
         MatInputModule,
         MatSelectModule,
         MatRadioModule,
+        MatStepperModule,
         BsDatepickerModule,
     ]
 })

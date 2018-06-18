@@ -10,6 +10,8 @@ public class TripDto {
 
     private String idProduct;
 
+    private String nameProduct;
+
     private String dateStart;
 
     private String dateEnd;
@@ -70,6 +72,14 @@ public class TripDto {
 
     public void setIdProduct(String idProduct) {
         this.idProduct = idProduct;
+    }
+
+    public String getNameProduct() {
+        return nameProduct;
+    }
+
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
     }
 
     public BigDecimal getPrice() {
