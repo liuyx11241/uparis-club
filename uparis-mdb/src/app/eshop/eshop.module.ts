@@ -17,6 +17,13 @@ import {NumberPickerComponent} from './number-picker.component';
 import {PersonFormComponent} from './person-form.component';
 import {MatNativeDateModule} from "@angular/material";
 
+import {defineLocale} from 'ngx-bootstrap/chronos';
+import {zhCnLocale} from 'ngx-bootstrap/locale';
+import {frLocale} from "ngx-bootstrap";
+
+defineLocale('zh-cn', zhCnLocale);
+defineLocale('fr', frLocale);
+
 @NgModule({
     imports: [
         CommonModule,

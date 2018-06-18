@@ -3,14 +3,12 @@ import {CommonModule} from '@angular/common';
 import {
     MatButtonModule,
     MatCardModule,
-    MatDatepickerModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
-    MatNativeDateModule,
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
@@ -19,6 +17,7 @@ import {
 } from "@angular/material";
 import {LayoutModule} from "@angular/cdk/layout";
 import {MDBBootstrapModule} from "angular-bootstrap-md";
+import {BsDatepickerModule} from "ngx-bootstrap";
 
 @NgModule({
     imports: [
@@ -39,7 +38,7 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
         MatInputModule,
         MatSelectModule,
         MatRadioModule,
-        MatDatepickerModule,
+        BsDatepickerModule.forRoot(),
 
     ],
     exports: [
@@ -59,7 +58,7 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
         MatInputModule,
         MatSelectModule,
         MatRadioModule,
-        MatDatepickerModule,
+        BsDatepickerModule,
     ]
 })
 export class MaterialModule {
