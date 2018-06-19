@@ -1,4 +1,5 @@
 import {Person} from "./person.dto";
+import {Option} from "./option.dto";
 
 export class Order {
 
@@ -8,5 +9,5 @@ export class Order {
 
     payer: Person;
 
-    mappedOption: Map;
+    mappedOption: Map<number, Option>;
 }

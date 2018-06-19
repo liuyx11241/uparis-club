@@ -8,39 +8,43 @@ import {Option} from "../model/option.dto";
 })
 export class OptionSelectorComponent implements OnInit {
 
-    @Input()
-    placeholder$: string;
 
-    private _listOption$: Option[];
+    private _mappedListOption$: any;
 
-    @Output()
-    readonly selection = new EventEmitter<Option>();
+    private _selectedOption$: Map<string, Option>;
 
-    private _selectedOption$: Option;
+    @Output("selectedOption")
+    selectedOptionEmitter = new EventEmitter<Map<string, Option>>();
 
     constructor() {
+        this._selectedOption$ = new Map<string, Option>();
     }
 
     ngOnInit() {
 
     }
 
-    get listOption$(): Option[] {
-        return this._listOption$;
+    selectOption(option: Option): void {
+        this._selectedOption$.set(option.level.toString(), option);
+        this.selectedOptionEmitter.emit(this._selectedOption$);
+    }
+
+    selectedOption(level: string): Option {
+        return this._selectedOption$.get(level);
+    }
+
+
+    get mappedListOption$(): any {
+        return this._mappedListOption$;
     }
 
     @Input()
-    set listOption$(value: Option[]) {
-        this._listOption$ = value;
-        this._selectedOption$ = null;
+    set mappedListOption$(value: any) {
+        this._mappedListOption$ = value;
+        this._selectedOption$.clear();
     }
 
-    get selectedOption$(): Option {
-        return this._selectedOption$;
-    }
-
-    set selectedOption$(value: Option) {
-        this._selectedOption$ = value;
-        this.selection.emit(value);
+    private getKeys() {
+        return Array.from(Object.keys(this._mappedListOption$));
     }
 }

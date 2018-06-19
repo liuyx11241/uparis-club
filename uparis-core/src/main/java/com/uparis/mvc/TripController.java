@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class TripController {
     @GetMapping("/{id}")
     public TripDto getTrip(@PathVariable("id") String idTrip) {
-        return mockTrip()[0];
+        return mockTrip()[1];
     }
 
     public static TripDto[] mockTrip() {

@@ -5,8 +5,16 @@
 <mat-vertical-stepper [linear]="true" #stepper>
     <mat-step *ngFor="let item of arrays(_number$); let index=index;">
         <ng-template matStepLabel>队员报名{{index+1}}</ng-template>
-        <uparis-option-selector [listOption$]="_trip$.mappedListOption"></uparis-option-selector>
-        <uparis-person-form></uparis-person-form>
+        <div class="row">
+            <div class="col-6">
+                <uparis-option-selector [mappedListOption$]="_trip$.mappedListOption"></uparis-option-selector>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 text-center">
+                <uparis-person-form></uparis-person-form>
+            </div>
+        </div>
         <div>
             <button mat-button matStepperPrevious color="accent" *ngIf="index>0">上一步</button>
             <button mat-button matStepperNext type="submit" color="primary">下一步</button>

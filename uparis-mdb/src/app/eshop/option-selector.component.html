@@ -1,19 +1,18 @@
-<mat-form-field class="d-block mt-2">
-    <mat-select [placeholder]="placeholder$"
-                [(value)]="selectedOption$" required>
-        <mat-option *ngFor="let option of listOption$"
+<mat-form-field class="d-block mt-2" *ngFor="let key of getKeys()">
+    <mat-select required [value]="selectedOption(key)" (valueChange)="selectOption($event)">
+        <mat-option *ngFor="let option of mappedListOption$[key]"
                     [value]="option" [disabled]="option.quantity===0">
             {{option.name}}
         </mat-option>
     </mat-select>
-    <mat-hint *ngIf="selectedOption$ && selectedOption$.quantity">
-        <ng-container *ngIf="selectedOption$.quantity<5">
+    <mat-hint *ngIf="selectedOption(key) && selectedOption(key).quantity">
+        <ng-container *ngIf="selectedOption(key).quantity<5">
             <span class="red-text">
-                该活动选项只剩最后<span class="black-text">{{selectedOption$.quantity}}</span>个名额
+                该活动选项只剩最后<span class="black-text">{{selectedOption(key).quantity}}</span>个名额
             </span>
         </ng-container>
-        <ng-container *ngIf="selectedOption$.quantity>=5">
-            该活动选项还有<span class="amber-text">{{selectedOption$.quantity}}</span>个名额
+        <ng-container *ngIf="selectedOption(key).quantity>=5">
+            该活动选项还有<span class="amber-text">{{selectedOption(key).quantity}}</span>个名额
         </ng-container>
     </mat-hint>
 </mat-form-field>

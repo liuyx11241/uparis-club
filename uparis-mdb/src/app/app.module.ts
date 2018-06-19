@@ -21,7 +21,7 @@ import {RouterModule} from "@angular/router";
                 {path: '', redirectTo: '/eshop', pathMatch: 'full'},
                 {path: '**', redirectTo: '/eshop'},
             ],
-            {useHash: false, enableTracing: true,}),
+            {useHash: false, enableTracing: false,}),
 
     ],
     providers: [],

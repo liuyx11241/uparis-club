@@ -1,3 +1,5 @@
+import {Option} from "./option.dto";
+
 export class Trip {
     id: string;
 
@@ -15,5 +17,5 @@ export class Trip {
 
     priceCurrency: string;
 
-    mappedListOption: Map;
+    mappedListOption: Map<number, Option[]>;
 }
