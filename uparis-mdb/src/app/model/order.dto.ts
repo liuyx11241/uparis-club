@@ -9,5 +9,5 @@ export class Order {
 
     payer: Person;
 
-    mappedOption: Map<number, Option>;
+    listOption: Option[];
 }

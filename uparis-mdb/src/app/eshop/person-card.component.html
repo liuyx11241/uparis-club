@@ -1,0 +1,47 @@
+<!--Card-->
+<div class="card testimonial-card">
+
+    <div class="card-body text-left">
+        <h4 class="card-title">
+            <ng-container *ngIf="_person?.gender=='MALE'">
+                <i class="fa fa-male blue-text col-2"></i>
+            </ng-container>
+            <ng-container *ngIf="_person?.gender=='FEMALE'">
+                <i class="fa fa-female red-text col-2"></i>
+            </ng-container>
+            <span class="col-10">{{_person?.lastName}} {{_person?.firstName}}</span>
+        </h4>
+        <hr>
+        <p><i class="fa fa-lg fa-calendar col-2"></i>
+            <span class="col-10">{{_person?.birthday}}</span>
+        </p>
+        <p><i class="fa fa-lg fa-phone-square col-2"></i>
+            <span class="col-10">{{_person?.telephone}}</span>
+        </p>
+        <p><i class="fa fa-lg fa-wechat col-2"></i>
+            <span class="col-10">{{_person?.wechat}}</span>
+        </p>
+        <p><i class="fa fa-lg fa-envelope col-2"></i>
+            <span class="col-10">{{_person?.email}}</span>
+        </p>
+        <ng-container *ngIf="_person?.addressComplement">
+            <div><i class="fa fa-lg col-2"></i>
+                <span class="col-10">{{_person?.addressComplement}}</span>
+            </div>
+        </ng-container>
+        <div><i class="fa fa-lg fa-address-book col-2"></i>
+            <span class="col-10">{{_person?.address}},</span>
+        </div>
+        <div><i class="fa fa-lg col-2"></i>
+            <span class="col-10">{{_person?.zipCode}} {{_person?.city}}, {{_person?.country | uppercase}}</span>
+        </div>
+        <hr>
+        <p *ngFor="let option of _listOption">
+            <i class="fa fa-lg col-2 fa-arrow-circle-right"></i>
+            <span class="col-10">{{option.name}} - {{option.priceFactor | currency: option.priceFactorCurrency}}</span>
+        </p>
+
+    </div>
+
+</div>
+<!--/.Card-->

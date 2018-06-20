@@ -10,26 +10,37 @@
     </div>
 </div>
 <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step *ngFor="let item of arrays(_number); let index=index;" [stepControl]="buildCheckoutForm()">
-        <form [formGroup]="_listCheckoutForm[index]">
+    <mat-step *ngFor="let checkoutForm of _listCheckoutForm; let index=index;" [stepControl]="checkoutForm">
+        <form [formGroup]="checkoutForm">
             <ng-template matStepLabel>队员报名{{index+1}}</ng-template>
             <div class="row mb-5">
                 <uparis-option-selector
                     [mappedListOption]="_trip.mappedListOption"
-                    [optionSelectorForm]="_listCheckoutForm[index].get('option')">
+                    [optionSelectorForm]="checkoutForm.get('option')">
                 </uparis-option-selector>
             </div>
             <div class="row">
-                <uparis-person-form [personForm]="_listCheckoutForm[index].get('participant')"></uparis-person-form>
+                <uparis-person-form [personForm]="checkoutForm.get('participant')"></uparis-person-form>
             </div>
             <div>
                 <button mat-button matStepperPrevious color="accent" *ngIf="index>0">上一步</button>
-                <button mat-button matStepperNext color="primary" [disabled]="!_listCheckoutForm[index].valid">下一步</button>
+                <button mat-button matStepperNext color="primary" (click)="createNewOrder($event, checkoutForm, index)">
+                    下一步
+                </button>
             </div>
         </form>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>付款信息</ng-template>
+        <div class="row">
+            <uparis-person-card
+                *ngFor="let order of _listOrder"
+                class="col-12 col-md-6 col-xl-4"
+                [person]="order.participant"
+            ></uparis-person-card>
+                <!--[listOption]="order.listOption"-->
+        </div>
+
         <div>
             <button mat-button matStepperPrevious color="accent">上一步</button>
         </div>

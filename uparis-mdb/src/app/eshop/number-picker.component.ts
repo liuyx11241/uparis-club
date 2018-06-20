@@ -28,18 +28,18 @@ export class NumberPickerComponent {
     @Input("min")
     set min(value: number) {
         this._min = value;
-        this.onValueChange(this._value)
+        this.onValueChange(this._value, false)
     }
 
     @Input("max")
     set max(value: number) {
         this._max = value;
-        this.onValueChange(this._value)
+        this.onValueChange(this._value, false)
     }
 
     @Input("initValue")
     set init(value: number) {
-        this.onValueChange(value);
+        this.onValueChange(value, false);
     }
 
     private onValueChange(newValue: number, event: boolean = true): void {

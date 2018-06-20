@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {Trip} from "../model/trip.dto";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Order} from "../model/order.dto";
 
 @Component({
     selector: 'uparis-checkout-stepper',
@@ -13,6 +14,7 @@ export class CheckoutStepperComponent implements OnInit {
     private _number: number;
 
     _listCheckoutForm: FormGroup[] = [];
+    _listOrder: Order[];
 
     constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) {
 
@@ -23,22 +25,25 @@ export class CheckoutStepperComponent implements OnInit {
             this._trip = data.trip;
         });
         this.route.queryParamMap.subscribe((params: ParamMap) => {
-            this._number = 1;
+            let number = 1;
             if (params.has('number')) {
-                this._number = parseInt(params.get('number'));
+                number = parseInt(params.get('number'));
             }
+            this.number = number;
         });
     }
 
     set number(value: number) {
+        this._listCheckoutForm = [];
+        this._listOrder = [];
         this._number = value;
+        for (var i = 0; i < this._number; i++) {
+            this._listCheckoutForm.push(this.buildCheckoutForm());
+            this._listOrder.push(new Order());
+        }
     }
 
-    arrays(n: number): number[] {
-        return Array(n);
-    }
-
-    buildCheckoutForm(): FormGroup {
+    private buildCheckoutForm(): FormGroup {
         let fg = this.formBuilder.group({
             'option': this.formBuilder.group({}),
             'participant': this.formBuilder.group({
@@ -63,13 +68,19 @@ export class CheckoutStepperComponent implements OnInit {
         for (let obj of Object.keys(this._trip.mappedListOption)) {
             (fg.get('option') as FormGroup).addControl("option" + obj, this.formBuilder.control('', Validators.required));
         }
-        
-        this._listCheckoutForm.push(fg);
+
         return fg;
     }
 
-    onClick() {
-        console.info(this._listCheckoutForm[0].valid);
-        console.info(JSON.stringify(this._listCheckoutForm[0].value));
+    createNewOrder(event: any, form: FormGroup, index: number) {
+        console.info(event);
+        console.info(form);
+        console.info(index);
+        let order = this._listOrder[index];
+
+        console.info(form.get('participant').value);
+        console.info(form.get('option').value);
+        order.participant = form.get('participant').value;
+        order.listOption = form.get('option').value;
     }
 }

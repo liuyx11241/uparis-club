@@ -22,6 +22,7 @@ import {defineLocale} from 'ngx-bootstrap/chronos';
 import {zhCnLocale} from 'ngx-bootstrap/locale';
 import {frLocale} from "ngx-bootstrap";
 import {TripResolver} from "./trip-resolver.service";
+import { PersonCardComponent } from './person-card.component';
 
 defineLocale('zh-cn', zhCnLocale);
 defineLocale('fr', frLocale);
@@ -47,7 +48,8 @@ defineLocale('fr', frLocale);
         TripSelectorComponent,
         NumberPickerComponent,
         PersonFormComponent,
-        CheckoutStepperComponent],
+        CheckoutStepperComponent,
+        PersonCardComponent],
     bootstrap: [EshopComponent]
 })
 export class EshopModule {
