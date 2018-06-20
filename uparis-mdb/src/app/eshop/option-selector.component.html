@@ -1,18 +1,22 @@
-<mat-form-field class="d-block mt-2" *ngFor="let key of getKeys()">
-    <mat-select required [value]="selectedOption(key)" (valueChange)="selectOption($event)">
-        <mat-option *ngFor="let option of mappedListOption$[key]"
-                    [value]="option" [disabled]="option.quantity===0">
-            {{option.name}}
-        </mat-option>
-    </mat-select>
-    <mat-hint *ngIf="selectedOption(key) && selectedOption(key).quantity">
-        <ng-container *ngIf="selectedOption(key).quantity<5">
+<div class="z-depth-1 hoverable container" [formGroup]="_optionSelectorForm">
+    <p class="text-center text-md-left">自定义活动</p>
+    <mat-form-field *ngFor="let key of getKeys()" class="col-12">
+        <mat-select [formControlName]="'option'+key"
+                    (valueChange)="selectOption($event)">
+            <mat-option *ngFor="let option of mappedListOption[key]"
+                        [value]="option" [disabled]="option.quantity===0">
+                {{option.name}}
+            </mat-option>
+        </mat-select>
+        <mat-hint *ngIf="selectedOption(key) && selectedOption(key).quantity">
+            <ng-container *ngIf="selectedOption(key).quantity<5">
             <span class="red-text">
                 该活动选项只剩最后<span class="black-text">{{selectedOption(key).quantity}}</span>个名额
             </span>
-        </ng-container>
-        <ng-container *ngIf="selectedOption(key).quantity>=5">
-            该活动选项还有<span class="amber-text">{{selectedOption(key).quantity}}</span>个名额
-        </ng-container>
-    </mat-hint>
-</mat-form-field>
+            </ng-container>
+            <ng-container *ngIf="selectedOption(key).quantity>=5">
+                该活动选项还有<span class="amber-text">{{selectedOption(key).quantity}}</span>个名额
+            </ng-container>
+        </mat-hint>
+    </mat-form-field>
+</div>

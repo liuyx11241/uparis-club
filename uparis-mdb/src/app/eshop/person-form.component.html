@@ -1,67 +1,58 @@
-<form [formGroup]="personForm$">
-    <div class="row">
-        <mat-radio-group formControlName="gender" class="col-12 text-left">
-            <mat-radio-button color="primary" value="MALE">男</mat-radio-button>
-            <mat-radio-button color="primary" value="FEMALE" class="ml-4">女</mat-radio-button>
-        </mat-radio-group>
-    </div>
-    <div class="row">
-        <mat-form-field class="col-6 d-block">
-            <!--<i class="fa fa-envelope" matPrefix></i>-->
-            <input matInput type="text" placeholder="姓" formControlName="lastName">
-            <mat-hint>请根据您的有效证件填写</mat-hint>
-        </mat-form-field>
-        <mat-form-field class="col-6 d-block">
-            <input matInput type="text" placeholder="名" formControlName="firstName">
-            <mat-hint>请根据您的有效证件填写</mat-hint>
-        </mat-form-field>
-    </div>
-    <div class="row">
-        <mat-form-field class="col-6 d-block">
-            <input matInput placeholder="出生日期" formControlName="birthday" bsDatepicker [bsConfig]="{ containerClass: 'theme-orange' }">
-            <mat-hint>请根据您的有效证件填写</mat-hint>
-        </mat-form-field>
-        <mat-form-field class="col-6 d-block">
-            <input matInput type="text" placeholder="出生地" formControlName="birthplace">
-            <mat-hint>请根据您的有效证件填写</mat-hint>
-        </mat-form-field>
-    </div>
-    <div class="row">
-        <mat-form-field class="col-6 d-block">
-            <input matInput type="text" placeholder="微信ID" formControlName="wechat">
-        </mat-form-field>
-        <mat-form-field class="col-6 d-block">
-            <input matInput type="number" placeholder="联系电话" formControlName="telephone">
-        </mat-form-field>
-    </div>
-    <div class="row">
-        <mat-form-field class="col-12 d-block">
-            <input matInput type="email" placeholder="电子邮箱" formControlName="email">
-            <mat-error>请输入有效电子邮箱</mat-error>
-        </mat-form-field>
-    </div>
-
-    <section class="well well-lg">
-        <div class="row">
-            <mat-form-field class="col-12 d-block">
-                <input matInput type="text" placeholder="联系地址" formControlName="address">
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field class="col-6 d-block">
-                <input matInput type="text" placeholder="补充地址" formControlName="addressComplement">
-            </mat-form-field>
-            <mat-form-field class="col-6 d-block">
-                <input matInput type="text" placeholder="邮编" formControlName="zipCode">
-            </mat-form-field>
-        </div>
-        <div class="row">
-            <mat-form-field class="col-6 d-block">
-                <input matInput type="text" placeholder="国家" formControlName="country">
-            </mat-form-field>
-            <mat-form-field class="col-6 d-block">
-                <input matInput type="text" placeholder="城市" formControlName="city">
-            </mat-form-field>
-        </div>
-    </section>
-</form>
+<div [formGroup]="_personForm" class="row">
+    <!--<mat-radio-group class="col-12 text-center text-md-left">-->
+    <!--<mat-radio-button color="primary" value="MALE">男</mat-radio-button>-->
+    <!--<mat-radio-button color="primary" value="FEMALE" class="col-3">女</mat-radio-button>-->
+    <!--</mat-radio-group>-->
+    <mat-form-field class="col-12 col-md-6">
+        <!--<i class="fa fa-envelope" matPrefix></i>-->
+        <input matInput type="text" placeholder="姓" formControlName="lastName">
+        <mat-hint>请根据您的有效证件填写</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-6">
+        <input matInput type="text" placeholder="名" formControlName="firstName">
+        <mat-hint>请根据您的有效证件填写</mat-hint>
+    </mat-form-field>
+    <!--<mat-form-field class="col-12 col-md-6">-->
+        <!--<input matInput type="text" placeholder="中文姓名" formControlName="fullName">-->
+    <!--</mat-form-field>-->
+    <mat-form-field class="col-12 col-md-6">
+        <mat-select placeholder="性别" formControlName="gender">
+            <mat-option value="MALE">男</mat-option>
+            <mat-option value="FEMALE">女</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-6">
+        <input matInput placeholder="出生日期" formControlName="birthday"
+               bsDatepicker [bsConfig]="{ containerClass: 'theme-orange' }">
+        <mat-hint>请根据您的有效证件填写</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-6">
+        <input matInput type="text" placeholder="出生地" formControlName="birthplace">
+        <mat-hint>请根据您的有效证件填写</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-6">
+        <input matInput type="text" placeholder="微信ID" formControlName="wechat">
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-6">
+        <input matInput type="tel" placeholder="联系电话" formControlName="telephone">
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-6">
+        <input matInput type="email" placeholder="电子邮箱" formControlName="email">
+        <mat-error>请输入有效电子邮箱</mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-12">
+        <input matInput type="text" placeholder="联系地址" formControlName="address">
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-6">
+        <input matInput type="text" placeholder="补充地址" formControlName="addressComplement">
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-6">
+        <input matInput type="text" placeholder="邮编" formControlName="zipCode">
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-6">
+        <input matInput type="text" placeholder="城市" formControlName="city">
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-6">
+        <input matInput type="text" placeholder="国家" formControlName="country">
+    </mat-form-field>
+</div>

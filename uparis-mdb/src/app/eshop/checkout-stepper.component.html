@@ -1,24 +1,32 @@
-<p>
-    {{_trip$.nameProduct}} works!
-    {{_number$}} works!
-</p>
-<mat-vertical-stepper [linear]="true" #stepper>
-    <mat-step *ngFor="let item of arrays(_number$); let index=index;">
-        <ng-template matStepLabel>队员报名{{index+1}}</ng-template>
-        <div class="row">
-            <div class="col-6">
-                <uparis-option-selector [mappedListOption$]="_trip$.mappedListOption"></uparis-option-selector>
+<div class="z-depth-1 py-5 mb-5 px-5 row">
+    <div class="col-12 col-md-3 text-center text-md-left">{{_trip.nameProduct}}</div>
+    <div class="col-12 col-md-3 text-center text-md-left">{{_trip.dateStart}}
+        <ng-container *ngIf="_trip.dateEnd != _trip.dateStart"> ~ {{_trip.dateEnd}}</ng-container>
+    </div>
+    <div class="col-12 col-md-6 text-center text-md-right">
+        <uparis-number-picker [initValue]="_number" [min]="1" [max]="_trip.stock"
+                              (onChange)="number=$event"
+        ></uparis-number-picker>
+    </div>
+</div>
+<mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step *ngFor="let item of arrays(_number); let index=index;" [stepControl]="buildCheckoutForm()">
+        <form [formGroup]="_listCheckoutForm[index]">
+            <ng-template matStepLabel>队员报名{{index+1}}</ng-template>
+            <div class="row mb-5">
+                <uparis-option-selector
+                    [mappedListOption]="_trip.mappedListOption"
+                    [optionSelectorForm]="_listCheckoutForm[index].get('option')">
+                </uparis-option-selector>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-6 text-center">
-                <uparis-person-form></uparis-person-form>
+            <div class="row">
+                <uparis-person-form [personForm]="_listCheckoutForm[index].get('participant')"></uparis-person-form>
             </div>
-        </div>
-        <div>
-            <button mat-button matStepperPrevious color="accent" *ngIf="index>0">上一步</button>
-            <button mat-button matStepperNext type="submit" color="primary">下一步</button>
-        </div>
+            <div>
+                <button mat-button matStepperPrevious color="accent" *ngIf="index>0">上一步</button>
+                <button mat-button matStepperNext color="primary" [disabled]="!_listCheckoutForm[index].valid">下一步</button>
+            </div>
+        </form>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>付款信息</ng-template>
@@ -26,4 +34,4 @@
             <button mat-button matStepperPrevious color="accent">上一步</button>
         </div>
     </mat-step>
-</mat-vertical-stepper>
+</mat-horizontal-stepper>

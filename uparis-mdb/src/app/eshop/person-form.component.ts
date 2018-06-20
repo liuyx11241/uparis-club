@@ -1,51 +1,21 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Person} from "../model/person.dto";
+import {Component, Input} from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'uparis-person-form',
     templateUrl: './person-form.component.html',
     styleUrls: ['./person-form.component.scss']
 })
-export class PersonFormComponent implements OnInit {
+export class PersonFormComponent {
 
-    personForm$: FormGroup;
+    private _personForm: FormGroup;
 
-    @Output("onSubmit")
-    onSubmit$: EventEmitter<Person> = new EventEmitter<Person>();
+    constructor() {
 
-    constructor(private fb: FormBuilder) {
-        this.rebuildPersonForm();
     }
 
-    ngOnInit() {
-    }
-
-    rebuildPersonForm(): void {
-        this.personForm$ = this.fb.group(
-            {
-                'gender': ['', Validators.required],
-                'fullName': ['',],
-                'firstName': ['', Validators.required],
-                'lastName': ['', Validators.required],
-                'birthday': ['', Validators.required],
-                'birthplace': ['', Validators.required],
-                'wechat': ['', Validators.required],
-                'telephone': ['', Validators.required],
-                'email': ['', [Validators.required, Validators.email]],
-                'address': ['', Validators.required],
-                'addressComplement': ['',],
-                'zipCode': ['', Validators.required],
-                'city': ['', Validators.required],
-                'country': ['', Validators.required],
-            }
-        )
-    }
-
-    retrievePerson(): Person {
-        if (this.personForm$.valid) {
-            return this.personForm$.value;
-        }
-        return null;
+    @Input()
+    set personForm(value: FormGroup) {
+        this._personForm = value;
     }
 }
