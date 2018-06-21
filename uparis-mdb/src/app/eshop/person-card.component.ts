@@ -26,4 +26,9 @@ export class PersonCardComponent {
     set listOption(value: Option[]) {
         this._listOption = value;
     }
+
+
+    get styleMale(): boolean {
+        return 'MALE' === this._person.gender;
+    }
 }

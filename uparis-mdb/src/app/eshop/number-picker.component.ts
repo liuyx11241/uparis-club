@@ -1,15 +1,17 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'uparis-number-picker',
     templateUrl: './number-picker.component.html',
     styles: []
 })
-export class NumberPickerComponent {
+export class NumberPickerComponent implements OnInit{
 
     private _min: number = 0;
 
     private _max: number;
+
+    private _enabled: boolean;
 
     // @Input("step")
     // step$: number;
@@ -23,6 +25,10 @@ export class NumberPickerComponent {
     private _value: number = 0;
 
     constructor() {
+    }
+
+    ngOnInit(): void {
+        this._enabled = true;
     }
 
     @Input("min")
@@ -40,6 +46,11 @@ export class NumberPickerComponent {
     @Input("initValue")
     set init(value: number) {
         this.onValueChange(value, false);
+    }
+
+    @Input()
+    set enabled(value: boolean) {
+        this._enabled = value;
     }
 
     private onValueChange(newValue: number, event: boolean = true): void {

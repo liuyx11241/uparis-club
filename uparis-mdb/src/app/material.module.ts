@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
     MatButtonModule,
-    MatCardModule,
+    MatCardModule, MatCheckboxModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
@@ -39,6 +39,7 @@ import {BsDatepickerModule} from "ngx-bootstrap";
         MatSelectModule,
         MatRadioModule,
         MatStepperModule,
+        MatCheckboxModule,
         BsDatepickerModule.forRoot(),
 
     ],
@@ -60,6 +61,7 @@ import {BsDatepickerModule} from "ngx-bootstrap";
         MatSelectModule,
         MatRadioModule,
         MatStepperModule,
+        MatCheckboxModule,
         BsDatepickerModule,
     ]
 })

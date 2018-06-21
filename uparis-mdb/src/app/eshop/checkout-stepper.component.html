@@ -5,17 +5,17 @@
     </div>
     <div class="col-12 col-md-6 text-center text-md-right">
         <uparis-number-picker [initValue]="_number" [min]="1" [max]="_trip.stock"
-                              (onChange)="number=$event"
+                              (onChange)="number=$event" [enabled]="stepper.selectedIndex==0"
         ></uparis-number-picker>
     </div>
 </div>
 <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="_listCheckoutForm">
+    <mat-step [stepControl]="_listCheckoutForm" #stepRegister>
         <ng-template matStepLabel>报名信息</ng-template>
         <div class="row">
             <form *ngFor="let checkoutForm of _listCheckoutForm.controls; let index=index;"
                   [formGroup]="checkoutForm"
-                  class="col-12 col-md-6 col-lg-4 card">
+                  class="col-12 col-md-6 col-xl-4 card mx-auto">
                 <div class="card-body text-left">
                     <uparis-option-selector
                         [mappedListOption]="_trip.mappedListOption"
@@ -26,21 +26,31 @@
                 </div>
             </form>
         </div>
-        <button mat-button matStepperNext color="primary" (click)="createNewOrder($event)">下一步</button>
+
+        <button mat-raised-button matStepperNext
+                class="mt-5"
+                color="primary" (click)="createNewOrder($event)">
+            下一步<i class="fa fa-arrow-circle-right fa-lg"></i></button>
     </mat-step>
-    <mat-step>
+    <mat-step #stepBilling>
         <ng-template matStepLabel>付款信息</ng-template>
         <div class="row">
             <uparis-person-card
                 *ngFor="let order of _listOrder"
-                class="col-12 col-md-6 col-xl-4"
+                class="col-12 col-md-6 col-xl-4 mx-auto"
                 [person]="order.participant"
                 [listOption]="order.listOption"
             ></uparis-person-card>
         </div>
 
-        <div>
-            <button mat-button matStepperPrevious color="accent">上一步</button>
+        <div class="row mt-5">
+            <mat-checkbox color="primary" class="col-12 mx-auto">
+                我已认真阅读并接受使用此<a><u>服务协议</u></a>
+            </mat-checkbox>
         </div>
+
+        <button mat-raised-button matStepperPrevious color="warn" class="mt-5">
+            <i class="fa fa-arrow-circle-left fa-lg"></i>上一步
+        </button>
     </mat-step>
 </mat-horizontal-stepper>
