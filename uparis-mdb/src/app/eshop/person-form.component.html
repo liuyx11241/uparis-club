@@ -1,58 +1,66 @@
 <div [formGroup]="_personForm" class="row">
-    <!--<mat-radio-group class="col-12 text-center text-md-left">-->
+    <!--<mat-radio-group class="col-12">-->
     <!--<mat-radio-button color="primary" value="MALE">男</mat-radio-button>-->
-    <!--<mat-radio-button color="primary" value="FEMALE" class="col-3">女</mat-radio-button>-->
+    <!--<mat-radio-button color="primary" value="FEMALE">女</mat-radio-button>-->
     <!--</mat-radio-group>-->
-    <mat-form-field class="col-12 col-md-6">
+    <mat-form-field class="col-12">
+        <mat-select formControlName="gender">
+            <mat-option value="MALE"><i class="fa fa-lg fa-male" matPrefix></i>男</mat-option>
+            <mat-option value="FEMALE"><i class="fa fa-lg fa-female" matPrefix></i>女</mat-option>
+        </mat-select>
+        <i class="fa fa-lg material-icons col-1" matPrefix>face</i>
+    </mat-form-field>
+    <mat-form-field class="col-7 pr-0">
         <!--<i class="fa fa-envelope" matPrefix></i>-->
         <input matInput type="text" placeholder="姓" formControlName="lastName">
-        <mat-hint>请根据您的有效证件填写</mat-hint>
+        <i class="fa fa-lg material-icons col-1" matPrefix>account_box</i>
     </mat-form-field>
-    <mat-form-field class="col-12 col-md-6">
+
+    <mat-form-field class="col-5 pl-0">
         <input matInput type="text" placeholder="名" formControlName="firstName">
-        <mat-hint>请根据您的有效证件填写</mat-hint>
     </mat-form-field>
-    <!--<mat-form-field class="col-12 col-md-6">-->
-        <!--<input matInput type="text" placeholder="中文姓名" formControlName="fullName">-->
+    <!--<mat-form-field class="col-12">-->
+    <!--<input matInput type="text" placeholder="中文姓名" formControlName="fullName">-->
     <!--</mat-form-field>-->
-    <mat-form-field class="col-12 col-md-6">
-        <mat-select placeholder="性别" formControlName="gender">
-            <mat-option value="MALE">男</mat-option>
-            <mat-option value="FEMALE">女</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field class="col-12 col-md-6">
+    <mat-form-field class="col-12">
         <input matInput placeholder="出生日期" formControlName="birthday"
                bsDatepicker [bsConfig]="{ containerClass: 'theme-orange' }">
-        <mat-hint>请根据您的有效证件填写</mat-hint>
+        <i class="fa fa-lg fa-birthday-cake col-1" matPrefix></i>
     </mat-form-field>
-    <mat-form-field class="col-12 col-md-6">
+    <mat-form-field class="col-12">
         <input matInput type="text" placeholder="出生地" formControlName="birthplace">
-        <mat-hint>请根据您的有效证件填写</mat-hint>
+        <i class="fa fa-lg fa-map-signs col-1" matPrefix></i>
     </mat-form-field>
-    <mat-form-field class="col-12 col-md-6">
+    <mat-divider></mat-divider>
+    <mat-form-field class="col-12">
         <input matInput type="text" placeholder="微信ID" formControlName="wechat">
+        <i class="fa fa-lg fa-wechat col-1" matPrefix></i>
     </mat-form-field>
-    <mat-form-field class="col-12 col-md-6">
+    <mat-form-field class="col-12">
         <input matInput type="tel" placeholder="联系电话" formControlName="telephone">
+        <i class="fa fa-lg material-icons col-1" matPrefix>phone_iphone</i>
     </mat-form-field>
-    <mat-form-field class="col-12 col-md-6">
+    <mat-form-field class="col-12">
         <input matInput type="email" placeholder="电子邮箱" formControlName="email">
+        <i class="fa fa-lg material-icons col-1" matPrefix>email</i>
         <mat-error>请输入有效电子邮箱</mat-error>
     </mat-form-field>
     <mat-form-field class="col-12">
         <input matInput type="text" placeholder="联系地址" formControlName="address">
+        <i class="fa fa-lg material-icons col-1" matPrefix>home</i>
     </mat-form-field>
-    <mat-form-field class="col-12 col-md-6">
+    <mat-form-field class="col-7 pr-0">
         <input matInput type="text" placeholder="补充地址" formControlName="addressComplement">
+        <i class="fa fa-lg material-icons col-1 transparent-bd" matPrefix>home</i>
     </mat-form-field>
-    <mat-form-field class="col-12 col-md-6">
+    <mat-form-field class="col-5">
         <input matInput type="text" placeholder="邮编" formControlName="zipCode">
     </mat-form-field>
-    <mat-form-field class="col-12 col-md-6">
+    <mat-form-field class="col-7 pr-0">
         <input matInput type="text" placeholder="城市" formControlName="city">
+        <i class="fa fa-lg material-icons col-1 transparent-bd" matPrefix>home</i>
     </mat-form-field>
-    <mat-form-field class="col-12 col-md-6">
+    <mat-form-field class="col-5">
         <input matInput type="text" placeholder="国家" formControlName="country">
     </mat-form-field>
 </div>

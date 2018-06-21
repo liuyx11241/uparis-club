@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Option} from "../model/option.dto";
-import {FormGroup} from "@angular/forms";
+import {FormArray, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'uparis-option-selector',
@@ -13,7 +13,7 @@ export class OptionSelectorComponent {
 
     private _selectedOption: Map<string, Option>;
 
-    private _optionSelectorForm: FormGroup;
+    private _optionForm: FormGroup;
 
     constructor() {
         this._selectedOption = new Map<string, Option>();
@@ -39,8 +39,8 @@ export class OptionSelectorComponent {
     }
 
     @Input()
-    set optionSelectorForm(value: FormGroup) {
-        this._optionSelectorForm = value;
+    set optionForm(value: FormGroup) {
+        this._optionForm = value;
     }
 
     private getKeys() {

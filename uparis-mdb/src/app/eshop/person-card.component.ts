@@ -5,7 +5,7 @@ import {Option} from "../model/option.dto";
 @Component({
     selector: 'uparis-person-card',
     templateUrl: './person-card.component.html',
-    styles: []
+    styleUrls: ['./person-card.component.scss']
 })
 export class PersonCardComponent {
 

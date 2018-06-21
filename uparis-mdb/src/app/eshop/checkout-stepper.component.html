@@ -10,25 +10,23 @@
     </div>
 </div>
 <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step *ngFor="let checkoutForm of _listCheckoutForm; let index=index;" [stepControl]="checkoutForm">
-        <form [formGroup]="checkoutForm">
-            <ng-template matStepLabel>队员报名{{index+1}}</ng-template>
-            <div class="row mb-5">
-                <uparis-option-selector
-                    [mappedListOption]="_trip.mappedListOption"
-                    [optionSelectorForm]="checkoutForm.get('option')">
-                </uparis-option-selector>
-            </div>
-            <div class="row">
-                <uparis-person-form [personForm]="checkoutForm.get('participant')"></uparis-person-form>
-            </div>
-            <div>
-                <button mat-button matStepperPrevious color="accent" *ngIf="index>0">上一步</button>
-                <button mat-button matStepperNext color="primary" (click)="createNewOrder($event, checkoutForm, index)">
-                    下一步
-                </button>
-            </div>
-        </form>
+    <mat-step [stepControl]="_listCheckoutForm">
+        <ng-template matStepLabel>报名信息</ng-template>
+        <div class="row">
+            <form *ngFor="let checkoutForm of _listCheckoutForm.controls; let index=index;"
+                  [formGroup]="checkoutForm"
+                  class="col-12 col-md-6 col-lg-4 card">
+                <div class="card-body text-left">
+                    <uparis-option-selector
+                        [mappedListOption]="_trip.mappedListOption"
+                        [optionForm]="checkoutForm.get('option')">
+                    </uparis-option-selector>
+                    <hr>
+                    <uparis-person-form [personForm]="checkoutForm.get('participant')"></uparis-person-form>
+                </div>
+            </form>
+        </div>
+        <button mat-button matStepperNext color="primary" (click)="createNewOrder($event)">下一步</button>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>付款信息</ng-template>
@@ -37,8 +35,8 @@
                 *ngFor="let order of _listOrder"
                 class="col-12 col-md-6 col-xl-4"
                 [person]="order.participant"
+                [listOption]="order.listOption"
             ></uparis-person-card>
-                <!--[listOption]="order.listOption"-->
         </div>
 
         <div>

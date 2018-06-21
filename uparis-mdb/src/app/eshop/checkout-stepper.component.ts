@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {Trip} from "../model/trip.dto";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Order} from "../model/order.dto";
 
 @Component({
@@ -13,11 +13,12 @@ export class CheckoutStepperComponent implements OnInit {
     private _trip: Trip;
     private _number: number;
 
-    _listCheckoutForm: FormGroup[] = [];
+    _listCheckoutForm: FormArray;
     _listOrder: Order[];
 
     constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) {
-
+        this._listCheckoutForm = this.formBuilder.array([]);
+        this._listOrder = [];
     }
 
     ngOnInit() {
@@ -34,19 +35,22 @@ export class CheckoutStepperComponent implements OnInit {
     }
 
     set number(value: number) {
-        this._listCheckoutForm = [];
-        this._listOrder = [];
+        let newCheckoutForm = this.formBuilder.array([]);
         this._number = value;
         for (var i = 0; i < this._number; i++) {
-            this._listCheckoutForm.push(this.buildCheckoutForm());
-            this._listOrder.push(new Order());
+            if (this._listCheckoutForm.at(i)) {
+                newCheckoutForm.push(this._listCheckoutForm.at(i))
+            } else {
+                newCheckoutForm.push(this.buildCheckoutForm());
+            }
         }
+        this._listCheckoutForm = newCheckoutForm;
     }
 
     private buildCheckoutForm(): FormGroup {
         let fg = this.formBuilder.group({
-            'option': this.formBuilder.group({}),
-            'participant': this.formBuilder.group({
+            option: this.formBuilder.group([]),
+            participant: this.formBuilder.group({
                     'gender': ['', Validators.required],
                     'fullName': ['',],
                     'firstName': ['', Validators.required],
@@ -72,15 +76,24 @@ export class CheckoutStepperComponent implements OnInit {
         return fg;
     }
 
-    createNewOrder(event: any, form: FormGroup, index: number) {
-        console.info(event);
-        console.info(form);
-        console.info(index);
-        let order = this._listOrder[index];
+    createNewOrder(event: any) {
+        this._listOrder = [];
+        for (let checkoutForm of this._listCheckoutForm.controls) {
+            let newOrder = new Order();
 
-        console.info(form.get('participant').value);
-        console.info(form.get('option').value);
-        order.participant = form.get('participant').value;
-        order.listOption = form.get('option').value;
+            const participant = checkoutForm.get('participant').value;
+            newOrder.participant = participant;
+
+            const listOption = checkoutForm.get('option').value;
+            newOrder.listOption = [];
+            Object.keys(listOption).map(opt => {
+                newOrder.listOption.push(listOption[opt])
+            })
+
+            console.info(checkoutForm.get('participant').value);
+            console.info(checkoutForm.get('option').value);
+            console.info(newOrder);
+            this._listOrder.push(newOrder);
+        }
     }
 }

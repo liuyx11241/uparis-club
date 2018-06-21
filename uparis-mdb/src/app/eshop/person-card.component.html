@@ -1,5 +1,10 @@
 <!--Card-->
-<div class="card testimonial-card">
+<div class="card">
+
+    <!--<ng-container *ngIf="_person?.portrait">-->
+        <!--<div class="card-up indigo lighten-1"></div>-->
+        <!--<div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg" class="rounded-circle"></div>-->
+    <!--</ng-container>-->
 
     <div class="card-body text-left">
         <h4 class="card-title">
@@ -12,16 +17,19 @@
             <span class="col-10">{{_person?.lastName}} {{_person?.firstName}}</span>
         </h4>
         <hr>
-        <p><i class="fa fa-lg fa-calendar col-2"></i>
+        <p><i class="fa fa-lg fa-birthday-cake col-2"></i>
             <span class="col-10">{{_person?.birthday}}</span>
         </p>
-        <p><i class="fa fa-lg fa-phone-square col-2"></i>
-            <span class="col-10">{{_person?.telephone}}</span>
+        <p><i class="fa fa-lg fa-map-signs col-2"></i>
+            <span class="col-10">{{_person?.birthplace}}</span>
         </p>
         <p><i class="fa fa-lg fa-wechat col-2"></i>
             <span class="col-10">{{_person?.wechat}}</span>
         </p>
-        <p><i class="fa fa-lg fa-envelope col-2"></i>
+        <p><i class="fa fa-lg material-icons col-2">phone_iphone</i>
+            <span class="col-10">{{_person?.telephone}}</span>
+        </p>
+        <p><i class="fa fa-lg material-icons col-2">email</i>
             <span class="col-10">{{_person?.email}}</span>
         </p>
         <ng-container *ngIf="_person?.addressComplement">
@@ -29,7 +37,7 @@
                 <span class="col-10">{{_person?.addressComplement}}</span>
             </div>
         </ng-container>
-        <div><i class="fa fa-lg fa-address-book col-2"></i>
+        <div><i class="fa fa-lg material-icons col-2">home</i>
             <span class="col-10">{{_person?.address}},</span>
         </div>
         <div><i class="fa fa-lg col-2"></i>
