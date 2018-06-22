@@ -1,0 +1,42 @@
+<mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>产品ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>产品名</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="alias">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>产品昵称</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.alias}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="duration">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>时长</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.duration}}天</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button mat-icon-button [routerLink]="['/admin/products', row.id]">
+                <mat-icon>edit</mat-icon>
+            </button>
+
+        </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator #paginator
+               [pageIndex]="0"
+               [pageSize]="50"
+               [pageSizeOptions]="[25, 50, 100, 250]">
+</mat-paginator>

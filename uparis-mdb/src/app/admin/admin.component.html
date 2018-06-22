@@ -1,0 +1,33 @@
+<mat-sidenav-container>
+    <mat-sidenav #drawer
+                 class="z-depth-1"
+                 [style.width.px]="200"
+                 fixedInViewport="true"
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [opened]="(isHandset$ | async) ? false : true">
+        <mat-toolbar color="primary" class="z-depth-1">Menu</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/admin/products">Products</a>
+            <a mat-list-item>Link 2</a>
+            <a mat-list-item>Link 3</a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+
+    <mat-sidenav-content>
+        <mat-toolbar class="topNav position-fixed z-depth-1 navbar-light amber-text lighten-4">
+            <button type="button" mat-icon-button
+                    (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>UPARIS</span>
+        </mat-toolbar>
+
+        <div [style.marginTop.px]="64">
+            <div class="card-body px-0 py-0">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

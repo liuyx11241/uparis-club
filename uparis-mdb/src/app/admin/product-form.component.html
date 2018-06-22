@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <form [formGroup]="_productForm" class="col-12 col-md-4 col-lg-3">
+                <mat-form-field class="col-12">
+                    <input type="text" matInput placeholder="产品ID" formControlName="id">
+                </mat-form-field>
+                <mat-form-field class="col-12">
+                    <input type="text" matInput placeholder="产品名" formControlName="name">
+                </mat-form-field>
+                <mat-form-field class="col-12">
+                    <input type="text" matInput placeholder="昵称" formControlName="alias">
+                </mat-form-field>
+                <mat-form-field class="col-12">
+                    <input type="number" matInput placeholder="时长" formControlName="duration">
+                </mat-form-field>
+                <mat-form-field class="col-12">
+                    <textarea matInput placeholder="短介绍" formControlName="shortDescription"></textarea>
+                </mat-form-field>
+                <mat-form-field class="col-12">
+                    <textarea matInput placeholder="长介绍" formControlName="longDescription"></textarea>
+                </mat-form-field>
+            </form>
+        </div>
+    </div>
+
+    <div class="card-footer">
+
+    </div>
+</div>

@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {ProductService} from "./product.service";
 import {HttpClientModule} from "@angular/common/http";
 import {ProductResolver} from "./product.resolver";
+import {TripResolver} from "./trip-resolver.service";
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import {ProductResolver} from "./product.resolver";
     providers: [
         ProductService,
         ProductResolver,
+        TripResolver,
     ]
 })
 export class ServiceModule {

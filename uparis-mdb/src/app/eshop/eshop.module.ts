@@ -20,7 +20,7 @@ import {CheckoutStepperComponent} from './checkout-stepper.component';
 import {defineLocale} from 'ngx-bootstrap/chronos';
 import {zhCnLocale} from 'ngx-bootstrap/locale';
 import {frLocale} from "ngx-bootstrap";
-import {TripResolver} from "./trip-resolver.service";
+import {TripResolver} from "../service/trip-resolver.service";
 import {PersonCardComponent} from './person-card.component';
 
 defineLocale('zh-cn', zhCnLocale);
@@ -36,10 +36,7 @@ defineLocale('fr', frLocale);
         MaterialModule,
         ServiceModule,
     ],
-    providers: [
-        TripResolver,
-        {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'never'}}
-    ],
+    providers: [],
     declarations: [
         EshopComponent,
         ProductListComponent,
