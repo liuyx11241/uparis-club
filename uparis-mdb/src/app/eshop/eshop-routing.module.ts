@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {EshopComponent} from "./eshop.component";
 import {ProductListComponent} from "./product-list.component";
 import {ProductDetailComponent} from "./product-detail.component";
-import {ProductResolver} from "./product-resolver.service";
+import {ProductResolver} from "../service/product-resolver.service";
 import {CheckoutStepperComponent} from "./checkout-stepper.component";
 import {TripResolver} from "./trip-resolver.service";
 

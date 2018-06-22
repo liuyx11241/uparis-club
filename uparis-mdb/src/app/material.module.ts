@@ -8,10 +8,10 @@ import {
     MatGridListModule,
     MatIconModule,
     MatInputModule,
-    MatListModule,
+    MatListModule, MatMenuModule, MatPaginatorModule,
     MatRadioModule,
     MatSelectModule,
-    MatSidenavModule, MatStepperModule,
+    MatSidenavModule, MatSortModule, MatStepperModule, MatTableModule,
     MatTabsModule,
     MatToolbarModule
 } from "@angular/material";
@@ -40,8 +40,12 @@ import {BsDatepickerModule} from "ngx-bootstrap";
         MatRadioModule,
         MatStepperModule,
         MatCheckboxModule,
-        BsDatepickerModule.forRoot(),
+        MatMenuModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
 
+        BsDatepickerModule.forRoot(),
     ],
     exports: [
         MDBBootstrapModule,
@@ -62,6 +66,11 @@ import {BsDatepickerModule} from "ngx-bootstrap";
         MatRadioModule,
         MatStepperModule,
         MatCheckboxModule,
+        MatMenuModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+
         BsDatepickerModule,
     ]
 })

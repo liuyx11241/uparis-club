@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {EshopModule} from './eshop/eshop.module';
 import {RouterModule} from "@angular/router";
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
     declarations: [
@@ -16,13 +17,13 @@ import {RouterModule} from "@angular/router";
 
         //custom module
         EshopModule,
+        AdminModule,
 
         RouterModule.forRoot([
                 {path: '', redirectTo: '/eshop', pathMatch: 'full'},
                 {path: '**', redirectTo: '/eshop'},
             ],
             {useHash: false, enableTracing: false,}),
-
     ],
     providers: [],
     schemas: [NO_ERRORS_SCHEMA],

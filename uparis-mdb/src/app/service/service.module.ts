@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ProductService} from "./product.service";
 import {HttpClientModule} from "@angular/common/http";
+import {ProductResolver} from "./product-resolver.service";
 
 @NgModule({
     imports: [
@@ -9,7 +10,10 @@ import {HttpClientModule} from "@angular/common/http";
         HttpClientModule
     ],
     declarations: [],
-    providers: [ProductService]
+    providers: [
+        ProductService,
+        ProductResolver,
+    ]
 })
 export class ServiceModule {
 }

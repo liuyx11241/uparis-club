@@ -8,7 +8,6 @@ import {ProductListComponent} from './product-list.component';
 import {ServiceModule} from "../service/service.module";
 import {ProductDetailComponent} from './product-detail.component';
 import {ItineraryListComponent} from './itinerary-list.component';
-import {ProductResolver} from "./product-resolver.service";
 import {ShoppingCartComponent} from './shopping-cart.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OptionSelectorComponent} from './option-selector.component';
@@ -38,7 +37,6 @@ defineLocale('fr', frLocale);
         ServiceModule,
     ],
     providers: [
-        ProductResolver,
         TripResolver,
         {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'never'}}
     ],

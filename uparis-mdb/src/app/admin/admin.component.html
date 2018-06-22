@@ -1,0 +1,28 @@
+<mat-sidenav-container class="h-100">
+    <mat-sidenav #drawer
+                 class="px-0 z-depth-5"
+                 [style.width.px]="200"
+                 fixedInViewport="true"
+                 [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [opened]="!(isHandset$ | async)">
+        <mat-toolbar>
+            UPARIS
+        </mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="['/admin/products']">Product</a>
+            <a mat-list-item>Trip</a>
+            <a mat-list-item>Order</a>
+            <a mat-list-item>Participant</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar class="z-depth-1">
+            <button type="button" mat-icon-button (click)="drawer.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>UPARIS</span>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
