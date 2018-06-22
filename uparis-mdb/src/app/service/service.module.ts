@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ProductService} from "./product.service";
 import {HttpClientModule} from "@angular/common/http";
-import {ProductResolver} from "./product-resolver.service";
+import {ProductResolver} from "./product.resolver";
 
 @NgModule({
     imports: [

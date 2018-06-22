@@ -5,7 +5,6 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {EshopModule} from './eshop/eshop.module';
 import {RouterModule} from "@angular/router";
-import { AdminModule } from './admin/admin.module';
 
 @NgModule({
     declarations: [
@@ -17,7 +16,6 @@ import { AdminModule } from './admin/admin.module';
 
         //custom module
         EshopModule,
-        AdminModule,
 
         RouterModule.forRoot([
                 {path: '', redirectTo: '/eshop', pathMatch: 'full'},
