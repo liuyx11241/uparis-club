@@ -11,7 +11,7 @@
 </div>
 <mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="_listCheckoutForm" #stepRegister>
-        <ng-template matStepLabel>报名信息</ng-template>
+        <ng-template matStepLabel>报名</ng-template>
         <div class="row">
             <form *ngFor="let checkoutForm of _listCheckoutForm.controls; let index=index;"
                   [formGroup]="checkoutForm"
@@ -32,8 +32,8 @@
                 color="primary" (click)="createNewOrder($event)">
             下一步<i class="fa fa-arrow-circle-right fa-lg"></i></button>
     </mat-step>
-    <mat-step #stepBilling>
-        <ng-template matStepLabel>付款信息</ng-template>
+    <mat-step #stepConfirm>
+        <ng-template matStepLabel>确认</ng-template>
         <div class="row">
             <uparis-person-card
                 *ngFor="let order of _listOrder"
@@ -44,7 +44,7 @@
         </div>
 
         <div class="row mt-5">
-            <mat-checkbox color="primary" class="col-12 mx-auto">
+            <mat-checkbox color="primary" class="col-12 mx-auto" #accept>
                 我已认真阅读并接受使用此<a><u>服务协议</u></a>
             </mat-checkbox>
         </div>
@@ -52,5 +52,8 @@
         <button mat-raised-button matStepperPrevious color="warn" class="mt-5">
             <i class="fa fa-arrow-circle-left fa-lg"></i>上一步
         </button>
+        <button mat-raised-button matStepperNext class="mt-5" color="primary"
+                [disabled]="!accept.checked">
+            下一步<i class="fa fa-arrow-circle-right fa-lg"></i></button>
     </mat-step>
 </mat-horizontal-stepper>
