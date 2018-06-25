@@ -14,13 +14,12 @@ import {OptionSelectorComponent} from './option-selector.component';
 import {TripSelectorComponent} from './trip-selector.component';
 import {NumberPickerComponent} from './number-picker.component';
 import {PersonFormComponent} from './person-form.component';
-import {MAT_LABEL_GLOBAL_OPTIONS, MatNativeDateModule} from "@angular/material";
+import {MatNativeDateModule} from "@angular/material";
 import {CheckoutStepperComponent} from './checkout-stepper.component';
 
 import {defineLocale} from 'ngx-bootstrap/chronos';
 import {zhCnLocale} from 'ngx-bootstrap/locale';
 import {frLocale} from "ngx-bootstrap";
-import {TripResolver} from "../service/trip-resolver.service";
 import {PersonCardComponent} from './person-card.component';
 
 defineLocale('zh-cn', zhCnLocale);
@@ -38,17 +37,18 @@ defineLocale('fr', frLocale);
     ],
     providers: [],
     declarations: [
+        CheckoutStepperComponent,
         EshopComponent,
+        ItineraryListComponent,
+        OptionSelectorComponent,
         ProductListComponent,
         ProductDetailComponent,
-        ItineraryListComponent,
+        PersonFormComponent,
+        PersonCardComponent,
         ShoppingCartComponent,
-        OptionSelectorComponent,
         TripSelectorComponent,
         NumberPickerComponent,
-        PersonFormComponent,
-        CheckoutStepperComponent,
-        PersonCardComponent],
+    ],
     bootstrap: [EshopComponent]
 })
 export class EshopModule {

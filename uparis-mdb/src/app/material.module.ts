@@ -2,16 +2,22 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
     MatButtonModule,
-    MatCardModule, MatCheckboxModule,
+    MatCardModule,
+    MatCheckboxModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
-    MatListModule, MatMenuModule, MatPaginatorModule,
+    MatListModule,
+    MatMenuModule,
+    MatPaginatorModule,
     MatRadioModule,
     MatSelectModule,
-    MatSidenavModule, MatSortModule, MatStepperModule, MatTableModule,
+    MatSidenavModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTableModule,
     MatTabsModule,
     MatToolbarModule
 } from "@angular/material";

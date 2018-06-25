@@ -63,7 +63,7 @@ public class ProductController {
         itinerary1.setIdProduct("1");
         itinerary1.setMovement("巴黎 － 卡塔尼亚");
         itinerary1.setListSchedule(Arrays.asList(
-            new ScheduleDto("1", "7:00", 1, "乘坐飞机前往卡塔尼亚"),
+            new ScheduleDto("1", "07:00", 1, "乘坐飞机前往卡塔尼亚"),
             new ScheduleDto("2", null, 2, "乘水陆交通，抵达利帕里岛"),
             new ScheduleDto("3", null, 3, "利帕里岛环岛徒步，高处可观赏海上众火山岛风光。"),
             new ScheduleDto("4", null, 4, "3h30徒步，海拔升降400米")));

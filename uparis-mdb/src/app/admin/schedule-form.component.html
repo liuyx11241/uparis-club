@@ -1,6 +1,9 @@
 <ng-container *ngFor="let schedule of _listSchedule;let index=index;">
     <mat-form-field class="col-3 col-md-2">
-        <input matInput type="text" placeholder="时间" [(ngModel)]="schedule.time" [name]="'time'+index">
+        <!--<mat-select [(value)]="schedule.time" placeholder="时间">-->
+            <!--<mat-option *ngFor="let time of _availableTime" [value]="time">{{time}}</mat-option>-->
+        <!--</mat-select>-->
+        <input matInput type="text" placeholder="时间" [(ngModel)]="schedule.time">
     </mat-form-field>
     <mat-form-field class="col-9 col-md-10">
         <input matInput type="text" placeholder="行程" [(ngModel)]="schedule.activity" [name]="'activity'+index"

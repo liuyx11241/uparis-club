@@ -32,10 +32,10 @@
             <mat-tab #tabSchedule>
                 <ng-template mat-tab-label>
                     <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>
-                    <span [class.amber-text]="tabSchedule.isActive">Schedule</span>
+                    <span [class.amber-text]="tabSchedule.isActive">行程</span>
                 </ng-template>
                 <ng-template matTabContent>
-                    <uparis-itinerary-form [listItinerary]="_product.listItinerary"></uparis-itinerary-form>
+                    <uparis-itinerary-table [listItinerary]="_product.listItinerary"></uparis-itinerary-table>
                 </ng-template>
             </mat-tab>
         </mat-tab-group>

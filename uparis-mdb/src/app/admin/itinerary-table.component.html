@@ -1,0 +1,62 @@
+<ng-template #itemTemplate let-item="item" let-index="index">
+
+</ng-template>
+
+<div class="col-12">
+    <button mat-raised-button color="primary" class="my-4" (click)="add()">
+        <mat-icon>add_box</mat-icon>
+        添加
+    </button>
+    <button mat-raised-button color="primary" class="my-4" (click)="save()">
+        <mat-icon>save_alt</mat-icon>
+        保存
+    </button>
+    <!--<bs-sortable-->
+    <!--[(ngModel)]="_listItinerary"-->
+    <!--[itemTemplate]="itemTemplate"-->
+    <!--&gt;</bs-sortable>-->
+    <form #form="ngForm">
+        <mat-table [dataSource]="_listItinerary" multiTemplateDataRows>
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef>行程ID</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dayStart">
+                <mat-header-cell *matHeaderCellDef>开始</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.dayStart}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dayEnd">
+                <mat-header-cell *matHeaderCellDef>结束</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.dayEnd}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="movement">
+                <mat-header-cell *matHeaderCellDef>地点</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.movement}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button mat-icon-button color="warn" (click)="delete(row)">
+                        <mat-icon>delete_sweep</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+            <ng-container matColumnDef="expandedItinerary">
+                <mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
+                    <uparis-itinerary-form class="my-2 py-4 w-100 z-depth-1" [itinerary]="row"></uparis-itinerary-form>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="expandedItinerary = row"></mat-row>
+            <mat-row *matRowDef="let row; columns: ['expandedItinerary']"
+                     [collapse]="_expandedItinerary !== row"></mat-row>
+        </mat-table>
+    </form>
+</div>
