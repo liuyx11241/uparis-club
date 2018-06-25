@@ -17,7 +17,7 @@ import {
 } from "@angular/material";
 import {LayoutModule} from "@angular/cdk/layout";
 import {MDBBootstrapModule} from "angular-bootstrap-md";
-import {BsDatepickerModule} from "ngx-bootstrap";
+import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap";
 
 @NgModule({
     imports: [
@@ -46,6 +46,8 @@ import {BsDatepickerModule} from "ngx-bootstrap";
         MatSortModule,
 
         BsDatepickerModule.forRoot(),
+        SortableModule.forRoot(),
+        CollapseModule.forRoot(),
     ],
     exports: [
         MDBBootstrapModule,
@@ -72,6 +74,8 @@ import {BsDatepickerModule} from "ngx-bootstrap";
         MatSortModule,
 
         BsDatepickerModule,
+        SortableModule,
+        CollapseModule,
     ]
 })
 export class MaterialModule {

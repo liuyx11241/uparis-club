@@ -1,30 +1,45 @@
 <div class="card">
+    <div class="card-header">
+        <span>Tool Bar</span>
+    </div>
+
     <div class="card-body">
         <div class="row">
-            <form [formGroup]="_productForm" class="col-12 col-md-4 col-lg-3">
+            <form #productForm="ngForm" class="col-12 col-md-4 col-lg-3 hoverable">
                 <mat-form-field class="col-12">
-                    <input type="text" matInput placeholder="产品ID" formControlName="id">
+                    <input type="text" matInput placeholder="产品ID" [(ngModel)]="_product.id" name="id">
                 </mat-form-field>
                 <mat-form-field class="col-12">
-                    <input type="text" matInput placeholder="产品名" formControlName="name">
+                    <input type="text" matInput placeholder="产品名" [(ngModel)]="_product.name" name="name" required>
                 </mat-form-field>
                 <mat-form-field class="col-12">
-                    <input type="text" matInput placeholder="昵称" formControlName="alias">
+                    <input type="text" matInput placeholder="昵称" [(ngModel)]="_product.alias" name="alias">
                 </mat-form-field>
                 <mat-form-field class="col-12">
-                    <input type="number" matInput placeholder="时长" formControlName="duration">
+                    <input type="number" matInput placeholder="时长" [(ngModel)]="_product.duration" name="duration" required>
                 </mat-form-field>
                 <mat-form-field class="col-12">
-                    <textarea matInput placeholder="短介绍" formControlName="shortDescription"></textarea>
+                    <textarea matInput placeholder="短介绍" [(ngModel)]="_product.shortDescription" name="shortDescription" maxlength="128"></textarea>
                 </mat-form-field>
                 <mat-form-field class="col-12">
-                    <textarea matInput placeholder="长介绍" formControlName="longDescription"></textarea>
+                    <textarea matInput placeholder="长介绍" [(ngModel)]="_product.longDescription" name="longDescription" maxlength="512"></textarea>
                 </mat-form-field>
             </form>
         </div>
-    </div>
 
-    <div class="card-footer">
+        <hr>
+        <mat-tab-group color="primary">
+            <mat-tab #tabSchedule>
+                <ng-template mat-tab-label>
+                    <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>
+                    <span [class.amber-text]="tabSchedule.isActive">Schedule</span>
+                </ng-template>
+                <ng-template matTabContent>
+                    <uparis-itinerary-form [listItinerary]="_product.listItinerary"></uparis-itinerary-form>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+
 
     </div>
 </div>

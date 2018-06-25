@@ -1,0 +1,9 @@
+<ng-container *ngFor="let schedule of _listSchedule;let index=index;">
+    <mat-form-field class="col-3 col-md-2">
+        <input matInput type="text" placeholder="时间" [(ngModel)]="schedule.time" [name]="'time'+index">
+    </mat-form-field>
+    <mat-form-field class="col-9 col-md-10">
+        <input matInput type="text" placeholder="行程" [(ngModel)]="schedule.activity" [name]="'activity'+index"
+               required>
+    </mat-form-field>
+</ng-container>

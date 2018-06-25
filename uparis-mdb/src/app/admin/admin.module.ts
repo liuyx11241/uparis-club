@@ -8,6 +8,8 @@ import {ProductTableComponent} from './product-table.component';
 import {ProductFormComponent} from './product-form.component';
 import {MaterialModule} from "../material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { ItineraryFormComponent } from './itinerary-form.component';
+import { ScheduleFormComponent } from './schedule-form.component';
 
 @NgModule({
     imports: [
@@ -21,7 +23,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         AdminComponent,
         DashboardComponent,
         ProductTableComponent,
-        ProductFormComponent],
+        ProductFormComponent,
+        ItineraryFormComponent,
+        ScheduleFormComponent],
     bootstrap: [AdminComponent]
 })
 export class AdminModule {

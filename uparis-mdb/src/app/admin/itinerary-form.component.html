@@ -1,0 +1,94 @@
+<ng-template #itemTemplate let-item="item" let-index="index">
+
+</ng-template>
+
+<div class="col-12">
+    <button mat-raised-button color="primary" class="my-4">
+        <mat-icon>save_alt</mat-icon>
+        保存行程
+    </button>
+    <button mat-raised-button color="primary" class="my-4">
+        <mat-icon>add_box</mat-icon>
+        添加行程
+    </button>
+    <!--<bs-sortable-->
+    <!--[(ngModel)]="_listItinerary"-->
+    <!--[itemTemplate]="itemTemplate"-->
+    <!--&gt;</bs-sortable>-->
+    <form #form="ngForm">
+        <mat-table [dataSource]="_listItinerary" multiTemplateDataRows>
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef>行程ID</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dayStart">
+                <mat-header-cell *matHeaderCellDef>开始</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.dayStart}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dayEnd">
+                <mat-header-cell *matHeaderCellDef>结束</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.dayEnd}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="movement">
+                <mat-header-cell *matHeaderCellDef>地点</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.movement}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button mat-mini-fab color="warn">
+                        <mat-icon>delete_sweep</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="_expandedItinerary = row">
+                        <mat-icon>expand_more</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+            <ng-container matColumnDef="expandedItinerary">
+                <mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
+                    <uparis-schedule-form
+                        [listSchedule]="row.listSchedule"
+                        class="my-2 py-4 w-100 z-depth-1"></uparis-schedule-form>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            <mat-row *matRowDef="let row; columns: ['expandedItinerary']" [collapse]="_expandedItinerary !== row"></mat-row>
+        </mat-table>
+        <!--<mat-expansion-panel [hideToggle]="true">-->
+        <!--<mat-expansion-panel-header class="row">-->
+        <!--<mat-panel-title class="col-4 col-md-3 col-lg-2 px-0">-->
+        <!--<mat-icon>date_range</mat-icon>-->
+        <!--Day {{item.value.dayStart}}-->
+        <!--<ng-container *ngIf="item.value.dayStart !== item.value.dayEnd">-->
+        <!--~ Day {{item.value.dayEnd}}-->
+        <!--</ng-container>-->
+        <!--</mat-panel-title>-->
+        <!--<mat-panel-description class="col-8 col-md-9 col-lg-10 px-0">-->
+        <!--<mat-icon>map</mat-icon>{{item.value.movement}}-->
+        <!--</mat-panel-description>-->
+        <!--</mat-expansion-panel-header>-->
+        <!--<div class="row">-->
+        <!--<mat-form-field class="col-6 col-md-1">-->
+        <!--<input matInput type="number" [(ngModel)]="item.value.dayStart" name="dayStart" placeholder="开始" required min="1">-->
+        <!--</mat-form-field>-->
+        <!--<mat-form-field class="col-6 col-md-1">-->
+        <!--<input matInput type="number" [(ngModel)]="item.value.dayEnd" name="dayEnd" placeholder="结束">-->
+        <!--</mat-form-field>-->
+
+        <!--<mat-form-field class="col-12 col-md-10">-->
+        <!--<input matInput type="text" [(ngModel)]="item.value.movement" name="movement" placeholder="地点">-->
+        <!--</mat-form-field>-->
+        <!--</div>-->
+
+
+        <!--</mat-expansion-panel>-->
+    </form>
+</div>
