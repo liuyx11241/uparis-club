@@ -10,15 +10,15 @@ import {ProductService} from "../service/product.service";
 export class ProductTableComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-    dataSource: ProductTableDataSource;
+    _dataSource: ProductTableDataSource;
 
-    displayedColumns = ['id', 'name', 'alias', 'duration', 'actions'];
+    _displayedColumns = ['id', 'name', 'alias', 'duration', 'actions'];
 
     constructor(private productService: ProductService) {
 
     }
 
     ngOnInit() {
-        this.dataSource = new ProductTableDataSource(this.paginator, this.sort, this.productService);
+        this._dataSource = new ProductTableDataSource(this.paginator, this.sort, this.productService);
     }
 }

@@ -1,6 +1,5 @@
 package com.uparis.dto;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -18,9 +17,9 @@ public class TripDto {
 
     private Integer stock;
 
-    private BigDecimal price;
+    private PriceDto mainPrice;
 
-    private String priceCurrency;
+    private SortedMap<String, PriceDto> mappedPrice = new TreeMap<>();
 
     private SortedMap<Integer, List<OptionDto>> mappedListOption = new TreeMap<>();
 
@@ -82,20 +81,12 @@ public class TripDto {
         this.nameProduct = nameProduct;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public PriceDto getMainPrice() {
+        return mainPrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getPriceCurrency() {
-        return priceCurrency;
-    }
-
-    public void setPriceCurrency(String priceCurrency) {
-        this.priceCurrency = priceCurrency;
+    public void setMainPrice(PriceDto mainPrice) {
+        this.mainPrice = mainPrice;
     }
 
     public SortedMap<Integer, List<OptionDto>> getMappedListOption() {
@@ -104,5 +95,13 @@ public class TripDto {
 
     public void setMappedListOption(SortedMap<Integer, List<OptionDto>> mappedListOption) {
         this.mappedListOption = mappedListOption;
+    }
+
+    public SortedMap<String, PriceDto> getMappedPrice() {
+        return mappedPrice;
+    }
+
+    public void setMappedPrice(SortedMap<String, PriceDto> mappedPrice) {
+        this.mappedPrice = mappedPrice;
     }
 }

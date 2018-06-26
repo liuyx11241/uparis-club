@@ -3,7 +3,7 @@ import {Schedule} from "./schedule.dto";
 export class Itinerary {
     id: string;
     dayStart: number;
-    dayEnd: number;
+    duration: number;
     movement: string;
     idProduct: string;
     idTrip: string;

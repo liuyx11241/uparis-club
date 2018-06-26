@@ -1,0 +1,38 @@
+<mat-table [dataSource]="_listTrip">
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="idProduct">
+        <mat-header-cell *matHeaderCellDef>产品</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.idProduct}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="dateStart">
+        <mat-header-cell *matHeaderCellDef>出发日期</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.dateStart}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="dateEnd">
+        <mat-header-cell *matHeaderCellDef>返回日期</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.dateEnd}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="stock">
+        <mat-header-cell *matHeaderCellDef>库存</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.stock}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="mainPrice">
+        <mat-header-cell *matHeaderCellDef>价格</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.mainPrice.value | currency: element.mainPrice.currency}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <button mat-icon-button [routerLink]="['/admin/trips', element.id]">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="_displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: _displayedColumns"></mat-row>
+</mat-table>

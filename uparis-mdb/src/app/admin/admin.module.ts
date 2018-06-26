@@ -11,6 +11,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ScheduleFormComponent} from './schedule-form.component';
 import {ItineraryTableComponent} from './itinerary-table.component';
 import {ItineraryFormComponent} from './itinerary-form.component';
+import { TripTableComponent } from './trip-table.component';
+import { TripFormComponent } from './trip-form.component';
+import { OptionFormComponent } from './option-form.component';
 
 @NgModule({
     imports: [
@@ -28,6 +31,9 @@ import {ItineraryFormComponent} from './itinerary-form.component';
         ScheduleFormComponent,
         ItineraryTableComponent,
         ItineraryFormComponent,
+        TripTableComponent,
+        TripFormComponent,
+        OptionFormComponent,
     ],
     bootstrap: [AdminComponent]
 })

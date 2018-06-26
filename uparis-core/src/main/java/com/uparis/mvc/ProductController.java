@@ -59,7 +59,7 @@ public class ProductController {
         ItineraryDto itinerary1 = new ItineraryDto();
         itinerary1.setId("1");
         itinerary1.setDayStart(1);
-        itinerary1.setDayEnd(1);
+        itinerary1.setDuration(1);
         itinerary1.setIdProduct("1");
         itinerary1.setMovement("巴黎 － 卡塔尼亚");
         itinerary1.setListSchedule(Arrays.asList(
@@ -71,7 +71,7 @@ public class ProductController {
         ItineraryDto itinerary2 = new ItineraryDto();
         itinerary2.setId("2");
         itinerary2.setDayStart(2);
-        itinerary2.setDayEnd(2);
+        itinerary2.setDuration(1);
         itinerary2.setIdProduct("1");
         itinerary2.setMovement("利帕里岛－火山岛");
         itinerary2.setListSchedule(Arrays.asList(
@@ -84,7 +84,7 @@ public class ProductController {
         ItineraryDto itinerary3 = new ItineraryDto();
         itinerary3.setId("3");
         itinerary3.setDayStart(3);
-        itinerary3.setDayEnd(3);
+        itinerary3.setDuration(1);
         itinerary3.setIdProduct("1");
         itinerary3.setMovement("利帕里岛－斯特魔波利岛");
         itinerary3.setListSchedule(Arrays.asList(
@@ -96,7 +96,7 @@ public class ProductController {
         ItineraryDto itinerary4 = new ItineraryDto();
         itinerary4.setId("4");
         itinerary4.setDayStart(4);
-        itinerary4.setDayEnd(4);
+        itinerary4.setDuration(1);
         itinerary4.setIdProduct("1");
         itinerary4.setMovement("斯特魔波利岛－卡塔尼亚");
         itinerary4.setListSchedule(Arrays.asList(
@@ -105,7 +105,7 @@ public class ProductController {
         ItineraryDto itinerary5 = new ItineraryDto();
         itinerary5.setId("5");
         itinerary5.setDayStart(5);
-        itinerary5.setDayEnd(5);
+        itinerary5.setDuration(1);
         itinerary5.setIdProduct("1");
         itinerary5.setMovement("埃特纳火山");
         itinerary5.setListSchedule(Arrays.asList(
@@ -117,7 +117,7 @@ public class ProductController {
         ItineraryDto itinerary6 = new ItineraryDto();
         itinerary6.setId("6");
         itinerary6.setDayStart(6);
-        itinerary6.setDayEnd(7);
+        itinerary6.setDuration(2);
         itinerary6.setIdProduct("1");
         itinerary6.setMovement("卡塔尼亚 – 陶尔米纳 – 卡塔尼亚");
         itinerary6.setListSchedule(Arrays.asList(
@@ -129,7 +129,7 @@ public class ProductController {
         ItineraryDto itinerary7 = new ItineraryDto();
         itinerary7.setId("7");
         itinerary7.setDayStart(8);
-        itinerary7.setDayEnd(8);
+        itinerary7.setDuration(1);
         itinerary7.setIdProduct("1");
         itinerary7.setMovement("卡塔尼亚－巴黎");
         itinerary7.setListSchedule(Arrays.asList(

@@ -11,7 +11,7 @@ public class ItineraryDto {
 
     private Integer dayStart;
 
-    private Integer dayEnd;
+    private Integer duration;
 
     private String idProduct;
 
@@ -43,12 +43,12 @@ public class ItineraryDto {
         this.dayStart = dayStart;
     }
 
-    public Integer getDayEnd() {
-        return dayEnd;
+    public Integer getDuration() {
+        return duration;
     }
 
-    public void setDayEnd(Integer dayEnd) {
-        this.dayEnd = dayEnd;
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 
     public String getIdProduct() {

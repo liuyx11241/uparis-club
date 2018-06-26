@@ -24,12 +24,12 @@
 
             <ng-container matColumnDef="dayStart">
                 <mat-header-cell *matHeaderCellDef>开始</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row.dayStart}}</mat-cell>
+                <mat-cell *matCellDef="let row">Day{{row.dayStart}}</mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="dayEnd">
-                <mat-header-cell *matHeaderCellDef>结束</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row.dayEnd}}</mat-cell>
+            <ng-container matColumnDef="duration">
+                <mat-header-cell *matHeaderCellDef>天数</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.duration}}天</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="movement">
@@ -43,18 +43,24 @@
                     <button mat-icon-button color="warn" (click)="delete(row)">
                         <mat-icon>delete_sweep</mat-icon>
                     </button>
+                    <button mat-icon-button (click)="expandedItinerary=null" *ngIf="_expandedItinerary===row">
+                        <mat-icon>expand_less</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="expandedItinerary=row" *ngIf="_expandedItinerary!==row">
+                        <mat-icon>expand_more</mat-icon>
+                    </button>
                 </mat-cell>
             </ng-container>
 
             <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
             <ng-container matColumnDef="expandedItinerary">
-                <mat-cell *matCellDef="let row" [attr.colspan]="displayedColumns.length">
+                <mat-cell *matCellDef="let row" [attr.colspan]="_displayedColumns.length">
                     <uparis-itinerary-form class="my-2 py-4 w-100 z-depth-1" [itinerary]="row"></uparis-itinerary-form>
                 </mat-cell>
             </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="expandedItinerary = row"></mat-row>
+            <mat-header-row *matHeaderRowDef="_displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: _displayedColumns;"></mat-row>
             <mat-row *matRowDef="let row; columns: ['expandedItinerary']"
                      [collapse]="_expandedItinerary !== row"></mat-row>
         </mat-table>

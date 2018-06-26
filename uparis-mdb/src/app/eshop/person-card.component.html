@@ -1,8 +1,8 @@
 <div class="card">
 
     <!--<ng-container *ngIf="_person?.portrait">-->
-        <!--<div class="card-up indigo lighten-1"></div>-->
-        <!--<div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg" class="rounded-circle"></div>-->
+    <!--<div class="card-up indigo lighten-1"></div>-->
+    <!--<div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg" class="rounded-circle"></div>-->
     <!--</ng-container>-->
 
     <div class="card-body text-left">
@@ -45,8 +45,8 @@
         <hr>
         <p *ngFor="let option of _listOption">
             <i class="fa fa-lg col-2 fa-hand-o-right" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
-            <span class="col-10">{{option.name}} - {{option.priceFactor | currency: option.priceFactorCurrency}}</span>
+            <span class="col-5">{{option.name}}</span>
+            <span class="col-5 text-right">{{option.priceFactor.value | currency: option.priceFactor.currency}}</span>
         </p>
-
     </div>
 </div>

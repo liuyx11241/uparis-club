@@ -8,8 +8,8 @@
             <mat-panel-title class="col-4 col-md-3 col-lg-2 px-0">
                 <mat-icon>date_range</mat-icon>
                 Day {{itinerary.dayStart}}
-                <ng-container *ngIf="itinerary.dayStart !== itinerary.dayEnd">
-                    ~ Day {{itinerary.dayEnd}}
+                <ng-container *ngIf="itinerary.dayStart !== itinerary.duration">
+                    ~ Day {{itinerary.duration}}
                 </ng-container>
             </mat-panel-title>
             <mat-panel-description class="col-8 col-md-9 col-lg-10 px-0">

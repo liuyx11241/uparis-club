@@ -1,0 +1,57 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <form #tripForm="ngForm" class="col-12 col-md-4 col-lg-3 hoverable">
+                <mat-form-field class="col-12">
+                    <input matInput placeholder="ID" [(ngModel)]="_trip.id" name="id" disabled>
+                </mat-form-field>
+
+                <mat-form-field class="col-12">
+                    <input matInput placeholder="产品" [(ngModel)]="_trip.idProduct" name="idProduct" disabled>
+                </mat-form-field>
+
+                <mat-form-field class="col-12">
+                    <input matInput placeholder="出发日期" [(ngModel)]="_trip.dateStart" name="dateStart">
+                </mat-form-field>
+
+                <mat-form-field class="col-12">
+                    <input matInput placeholder="返回日期" [(ngModel)]="_trip.dateEnd" name="dateEnd" disabled>
+                </mat-form-field>
+
+                <mat-form-field class="col-12">
+                    <input matInput type="number" placeholder="库存" [(ngModel)]="_trip.stock" name="stock">
+                </mat-form-field>
+
+                <mat-form-field class="col-12">
+                    <input matInput type="number" placeholder="价格" [(ngModel)]="_trip.mainPrice.value" name="price">
+                </mat-form-field>
+
+                <mat-form-field class="col-12">
+                    <input matInput placeholder="货币" [(ngModel)]="_trip.mainPrice.currency" name="priceCurrency" disabled>
+                </mat-form-field>
+            </form>
+        </div>
+
+        <hr>
+        <mat-tab-group color="primary">
+            <mat-tab #tabOption>
+                <ng-template mat-tab-label>
+                    <mat-icon [class.amber-text]="tabOption.isActive">format_list_numbered</mat-icon>
+                    <span [class.amber-text]="tabOption.isActive">选项</span>
+                </ng-template>
+                <ng-template matTabContent>
+                    <uparis-option-form></uparis-option-form>
+                </ng-template>
+            </mat-tab>
+            <mat-tab #tabPrice>
+                <ng-template mat-tab-label>
+                    <mat-icon [class.amber-text]="tabPrice.isActive">euro_symbol</mat-icon>
+                    <span [class.amber-text]="tabPrice.isActive">价格</span>
+                </ng-template>
+                <ng-template matTabContent>
+                    To be implemented with RMB...
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

@@ -1,11 +1,10 @@
+import {Price} from "./price.dto";
+import {Stock} from "./stock.dto";
+
 export class Option {
     id: string;
 
     idTrip: string;
-
-    idStock: string;
-
-    quantity: number;
 
     name: string;
 
@@ -15,7 +14,7 @@ export class Option {
 
     numOrder: number;
 
-    priceFactor: number;
+    priceFactor: Price;
 
-    priceFactorCurrency: string;
+    stock: Stock;
 }

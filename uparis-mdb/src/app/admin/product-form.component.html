@@ -29,6 +29,15 @@
 
         <hr>
         <mat-tab-group color="primary">
+            <mat-tab #tabTrip>
+                <ng-template mat-tab-label>
+                    <mat-icon [class.amber-text]="tabTrip.isActive">directions_run</mat-icon>
+                    <span [class.amber-text]="tabTrip.isActive">出队</span>
+                </ng-template>
+                <ng-template matTabContent>
+                    <uparis-trip-table [listTrip]="_product.listTrip"></uparis-trip-table>
+                </ng-template>
+            </mat-tab>
             <mat-tab #tabSchedule>
                 <ng-template mat-tab-label>
                     <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>

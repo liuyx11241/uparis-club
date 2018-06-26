@@ -1,4 +1,4 @@
-<mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+<mat-table #table [dataSource]="_dataSource" matSort aria-label="Elements">
 
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header>产品ID</mat-header-cell>
@@ -26,13 +26,12 @@
             <button mat-icon-button [routerLink]="['/admin/products', row.id]">
                 <mat-icon>edit</mat-icon>
             </button>
-
         </mat-cell>
     </ng-container>
 
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-header-row *matHeaderRowDef="_displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: _displayedColumns;"></mat-row>
 </mat-table>
 
 <mat-paginator #paginator

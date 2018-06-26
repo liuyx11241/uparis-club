@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 public class PricePo extends AbstractPo {
 
     private BigDecimal value;
+    
+    private BigDecimal valueAddedTax;
 
     private String currency;
 

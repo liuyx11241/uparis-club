@@ -10,7 +10,7 @@ export class ItineraryTableComponent implements OnInit {
 
     private _listItinerary: Itinerary[];
     private _expandedItinerary: Itinerary;
-    displayedColumns = ['id', 'dayStart', 'dayEnd', 'movement', 'actions'];
+    _displayedColumns = ['id', 'dayStart', 'duration', 'movement', 'actions'];
 
     constructor() {
     }
