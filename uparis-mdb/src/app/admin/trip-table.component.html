@@ -1,3 +1,9 @@
+<mat-toolbar>
+    <button mat-button (click)="add()">
+        <mat-icon>add_box</mat-icon>
+        添加新活动
+    </button>
+</mat-toolbar>
 <mat-table [dataSource]="_listTrip">
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
@@ -5,7 +11,7 @@
     </ng-container>
     <ng-container matColumnDef="idProduct">
         <mat-header-cell *matHeaderCellDef>产品</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.idProduct}}</mat-cell>
+        <mat-cell *matCellDef="let element">{{element.nameProduct}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="dateStart">
         <mat-header-cell *matHeaderCellDef>出发日期</mat-header-cell>
@@ -29,6 +35,9 @@
         <mat-cell *matCellDef="let element">
             <button mat-icon-button [routerLink]="['/admin/trips', element.id]">
                 <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button>
+                <mat-icon>delete</mat-icon>
             </button>
         </mat-cell>
     </ng-container>

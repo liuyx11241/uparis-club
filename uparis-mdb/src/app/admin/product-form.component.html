@@ -1,54 +1,62 @@
-<div class="card">
-    <div class="card-header">
-        <span>Tool Bar</span>
+<mat-toolbar>
+    <button mat-button (click)="add()">
+        <mat-icon>add_box</mat-icon>
+        添加新产品
+    </button>
+    <button mat-button (click)="save()">
+        <mat-icon>save</mat-icon>
+        保存修改
+    </button>
+    <button mat-button (click)="save()">
+        <mat-icon>delete</mat-icon>
+        删除产品
+    </button>
+</mat-toolbar>
+<div class="card-body">
+    <div class="row">
+        <form #productForm="ngForm" class="col-12 col-md-4 col-lg-3 hoverable">
+            <mat-form-field class="col-12">
+                <input type="text" matInput placeholder="产品ID" [(ngModel)]="_product.id" name="id" disabled>
+            </mat-form-field>
+            <mat-form-field class="col-12">
+                <input type="text" matInput placeholder="产品名" [(ngModel)]="_product.name" name="name" required>
+            </mat-form-field>
+            <mat-form-field class="col-12">
+                <input type="text" matInput placeholder="昵称" [(ngModel)]="_product.alias" name="alias">
+            </mat-form-field>
+            <mat-form-field class="col-12">
+                <input type="number" matInput placeholder="时长" [(ngModel)]="_product.duration" name="duration" required>
+            </mat-form-field>
+            <mat-form-field class="col-12">
+                <textarea matInput placeholder="短介绍" [(ngModel)]="_product.shortDescription" name="shortDescription"
+                          maxlength="128"></textarea>
+            </mat-form-field>
+            <mat-form-field class="col-12">
+                <textarea matInput placeholder="长介绍" [(ngModel)]="_product.longDescription" name="longDescription"
+                          maxlength="512"></textarea>
+            </mat-form-field>
+        </form>
     </div>
 
-    <div class="card-body">
-        <div class="row">
-            <form #productForm="ngForm" class="col-12 col-md-4 col-lg-3 hoverable">
-                <mat-form-field class="col-12">
-                    <input type="text" matInput placeholder="产品ID" [(ngModel)]="_product.id" name="id">
-                </mat-form-field>
-                <mat-form-field class="col-12">
-                    <input type="text" matInput placeholder="产品名" [(ngModel)]="_product.name" name="name" required>
-                </mat-form-field>
-                <mat-form-field class="col-12">
-                    <input type="text" matInput placeholder="昵称" [(ngModel)]="_product.alias" name="alias">
-                </mat-form-field>
-                <mat-form-field class="col-12">
-                    <input type="number" matInput placeholder="时长" [(ngModel)]="_product.duration" name="duration" required>
-                </mat-form-field>
-                <mat-form-field class="col-12">
-                    <textarea matInput placeholder="短介绍" [(ngModel)]="_product.shortDescription" name="shortDescription" maxlength="128"></textarea>
-                </mat-form-field>
-                <mat-form-field class="col-12">
-                    <textarea matInput placeholder="长介绍" [(ngModel)]="_product.longDescription" name="longDescription" maxlength="512"></textarea>
-                </mat-form-field>
-            </form>
-        </div>
-
-        <hr>
-        <mat-tab-group color="primary">
-            <mat-tab #tabTrip>
-                <ng-template mat-tab-label>
-                    <mat-icon [class.amber-text]="tabTrip.isActive">directions_run</mat-icon>
-                    <span [class.amber-text]="tabTrip.isActive">出队</span>
-                </ng-template>
-                <ng-template matTabContent>
-                    <uparis-trip-table [listTrip]="_product.listTrip"></uparis-trip-table>
-                </ng-template>
-            </mat-tab>
-            <mat-tab #tabSchedule>
-                <ng-template mat-tab-label>
-                    <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>
-                    <span [class.amber-text]="tabSchedule.isActive">行程</span>
-                </ng-template>
-                <ng-template matTabContent>
-                    <uparis-itinerary-table [listItinerary]="_product.listItinerary"></uparis-itinerary-table>
-                </ng-template>
-            </mat-tab>
-        </mat-tab-group>
-
-
-    </div>
+    <hr>
+    <mat-tab-group color="primary">
+        <mat-tab #tabTrip>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabTrip.isActive">directions_run</mat-icon>
+                <span [class.amber-text]="tabTrip.isActive">出队</span>
+            </ng-template>
+            <ng-template matTabContent>
+                <uparis-trip-table [listTrip]="_product.listTrip"></uparis-trip-table>
+            </ng-template>
+        </mat-tab>
+        <mat-tab #tabSchedule>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>
+                <span [class.amber-text]="tabSchedule.isActive">行程</span>
+            </ng-template>
+            <ng-template matTabContent>
+                <uparis-itinerary-table [listItinerary]="_product.listItinerary"></uparis-itinerary-table>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
 </div>

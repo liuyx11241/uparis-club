@@ -9,7 +9,7 @@ import {FormArray, FormGroup} from "@angular/forms";
 })
 export class OptionSelectorComponent {
 
-    private _mappedListOption: any;
+    private _mappedListOption: object;
 
     private _selectedOption: Map<string, Option>;
 
@@ -28,12 +28,12 @@ export class OptionSelectorComponent {
     }
 
 
-    get mappedListOption(): any {
+    get mappedListOption(): object {
         return this._mappedListOption;
     }
 
     @Input()
-    set mappedListOption(value: any) {
+    set mappedListOption(value: object) {
         this._mappedListOption = value;
         this._selectedOption.clear();
     }

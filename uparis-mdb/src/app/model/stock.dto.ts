@@ -1,4 +1,4 @@
 export class Stock {
-    idStock: string;
+    id: string;
     quantity: number;
 }

@@ -1,4 +1,3 @@
-import {Option} from "./option.dto";
 import {Price} from "./price.dto";
 
 export class Trip {
@@ -16,7 +15,7 @@ export class Trip {
 
     mainPrice: Price;
 
-    mappedListOption: Map<number, Option[]>;
+    mappedListOption: object;//Map<number, Option[]>;
 
-    mappedPrice: Map<string, Price>
+    mappedPrice: object;//Map<string, Price>
 }

@@ -40,7 +40,7 @@
                     <span [class.amber-text]="tabOption.isActive">选项</span>
                 </ng-template>
                 <ng-template matTabContent>
-                    <uparis-option-form></uparis-option-form>
+                    <uparis-option-table [mappedListOption]="_trip.mappedListOption"></uparis-option-table>
                 </ng-template>
             </mat-tab>
             <mat-tab #tabPrice>
