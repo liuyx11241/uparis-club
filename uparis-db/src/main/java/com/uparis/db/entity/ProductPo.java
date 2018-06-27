@@ -23,11 +23,11 @@ public class ProductPo extends AbstractPo {
     private Integer duration;
 
     // Relationship
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")
+    @OneToMany(mappedBy = "product")
     @OrderBy("date_start")
     private List<TripPo> listTrip;
 
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "product")
+    @OneToMany(mappedBy = "product")
     @OrderBy("day_start asc")
     private List<ItineraryPo> listItinerary;
 
@@ -42,5 +42,61 @@ public class ProductPo extends AbstractPo {
     public ProductPo(String name, Integer duration) {
         this.name = name;
         this.duration = duration;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public List<TripPo> getListTrip() {
+        return listTrip;
+    }
+
+    public void setListTrip(List<TripPo> listTrip) {
+        this.listTrip = listTrip;
+    }
+
+    public List<ItineraryPo> getListItinerary() {
+        return listItinerary;
+    }
+
+    public void setListItinerary(List<ItineraryPo> listItinerary) {
+        this.listItinerary = listItinerary;
     }
 }

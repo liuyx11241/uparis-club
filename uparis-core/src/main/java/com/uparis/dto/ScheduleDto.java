@@ -2,9 +2,9 @@ package com.uparis.dto;
 
 public class ScheduleDto {
 
-    private String id;
+    private Long id;
 
-    private String idItinerary;
+    private Long idItinerary;
 
     private String time;
 
@@ -16,26 +16,26 @@ public class ScheduleDto {
         //Serializable
     }
 
-    public ScheduleDto(String id, String time, Integer numOrder, String activity) {
+    public ScheduleDto(Long id, String time, Integer numOrder, String activity) {
         this.id = id;
         this.time = time;
         this.numOrder = numOrder;
         this.activity = activity;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getIdItinerary() {
+    public Long getIdItinerary() {
         return idItinerary;
     }
 
-    public void setIdItinerary(String idItinerary) {
+    public void setIdItinerary(Long idItinerary) {
         this.idItinerary = idItinerary;
     }
 

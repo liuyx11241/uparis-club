@@ -3,9 +3,9 @@ package com.uparis.dto;
 import java.math.BigDecimal;
 
 public class OptionDto {
-    private String id;
+    private Long id;
 
-    private String idTrip;
+    private Long idTrip;
 
     private String name;
 
@@ -23,19 +23,19 @@ public class OptionDto {
         // Empty Constructor
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getIdTrip() {
+    public Long getIdTrip() {
         return idTrip;
     }
 
-    public void setIdTrip(String idTrip) {
+    public void setIdTrip(Long idTrip) {
         this.idTrip = idTrip;
     }
 
@@ -87,7 +87,7 @@ public class OptionDto {
         this.stock = stock;
     }
 
-    public static OptionDto valueOf(String idTrip, String name, int level, int numOrder, PriceDto priceFactor) {
+    public static OptionDto valueOf(Long idTrip, String name, int level, int numOrder, PriceDto priceFactor) {
         OptionDto option = new OptionDto();
         option.idTrip = idTrip;
         option.name = name;
@@ -97,7 +97,7 @@ public class OptionDto {
         return option;
     }
 
-    public static OptionDto valueOf(String idTrip, String name, int level, int numOrder, BigDecimal priceFactor, String currency) {
+    public static OptionDto valueOf(Long idTrip, String name, int level, int numOrder, BigDecimal priceFactor, String currency) {
         OptionDto option = new OptionDto();
         option.idTrip = idTrip;
         option.name = name;
@@ -107,8 +107,8 @@ public class OptionDto {
         return option;
     }
 
-    public static OptionDto valueOf(String idTrip, String name, int level, int numOrder, BigDecimal priceFactor, String currency,
-        String idStock, Integer quantity, String description) {
+    public static OptionDto valueOf(Long idTrip, String name, int level, int numOrder, BigDecimal priceFactor, String currency,
+                                    Long idStock, Integer quantity, String description) {
         OptionDto option = new OptionDto();
         option.idTrip = idTrip;
         option.name = name;

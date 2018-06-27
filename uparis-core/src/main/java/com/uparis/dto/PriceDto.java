@@ -9,9 +9,9 @@ public class PriceDto {
 
     private String currency;
 
-    private String idTrip;
+    private Long idTrip;
 
-    private String idOption;
+    private Long idOption;
 
     public PriceDto() {
         // empty
@@ -46,19 +46,19 @@ public class PriceDto {
         this.currency = currency;
     }
 
-    public String getIdTrip() {
+    public Long getIdTrip() {
         return idTrip;
     }
 
-    public void setIdTrip(String idTrip) {
+    public void setIdTrip(Long idTrip) {
         this.idTrip = idTrip;
     }
 
-    public String getIdOption() {
+    public Long getIdOption() {
         return idOption;
     }
 
-    public void setIdOption(String idOption) {
+    public void setIdOption(Long idOption) {
         this.idOption = idOption;
     }
 

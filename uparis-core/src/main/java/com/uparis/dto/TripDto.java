@@ -5,9 +5,9 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class TripDto {
-    private String id;
+    private Long id;
 
-    private String idProduct;
+    private Long idProduct;
 
     private String nameProduct;
 
@@ -33,11 +33,11 @@ public class TripDto {
         this.stock = stock;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -65,11 +65,11 @@ public class TripDto {
         this.stock = stock;
     }
 
-    public String getIdProduct() {
+    public Long getIdProduct() {
         return idProduct;
     }
 
-    public void setIdProduct(String idProduct) {
+    public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }
 

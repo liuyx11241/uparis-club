@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ItineraryDto {
 
-    private String id;
+    private Long id;
 
     private String movement;
 
@@ -13,17 +13,17 @@ public class ItineraryDto {
 
     private Integer duration;
 
-    private String idProduct;
+    private Long idProduct;
 
-    private String idTrip;
+    private Long idTrip;
 
     private List<ScheduleDto> listSchedule = new ArrayList<>();
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,19 +51,19 @@ public class ItineraryDto {
         this.duration = duration;
     }
 
-    public String getIdProduct() {
+    public Long getIdProduct() {
         return idProduct;
     }
 
-    public void setIdProduct(String idProduct) {
+    public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }
 
-    public String getIdTrip() {
+    public Long getIdTrip() {
         return idTrip;
     }
 
-    public void setIdTrip(String idTrip) {
+    public void setIdTrip(Long idTrip) {
         this.idTrip = idTrip;
     }
 

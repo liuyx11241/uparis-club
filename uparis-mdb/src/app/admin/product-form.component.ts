@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../model/product.dto";
 import {ActivatedRoute} from "@angular/router";
 import {MAT_LABEL_GLOBAL_OPTIONS} from "@angular/material";
+import {ProductService} from "../service/product.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
     selector: 'uparis-product-form',
@@ -13,7 +15,8 @@ export class ProductFormComponent implements OnInit {
 
     _product: Product;
 
-    constructor(private route: ActivatedRoute) {
+    constructor(private route: ActivatedRoute,
+                private service: ProductService) {
     }
 
 
@@ -21,5 +24,29 @@ export class ProductFormComponent implements OnInit {
         this.route.data.subscribe((data: { product: Product }) => {
             this._product = data.product;
         });
+
+        if (!this._product) {
+            this.add();
+        }
+    }
+
+    add(): void {
+        this._product = new Product();
+    }
+
+    save(form: NgForm) {
+        console.log(form.valid);
+        console.log(form.dirty);
+        console.log(this._product);
+        if (form.valid && form.dirty && this._product) {
+            this.service.saveProduct(this._product).subscribe((product: Product) => {
+                this._product = product;
+            });
+        }
+    }
+
+    delete(form: NgForm) {
+        if (this._product) {
+        }
     }
 }

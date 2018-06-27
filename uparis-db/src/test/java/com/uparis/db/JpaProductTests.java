@@ -67,12 +67,13 @@ public class JpaProductTests {
     @Test
     @Transactional
     public void testJpaItinerary() {
-        ItineraryPo itinerary1 = new ItineraryPo();
-        itineraryRepository.saveAndFlush(itinerary1);
-        ItineraryPo itinerary2 = new ItineraryPo();
-        itineraryRepository.saveAndFlush(itinerary2);
-
         ProductPo product = new ProductPo("name");
         productRepository.saveAndFlush(product);
+
+        ItineraryPo itinerary1 = new ItineraryPo();
+        itinerary1.setDayStart(1);
+        itinerary1.setDuration(1);
+        itinerary1.setProduct(product);
+        itineraryRepository.saveAndFlush(itinerary1);
     }
 }

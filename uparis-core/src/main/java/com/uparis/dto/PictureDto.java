@@ -1,9 +1,9 @@
 package com.uparis.dto;
 
 public class PictureDto {
-    private String id;
+    private Long id;
 
-    private String idProduct;
+    private Long idProduct;
 
     private String srcUrl;
 
@@ -17,7 +17,7 @@ public class PictureDto {
         //Serializable
     }
 
-    public PictureDto(String id, String idProduct, String srcUrl, String altText, String title, String description) {
+    public PictureDto(Long id, Long idProduct, String srcUrl, String altText, String title, String description) {
         this.id = id;
         this.idProduct = idProduct;
         this.srcUrl = srcUrl;
@@ -26,19 +26,19 @@ public class PictureDto {
         this.description = description;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getIdProduct() {
+    public Long getIdProduct() {
         return idProduct;
     }
 
-    public void setIdProduct(String idProduct) {
+    public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }
 

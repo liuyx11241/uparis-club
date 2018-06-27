@@ -14,6 +14,7 @@ const routes: Routes = [
         children: [
             {path: '', component: DashboardComponent},
             {path: 'products', component: ProductTableComponent},
+            {path: 'products/new', component: ProductFormComponent},
             {path: 'products/:id', component: ProductFormComponent,
                 resolve:{
                     product: ProductResolver

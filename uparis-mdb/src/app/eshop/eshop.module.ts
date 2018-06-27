@@ -5,7 +5,6 @@ import {EshopRoutingModule} from './eshop-routing.module';
 import {EshopComponent} from './eshop.component';
 import {MaterialModule} from "../material.module";
 import {ProductListComponent} from './product-list.component';
-import {ServiceModule} from "../service/service.module";
 import {ProductDetailComponent} from './product-detail.component';
 import {ItineraryListComponent} from './itinerary-list.component';
 import {ShoppingCartComponent} from './shopping-cart.component';
@@ -33,7 +32,6 @@ defineLocale('fr', frLocale);
         EshopRoutingModule,
         MatNativeDateModule,
         MaterialModule,
-        ServiceModule,
     ],
     providers: [],
     declarations: [

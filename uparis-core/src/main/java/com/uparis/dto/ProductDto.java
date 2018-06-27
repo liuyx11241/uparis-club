@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDto implements Serializable {
-    private String id;
+    private Long id;
 
     @NotNull
     private String name;
@@ -32,11 +32,11 @@ public class ProductDto implements Serializable {
 
     private List<PictureDto> listPicture = new ArrayList<>();
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

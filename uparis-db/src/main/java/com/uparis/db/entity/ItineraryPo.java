@@ -12,7 +12,7 @@ public class ItineraryPo extends AbstractPo {
     private Integer dayStart;
 
     @Column(nullable = false)
-    private Integer dayEnd;
+    private Integer duration;
 
     @ManyToOne
     private ProductPo product;
@@ -20,4 +20,44 @@ public class ItineraryPo extends AbstractPo {
     @OneToMany(mappedBy = "itinerary", orphanRemoval = true)
     @OrderBy("num_order asc")
     private List<SchedulePo> listSchedule;
+
+    public String getMovement() {
+        return movement;
+    }
+
+    public void setMovement(String movement) {
+        this.movement = movement;
+    }
+
+    public Integer getDayStart() {
+        return dayStart;
+    }
+
+    public void setDayStart(Integer dayStart) {
+        this.dayStart = dayStart;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public ProductPo getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductPo product) {
+        this.product = product;
+    }
+
+    public List<SchedulePo> getListSchedule() {
+        return listSchedule;
+    }
+
+    public void setListSchedule(List<SchedulePo> listSchedule) {
+        this.listSchedule = listSchedule;
+    }
 }

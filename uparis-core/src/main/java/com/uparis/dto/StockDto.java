@@ -1,15 +1,15 @@
 package com.uparis.dto;
 
 public class StockDto {
-    private String id;
+    private Long id;
 
     private Integer quantity;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -21,7 +21,7 @@ public class StockDto {
         this.quantity = quantity;
     }
 
-    public static StockDto valueOf(String id, Integer quantity) {
+    public static StockDto valueOf(Long id, Integer quantity) {
         StockDto stock = new StockDto();
         stock.id = id;
         stock.quantity = quantity;

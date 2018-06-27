@@ -22,6 +22,6 @@ public class OptionPo extends AbstractPo {
     @ManyToOne
     private StockPo stock;
 
-    @OneToMany(mappedBy = "tripOption")
+    @OneToMany(mappedBy = "option")
     private List<PricePo> listPriceFactor;
 }

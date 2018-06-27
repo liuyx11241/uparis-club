@@ -18,10 +18,24 @@ export class ProductService {
     }
 
     public getProduct(id: string): Observable<Product> {
-        return this.http.get<Product>("/api/products/" + id);
+        return this.http.get<Product>(`/api/products/${id}`);
     }
 
+    public saveProduct(value: Product): Observable<Product> {
+        if (value === null) {
+            return;
+        }
+        if (value.id) {
+            console.info(`put${value.id}`);
+            return this.http.put<Product>(`/api/products`, value, httpOptions);
+        } else {
+            console.info(`post${value.id}`);
+            return this.http.post<Product>(`/api/products`, value, httpOptions);
+        }
+    }
+
+
     public getTrip(id: string): Observable<Trip> {
-        return this.http.get<Trip>("/api/trips/" + id);
+        return this.http.get<Trip>(`/api/trips/${id}`);
     }
 }

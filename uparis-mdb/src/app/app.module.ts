@@ -6,6 +6,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {EshopModule} from './eshop/eshop.module';
 import {RouterModule} from "@angular/router";
 import {AdminModule} from './admin/admin.module';
+import {ServiceModule} from "./service/service.module";
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import {AdminModule} from './admin/admin.module';
         BrowserModule,
         BrowserAnimationsModule,
 
+        ServiceModule,
         //custom module
         AdminModule,
         EshopModule,
