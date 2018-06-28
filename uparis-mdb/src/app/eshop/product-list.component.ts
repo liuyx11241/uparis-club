@@ -29,7 +29,7 @@ export class ProductListComponent implements OnInit {
         return this._listProduct$;
     }
 
-    trackByProducts(index: number, product: Product): string {
+    trackByProducts(index: number, product: Product): number {
         return product.id;
     };
 
