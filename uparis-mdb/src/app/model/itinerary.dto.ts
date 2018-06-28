@@ -1,12 +1,11 @@
 import {Schedule} from "./schedule.dto";
 
 export class Itinerary {
-    id: string;
+    id: number;
     dayStart: number;
     duration: number;
     movement: string;
-    idProduct: string;
-    idTrip: string;
+    idProduct: number;
 
     listSchedule: Schedule[];
 }

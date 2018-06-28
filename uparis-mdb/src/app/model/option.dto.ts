@@ -2,9 +2,9 @@ import {Price} from "./price.dto";
 import {Stock} from "./stock.dto";
 
 export class Option {
-    id: string;
+    id: number;
 
-    idTrip: string;
+    idTrip: number;
 
     name: string;
 

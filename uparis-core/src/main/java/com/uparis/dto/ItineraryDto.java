@@ -2,8 +2,9 @@ package com.uparis.dto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class ItineraryDto {
+public class ItineraryDto implements Comparable<ItineraryDto> {
 
     private Long id;
 
@@ -15,9 +16,28 @@ public class ItineraryDto {
 
     private Long idProduct;
 
-    private Long idTrip;
-
     private List<ScheduleDto> listSchedule = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ItineraryDto that = (ItineraryDto) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public int compareTo(ItineraryDto o) {
+        if (this.equals(o)) {
+            return 0;
+        }
+        return Objects.compare(this.dayStart, o.dayStart, Integer::compareTo);
+    }
 
     public Long getId() {
         return id;
@@ -57,14 +77,6 @@ public class ItineraryDto {
 
     public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
-    }
-
-    public Long getIdTrip() {
-        return idTrip;
-    }
-
-    public void setIdTrip(Long idTrip) {
-        this.idTrip = idTrip;
     }
 
     public List<ScheduleDto> getListSchedule() {

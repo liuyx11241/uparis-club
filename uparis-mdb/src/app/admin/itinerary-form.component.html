@@ -1,10 +1,11 @@
-<div class="row card-body">
+<div class="row card-body px-0 py-0">
     <mat-form-field class="col-6 col-md-1">
         <input matInput type="number" [(ngModel)]="_itinerary.dayStart" name="dayStart" placeholder="起始日"
-               required min="1">
+               required min="1" disabled>
     </mat-form-field>
     <mat-form-field class="col-6 col-md-1">
-        <input matInput type="number" [(ngModel)]="_itinerary.duration" name="duration" placeholder="天数">
+        <input matInput type="number" [(ngModel)]="_itinerary.duration" name="duration" placeholder="天数"
+               min="1" (change)="onDurationChange()">
     </mat-form-field>
 
     <mat-form-field class="col-12 col-md-10">
@@ -12,4 +13,4 @@
     </mat-form-field>
 </div>
 
-<uparis-schedule-form class="row card-body" [listSchedule]="_itinerary.listSchedule"></uparis-schedule-form>
+<uparis-schedule-form class="row card-body px-0 py-0" [itinerary]="_itinerary"></uparis-schedule-form>

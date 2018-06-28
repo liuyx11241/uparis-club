@@ -8,53 +8,20 @@
         保存修改
     </button>
 </mat-toolbar>
-<div class="col-12">
-    <mat-table [dataSource]="_listItinerary" multiTemplateDataRows>
-        <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef>行程ID</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="dayStart">
-            <mat-header-cell *matHeaderCellDef>开始</mat-header-cell>
-            <mat-cell *matCellDef="let row">Day{{row.dayStart}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="duration">
-            <mat-header-cell *matHeaderCellDef>天数</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.duration}}天</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="movement">
-            <mat-header-cell *matHeaderCellDef>地点</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.movement}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let row">
-                <button mat-icon-button (click)="delete(row)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-                <button mat-icon-button (click)="expandedItinerary=null" *ngIf="_expandedItinerary===row">
-                    <mat-icon>expand_less</mat-icon>
-                </button>
-                <button mat-icon-button (click)="expandedItinerary=row" *ngIf="_expandedItinerary!==row">
-                    <mat-icon>expand_more</mat-icon>
-                </button>
-            </mat-cell>
-        </ng-container>
-
-        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-        <ng-container matColumnDef="expandedItinerary">
-            <mat-cell *matCellDef="let row" [attr.colspan]="_displayedColumns.length" class="z-depth-1">
-                <uparis-itinerary-form class="w-100" [itinerary]="row"></uparis-itinerary-form>
-            </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="_displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: _displayedColumns;"></mat-row>
-        <mat-row *matRowDef="let row; columns: ['expandedItinerary']"
-                 [collapse]="_expandedItinerary !== row"></mat-row>
-    </mat-table>
-</div>
+<mat-expansion-panel *ngFor="let itinerary of _product.listItinerary">
+    <mat-expansion-panel-header class="row">
+        <mat-panel-title class="col-4 col-md-3 col-lg-2">
+            <mat-icon>date_range</mat-icon>
+            Day {{itinerary.dayStart}}
+            <ng-container *ngIf="itinerary.duration > 1">
+                ~ Day {{itinerary.dayStart + itinerary.duration - 1}}
+            </ng-container>
+        </mat-panel-title>
+        <mat-panel-description class="col-8 col-md-9 col-lg-10 px-0">
+            <mat-icon>map</mat-icon>
+            {{itinerary.movement}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+    <uparis-itinerary-form class="w-100" [itinerary]="itinerary"
+                           (durationChange)="prepareSave()"></uparis-itinerary-form>
+</mat-expansion-panel>

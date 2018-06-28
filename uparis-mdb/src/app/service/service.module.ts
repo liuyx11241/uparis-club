@@ -1,14 +1,15 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ProductService} from "./product.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
 import {ProductResolver} from "./product.resolver";
-import {TripResolver} from "./trip-resolver.service";
+import {TripResolver} from "./trip.resolver";
 
 @NgModule({
     imports: [
         CommonModule,
-        HttpClientModule
+        HttpClientModule,
+        HttpClientXsrfModule,
     ],
     declarations: [],
     providers: [

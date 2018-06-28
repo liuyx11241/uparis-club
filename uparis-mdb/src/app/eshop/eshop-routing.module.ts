@@ -5,7 +5,7 @@ import {ProductListComponent} from "./product-list.component";
 import {ProductDetailComponent} from "./product-detail.component";
 import {ProductResolver} from "../service/product.resolver";
 import {CheckoutStepperComponent} from "./checkout-stepper.component";
-import {TripResolver} from "../service/trip-resolver.service";
+import {TripResolver} from "../service/trip.resolver";
 
 const routes: Routes = [
   {

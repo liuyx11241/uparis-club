@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Itinerary} from "../model/itinerary.dto";
 import {Schedule} from "../model/schedule.dto";
 
 @Component({
@@ -6,7 +7,7 @@ import {Schedule} from "../model/schedule.dto";
     templateUrl: './schedule-form.component.html',
 })
 export class ScheduleFormComponent implements OnInit {
-    private _listSchedule: Schedule[];
+    private _itinerary: Itinerary;
 
     private _availableTime: string[];
 
@@ -23,7 +24,14 @@ export class ScheduleFormComponent implements OnInit {
     }
 
     @Input()
-    set listSchedule(value: Schedule[]) {
-        this._listSchedule = value;
+    set itinerary(value: Itinerary) {
+        this._itinerary = value;
+    }
+
+    add(): void {
+        let schedule = new Schedule();
+        schedule.numOrder = 1 + this._itinerary.listSchedule.length;
+        schedule.idItinerary = this._itinerary.id;
+        this._itinerary.listSchedule.push(schedule);
     }
 }

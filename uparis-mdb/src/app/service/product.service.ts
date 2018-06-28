@@ -3,11 +3,15 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Product} from "../model/product.dto";
 import {Observable} from "rxjs/index";
 import {Trip} from "../model/trip.dto";
+import {ErrorHandler} from "./error.handler";
+import {catchError} from "rxjs/internal/operators";
 
 const httpOptions = {headers: new HttpHeaders({'ContentType': 'application/json'})}
 
 @Injectable()
 export class ProductService {
+
+    private handler: ErrorHandler = new ErrorHandler();
 
     constructor(private http: HttpClient) {
 
@@ -21,21 +25,27 @@ export class ProductService {
         return this.http.get<Product>(`/api/products/${id}`);
     }
 
-    public saveProduct(value: Product): Observable<Product> {
+    public saveProduct(value: Product): Observable<number> {
         if (value === null) {
             return;
         }
         if (value.id) {
             console.info(`put${value.id}`);
-            return this.http.put<Product>(`/api/products`, value, httpOptions);
+            return this.http.put<number>(`/api/products`, value, httpOptions).pipe(
+                catchError(this.handler.handleError)
+            );
         } else {
             console.info(`post${value.id}`);
-            return this.http.post<Product>(`/api/products`, value, httpOptions);
+            return this.http.post<number>(`/api/products`, value, httpOptions).pipe(
+                catchError(this.handler.handleError)
+            );
         }
     }
 
 
     public getTrip(id: string): Observable<Trip> {
-        return this.http.get<Trip>(`/api/trips/${id}`);
+        return this.http.get<Trip>(`/api/trips/${id}`).pipe(
+            catchError(this.handler.handleError)
+        );
     }
 }

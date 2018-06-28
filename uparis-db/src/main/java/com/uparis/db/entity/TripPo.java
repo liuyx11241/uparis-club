@@ -21,11 +21,11 @@ public class TripPo extends AbstractPo {
     @OneToMany(mappedBy = "trip")
     private List<PricePo> listPrice;
 
-    @OneToMany(mappedBy = "trip", orphanRemoval = true)
+    @OneToMany(mappedBy = "trip")
     @OrderBy("level asc, num_order asc")
     private List<OptionPo> listOption;
 
-    @OneToMany(mappedBy = "trip", orphanRemoval = true)
+    @OneToMany(mappedBy = "trip")
     private List<OrderPo> listOrder;
 
     @ManyToMany

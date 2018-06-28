@@ -3,7 +3,7 @@ import {Trip} from "./trip.dto";
 import {Picture} from "./picture.dto";
 
 export class Product {
-    id: string;
+    id: number;
     name: string;
     alias: string
     shortDescription: string;

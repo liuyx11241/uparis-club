@@ -1,6 +1,6 @@
 export class Schedule {
-    id: string;
-    idItinerary: string;
+    id: number;
+    idItinerary: number;
     time: string;
     numOrder: number;
     activity: string;

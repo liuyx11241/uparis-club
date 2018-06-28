@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Product} from "../model/product.dto";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MAT_LABEL_GLOBAL_OPTIONS} from "@angular/material";
 import {ProductService} from "../service/product.service";
 import {NgForm} from "@angular/forms";
@@ -15,7 +15,8 @@ export class ProductFormComponent implements OnInit {
 
     _product: Product;
 
-    constructor(private route: ActivatedRoute,
+    constructor(private router: Router,
+                private route: ActivatedRoute,
                 private service: ProductService) {
     }
 
@@ -39,8 +40,8 @@ export class ProductFormComponent implements OnInit {
         console.log(form.dirty);
         console.log(this._product);
         if (form.valid && form.dirty && this._product) {
-            this.service.saveProduct(this._product).subscribe((product: Product) => {
-                this._product = product;
+            this.service.saveProduct(this._product).subscribe((id: number) => {
+                this.router.navigate(['/admin/products', id]);
             });
         }
     }

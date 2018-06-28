@@ -3,9 +3,11 @@ import {Option} from "./option.dto";
 
 export class Order {
 
+    id: number;
+
     participant: Person;
 
-    idTrip: string;
+    idTrip: number;
 
     payer: Person;
 

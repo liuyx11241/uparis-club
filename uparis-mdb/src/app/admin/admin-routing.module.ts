@@ -6,7 +6,7 @@ import {ProductTableComponent} from "./product-table.component";
 import {ProductFormComponent} from "./product-form.component";
 import {ProductResolver} from "../service/product.resolver";
 import {TripFormComponent} from "./trip-form.component";
-import {TripResolver} from "../service/trip-resolver.service";
+import {TripResolver} from "../service/trip.resolver";
 
 const routes: Routes = [
     {

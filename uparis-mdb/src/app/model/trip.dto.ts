@@ -1,9 +1,9 @@
 import {Price} from "./price.dto";
 
 export class Trip {
-    id: string;
+    id: number;
 
-    idProduct: string;
+    idProduct: number;
 
     nameProduct: string;
 

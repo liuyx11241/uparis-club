@@ -1,4 +1,6 @@
 export class Person {
+    id: number;
+
     gender: string;
 
     fullName: string;
