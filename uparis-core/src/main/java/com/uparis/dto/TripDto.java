@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class TripDto {
-    private Long id;
-
+public class TripDto extends AbstractDto {
     private Long idProduct;
 
     private String nameProduct;
@@ -22,24 +20,6 @@ public class TripDto {
     private SortedMap<String, PriceDto> mappedPrice = new TreeMap<>();
 
     private SortedMap<Integer, List<OptionDto>> mappedListOption = new TreeMap<>();
-
-    public TripDto() {
-        // Empty Constructor
-    }
-
-    public TripDto(String dateStart, String dateEnd, Integer stock) {
-        this.dateStart = dateStart;
-        this.dateEnd = dateEnd;
-        this.stock = stock;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getDateStart() {
         return dateStart;

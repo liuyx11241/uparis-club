@@ -8,8 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDto implements Serializable {
-    private Long id;
+public class ProductDto extends AbstractDto implements Serializable {
 
     @NotNull
     private String name;
@@ -31,14 +30,6 @@ public class ProductDto implements Serializable {
     private List<ItineraryDto> listItinerary = new ArrayList<>();
 
     private List<PictureDto> listPicture = new ArrayList<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

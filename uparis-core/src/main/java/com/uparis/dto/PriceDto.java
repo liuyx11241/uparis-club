@@ -2,7 +2,7 @@ package com.uparis.dto;
 
 import java.math.BigDecimal;
 
-public class PriceDto {
+public class PriceDto extends AbstractDto {
     private BigDecimal value;
 
     private BigDecimal valueAddedTax;
@@ -12,15 +12,6 @@ public class PriceDto {
     private Long idTrip;
 
     private Long idOption;
-
-    public PriceDto() {
-        // empty
-    }
-
-    public PriceDto(BigDecimal value, String currency) {
-        this.value = value;
-        this.currency = currency;
-    }
 
     public BigDecimal getValue() {
         return value;
@@ -60,9 +51,5 @@ public class PriceDto {
 
     public void setIdOption(Long idOption) {
         this.idOption = idOption;
-    }
-
-    public static PriceDto valueOf(BigDecimal value, String currency) {
-        return new PriceDto(value, currency);
     }
 }

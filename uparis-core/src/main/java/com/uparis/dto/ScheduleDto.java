@@ -1,8 +1,6 @@
 package com.uparis.dto;
 
-public class ScheduleDto {
-
-    private Long id;
+public class ScheduleDto extends AbstractDto {
 
     private Long idItinerary;
 
@@ -11,25 +9,6 @@ public class ScheduleDto {
     private Integer numOrder;
 
     private String activity;
-
-    public ScheduleDto() {
-        //Serializable
-    }
-
-    public ScheduleDto(Long id, String time, Integer numOrder, String activity) {
-        this.id = id;
-        this.time = time;
-        this.numOrder = numOrder;
-        this.activity = activity;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getIdItinerary() {
         return idItinerary;

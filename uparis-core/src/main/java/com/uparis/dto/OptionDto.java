@@ -1,9 +1,6 @@
 package com.uparis.dto;
 
-import java.math.BigDecimal;
-
-public class OptionDto {
-    private Long id;
+public class OptionDto extends AbstractDto {
 
     private Long idTrip;
 
@@ -18,18 +15,6 @@ public class OptionDto {
     private PriceDto priceFactor;
 
     private StockDto stock;
-
-    public OptionDto() {
-        // Empty Constructor
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getIdTrip() {
         return idTrip;
@@ -86,38 +71,4 @@ public class OptionDto {
     public void setStock(StockDto stock) {
         this.stock = stock;
     }
-
-    public static OptionDto valueOf(Long idTrip, String name, int level, int numOrder, PriceDto priceFactor) {
-        OptionDto option = new OptionDto();
-        option.idTrip = idTrip;
-        option.name = name;
-        option.level = level;
-        option.numOrder = numOrder;
-        option.priceFactor = priceFactor;
-        return option;
-    }
-
-    public static OptionDto valueOf(Long idTrip, String name, int level, int numOrder, BigDecimal priceFactor, String currency) {
-        OptionDto option = new OptionDto();
-        option.idTrip = idTrip;
-        option.name = name;
-        option.level = level;
-        option.numOrder = numOrder;
-        option.priceFactor = PriceDto.valueOf(priceFactor, currency);
-        return option;
-    }
-
-    public static OptionDto valueOf(Long idTrip, String name, int level, int numOrder, BigDecimal priceFactor, String currency,
-                                    Long idStock, Integer quantity, String description) {
-        OptionDto option = new OptionDto();
-        option.idTrip = idTrip;
-        option.name = name;
-        option.level = level;
-        option.numOrder = numOrder;
-        option.priceFactor = PriceDto.valueOf(priceFactor, currency);
-        option.stock = StockDto.valueOf(idStock, quantity);
-        option.description = description;
-        return option;
-    }
-
 }

@@ -1,17 +1,7 @@
 package com.uparis.dto;
 
-public class StockDto {
-    private Long id;
-
+public class StockDto extends AbstractDto {
     private Integer quantity;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Integer getQuantity() {
         return quantity;
@@ -21,9 +11,8 @@ public class StockDto {
         this.quantity = quantity;
     }
 
-    public static StockDto valueOf(Long id, Integer quantity) {
+    public static StockDto valueOf(Integer quantity) {
         StockDto stock = new StockDto();
-        stock.id = id;
         stock.quantity = quantity;
         return stock;
     }
