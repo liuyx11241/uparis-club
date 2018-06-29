@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12 col-md-6 col-lg-4 mb-5 hoverable" *ngFor="let product of listProduct$; trackBy: trackByProducts;">
         <mdb-carousel [isControls]="true" [animation]="'slide'" class="view hm-white-slight waves-light pt-2">
-            <mdb-slide *ngFor="let slide of product.listPicture">
+            <mdb-slide *ngFor="let slide of product.listMultimedia">
                 <img class="d-block w-100" [src]="slide.srcUrl" [alt]="slide.altText">
                 <!--<div class="mask flex-center rgba-orange-slight"></div>-->
                 <div class="carousel-caption">
@@ -11,7 +11,7 @@
             </mdb-slide>
         </mdb-carousel>
         <!--<div class="view hm-white-slight waves-light" mdbWavesEffect>-->
-        <!--<img [src]="product.listPicture[0].srcUrl" class="img-fluid" [alt]="product.listPicture[0].altText">-->
+        <!--<img [src]="product.listMultimedia[0].srcUrl" class="img-fluid" [alt]="product.listMultimedia[0].altText">-->
         <!--</div>-->
         <div class="card-body">
             <h4 class="card-title">{{product.name}}</h4>

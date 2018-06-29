@@ -12,7 +12,7 @@ public class UserPo extends AbstractPo {
     private PersonPo person;
 
     @ManyToOne
-    private PicturePo portrait;
+    private MultimediaPo portrait;
 
     private String login;
 

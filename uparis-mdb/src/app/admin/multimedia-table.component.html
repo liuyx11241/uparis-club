@@ -1,0 +1,38 @@
+<mat-toolbar *ngIf="!_disabled">
+    <button mat-button (click)="add('PHOTO')">
+        <mat-icon>add_box</mat-icon>
+        添加新照片
+    </button>
+    <button mat-button (click)="add('VIDEO')">
+        <mat-icon>add_box</mat-icon>
+        添加新照片
+    </button>
+</mat-toolbar>
+<div class="row card-body" *ngFor="let media of _product.listMultimedia">
+    <mat-form-field class="col-12 col-md-2">
+        <input matInput [(ngModel)]="media.id" name="id" disabled placeholder="ID">
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-2">
+        <mat-select [(ngModel)]="media.type" name="type" placeholder="类型"
+                    readonly disabled>
+            <mat-option [value]="'PHOTO'">照片</mat-option>
+            <mat-option [value]="'VIDEO'">视频</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-8">
+        <input matInput type="url" [(ngModel)]="media.srcUrl" name="srcUrl" placeholder="链接"
+               [disabled]="_disabled" required>
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-4">
+        <input matInput type="text" [(ngModel)]="media.altText" name="altText" placeholder="替代文本"
+               [disabled]="_disabled">
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-4">
+        <input matInput type="text" [(ngModel)]="media.title" name="title" placeholder="题目"
+               [disabled]="_disabled">
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-4">
+        <input matInput type="text" [(ngModel)]="media.description" name="description" placeholder="描述"
+               [disabled]="_disabled">
+    </mat-form-field>
+</div>

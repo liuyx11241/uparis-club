@@ -38,15 +38,13 @@ export class ProductFormComponent implements OnInit {
 
     add(): void {
         this._disabled = false;
-
         this._product = new Product();
-        this._product.listItinerary = [];
-        this._product.listPicture = [];
-        this._product.listTrip = [];
     }
 
     save(form: NgForm) {
-        this.itineraryTable.prepareSave()
+        if(this.itineraryTable) {
+            this.itineraryTable.prepareSave();
+        }
         if (form.valid && this._product) {
             this.service.saveProduct(this._product).subscribe((id: number) => {
                 this._disabled = true;

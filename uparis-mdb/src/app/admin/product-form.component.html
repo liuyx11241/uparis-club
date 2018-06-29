@@ -65,5 +65,14 @@
                 <uparis-trip-table [listTrip]="_product.listTrip"></uparis-trip-table>
             </ng-template>
         </mat-tab>
+        <mat-tab #tabMultimedia>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabMultimedia.isActive">photo_library</mat-icon>
+                <span [class.amber-text]="tabMultimedia.isActive">多媒体</span>
+            </ng-template>
+            <ng-template matTabContent>
+                <uparis-multimedia-table [product]="_product" [disabled]="_disabled"></uparis-multimedia-table>
+            </ng-template>
+        </mat-tab>
     </mat-tab-group>
 </div>

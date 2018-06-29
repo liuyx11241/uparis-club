@@ -29,7 +29,7 @@ public class ProductDto extends AbstractDto implements Serializable {
 
     private List<ItineraryDto> listItinerary = new ArrayList<>();
 
-    private List<PictureDto> listPicture = new ArrayList<>();
+    private List<MultimediaDto> listMultimedia = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -87,11 +87,11 @@ public class ProductDto extends AbstractDto implements Serializable {
         this.listItinerary = listItinerary;
     }
 
-    public List<PictureDto> getListPicture() {
-        return listPicture;
+    public List<MultimediaDto> getListMultimedia() {
+        return listMultimedia;
     }
 
-    public void setListPicture(List<PictureDto> listPicture) {
-        this.listPicture = listPicture;
+    public void setListMultimedia(List<MultimediaDto> listMultimedia) {
+        this.listMultimedia = listMultimedia;
     }
 }

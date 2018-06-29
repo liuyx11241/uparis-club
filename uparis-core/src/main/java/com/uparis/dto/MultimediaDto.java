@@ -1,9 +1,15 @@
 package com.uparis.dto;
 
-public class PictureDto extends AbstractDto {
+import javax.validation.constraints.NotNull;
+
+public class MultimediaDto extends AbstractDto {
     private Long idProduct;
 
+    @NotNull
     private String srcUrl;
+
+    @NotNull
+    private String type;
 
     private String altText;
 
@@ -11,7 +17,7 @@ public class PictureDto extends AbstractDto {
 
     private String description;
 
-    public PictureDto() {
+    public MultimediaDto() {
         //Serializable
     }
 

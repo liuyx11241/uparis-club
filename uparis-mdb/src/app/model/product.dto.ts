@@ -1,6 +1,6 @@
 import {Itinerary} from "./itinerary.dto";
 import {Trip} from "./trip.dto";
-import {Picture} from "./picture.dto";
+import {Multimedia} from "./multimedia.dto";
 
 export class Product {
     id: number;
@@ -10,7 +10,7 @@ export class Product {
     longDescription: string;
     duration: number;
 
-    listTrip: Trip[];
-    listItinerary: Itinerary[];
-    listPicture: Picture[];
+    listTrip: Trip[] = [];
+    listItinerary: Itinerary[] = [];
+    listMultimedia: Multimedia[] = [];
 }
