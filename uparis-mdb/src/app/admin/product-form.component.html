@@ -3,9 +3,13 @@
         <mat-icon>add_box</mat-icon>
         添加新产品
     </button>
-    <button mat-button (click)="save(productForm)">
+    <button mat-button (click)="save(productForm)" *ngIf="!_disabled">
         <mat-icon>save</mat-icon>
         保存修改
+    </button>
+    <button mat-button (click)="_disabled=false" *ngIf="_disabled">
+        <mat-icon>edit</mat-icon>
+        修改产品
     </button>
     <button mat-button (click)="delete()">
         <mat-icon>delete</mat-icon>
@@ -19,21 +23,24 @@
                 <input type="text" matInput placeholder="产品ID" [(ngModel)]="_product.id" name="id" disabled>
             </mat-form-field>
             <mat-form-field class="col-12">
-                <input type="text" matInput placeholder="产品名" [(ngModel)]="_product.name" name="name" required>
+                <input type="text" matInput placeholder="产品名" [(ngModel)]="_product.name" name="name"
+                       [disabled]="_disabled" required>
             </mat-form-field>
             <mat-form-field class="col-12">
-                <input type="text" matInput placeholder="昵称" [(ngModel)]="_product.alias" name="alias">
+                <input type="text" matInput placeholder="昵称" [(ngModel)]="_product.alias" name="alias"
+                       [disabled]="_disabled">
             </mat-form-field>
             <mat-form-field class="col-12">
-                <input type="number" matInput placeholder="时长" [(ngModel)]="_product.duration" name="duration" required>
+                <input type="number" matInput placeholder="时长" [(ngModel)]="_product.duration" name="duration"
+                       [disabled]="_disabled" required>
             </mat-form-field>
             <mat-form-field class="col-12">
                 <textarea matInput placeholder="短介绍" [(ngModel)]="_product.shortDescription" name="shortDescription"
-                          maxlength="128"></textarea>
+                          [disabled]="_disabled" maxlength="128"></textarea>
             </mat-form-field>
             <mat-form-field class="col-12">
                 <textarea matInput placeholder="长介绍" [(ngModel)]="_product.longDescription" name="longDescription"
-                          maxlength="512"></textarea>
+                          [disabled]="_disabled" maxlength="512"></textarea>
             </mat-form-field>
         </form>
     </div>
@@ -46,7 +53,7 @@
                 <span [class.amber-text]="tabSchedule.isActive">行程</span>
             </ng-template>
             <ng-template matTabContent>
-                <uparis-itinerary-table [product]="_product"></uparis-itinerary-table>
+                <uparis-itinerary-table [product]="_product" [disabled]="_disabled"></uparis-itinerary-table>
             </ng-template>
         </mat-tab>
         <mat-tab #tabTrip>

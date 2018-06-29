@@ -40,17 +40,7 @@ public class ModelService {
         if (productPo == null) {
             return null;
         }
-        ProductDto productDto = modelMapper.map(productPo, ProductDto.class);
-        productDto.getListItinerary().addAll(
-            productPo.getListItinerary().stream().map(itineraryPo -> {
-                ItineraryDto itineraryDto = modelMapper.map(itineraryPo, ItineraryDto.class);
-                itineraryDto.getListSchedule().addAll(
-                    itineraryPo.getListSchedule().stream()
-                        .map(schedulePo -> modelMapper.map(schedulePo, ScheduleDto.class))
-                        .collect(Collectors.toList()));
-                return itineraryDto;
-            }).collect(Collectors.toList()));
-        return productDto;
+        return modelMapper.map(productPo, ProductDto.class);
     }
 
     @Transactional

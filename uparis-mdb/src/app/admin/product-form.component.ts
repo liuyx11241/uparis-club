@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Product} from "../model/product.dto";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MAT_LABEL_GLOBAL_OPTIONS} from "@angular/material";
 import {ProductService} from "../service/product.service";
 import {NgForm} from "@angular/forms";
+import {ItineraryTableComponent} from "./itinerary-table.component";
 
 @Component({
     selector: 'uparis-product-form',
@@ -13,7 +14,11 @@ import {NgForm} from "@angular/forms";
 })
 export class ProductFormComponent implements OnInit {
 
+    @ViewChild(ItineraryTableComponent) itineraryTable: ItineraryTableComponent;
+
     _product: Product;
+
+    _disabled = true;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -32,15 +37,19 @@ export class ProductFormComponent implements OnInit {
     }
 
     add(): void {
+        this._disabled = false;
+
         this._product = new Product();
+        this._product.listItinerary = [];
+        this._product.listPicture = [];
+        this._product.listTrip = [];
     }
 
     save(form: NgForm) {
-        console.log(form.valid);
-        console.log(form.dirty);
-        console.log(this._product);
-        if (form.valid && form.dirty && this._product) {
+        this.itineraryTable.prepareSave()
+        if (form.valid && this._product) {
             this.service.saveProduct(this._product).subscribe((id: number) => {
+                this._disabled = true;
                 this.router.navigate(['/admin/products', id]);
             });
         }

@@ -9,6 +9,8 @@ import {Schedule} from "../model/schedule.dto";
 export class ScheduleFormComponent implements OnInit {
     private _itinerary: Itinerary;
 
+    private _disabled = true;
+
     private _availableTime: string[];
 
     constructor() {
@@ -28,7 +30,14 @@ export class ScheduleFormComponent implements OnInit {
         this._itinerary = value;
     }
 
+    @Input()
+    set disabled(value: boolean) {
+        this._disabled = value;
+    }
+
     add(): void {
+        if (!this._itinerary.listSchedule)
+            this._itinerary.listSchedule = [];
         let schedule = new Schedule();
         schedule.numOrder = 1 + this._itinerary.listSchedule.length;
         schedule.idItinerary = this._itinerary.id;

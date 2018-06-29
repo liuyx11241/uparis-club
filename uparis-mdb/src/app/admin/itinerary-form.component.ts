@@ -9,6 +9,8 @@ export class ItineraryFormComponent implements OnInit {
 
     private _itinerary: Itinerary;
 
+    private _disabled = true;
+
     private _durationChange = new EventEmitter<Itinerary>();
 
     constructor() {
@@ -22,6 +24,10 @@ export class ItineraryFormComponent implements OnInit {
         this._itinerary = value;
     }
 
+    @Input()
+    set disabled(value: boolean) {
+        this._disabled = value;
+    }
 
     @Output()
     get durationChange(): EventEmitter<Itinerary> {

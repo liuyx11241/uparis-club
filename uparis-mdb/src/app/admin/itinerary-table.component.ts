@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 export class ItineraryTableComponent implements OnInit {
 
     private _product: Product;
-    private _expandedItinerary: Itinerary;
+    private _disabled = true;
 
     constructor(private router: Router,
                 private service: ProductService) {
@@ -27,8 +27,9 @@ export class ItineraryTableComponent implements OnInit {
         this._product = value;
     }
 
-    set expandedItinerary(value: Itinerary) {
-        this._expandedItinerary = value;
+    @Input()
+    set disabled(value: boolean) {
+        this._disabled = value;
     }
 
     add(): void {
@@ -36,15 +37,8 @@ export class ItineraryTableComponent implements OnInit {
         itinerary.dayStart = 1 + this._product.listItinerary.length;
         itinerary.duration = 1;
         itinerary.idProduct = this._product.id;
-        this._product.listItinerary.push();
+        this._product.listItinerary.push(itinerary);
         this.prepareSave();
-    }
-
-    save(): void {
-        this.prepareSave();
-        this.service.saveProduct(this._product).subscribe((id: number) => {
-            this.router.navigate(['/admin/products', id]);
-        });
     }
 
     delete(value: Itinerary): void {
