@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {LOCALE_ID, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -28,7 +28,7 @@ import {ServiceModule} from "./service/service.module";
             {useHash: false, enableTracing: false,}),
 
     ],
-    providers: [],
+    providers: [ { provide: LOCALE_ID, useValue: 'zh-cn' } ],
     schemas: [NO_ERRORS_SCHEMA],
     bootstrap: [AppComponent]
 })

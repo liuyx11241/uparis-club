@@ -1,9 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {HttpService} from "./product.service";
+import {GetService} from "./http-get.service";
 import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
 import {ProductResolver} from "./product.resolver";
 import {TripResolver} from "./trip.resolver";
+import {PostService} from "./http-post.service";
+import {DeleteService} from "./http-delete.service";
 
 @NgModule({
     imports: [
@@ -13,7 +15,9 @@ import {TripResolver} from "./trip.resolver";
     ],
     declarations: [],
     providers: [
-        HttpService,
+        GetService,
+        PostService,
+        DeleteService,
         ProductResolver,
         TripResolver,
     ]

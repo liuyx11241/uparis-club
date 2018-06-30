@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
 import {ProductTableDataSource} from './product-table-datasource';
-import {HttpService} from "../service/product.service";
+import {GetService} from "../service/http-get.service";
 
 @Component({
     selector: 'admin/product-table',
@@ -14,7 +14,7 @@ export class ProductTableComponent implements OnInit {
 
     _displayedColumns = ['id', 'name', 'alias', 'duration', 'actions'];
 
-    constructor(private productService: HttpService) {
+    constructor(private productService: GetService) {
 
     }
 

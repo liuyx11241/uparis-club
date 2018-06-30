@@ -2,6 +2,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs/index";
 
 export class ErrorHandler {
+    public static errorHandler = new ErrorHandler();
 
     constructor() {
     }

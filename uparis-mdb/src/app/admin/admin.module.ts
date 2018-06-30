@@ -15,6 +15,7 @@ import {TripFormComponent} from './trip-form.component';
 import {OptionTableComponent} from './option-table.component';
 import {StockTableComponent} from './stock-table.component';
 import {MultimediaTableComponent} from './multimedia-table.component';
+import {SnackBar} from "./snack-bar";
 
 @NgModule({
     imports: [
@@ -37,6 +38,7 @@ import {MultimediaTableComponent} from './multimedia-table.component';
         StockTableComponent,
         MultimediaTableComponent,
     ],
+    providers: [SnackBar],
     bootstrap: [AdminComponent]
 })
 export class AdminModule {

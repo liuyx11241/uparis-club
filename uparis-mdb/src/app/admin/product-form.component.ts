@@ -2,10 +2,10 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Product} from "../model/product.dto";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MAT_LABEL_GLOBAL_OPTIONS} from "@angular/material";
-import {HttpService} from "../service/product.service";
 import {NgForm} from "@angular/forms";
-import {ItineraryTableComponent} from "./itinerary-table.component";
 import {FormHelper} from "./form-helper";
+import {PostService} from "../service/http-post.service";
+import {SnackBar} from "./snack-bar";
 
 @Component({
     selector: 'uparis-product-form',
@@ -15,7 +15,6 @@ import {FormHelper} from "./form-helper";
 })
 export class ProductFormComponent implements OnInit {
 
-    @ViewChild(ItineraryTableComponent) itineraryTable: ItineraryTableComponent;
     @ViewChild('productForm') productForm: NgForm;
 
     _product: Product;
@@ -24,7 +23,8 @@ export class ProductFormComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private service: HttpService) {
+                private snackBar: SnackBar,
+                private service: PostService) {
         this._formHelper = new FormHelper();
     }
 
@@ -46,13 +46,11 @@ export class ProductFormComponent implements OnInit {
     }
 
     save() {
-        if (this.itineraryTable) {
-            this.itineraryTable.prepareSave();
-        }
         this._formHelper.submit();
         if (this._formHelper.isValid) {
             this.service.saveProduct(this._product).subscribe((id: number) => {
                 this._formHelper.disabled = true;
+                this.snackBar.openSuccessfulSave();
                 this.router.navigate(['/admin/products', id]);
             });
         }

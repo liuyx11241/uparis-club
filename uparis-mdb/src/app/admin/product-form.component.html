@@ -17,8 +17,8 @@
     </button>
 </mat-toolbar>
 <div class="card-body">
-    <div class="row">
-        <form #productForm="ngForm" class="col-12 col-md-4 col-lg-3 hoverable">
+    <div class="row" ngForm #productForm="ngForm">
+        <div class="col-12 col-md-4 col-lg-3 hoverable">
             <mat-form-field class="col-12">
                 <input type="text" matInput placeholder="产品ID" [(ngModel)]="_product.id" name="id" disabled>
             </mat-form-field>
@@ -27,39 +27,41 @@
                        [disabled]="_formHelper.disabled" required>
             </mat-form-field>
             <mat-form-field class="col-12">
-                <input type="text" matInput placeholder="昵称" [(ngModel)]="_product.alias" name="alias"
-                       [disabled]="_formHelper.disabled">
-            </mat-form-field>
-            <mat-form-field class="col-12">
                 <input type="number" matInput placeholder="时长" [(ngModel)]="_product.duration" name="duration"
                        [disabled]="_formHelper.disabled" required>
             </mat-form-field>
             <mat-form-field class="col-12">
+                <input type="text" matInput placeholder="昵称" [(ngModel)]="_product.alias" name="alias"
+                       [disabled]="_formHelper.disabled">
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-8 col-lg-9 hoverable">
+            <mat-form-field class="col-12">
                 <textarea matInput placeholder="短介绍" [(ngModel)]="_product.shortDescription" name="shortDescription"
-                          [disabled]="_formHelper.disabled" maxlength="128"></textarea>
+                          [disabled]="_formHelper.disabled" maxlength="128" rows="3"></textarea>
             </mat-form-field>
             <mat-form-field class="col-12">
                 <textarea matInput placeholder="长介绍" [(ngModel)]="_product.longDescription" name="longDescription"
-                          [disabled]="_formHelper.disabled" maxlength="512"></textarea>
+                          [disabled]="_formHelper.disabled" maxlength="512" rows="6"></textarea>
             </mat-form-field>
-        </form>
+        </div>
     </div>
 
     <hr>
     <mat-tab-group color="primary">
-        <mat-tab #tabSchedule>
-            <ng-template mat-tab-label>
-                <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>
-                <span [class.amber-text]="tabSchedule.isActive">行程</span>
-            </ng-template>
-            <uparis-itinerary-table [product]="_product" [formHelper]="_formHelper"></uparis-itinerary-table>
-        </mat-tab>
         <mat-tab #tabTrip>
             <ng-template mat-tab-label>
                 <mat-icon [class.amber-text]="tabTrip.isActive">directions_run</mat-icon>
                 <span [class.amber-text]="tabTrip.isActive">出队</span>
             </ng-template>
             <uparis-trip-table [listTrip]="_product.listTrip"></uparis-trip-table>
+        </mat-tab>
+        <mat-tab #tabSchedule>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>
+                <span [class.amber-text]="tabSchedule.isActive">行程</span>
+            </ng-template>
+            <uparis-itinerary-table [product]="_product" [formHelper]="_formHelper"></uparis-itinerary-table>
         </mat-tab>
         <mat-tab #tabMultimedia>
             <ng-template mat-tab-label>
@@ -73,7 +75,7 @@
                 </ng-container>
                 <span [class.amber-text]="tabMultimedia.isActive">多媒体</span>
             </ng-template>
-            <uparis-multimedia-table [product]="_product" [formHelper]="_formHelper"></uparis-multimedia-table>
+            <uparis-multimedia-table [listMultimedia]="_product.listMultimedia" [formHelper]="_formHelper"></uparis-multimedia-table>
         </mat-tab>
     </mat-tab-group>
 </div>

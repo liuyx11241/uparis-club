@@ -15,7 +15,7 @@ import {
     MatPaginatorModule,
     MatRadioModule,
     MatSelectModule,
-    MatSidenavModule,
+    MatSidenavModule, MatSnackBar, MatSnackBarModule,
     MatSortModule,
     MatStepperModule,
     MatTableModule,
@@ -52,6 +52,7 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
         MatPaginatorModule,
         MatSortModule,
         MatBadgeModule,
+        MatSnackBarModule,
 
         BsDatepickerModule.forRoot(),
         SortableModule.forRoot(),
@@ -81,6 +82,7 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
         MatPaginatorModule,
         MatSortModule,
         MatBadgeModule,
+        MatSnackBarModule,
 
         BsDatepickerModule,
         SortableModule,

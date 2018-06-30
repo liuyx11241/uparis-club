@@ -3,6 +3,8 @@ import {Itinerary} from "../model/itinerary.dto";
 import {Schedule} from "../model/schedule.dto";
 import {FormHelper} from "./form-helper";
 import {NgForm} from "@angular/forms";
+import {DeleteService} from "../service/http-delete.service";
+import {SnackBar} from "./snack-bar";
 
 @Component({
     selector: 'uparis-schedule-table',
@@ -10,7 +12,7 @@ import {NgForm} from "@angular/forms";
 })
 export class ScheduleTableComponent implements OnInit {
 
-    @ViewChild('scheduleform') scheduleform: NgForm;
+    @ViewChild('scheduleForm') scheduleForm: NgForm;
 
     private _itinerary: Itinerary;
 
@@ -18,7 +20,8 @@ export class ScheduleTableComponent implements OnInit {
 
     private _availableTime: string[];
 
-    constructor() {
+    constructor(private snackBar: SnackBar,
+                private service: DeleteService) {
     }
 
 
@@ -38,7 +41,15 @@ export class ScheduleTableComponent implements OnInit {
     @Input()
     set formHelper(value: FormHelper) {
         this._formHelper = value;
-        this._formHelper.register('schedule', this.scheduleform);
+        this._formHelper.register(`schedule${this._itinerary.dayStart}`, this.scheduleForm);
+    }
+
+    reorder(): void {
+        let numOrder = 0;
+        this._itinerary.listSchedule.forEach(value => {
+            value.numOrder = numOrder;
+            numOrder++;
+        });
     }
 
     add(): void {
@@ -48,5 +59,12 @@ export class ScheduleTableComponent implements OnInit {
         schedule.numOrder = 1 + this._itinerary.listSchedule.length;
         schedule.idItinerary = this._itinerary.id;
         this._itinerary.listSchedule.push(schedule);
+        this.reorder();
+    }
+
+    delete(schedule: Schedule): void {
+        let index = this._itinerary.listSchedule.indexOf(schedule);
+        this._itinerary.listSchedule.splice(index, 1);
+        this.reorder();
     }
 }

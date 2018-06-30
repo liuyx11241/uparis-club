@@ -27,7 +27,7 @@ public class ProductController {
     public List<ProductDto> getAllProducts(@RequestParam(value = "page", required = false, defaultValue = "0") Integer page) {
         List<ProductPo> productPos = productRepo.findAll();
         return productPos.stream().map(
-            productPo -> modelMapper.map(productPo, ProductDto.class)).collect(Collectors.toList());
+                productPo -> modelMapper.map(productPo, ProductDto.class)).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
@@ -42,12 +42,15 @@ public class ProductController {
             itineraryDto.setId(null);
             itineraryDto.getListSchedule().forEach(scheduleDto -> scheduleDto.setId(null));
         });
-        return modelService.deepSaveProduct(newProduct);
+        return modelService.deepCreateProduct(newProduct);
     }
 
     @PutMapping
     public Long updateProduct(@RequestBody ProductDto product) {
-        return modelService.deepSaveProduct(product);
+        if (product.getId() == null) {
+            return createProduct(product);
+        }
+        return modelService.deepUpdateProduct(product);
     }
 
     @DeleteMapping("/{id}")

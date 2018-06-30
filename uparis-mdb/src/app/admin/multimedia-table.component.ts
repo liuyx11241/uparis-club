@@ -1,5 +1,4 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Product} from "../model/product.dto";
 import {Multimedia} from "../model/multimedia.dto";
 import {FormHelper} from "./form-helper";
 import {NgForm} from "@angular/forms";
@@ -13,7 +12,7 @@ export class MultimediaTableComponent implements OnInit {
 
     @ViewChild('multimediaForm') multimediaForm: NgForm;
 
-    private _product: Product;
+    private _listMultimedia: Multimedia[];
     private _formHelper: FormHelper;
 
     constructor() {
@@ -23,8 +22,8 @@ export class MultimediaTableComponent implements OnInit {
     }
 
     @Input()
-    set product(value: Product) {
-        this._product = value;
+    set listMultimedia(value: Multimedia[]) {
+        this._listMultimedia = value;
     }
 
     @Input()
@@ -35,8 +34,12 @@ export class MultimediaTableComponent implements OnInit {
 
     add(type: string): void {
         let multimedia = new Multimedia();
-        multimedia.idProduct = this._product.id;
         multimedia.type = type.toUpperCase();
-        this._product.listMultimedia.push(multimedia);
+        this._listMultimedia.push(multimedia);
+    }
+
+    delete(media: Multimedia): void {
+        let index = this._listMultimedia.indexOf(media);
+        this._listMultimedia.splice(index, 1);
     }
 }

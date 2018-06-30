@@ -1,10 +1,11 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Itinerary} from "../model/itinerary.dto";
 import {Product} from "../model/product.dto";
-import {HttpService} from "../service/product.service";
 import {Router} from "@angular/router";
 import {FormHelper} from "./form-helper";
 import {NgForm} from "@angular/forms";
+import {DeleteService} from "../service/http-delete.service";
+import {SnackBar} from "./snack-bar";
 
 @Component({
     selector: 'uparis-itinerary-table',
@@ -19,7 +20,8 @@ export class ItineraryTableComponent implements OnInit {
     private _formHelper: FormHelper;
 
     constructor(private router: Router,
-                private service: HttpService) {
+                private snackBar: SnackBar,
+                private service: DeleteService) {
     }
 
     ngOnInit() {
@@ -43,14 +45,16 @@ export class ItineraryTableComponent implements OnInit {
         itinerary.duration = 1;
         itinerary.idProduct = this._product.id;
         this._product.listItinerary.push(itinerary);
-        this.prepareSave();
+        this.reorder();
     }
 
-    delete(value: Itinerary): void {
-
+    delete(itinerary: Itinerary): void {
+        let index = this._product.listItinerary.indexOf(itinerary);
+        this._product.listItinerary.splice(index, 1);
+        this.reorder();
     }
 
-    prepareSave() {
+    reorder() {
         let dayStart = 1;
         this._product.listItinerary.forEach((value: Itinerary) => {
             value.dayStart = dayStart;

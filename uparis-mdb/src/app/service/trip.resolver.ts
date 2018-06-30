@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from "@angular/router";
 import {Observable} from "rxjs/index";
-import {HttpService} from "./product.service";
+import {GetService} from "./http-get.service";
 import {map, take} from "rxjs/internal/operators";
 import {Trip} from "../model/trip.dto";
 
 @Injectable()
 export class TripResolver implements Resolve<Trip> {
 
-    constructor(private service: HttpService, private router: Router) {
+    constructor(private service: GetService, private router: Router) {
     }
 
 

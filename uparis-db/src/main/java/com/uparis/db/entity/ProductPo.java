@@ -31,6 +31,9 @@ public class ProductPo extends AbstractPo {
     @OrderBy("day_start asc")
     private List<ItineraryPo> listItinerary;
 
+    @OneToMany(mappedBy = "product")
+    private List<MultimediaPo> listMultimedia;
+
     public ProductPo() {
         // Empty Constructor
     }
@@ -98,5 +101,13 @@ public class ProductPo extends AbstractPo {
 
     public void setListItinerary(List<ItineraryPo> listItinerary) {
         this.listItinerary = listItinerary;
+    }
+
+    public List<MultimediaPo> getListMultimedia() {
+        return listMultimedia;
+    }
+
+    public void setListMultimedia(List<MultimediaPo> listMultimedia) {
+        this.listMultimedia = listMultimedia;
     }
 }

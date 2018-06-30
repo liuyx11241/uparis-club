@@ -1,28 +1,19 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Product} from "../model/product.dto";
 import {Observable} from "rxjs/index";
-import {Trip} from "../model/trip.dto";
-import {ErrorHandler} from "./error.handler";
 import {catchError} from "rxjs/internal/operators";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ErrorHandler} from "./error.handler";
 
 const httpOptions = {headers: new HttpHeaders({'ContentType': 'application/json'})}
 
 @Injectable()
-export class HttpService {
+export class PostService {
 
-    private handler: ErrorHandler = new ErrorHandler();
+    private handler: ErrorHandler = ErrorHandler.errorHandler;
 
     constructor(private http: HttpClient) {
 
-    }
-
-    public getAllProducts(): Observable<Product[]> {
-        return this.http.get<Product[]>("/api/product");
-    }
-
-    public getProduct(id: string): Observable<Product> {
-        return this.http.get<Product>(`/api/product/${id}`);
     }
 
     public saveProduct(value: Product): Observable<number> {
@@ -38,12 +29,5 @@ export class HttpService {
                 catchError(this.handler.handleError)
             );
         }
-    }
-
-
-    public getTrip(id: string): Observable<Trip> {
-        return this.http.get<Trip>(`/api/trip/${id}`).pipe(
-            catchError(this.handler.handleError)
-        );
     }
 }
