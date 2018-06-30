@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ProductService} from "./product.service";
+import {HttpService} from "./product.service";
 import {HttpClientModule, HttpClientXsrfModule} from "@angular/common/http";
 import {ProductResolver} from "./product.resolver";
 import {TripResolver} from "./trip.resolver";
@@ -13,7 +13,7 @@ import {TripResolver} from "./trip.resolver";
     ],
     declarations: [],
     providers: [
-        ProductService,
+        HttpService,
         ProductResolver,
         TripResolver,
     ]

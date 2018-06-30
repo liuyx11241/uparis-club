@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../model/product.dto";
-import {ProductService} from "../service/product.service";
+import {HttpService} from "../service/product.service";
 import {NavigationExtras, Router} from "@angular/router";
 
 @Component({
@@ -11,7 +11,7 @@ import {NavigationExtras, Router} from "@angular/router";
 export class ProductListComponent implements OnInit {
     private _listProduct$: Product[];
 
-    constructor(private service: ProductService, private router: Router) {
+    constructor(private service: HttpService, private router: Router) {
     }
 
     ngOnInit() {

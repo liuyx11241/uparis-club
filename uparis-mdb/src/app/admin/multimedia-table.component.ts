@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Product} from "../model/product.dto";
 import {Multimedia} from "../model/multimedia.dto";
+import {FormHelper} from "./form-helper";
+import {NgForm} from "@angular/forms";
 
 @Component({
     selector: 'uparis-multimedia-table',
@@ -9,8 +11,10 @@ import {Multimedia} from "../model/multimedia.dto";
 })
 export class MultimediaTableComponent implements OnInit {
 
+    @ViewChild('multimediaForm') multimediaForm: NgForm;
+
     private _product: Product;
-    private _disabled: boolean;
+    private _formHelper: FormHelper;
 
     constructor() {
     }
@@ -24,8 +28,9 @@ export class MultimediaTableComponent implements OnInit {
     }
 
     @Input()
-    set disabled(value: boolean) {
-        this._disabled = value;
+    set formHelper(value: FormHelper) {
+        this._formHelper = value;
+        this._formHelper.register('multimedia', this.multimediaForm);
     }
 
     add(type: string): void {

@@ -8,14 +8,13 @@ import {ProductTableComponent} from './product-table.component';
 import {ProductFormComponent} from './product-form.component';
 import {MaterialModule} from "../material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ScheduleFormComponent} from './schedule-form.component';
+import {ScheduleTableComponent} from './schedule-table.component';
 import {ItineraryTableComponent} from './itinerary-table.component';
-import {ItineraryFormComponent} from './itinerary-form.component';
 import {TripTableComponent} from './trip-table.component';
 import {TripFormComponent} from './trip-form.component';
 import {OptionTableComponent} from './option-table.component';
-import { StockTableComponent } from './stock-table.component';
-import { MultimediaTableComponent } from './multimedia-table.component';
+import {StockTableComponent} from './stock-table.component';
+import {MultimediaTableComponent} from './multimedia-table.component';
 
 @NgModule({
     imports: [
@@ -30,9 +29,8 @@ import { MultimediaTableComponent } from './multimedia-table.component';
         DashboardComponent,
         ProductTableComponent,
         ProductFormComponent,
-        ScheduleFormComponent,
+        ScheduleTableComponent,
         ItineraryTableComponent,
-        ItineraryFormComponent,
         TripTableComponent,
         TripFormComponent,
         OptionTableComponent,

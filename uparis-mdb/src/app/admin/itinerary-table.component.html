@@ -1,23 +1,41 @@
-<mat-toolbar *ngIf="!_disabled">
+<mat-toolbar *ngIf="!_formHelper.disabled">
     <button mat-button (click)="add()">
         <mat-icon>add_box</mat-icon>
         添加新行程
     </button>
 </mat-toolbar>
-<mat-expansion-panel *ngFor="let itinerary of _product.listItinerary" class="row">
-    <mat-expansion-panel-header>
-        <mat-panel-title class="col-4 col-md-3 col-lg-2">
-            <mat-icon>date_range</mat-icon>
-            Day {{itinerary.dayStart}}
-            <ng-container *ngIf="itinerary.duration > 1">
-                ~ Day {{itinerary.dayStart + itinerary.duration - 1}}
-            </ng-container>
-        </mat-panel-title>
-        <mat-panel-description class="col-8 col-md-9 col-lg-10 px-0">
-            <mat-icon>map</mat-icon>
-            {{itinerary.movement}}
-        </mat-panel-description>
-    </mat-expansion-panel-header>
-    <uparis-itinerary-form class="w-100" [itinerary]="itinerary" [disabled]="_disabled"
-                           (durationChange)="prepareSave()"></uparis-itinerary-form>
-</mat-expansion-panel>
+<ng-container ngForm #itineraryForm="ngForm">
+    <mat-expansion-panel *ngFor="let itinerary of _product.listItinerary" class="row">
+        <mat-expansion-panel-header>
+            <mat-panel-title class="col-4 col-md-3 col-lg-2">
+                <mat-icon>date_range</mat-icon>
+                Day {{itinerary.dayStart}}
+                <ng-container *ngIf="itinerary.duration > 1">
+                    ~ Day {{itinerary.dayStart + itinerary.duration - 1}}
+                </ng-container>
+            </mat-panel-title>
+            <mat-panel-description class="col-8 col-md-9 col-lg-10 px-0">
+                <mat-icon>map</mat-icon>
+                {{itinerary.movement}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="card-body px-0 py-0">
+            <mat-form-field class="col-6 col-md-1">
+                <input matInput type="number" [(ngModel)]="itinerary.dayStart" name="dayStart" placeholder="起始日"
+                       required min="1" disabled>
+            </mat-form-field>
+            <mat-form-field class="col-6 col-md-1">
+                <input matInput type="number" [(ngModel)]="itinerary.duration" name="duration" placeholder="天数"
+                       min="1" (change)="prepareSave()" [disabled]="_formHelper.disabled">
+            </mat-form-field>
+
+            <mat-form-field class="col-12 col-md-10">
+                <input matInput type="text" [(ngModel)]="itinerary.movement" name="movement" placeholder="地点"
+                       [disabled]="_formHelper.disabled">
+            </mat-form-field>
+        </div>
+
+        <uparis-schedule-table class="card-body px-0 py-0" [itinerary]="itinerary"
+                               [formHelper]="_formHelper"></uparis-schedule-table>
+    </mat-expansion-panel>
+</ng-container>

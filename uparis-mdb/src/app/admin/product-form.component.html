@@ -3,11 +3,11 @@
         <mat-icon>add_box</mat-icon>
         添加新产品
     </button>
-    <button mat-button (click)="save(productForm)" *ngIf="!_disabled">
+    <button mat-button (click)="save()" *ngIf="!_formHelper.disabled">
         <mat-icon>save</mat-icon>
         保存修改
     </button>
-    <button mat-button (click)="_disabled=false" *ngIf="_disabled">
+    <button mat-button (click)="_formHelper.disabled=false" *ngIf="_formHelper.disabled">
         <mat-icon>edit</mat-icon>
         修改产品
     </button>
@@ -24,23 +24,23 @@
             </mat-form-field>
             <mat-form-field class="col-12">
                 <input type="text" matInput placeholder="产品名" [(ngModel)]="_product.name" name="name"
-                       [disabled]="_disabled" required>
+                       [disabled]="_formHelper.disabled" required>
             </mat-form-field>
             <mat-form-field class="col-12">
                 <input type="text" matInput placeholder="昵称" [(ngModel)]="_product.alias" name="alias"
-                       [disabled]="_disabled">
+                       [disabled]="_formHelper.disabled">
             </mat-form-field>
             <mat-form-field class="col-12">
                 <input type="number" matInput placeholder="时长" [(ngModel)]="_product.duration" name="duration"
-                       [disabled]="_disabled" required>
+                       [disabled]="_formHelper.disabled" required>
             </mat-form-field>
             <mat-form-field class="col-12">
                 <textarea matInput placeholder="短介绍" [(ngModel)]="_product.shortDescription" name="shortDescription"
-                          [disabled]="_disabled" maxlength="128"></textarea>
+                          [disabled]="_formHelper.disabled" maxlength="128"></textarea>
             </mat-form-field>
             <mat-form-field class="col-12">
                 <textarea matInput placeholder="长介绍" [(ngModel)]="_product.longDescription" name="longDescription"
-                          [disabled]="_disabled" maxlength="512"></textarea>
+                          [disabled]="_formHelper.disabled" maxlength="512"></textarea>
             </mat-form-field>
         </form>
     </div>
@@ -52,27 +52,28 @@
                 <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>
                 <span [class.amber-text]="tabSchedule.isActive">行程</span>
             </ng-template>
-            <ng-template matTabContent>
-                <uparis-itinerary-table [product]="_product" [disabled]="_disabled"></uparis-itinerary-table>
-            </ng-template>
+            <uparis-itinerary-table [product]="_product" [formHelper]="_formHelper"></uparis-itinerary-table>
         </mat-tab>
         <mat-tab #tabTrip>
             <ng-template mat-tab-label>
                 <mat-icon [class.amber-text]="tabTrip.isActive">directions_run</mat-icon>
                 <span [class.amber-text]="tabTrip.isActive">出队</span>
             </ng-template>
-            <ng-template matTabContent>
-                <uparis-trip-table [listTrip]="_product.listTrip"></uparis-trip-table>
-            </ng-template>
+            <uparis-trip-table [listTrip]="_product.listTrip"></uparis-trip-table>
         </mat-tab>
         <mat-tab #tabMultimedia>
             <ng-template mat-tab-label>
-                <mat-icon [class.amber-text]="tabMultimedia.isActive">photo_library</mat-icon>
+                <ng-container *ngIf="_formHelper.lookup('multimedia').invalid">
+                    <mat-icon [matBadge]="1" matBadgePosition="above before" matBadgeColor="warn"
+                              [class.amber-text]="tabMultimedia.isActive">photo_library
+                    </mat-icon>
+                </ng-container>
+                <ng-container *ngIf="_formHelper.lookup('multimedia').valid">
+                    <mat-icon [class.amber-text]="tabMultimedia.isActive">photo_library</mat-icon>
+                </ng-container>
                 <span [class.amber-text]="tabMultimedia.isActive">多媒体</span>
             </ng-template>
-            <ng-template matTabContent>
-                <uparis-multimedia-table [product]="_product" [disabled]="_disabled"></uparis-multimedia-table>
-            </ng-template>
+            <uparis-multimedia-table [product]="_product" [formHelper]="_formHelper"></uparis-multimedia-table>
         </mat-tab>
     </mat-tab-group>
 </div>

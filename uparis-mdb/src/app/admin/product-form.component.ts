@@ -2,9 +2,10 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Product} from "../model/product.dto";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MAT_LABEL_GLOBAL_OPTIONS} from "@angular/material";
-import {ProductService} from "../service/product.service";
+import {HttpService} from "../service/product.service";
 import {NgForm} from "@angular/forms";
 import {ItineraryTableComponent} from "./itinerary-table.component";
+import {FormHelper} from "./form-helper";
 
 @Component({
     selector: 'uparis-product-form',
@@ -15,14 +16,16 @@ import {ItineraryTableComponent} from "./itinerary-table.component";
 export class ProductFormComponent implements OnInit {
 
     @ViewChild(ItineraryTableComponent) itineraryTable: ItineraryTableComponent;
+    @ViewChild('productForm') productForm: NgForm;
 
     _product: Product;
 
-    _disabled = true;
+    _formHelper: FormHelper;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private service: ProductService) {
+                private service: HttpService) {
+        this._formHelper = new FormHelper();
     }
 
 
@@ -34,20 +37,22 @@ export class ProductFormComponent implements OnInit {
         if (!this._product) {
             this.add();
         }
+        this._formHelper.register('product', this.productForm);
     }
 
     add(): void {
-        this._disabled = false;
+        this._formHelper.disabled = false;
         this._product = new Product();
     }
 
-    save(form: NgForm) {
-        if(this.itineraryTable) {
+    save() {
+        if (this.itineraryTable) {
             this.itineraryTable.prepareSave();
         }
-        if (form.valid && this._product) {
+        this._formHelper.submit();
+        if (this._formHelper.isValid) {
             this.service.saveProduct(this._product).subscribe((id: number) => {
-                this._disabled = true;
+                this._formHelper.disabled = true;
                 this.router.navigate(['/admin/products', id]);
             });
         }

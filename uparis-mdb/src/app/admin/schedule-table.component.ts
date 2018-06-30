@@ -1,15 +1,20 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Itinerary} from "../model/itinerary.dto";
 import {Schedule} from "../model/schedule.dto";
+import {FormHelper} from "./form-helper";
+import {NgForm} from "@angular/forms";
 
 @Component({
-    selector: 'uparis-schedule-form',
-    templateUrl: './schedule-form.component.html',
+    selector: 'uparis-schedule-table',
+    templateUrl: './schedule-table.component.html',
 })
-export class ScheduleFormComponent implements OnInit {
+export class ScheduleTableComponent implements OnInit {
+
+    @ViewChild('scheduleform') scheduleform: NgForm;
+
     private _itinerary: Itinerary;
 
-    private _disabled = true;
+    private _formHelper: FormHelper;
 
     private _availableTime: string[];
 
@@ -31,8 +36,9 @@ export class ScheduleFormComponent implements OnInit {
     }
 
     @Input()
-    set disabled(value: boolean) {
-        this._disabled = value;
+    set formHelper(value: FormHelper) {
+        this._formHelper = value;
+        this._formHelper.register('schedule', this.scheduleform);
     }
 
     add(): void {

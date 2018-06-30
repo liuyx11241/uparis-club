@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Itinerary} from "../model/itinerary.dto";
 import {Product} from "../model/product.dto";
-import {ProductService} from "../service/product.service";
+import {HttpService} from "../service/product.service";
 import {Router} from "@angular/router";
+import {FormHelper} from "./form-helper";
+import {NgForm} from "@angular/forms";
 
 @Component({
     selector: 'uparis-itinerary-table',
@@ -11,11 +13,13 @@ import {Router} from "@angular/router";
 })
 export class ItineraryTableComponent implements OnInit {
 
+    @ViewChild('itineraryForm') itineraryForm: NgForm;
+
     private _product: Product;
-    private _disabled = true;
+    private _formHelper: FormHelper;
 
     constructor(private router: Router,
-                private service: ProductService) {
+                private service: HttpService) {
     }
 
     ngOnInit() {
@@ -28,8 +32,9 @@ export class ItineraryTableComponent implements OnInit {
     }
 
     @Input()
-    set disabled(value: boolean) {
-        this._disabled = value;
+    set formHelper(value: FormHelper) {
+        this._formHelper = value;
+        this._formHelper.register('itinerary', this.itineraryForm);
     }
 
     add(): void {

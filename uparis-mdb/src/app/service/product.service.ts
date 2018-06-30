@@ -9,7 +9,7 @@ import {catchError} from "rxjs/internal/operators";
 const httpOptions = {headers: new HttpHeaders({'ContentType': 'application/json'})}
 
 @Injectable()
-export class ProductService {
+export class HttpService {
 
     private handler: ErrorHandler = new ErrorHandler();
 
@@ -18,11 +18,11 @@ export class ProductService {
     }
 
     public getAllProducts(): Observable<Product[]> {
-        return this.http.get<Product[]>("/api/products");
+        return this.http.get<Product[]>("/api/product");
     }
 
     public getProduct(id: string): Observable<Product> {
-        return this.http.get<Product>(`/api/products/${id}`);
+        return this.http.get<Product>(`/api/product/${id}`);
     }
 
     public saveProduct(value: Product): Observable<number> {
@@ -30,13 +30,11 @@ export class ProductService {
             return;
         }
         if (value.id) {
-            console.info(`put${value.id}`);
-            return this.http.put<number>(`/api/products`, value, httpOptions).pipe(
+            return this.http.put<number>(`/api/product`, value, httpOptions).pipe(
                 catchError(this.handler.handleError)
             );
         } else {
-            console.info(`post${value.id}`);
-            return this.http.post<number>(`/api/products`, value, httpOptions).pipe(
+            return this.http.post<number>(`/api/product`, value, httpOptions).pipe(
                 catchError(this.handler.handleError)
             );
         }
@@ -44,7 +42,7 @@ export class ProductService {
 
 
     public getTrip(id: string): Observable<Trip> {
-        return this.http.get<Trip>(`/api/trips/${id}`).pipe(
+        return this.http.get<Trip>(`/api/trip/${id}`).pipe(
             catchError(this.handler.handleError)
         );
     }

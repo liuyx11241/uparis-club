@@ -1,7 +1,7 @@
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
 import {MatPaginator, MatSort} from '@angular/material';
 import {Observable} from 'rxjs';
-import {ProductService} from "../service/product.service";
+import {HttpService} from "../service/product.service";
 import {Product} from "../model/product.dto";
 
 /**
@@ -12,7 +12,7 @@ import {Product} from "../model/product.dto";
 export class ProductTableDataSource extends DataSource<Product> {
     constructor(private paginator: MatPaginator,
                 private sort: MatSort,
-                private productService: ProductService) {
+                private productService: HttpService) {
         super();
     }
 

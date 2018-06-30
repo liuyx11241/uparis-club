@@ -1,0 +1,19 @@
+<ng-container ngForm #scheduleform="ngForm">
+    <ng-container *ngFor="let schedule of _itinerary.listSchedule;let index=index;">
+        <mat-form-field class="col-3 col-md-2">
+            <!--<mat-select [(value)]="schedule.time" placeholder="时间">-->
+            <!--<mat-option *ngFor="let time of _availableTime" [value]="time">{{time}}</mat-option>-->
+            <!--</mat-select>-->
+            <input matInput type="text" placeholder="时间" [(ngModel)]="schedule.time" name="time"
+                   [disabled]="_formHelper.disabled">
+        </mat-form-field>
+        <mat-form-field class="col-9 col-md-10">
+            <input matInput type="text" placeholder="行程" [(ngModel)]="schedule.activity" name="activity"
+                   [disabled]="_formHelper.disabled" required>
+        </mat-form-field>
+    </ng-container>
+</ng-container>
+<button mat-button (click)="add()" *ngIf="!_formHelper.disabled">
+    <mat-icon>add_box</mat-icon>
+    添加新条目
+</button>

@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
+    MatBadgeModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -50,6 +51,7 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
+        MatBadgeModule,
 
         BsDatepickerModule.forRoot(),
         SortableModule.forRoot(),
@@ -78,6 +80,7 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
+        MatBadgeModule,
 
         BsDatepickerModule,
         SortableModule,
