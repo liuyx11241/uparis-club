@@ -3,10 +3,13 @@
         <mat-icon>add_box</mat-icon>
         添加新产品
     </button>
+
+    <mat-form-field>
+        <input matInput type="text" placeholder="查找" #nameInput>
+    </mat-form-field>
 </mat-toolbar>
 
 <mat-table #table [dataSource]="_dataSource" matSort aria-label="Elements">
-
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header>产品ID</mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
@@ -28,7 +31,7 @@
     </ng-container>
 
     <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let row">
             <button mat-icon-button [routerLink]="['/admin/products', row.id]">
                 <mat-icon>search</mat-icon>

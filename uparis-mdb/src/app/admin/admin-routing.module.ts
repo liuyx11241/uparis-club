@@ -7,6 +7,7 @@ import {ProductFormComponent} from "./product-form.component";
 import {ProductResolver} from "../service/product.resolver";
 import {TripFormComponent} from "./trip-form.component";
 import {TripResolver} from "../service/trip.resolver";
+import {TripTableComponent} from "./trip-table.component";
 
 const routes: Routes = [
     {
@@ -19,6 +20,7 @@ const routes: Routes = [
                 resolve:{
                     product: ProductResolver
                 }},
+            {path: 'trips', component: TripTableComponent},
             {path: 'trips/:id', component: TripFormComponent,
                 resolve:{
                     trip:TripResolver

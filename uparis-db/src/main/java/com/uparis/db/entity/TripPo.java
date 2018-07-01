@@ -10,9 +10,6 @@ public class TripPo extends AbstractPo {
     private String dateStart;
 
     @Column(nullable = false)
-    private String dateEnd;
-
-    @Column(nullable = false)
     private Integer stock;
 
     @ManyToOne(optional = false)
@@ -44,14 +41,6 @@ public class TripPo extends AbstractPo {
 
     public void setDateStart(String dateStart) {
         this.dateStart = dateStart;
-    }
-
-    public String getDateEnd() {
-        return dateEnd;
-    }
-
-    public void setDateEnd(String dateEnd) {
-        this.dateEnd = dateEnd;
     }
 
     public Integer getStock() {

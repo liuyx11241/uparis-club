@@ -58,7 +58,6 @@ public class JpaProductTests {
 
         TripPo tripPo = new TripPo();
         tripPo.setDateStart("18/05/2018");
-        tripPo.setDateEnd("19/05/2018");
         tripPo.setProduct(productPo);
         tripPo.setStock(0);
         tripRepository.save(tripPo);

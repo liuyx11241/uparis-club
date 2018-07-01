@@ -1,18 +1,18 @@
-import {CollectionViewer, DataSource} from '@angular/cdk/collections';
 import {MatPaginator, MatSort} from '@angular/material';
-import {BehaviorSubject, merge, Observable, of} from 'rxjs';
+import {Trip} from "../model/trip.dto";
 import {GetService} from "../service/http-get.service";
-import {Product} from "../model/product.dto";
+import {CollectionViewer, DataSource} from "@angular/cdk/collections";
+import {BehaviorSubject, merge, Observable, of} from "rxjs/index";
 import {catchError, finalize, tap} from "rxjs/internal/operators";
 
 /**
- * Data source for the ProductTable view. This class should
+ * Data source for the TripTable view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class ProductTableDataSource extends DataSource<Product> {
+export class TripTableDataSource extends DataSource<Trip> {
 
-    private productSubject = new BehaviorSubject<Product[]>([]);
+    private tripSubject = new BehaviorSubject<Trip[]>([]);
     private loadingSubject = new BehaviorSubject<boolean>(false);
 
     public loading$ = this.loadingSubject.asObservable();
@@ -24,7 +24,7 @@ export class ProductTableDataSource extends DataSource<Product> {
     }
 
 
-    connect(collectionViewer: CollectionViewer): Observable<Product[]> {
+    connect(collectionViewer: CollectionViewer): Observable<Trip[]> {
         this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
         merge(this.sort.sortChange, this.paginator.page)
@@ -32,11 +32,11 @@ export class ProductTableDataSource extends DataSource<Product> {
                 tap(x => this.reload())
             ).subscribe();
 
-        return this.productSubject.asObservable();
+        return this.tripSubject.asObservable();
     }
 
     disconnect(collectionViewer: CollectionViewer): void {
-        this.productSubject.complete();
+        this.tripSubject.complete();
         this.loadingSubject.complete();
     }
 
@@ -45,7 +45,7 @@ export class ProductTableDataSource extends DataSource<Product> {
         console.log(this.paginator);
         this.loadingSubject.next(true);
 
-        this.service.getProducts(filter,
+        this.service.getTrips(filter,
             this.paginator.pageIndex, this.paginator.pageSize,
             this.sort.active ? this.sort.active : '', this.sort.direction)
             .pipe(
@@ -55,7 +55,7 @@ export class ProductTableDataSource extends DataSource<Product> {
             res => {
                 console.log(res);
                 this.paginator.length = res['totalElements'];
-                this.productSubject.next(res['content']);
+                this.tripSubject.next(res['content']);
             });
     }
 

@@ -4,30 +4,27 @@
         添加新活动
     </button>
 </mat-toolbar>
-<mat-table [dataSource]="_listTrip">
+<mat-table #table [dataSource]="_dataSource" matSort>
     <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="idProduct">
-        <mat-header-cell *matHeaderCellDef>产品</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>产品</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.nameProduct}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="dateStart">
-        <mat-header-cell *matHeaderCellDef>出发日期</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>出发日期</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.dateStart}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="dateEnd">
-        <mat-header-cell *matHeaderCellDef>返回日期</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.dateEnd}}</mat-cell>
-    </ng-container>
     <ng-container matColumnDef="stock">
-        <mat-header-cell *matHeaderCellDef>库存</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>库存</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.stock}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="mainPrice">
-        <mat-header-cell *matHeaderCellDef>价格</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.mainPrice.value | currency: element.mainPrice.currency}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>价格</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.mainPrice.value | currency: element.mainPrice.currency}}
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
@@ -45,3 +42,9 @@
     <mat-header-row *matHeaderRowDef="_displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: _displayedColumns"></mat-row>
 </mat-table>
+
+<mat-paginator #paginator
+               [pageIndex]="0"
+               [pageSize]="50"
+               [pageSizeOptions]="[25, 50, 100, 250]">
+</mat-paginator>

@@ -9,6 +9,8 @@ public class TripDto extends AbstractDto {
 
     private String nameProduct;
 
+    private Integer durationProduct;
+
     private String dateStart;
 
     private String dateEnd;

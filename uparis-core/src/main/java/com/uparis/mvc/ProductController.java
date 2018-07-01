@@ -5,10 +5,10 @@ import com.uparis.db.repo.ProductRepository;
 import com.uparis.dto.ProductDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/product")
@@ -24,10 +24,18 @@ public class ProductController {
     private ModelService modelService;
 
     @GetMapping
-    public List<ProductDto> getAllProducts(@RequestParam(value = "page", required = false, defaultValue = "0") Integer page) {
-        List<ProductPo> productPos = productRepo.findAll();
-        return productPos.stream().map(
-                productPo -> modelMapper.map(productPo, ProductDto.class)).collect(Collectors.toList());
+    public Page<ProductDto> getProducts(
+            @RequestParam(value = "filter", required = false, defaultValue = "") String filter,
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
+            @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
+            @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
+        Page<ProductPo> productPoPage = productRepo.findAll(
+                PageRequest.of(
+                        pageIndex,
+                        pageSize,
+                        Sort.by(Sort.Direction.fromString(direction), sort)));
+        return productPoPage.map(productPo -> modelMapper.map(productPo, ProductDto.class));
     }
 
     @GetMapping("/{id}")
