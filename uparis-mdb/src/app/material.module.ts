@@ -4,7 +4,8 @@ import {
     MatBadgeModule,
     MatButtonModule,
     MatCardModule,
-    MatCheckboxModule, MatDatepickerModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
@@ -16,6 +17,7 @@ import {
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSlideToggleModule,
     MatSnackBarModule,
     MatSortModule,
     MatStepperModule,
@@ -23,7 +25,6 @@ import {
     MatTabsModule,
     MatToolbarModule
 } from "@angular/material";
-import {LayoutModule} from "@angular/cdk/layout";
 import {MDBBootstrapModule} from "angular-bootstrap-md";
 import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap";
 
@@ -32,7 +33,6 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
         CommonModule,
         MDBBootstrapModule.forRoot(),
 
-        LayoutModule,
         MatToolbarModule,
         MatButtonModule,
         MatSidenavModule,
@@ -55,6 +55,7 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
         MatSnackBarModule,
         MatProgressSpinnerModule,
         MatDatepickerModule,
+        MatSlideToggleModule,
 
         BsDatepickerModule.forRoot(),
         SortableModule.forRoot(),
@@ -63,7 +64,6 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
     exports: [
         MDBBootstrapModule,
 
-        LayoutModule,
         MatToolbarModule,
         MatButtonModule,
         MatSidenavModule,
@@ -86,6 +86,7 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
         MatSnackBarModule,
         MatProgressSpinnerModule,
         MatDatepickerModule,
+        MatSlideToggleModule,
 
         BsDatepickerModule,
         SortableModule,

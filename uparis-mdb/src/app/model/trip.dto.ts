@@ -17,7 +17,7 @@ export class Trip {
 
     mainPrice: Price;
 
-    mappedListOption: object;//Map<number, Option[]>;
+    listPrice: Price[];
 
-    mappedPrice: object;//Map<string, Price>
+    mappedListOption: object;//Map<number, Option[]>;
 }

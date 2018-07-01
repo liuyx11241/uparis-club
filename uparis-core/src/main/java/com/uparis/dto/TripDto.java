@@ -1,5 +1,6 @@
 package com.uparis.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -19,7 +20,7 @@ public class TripDto extends AbstractDto {
 
     private PriceDto mainPrice;
 
-    private SortedMap<String, PriceDto> mappedPrice = new TreeMap<>();
+    private List<PriceDto> listPrice = new ArrayList<>();
 
     private SortedMap<Integer, List<OptionDto>> mappedListOption = new TreeMap<>();
 
@@ -87,11 +88,11 @@ public class TripDto extends AbstractDto {
         this.mappedListOption = mappedListOption;
     }
 
-    public SortedMap<String, PriceDto> getMappedPrice() {
-        return mappedPrice;
+    public List<PriceDto> getListPrice() {
+        return listPrice;
     }
 
-    public void setMappedPrice(SortedMap<String, PriceDto> mappedPrice) {
-        this.mappedPrice = mappedPrice;
+    public void setListPrice(List<PriceDto> listPrice) {
+        this.listPrice = listPrice;
     }
 }

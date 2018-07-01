@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class PricePo extends AbstractPo {
 
     private BigDecimal value;
-    
+
     private BigDecimal valueAddedTax;
 
     private String currency;
@@ -21,4 +21,43 @@ public class PricePo extends AbstractPo {
     @ManyToOne
     private OptionPo option;
 
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    public void setValue(BigDecimal value) {
+        this.value = value;
+    }
+
+    public BigDecimal getValueAddedTax() {
+        return valueAddedTax;
+    }
+
+    public void setValueAddedTax(BigDecimal valueAddedTax) {
+        this.valueAddedTax = valueAddedTax;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public TripPo getTrip() {
+        return trip;
+    }
+
+    public void setTrip(TripPo trip) {
+        this.trip = trip;
+    }
+
+    public OptionPo getOption() {
+        return option;
+    }
+
+    public void setOption(OptionPo option) {
+        this.option = option;
+    }
 }

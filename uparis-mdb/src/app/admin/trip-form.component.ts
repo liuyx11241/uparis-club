@@ -1,13 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Trip} from "../model/trip.dto";
 import {FormHelper} from "./form-helper";
 import {Product} from "../model/product.dto";
 import {Price} from "../model/price.dto";
-import {MatDatepickerInputEvent} from "@angular/material";
-import {FormControl} from "@angular/forms";
 import {PostService} from "../service/http-post.service";
 import {SnackBar} from "./snack-bar";
+import {NgForm} from "@angular/forms";
 
 @Component({
     selector: 'uparis-trip-form',
@@ -16,11 +15,11 @@ import {SnackBar} from "./snack-bar";
 })
 export class TripFormComponent implements OnInit {
 
+    @ViewChild('tripForm') tripForm: NgForm;
+
     _trip: Trip;
     _product: Product;
     _formHelper = new FormHelper();
-
-    dateStart: FormControl;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -35,19 +34,21 @@ export class TripFormComponent implements OnInit {
         });
         if (!this._trip) {
             this._trip = new Trip();
-            this._trip.mappedPrice = {};
+            this._trip.listPrice = [];
             this._trip.mappedListOption = {};
             this._trip.idProduct = this._product.id;
             this._trip.nameProduct = this._product.name;
             this._trip.durationProduct = this._product.duration;
             this._trip.mainPrice = new Price();
             this._formHelper.disabled = false;
+        } else {
+            this.onDateStartChange(this.parseDate(this._trip.dateStart));
         }
-        this.dateStart = new FormControl(this._trip.dateStart);
+
+        this._formHelper.register('trip', this.tripForm);
     }
 
-    onDateStartChange(event: MatDatepickerInputEvent<Date>) {
-        let dateStart = event.value;
+    onDateStartChange(dateStart: Date) {
         this._trip.dateStart = dateStart.toLocaleDateString();
         let dateEnd = new Date(dateStart.setDate(dateStart.getDate() + this._trip.durationProduct - 1));
         this._trip.dateEnd = dateEnd.toLocaleDateString();
@@ -58,10 +59,13 @@ export class TripFormComponent implements OnInit {
     }
 
     save(): void {
-        this.service.saveTrip(this._trip).subscribe(id => {
-            console.log(id);
-            this.snackBar.openSuccessfulSave();
-            this.router.navigate(['/admin/trips/', id]);
-        });
+        this._formHelper.submit();
+        if (this._formHelper.isValid) {
+            this.service.saveTrip(this._trip).subscribe(id => {
+                this.snackBar.openSuccessfulSave();
+                this._formHelper.disabled = true;
+                this.router.navigate(['/admin/trips/', id]);
+            });
+        }
     }
 }

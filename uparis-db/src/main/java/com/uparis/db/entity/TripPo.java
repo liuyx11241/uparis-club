@@ -58,4 +58,28 @@ public class TripPo extends AbstractPo {
     public void setProduct(ProductPo product) {
         this.product = product;
     }
+
+    public List<PricePo> getListPrice() {
+        return listPrice;
+    }
+
+    public void setListPrice(List<PricePo> listPrice) {
+        this.listPrice = listPrice;
+    }
+
+    public List<OptionPo> getListOption() {
+        return listOption;
+    }
+
+    public void setListOption(List<OptionPo> listOption) {
+        this.listOption = listOption;
+    }
+
+    public List<OrderPo> getListOrder() {
+        return listOrder;
+    }
+
+    public void setListOrder(List<OrderPo> listOrder) {
+        this.listOrder = listOrder;
+    }
 }

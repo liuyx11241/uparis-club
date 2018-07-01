@@ -42,13 +42,15 @@ public class TripController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> createTrip(@RequestBody TripDto newtrip) {
-        if (newtrip.getIdProduct() == null) {
+    public ResponseEntity<Long> createTrip(@RequestBody TripDto newTrip) {
+        if (newTrip.getIdProduct() == null) {
             return ResponseEntity.badRequest().build();
         }
 
-        newtrip.setId(null);
-        return ResponseEntity.ok(tripService.deepCreateTrip(newtrip));
+        newTrip.setId(null);
+        newTrip.getListPrice().forEach(priceDto -> priceDto.setId(null));
+
+        return ResponseEntity.ok(tripService.deepCreateTrip(newTrip));
     }
 
     @PutMapping
@@ -56,6 +58,6 @@ public class TripController {
         if (trip.getId() == null) {
             return createTrip(trip);
         }
-        return ResponseEntity.ok(tripService.deepCreateTrip(trip));
+        return ResponseEntity.ok(tripService.deepUpdateTrip(trip));
     }
 }

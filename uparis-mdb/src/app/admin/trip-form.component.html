@@ -14,8 +14,8 @@
 </mat-toolbar>
 
 <div class="card-body">
-    <div class="row">
-        <div ngForm #tripForm="ngForm" class="col-12 col-md-4 col-lg-3 hoverable">
+    <div ngForm #tripForm="ngForm" class="row">
+        <div class="col-12 col-md-4 col-lg-3 hoverable">
             <mat-form-field class="col-12">
                 <input matInput placeholder="ID" [(ngModel)]="_trip.id" name="id" disabled>
             </mat-form-field>
@@ -26,7 +26,7 @@
 
             <mat-form-field class="col-12">
                 <input matInput placeholder="出发日期" name="dateStart" [value]="parseDate(_trip.dateStart)"
-                       (dateChange)="onDateStartChange($event)" [matDatepicker]="picker" required
+                       (dateChange)="onDateStartChange($event.value)" [matDatepicker]="picker" required
                        [disabled]="_formHelper.disabled">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker color="primary"></mat-datepicker>
@@ -45,21 +45,20 @@
 
     <hr>
     <mat-tab-group color="primary">
+        <mat-tab #tabPrice>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabPrice.isActive">euro_symbol</mat-icon>
+                <span [class.amber-text]="tabPrice.isActive">价格</span>
+            </ng-template>
+            <uparis-price-table [formHelper]="_formHelper" [listPrice]="_trip.listPrice"
+                                (mainPrice)="_trip.mainPrice=$event"></uparis-price-table>
+        </mat-tab>
         <mat-tab #tabOption>
             <ng-template mat-tab-label>
                 <mat-icon [class.amber-text]="tabOption.isActive">format_list_numbered</mat-icon>
                 <span [class.amber-text]="tabOption.isActive">选项</span>
             </ng-template>
             <uparis-option-table [mappedListOption]="_trip.mappedListOption"></uparis-option-table>
-        </mat-tab>
-        <mat-tab #tabPrice>
-            <ng-template mat-tab-label>
-                <mat-icon [class.amber-text]="tabPrice.isActive">euro_symbol</mat-icon>
-                <span [class.amber-text]="tabPrice.isActive">价格</span>
-            </ng-template>
-            <ng-template matTabContent>
-                To be implemented with RMB...
-            </ng-template>
         </mat-tab>
     </mat-tab-group>
 </div>
