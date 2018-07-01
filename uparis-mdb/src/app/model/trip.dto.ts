@@ -1,4 +1,5 @@
 import {Price} from "./price.dto";
+import {Option} from "./option.dto";
 
 export class Trip {
     id: number;
@@ -19,5 +20,5 @@ export class Trip {
 
     listPrice: Price[];
 
-    mappedListOption: object;//Map<number, Option[]>;
+    listOption: Option[];
 }

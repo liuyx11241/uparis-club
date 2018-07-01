@@ -50,6 +50,13 @@ public class TripController {
         newTrip.setId(null);
         newTrip.getListPrice().forEach(priceDto -> priceDto.setId(null));
 
+        newTrip.getListOption().forEach(optionDto -> {
+            optionDto.setId(null);
+            if (null != optionDto.getStock()) {
+                optionDto.getStock().setId(null);
+            }
+        });
+
         return ResponseEntity.ok(tripService.deepCreateTrip(newTrip));
     }
 

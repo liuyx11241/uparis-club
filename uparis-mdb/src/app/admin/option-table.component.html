@@ -1,44 +1,48 @@
-<ng-template #optionFormTemplate let-item="item" let-index="index">
-    <mat-form-field class="col-12">
-        <input matInput type="text" [(ngModel)]="item.value.id" name="id" placeholder="ID" disabled>
-    </mat-form-field>
-    <mat-form-field class="col-12">
-        <input matInput type="text" [(ngModel)]="item.value.name" name="name" placeholder="名称">
-    </mat-form-field>
-    <mat-form-field class="col-12">
-        <mat-select placeholder="库存" [(ngModel)]="item.value.stock" name="stock">
-            <mat-option>-- None --</mat-option>
-            <mat-option *ngFor="let stock of _listStock | async" [value]="stock">
-                库存ID:{{stock.id}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field class="col-12">
-        <input matInput type="text" [(ngModel)]="item.value.description" name="description" placeholder="描述">
-    </mat-form-field>
-</ng-template>
-
-<uparis-stock-table [listStock]="_listStock"></uparis-stock-table>
-
-<mat-toolbar>
-    <button type="button" mat-button>
-        <mat-icon>add_box</mat-icon>添加新选项
+<mat-toolbar *ngIf="!_formHelper.disabled">
+    <button type="button" mat-button (click)="addLevel()">
+        <mat-icon>add_box</mat-icon>
+        添加新层级
     </button>
-    <button type="button" mat-button>
-        <mat-icon>save</mat-icon>保存修改
+    <button type="button" mat-button (click)="addOption()" *ngIf="getOptionLevels().length > 0">
+        <mat-icon>add_circle_outline</mat-icon>
+        添加新选项
     </button>
 </mat-toolbar>
-<div class="card-body">
-    <div class="row mb-4" *ngFor="let level of getOptionLevels()">
-        <div class="col-12 col-md-2 col-lg-1">层级 {{level}}</div>
-        <div class="col-12 col-md-10 col-lg-11">
-            <bs-sortable
-                [(ngModel)]="_mappedListOption[level]"
-                [itemTemplate]="optionFormTemplate"
-                placeholderItem="拖放到这儿"
-                itemClass="hoverable col-12 col-md-4 col-lg-3 float-left"
-            ></bs-sortable>
+<ng-container ngForm #optionForm="ngForm">
+    <ng-container *ngFor="let level of getOptionLevels()">
+        <div class="card-header">层级 {{level}}</div>
+        <div class="row">
+            <div class="hoverable col-12 col-md-4 col-lg-3 float-left"
+                 *ngFor="let option of _mappedListOption[level];let index=index;">
+                <mat-form-field class="col-4">
+                    <input matInput type="text" [(ngModel)]="option.id" name="id{{level}}{{index}}" placeholder="ID"
+                           disabled>
+                </mat-form-field>
+                <mat-form-field class="col-8">
+                    <input matInput type="text" [(ngModel)]="option.name" name="name{{level}}{{index}}" placeholder="名称"
+                           required>
+                </mat-form-field>
+                <mat-form-field class="col-4">
+                    <mat-select placeholder="层级" [ngModel]="option.level" name="level{{level}}{{index}}"
+                                (selectionChange)="onLevelChange($event.value, option)">
+                        <mat-option *ngFor="let ol of getOptionLevels();let optionLevel=index" [value]="1+optionLevel">
+                            {{ol}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col-8">
+                    <mat-select placeholder="库存" [(ngModel)]="option.stock" name="stock{{level}}{{index}}">
+                        <mat-option>-- None --</mat-option>
+                        <mat-option *ngFor="let stock of _listStock | async" [value]="stock">
+                            {{stock.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col-12">
+                    <input matInput type="text" [(ngModel)]="option.description" name="description{{level}}{{index}}"
+                           placeholder="描述">
+                </mat-form-field>
+            </div>
         </div>
-        <hr class="my-2 col-12">
-    </div>
-</div>
+    </ng-container>
+</ng-container>

@@ -7,6 +7,8 @@ import {Price} from "../model/price.dto";
 import {PostService} from "../service/http-post.service";
 import {SnackBar} from "./snack-bar";
 import {NgForm} from "@angular/forms";
+import {Stock} from "../model/stock.dto";
+import {Option} from "../model/option.dto";
 
 @Component({
     selector: 'uparis-trip-form',
@@ -17,9 +19,10 @@ export class TripFormComponent implements OnInit {
 
     @ViewChild('tripForm') tripForm: NgForm;
 
-    _trip: Trip;
-    _product: Product;
-    _formHelper = new FormHelper();
+    private _trip: Trip;
+    private _product: Product;
+    private _formHelper = new FormHelper();
+    private _listStock: Stock[];
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -35,7 +38,7 @@ export class TripFormComponent implements OnInit {
         if (!this._trip) {
             this._trip = new Trip();
             this._trip.listPrice = [];
-            this._trip.mappedListOption = {};
+            this._trip.listOption = [];
             this._trip.idProduct = this._product.id;
             this._trip.nameProduct = this._product.name;
             this._trip.durationProduct = this._product.duration;
@@ -43,6 +46,9 @@ export class TripFormComponent implements OnInit {
             this._formHelper.disabled = false;
         } else {
             this.onDateStartChange(this.parseDate(this._trip.dateStart));
+            this._listStock = this._trip.listOption
+                .filter((option: Option) => option.stock !== null)
+                .map((option: Option) => option.stock);
         }
 
         this._formHelper.register('trip', this.tripForm);
@@ -59,6 +65,8 @@ export class TripFormComponent implements OnInit {
     }
 
     save(): void {
+        console.debug(this._formHelper);
+
         this._formHelper.submit();
         if (this._formHelper.isValid) {
             this.service.saveTrip(this._trip).subscribe(id => {

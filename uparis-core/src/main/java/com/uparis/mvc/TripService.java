@@ -1,10 +1,16 @@
 package com.uparis.mvc;
 
+import com.uparis.db.entity.OptionPo;
 import com.uparis.db.entity.PricePo;
+import com.uparis.db.entity.StockPo;
 import com.uparis.db.entity.TripPo;
+import com.uparis.db.repo.OptionRepository;
 import com.uparis.db.repo.PriceRepository;
+import com.uparis.db.repo.StockRepository;
 import com.uparis.db.repo.TripRepository;
+import com.uparis.dto.OptionDto;
 import com.uparis.dto.PriceDto;
+import com.uparis.dto.StockDto;
 import com.uparis.dto.TripDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +32,12 @@ public class TripService {
 
     @Autowired
     private PriceRepository repoPrice;
+
+    @Autowired
+    private OptionRepository repoOption;
+
+    @Autowired
+    private StockRepository repoStock;
 
     public TripDto deepGetTrip(Long id) {
         TripPo tripPo = repoTrip.findById(id).get();
@@ -66,5 +78,13 @@ public class TripService {
 
     private PricePo mapPrice(PriceDto priceDto) {
         return modelUtil.mapDto2Po(priceDto, repoPrice, PricePo.class);
+    }
+
+    private OptionPo mapOption(OptionDto optionDto) {
+        return modelUtil.mapDto2Po(optionDto, repoOption, OptionPo.class);
+    }
+
+    private StockPo mapStock(StockDto stockDto) {
+        return modelUtil.mapDto2Po(stockDto, repoStock, StockPo.class);
     }
 }

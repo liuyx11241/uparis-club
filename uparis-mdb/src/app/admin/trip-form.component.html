@@ -45,20 +45,29 @@
 
     <hr>
     <mat-tab-group color="primary">
-        <mat-tab #tabPrice>
-            <ng-template mat-tab-label>
-                <mat-icon [class.amber-text]="tabPrice.isActive">euro_symbol</mat-icon>
-                <span [class.amber-text]="tabPrice.isActive">价格</span>
-            </ng-template>
-            <uparis-price-table [formHelper]="_formHelper" [listPrice]="_trip.listPrice"
-                                (mainPrice)="_trip.mainPrice=$event"></uparis-price-table>
-        </mat-tab>
         <mat-tab #tabOption>
             <ng-template mat-tab-label>
                 <mat-icon [class.amber-text]="tabOption.isActive">format_list_numbered</mat-icon>
                 <span [class.amber-text]="tabOption.isActive">选项</span>
             </ng-template>
-            <uparis-option-table [mappedListOption]="_trip.mappedListOption"></uparis-option-table>
+            <uparis-stock-table [formHelper]="_formHelper" [listStock]="_listStock"></uparis-stock-table>
+            <uparis-option-table [formHelper]="_formHelper" [listOption]="_trip.listOption"
+                                 [listStock]="_listStock"></uparis-option-table>
+        </mat-tab>
+        <mat-tab #tabPrice>
+            <ng-template mat-tab-label>
+                <ng-container *ngIf="_formHelper.lookup('price').invalid">
+                    <mat-icon [matBadge]="1" matBadgePosition="above before" matBadgeColor="warn"
+                              [class.amber-text]="tabPrice.isActive">euro_symbol
+                    </mat-icon>
+                </ng-container>
+                <ng-container *ngIf="_formHelper.lookup('price').valid">
+                    <mat-icon [class.amber-text]="tabPrice.isActive">euro_symbol</mat-icon>
+                </ng-container>
+                <span [class.amber-text]="tabPrice.isActive">价格</span>
+            </ng-template>
+            <uparis-price-table [formHelper]="_formHelper" [listPrice]="_trip.listPrice"
+                                (mainPrice)="_trip.mainPrice=$event"></uparis-price-table>
         </mat-tab>
     </mat-tab-group>
 </div>

@@ -24,4 +24,60 @@ public class OptionPo extends AbstractPo {
 
     @OneToMany(mappedBy = "option")
     private List<PricePo> listPriceFactor;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getNumOrder() {
+        return numOrder;
+    }
+
+    public void setNumOrder(Integer numOrder) {
+        this.numOrder = numOrder;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public TripPo getTrip() {
+        return trip;
+    }
+
+    public void setTrip(TripPo trip) {
+        this.trip = trip;
+    }
+
+    public StockPo getStock() {
+        return stock;
+    }
+
+    public void setStock(StockPo stock) {
+        this.stock = stock;
+    }
+
+    public List<PricePo> getListPriceFactor() {
+        return listPriceFactor;
+    }
+
+    public void setListPriceFactor(List<PricePo> listPriceFactor) {
+        this.listPriceFactor = listPriceFactor;
+    }
 }

@@ -1,20 +1,21 @@
-<mat-toolbar>
-    <button type="button" mat-button>
-        <mat-icon>add_box</mat-icon>添加新库存
-    </button>
-    <button type="button" mat-button>
-        <mat-icon>save</mat-icon>保存修改
+<mat-toolbar *ngIf="!_formHelper.disabled">
+    <button type="button" mat-button (click)="add()">
+        <mat-icon>add_box</mat-icon>
+        添加新库存
     </button>
 </mat-toolbar>
-<div class="row card-body">
-    <div class="col-12">
-        <div *ngFor="let stock of _listStock | async" class="hoverable col-12 col-md-3 col-lg-2 float-left pt-2">
-            <mat-form-field class="col-12">
-                <input matInput placeholder="库存ID" [(ngModel)]="stock.id" name="id" disabled>
-            </mat-form-field>
-            <mat-form-field class="col-12">
-                <input matInput type="number" placeholder="数量" [(ngModel)]="stock.quantity" name="quantity">
-            </mat-form-field>
-        </div>
+<div class="card-body" ngForm #stockForm="ngForm">
+    <div *ngFor="let stock of _listStock; let index=index;" class="hoverable col-12 col-md-3 col-lg-2 float-left pt-2">
+        <mat-form-field class="col-6">
+            <input matInput placeholder="ID" [(ngModel)]="stock.id" name="id{{index}}" disabled>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+            <input matInput type="number" placeholder="数量" [(ngModel)]="stock.quantity" name="quantity{{index}}"
+                   [disabled]="_formHelper.disabled" required min="0">
+        </mat-form-field>
+        <mat-form-field class="col-12">
+            <input matInput placeholder="名称" [(ngModel)]="stock.name" name="name{{index}}"
+                   [disabled]="_formHelper.disabled" required>
+        </mat-form-field>
     </div>
 </div>

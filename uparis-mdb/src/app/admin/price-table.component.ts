@@ -37,7 +37,6 @@ export class PriceTableComponent implements OnInit {
 
     @Input()
     set listPrice(listPrice: Price[]) {
-        console.log(listPrice.length);
         this._listPrice = listPrice;
         this._listCurrency.forEach(currency => {
             let priceFound = this._listPrice.find(value => currency === value.currency);
