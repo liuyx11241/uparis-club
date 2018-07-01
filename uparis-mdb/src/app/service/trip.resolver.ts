@@ -15,6 +15,7 @@ export class TripResolver implements Resolve<Trip> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Trip> | Promise<Trip> | Trip {
         let idTrip: string = route.paramMap.get('idTrip') || route.queryParamMap.get('idTrip');
 
+        console.log(idTrip);
         return this.service.getTrip(idTrip).pipe(
             take(1),
             map(trip => {

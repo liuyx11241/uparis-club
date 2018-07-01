@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
         {path: '', component: ProductListComponent},
         {path: 'products', component: ProductListComponent},
-        {path: 'products/:id', component: ProductDetailComponent, resolve: {
+        {path: 'products/:idProduct', component: ProductDetailComponent, resolve: {
             product: ProductResolver
         }},
         {path: 'checkout', component: CheckoutStepperComponent,

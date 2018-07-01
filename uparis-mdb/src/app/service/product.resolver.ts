@@ -13,7 +13,7 @@ export class ProductResolver implements Resolve<Product> {
 
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product> | Promise<Product> | Product {
-        let idProduct: string = route.paramMap.get('id') || route.queryParamMap.get('idProduct');
+        let idProduct: string = route.paramMap.get('idProduct') || route.queryParamMap.get('idProduct');
 
         return this.service.getProduct(idProduct).pipe(
             take(1),

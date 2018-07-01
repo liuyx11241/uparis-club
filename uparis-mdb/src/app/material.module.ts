@@ -4,7 +4,7 @@ import {
     MatBadgeModule,
     MatButtonModule,
     MatCardModule,
-    MatCheckboxModule,
+    MatCheckboxModule, MatDatepickerModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
@@ -54,6 +54,7 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
         MatBadgeModule,
         MatSnackBarModule,
         MatProgressSpinnerModule,
+        MatDatepickerModule,
 
         BsDatepickerModule.forRoot(),
         SortableModule.forRoot(),
@@ -84,6 +85,7 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
         MatBadgeModule,
         MatSnackBarModule,
         MatProgressSpinnerModule,
+        MatDatepickerModule,
 
         BsDatepickerModule,
         SortableModule,

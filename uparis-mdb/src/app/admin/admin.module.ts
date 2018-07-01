@@ -16,7 +16,7 @@ import {OptionTableComponent} from './option-table.component';
 import {StockTableComponent} from './stock-table.component';
 import {MultimediaTableComponent} from './multimedia-table.component';
 import {SnackBar} from "./snack-bar";
-import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import {MAT_DATE_LOCALE} from '@angular/material';
 
 @NgModule({
     imports: [
@@ -25,9 +25,6 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule
     ],
     declarations: [
         AdminComponent,
@@ -42,7 +39,9 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
         StockTableComponent,
         MultimediaTableComponent,
     ],
-    providers: [SnackBar],
+    providers: [SnackBar,
+        {provide: MAT_DATE_LOCALE, useValue: 'zh-cn'},
+    ],
     bootstrap: [AdminComponent]
 })
 export class AdminModule {

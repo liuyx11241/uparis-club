@@ -41,8 +41,6 @@ export class ProductTableDataSource extends DataSource<Product> {
     }
 
     reload(filter = '') {
-        console.log(this.sort);
-        console.log(this.paginator);
         this.loadingSubject.next(true);
 
         this.service.getProducts(filter,
@@ -53,7 +51,6 @@ export class ProductTableDataSource extends DataSource<Product> {
                 finalize(() => this.loadingSubject.next(false))
             ).subscribe(
             res => {
-                console.log(res);
                 this.paginator.length = res['totalElements'];
                 this.productSubject.next(res['content']);
             });

@@ -60,4 +60,12 @@ export class ProductFormComponent implements OnInit {
         if (this._product) {
         }
     }
+
+    generateTrip() {
+        this.router.navigate(['/admin/trips/new'], {
+            queryParams: {
+                idProduct: this._product.id
+            }
+        });
+    }
 }

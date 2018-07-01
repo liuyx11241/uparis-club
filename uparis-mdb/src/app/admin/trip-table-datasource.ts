@@ -41,8 +41,6 @@ export class TripTableDataSource extends DataSource<Trip> {
     }
 
     reload(filter = '') {
-        console.log(this.sort);
-        console.log(this.paginator);
         this.loadingSubject.next(true);
 
         this.service.getTrips(filter,
@@ -53,7 +51,6 @@ export class TripTableDataSource extends DataSource<Trip> {
                 finalize(() => this.loadingSubject.next(false))
             ).subscribe(
             res => {
-                console.log(res);
                 this.paginator.length = res['totalElements'];
                 this.tripSubject.next(res['content']);
             });

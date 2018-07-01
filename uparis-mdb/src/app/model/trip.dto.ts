@@ -7,6 +7,8 @@ export class Trip {
 
     nameProduct: string;
 
+    durationProduct: number;
+
     dateStart: string;
 
     dateEnd: string;

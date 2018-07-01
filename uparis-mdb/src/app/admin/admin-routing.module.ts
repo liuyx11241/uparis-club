@@ -16,12 +16,17 @@ const routes: Routes = [
             {path: '', component: DashboardComponent},
             {path: 'products', component: ProductTableComponent},
             {path: 'products/new', component: ProductFormComponent},
-            {path: 'products/:id', component: ProductFormComponent,
+            {path: 'products/:idProduct', component: ProductFormComponent,
                 resolve:{
                     product: ProductResolver
                 }},
             {path: 'trips', component: TripTableComponent},
-            {path: 'trips/:id', component: TripFormComponent,
+            {path: 'trips/new', component: TripFormComponent,
+                resolve: {
+                    product: ProductResolver
+                }
+            },
+            {path: 'trips/:idTrip', component: TripFormComponent,
                 resolve:{
                     trip:TripResolver
                 }

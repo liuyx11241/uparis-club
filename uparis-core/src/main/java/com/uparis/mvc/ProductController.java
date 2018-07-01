@@ -21,7 +21,7 @@ public class ProductController {
     private ModelMapper modelMapper;
 
     @Autowired
-    private ModelService modelService;
+    private ProductService productService;
 
     @GetMapping
     public Page<ProductDto> getProducts(
@@ -40,7 +40,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductDto getProduct(@PathVariable("id") Long idProduct) {
-        return modelService.deepGetProduct(idProduct);
+        return productService.deepGetProduct(idProduct);
     }
 
     @PostMapping
@@ -50,7 +50,7 @@ public class ProductController {
             itineraryDto.setId(null);
             itineraryDto.getListSchedule().forEach(scheduleDto -> scheduleDto.setId(null));
         });
-        return modelService.deepCreateProduct(newProduct);
+        return productService.deepCreateProduct(newProduct);
     }
 
     @PutMapping
@@ -58,7 +58,7 @@ public class ProductController {
         if (product.getId() == null) {
             return createProduct(product);
         }
-        return modelService.deepUpdateProduct(product);
+        return productService.deepUpdateProduct(product);
     }
 
     @DeleteMapping("/{id}")

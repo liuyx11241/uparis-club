@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class ModelService {
+public class ProductService {
 
     @Autowired
     private ModelMapper modelMapper;
@@ -140,7 +140,7 @@ public class ModelService {
         return productPo.getId();
     }
 
-
+    @Transactional
     public Long deepDeleteProduct(ProductDto productDto) {
         return null;
     }

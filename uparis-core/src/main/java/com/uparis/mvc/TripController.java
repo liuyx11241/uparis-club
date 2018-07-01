@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/trip")
@@ -21,6 +20,9 @@ public class TripController {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private TripService tripService;
 
     @GetMapping
     public Page<TripDto> getTrips(
@@ -36,7 +38,24 @@ public class TripController {
 
     @GetMapping("/{id}")
     public TripDto getTrip(@PathVariable("id") Long idTrip) {
-        Optional<TripPo> tripPo = repoTrip.findById(idTrip);
-        return modelMapper.map(tripPo, TripDto.class);
+        return tripService.deepGetTrip(idTrip);
+    }
+
+    @PostMapping
+    public ResponseEntity<Long> createTrip(@RequestBody TripDto newtrip) {
+        if (newtrip.getIdProduct() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        newtrip.setId(null);
+        return ResponseEntity.ok(tripService.deepCreateTrip(newtrip));
+    }
+
+    @PutMapping
+    public ResponseEntity<Long> updateTrip(@RequestBody TripDto trip) {
+        if (trip.getId() == null) {
+            return createTrip(trip);
+        }
+        return ResponseEntity.ok(tripService.deepCreateTrip(trip));
     }
 }

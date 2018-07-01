@@ -4,6 +4,7 @@ import {Observable} from "rxjs/index";
 import {catchError} from "rxjs/internal/operators";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ErrorHandler} from "./error.handler";
+import {Trip} from "../model/trip.dto";
 
 const httpOptions = {headers: new HttpHeaders({'ContentType': 'application/json'})}
 
@@ -29,5 +30,22 @@ export class PostService {
                 catchError(this.handler.handleError)
             );
         }
+    }
+
+    public saveTrip(value: Trip): Observable<number> {
+        if (value == null) {
+            return;
+        }
+
+        if (value.id) {
+            return this.http.put<number>(`/api/trip`, value, httpOptions).pipe(
+                catchError(this.handler.handleError)
+            );
+        } else {
+            return this.http.post<number>(`/api/trip`, value, httpOptions).pipe(
+                catchError(this.handler.handleError)
+            );
+        }
+
     }
 }

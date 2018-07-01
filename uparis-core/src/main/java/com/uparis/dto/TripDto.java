@@ -63,6 +63,14 @@ public class TripDto extends AbstractDto {
         this.nameProduct = nameProduct;
     }
 
+    public Integer getDurationProduct() {
+        return durationProduct;
+    }
+
+    public void setDurationProduct(Integer durationProduct) {
+        this.durationProduct = durationProduct;
+    }
+
     public PriceDto getMainPrice() {
         return mainPrice;
     }
