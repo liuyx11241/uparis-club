@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {BsLocaleService} from "ngx-bootstrap";
 
 @Component({
     selector: 'eshop',
@@ -7,7 +6,6 @@ import {BsLocaleService} from "ngx-bootstrap";
     styleUrls: ['./eshop.component.scss']
 })
 export class EshopComponent {
-    constructor(private localeService: BsLocaleService) {
-        this.localeService.use("zh-cn");
+    constructor() {
     }
 }

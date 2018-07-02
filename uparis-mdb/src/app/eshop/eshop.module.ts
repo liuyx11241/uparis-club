@@ -16,13 +16,7 @@ import {PersonFormComponent} from './person-form.component';
 import {MatNativeDateModule} from "@angular/material";
 import {CheckoutStepperComponent} from './checkout-stepper.component';
 
-import {defineLocale} from 'ngx-bootstrap/chronos';
-import {zhCnLocale} from 'ngx-bootstrap/locale';
-import {frLocale} from "ngx-bootstrap";
 import {PersonCardComponent} from './person-card.component';
-
-defineLocale('zh-cn', zhCnLocale);
-defineLocale('fr', frLocale);
 
 @NgModule({
     imports: [

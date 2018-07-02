@@ -26,7 +26,6 @@ import {
     MatToolbarModule
 } from "@angular/material";
 import {MDBBootstrapModule} from "angular-bootstrap-md";
-import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap";
 
 @NgModule({
     imports: [
@@ -56,10 +55,6 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
         MatProgressSpinnerModule,
         MatDatepickerModule,
         MatSlideToggleModule,
-
-        BsDatepickerModule.forRoot(),
-        SortableModule.forRoot(),
-        CollapseModule.forRoot(),
     ],
     exports: [
         MDBBootstrapModule,
@@ -87,10 +82,6 @@ import {BsDatepickerModule, CollapseModule, SortableModule} from "ngx-bootstrap"
         MatProgressSpinnerModule,
         MatDatepickerModule,
         MatSlideToggleModule,
-
-        BsDatepickerModule,
-        SortableModule,
-        CollapseModule,
     ]
 })
 export class MaterialModule {
