@@ -1,11 +1,10 @@
 import {Component, Input} from '@angular/core';
 import {Option} from "../model/option.dto";
-import {FormArray, FormGroup} from "@angular/forms";
+import {FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'uparis-option-selector',
     templateUrl: './option-selector.component.html',
-    styles: []
 })
 export class OptionSelectorComponent {
 
@@ -33,9 +32,15 @@ export class OptionSelectorComponent {
     }
 
     @Input()
-    set mappedListOption(value: object) {
-        this._mappedListOption = value;
+    set listOption(value: Option[]) {
         this._selectedOption.clear();
+        this._mappedListOption = {};
+        value.forEach(option => {
+            if (!this._mappedListOption[option.level]) {
+                this._mappedListOption[option.level] = [];
+            }
+            this._mappedListOption[option.level].push(option);
+        });
     }
 
     @Input()

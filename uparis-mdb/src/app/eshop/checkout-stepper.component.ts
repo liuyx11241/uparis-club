@@ -7,7 +7,6 @@ import {Order} from "../model/order.dto";
 @Component({
     selector: 'uparis-checkout-stepper',
     templateUrl: './checkout-stepper.component.html',
-    styleUrls: ['./checkout-stepper.component.scss']
 })
 export class CheckoutStepperComponent implements OnInit {
     private _trip: Trip;
@@ -69,9 +68,12 @@ export class CheckoutStepperComponent implements OnInit {
             ),
         });
 
-        for (let obj of Object.keys(this._trip.mappedListOption)) {
-            (fg.get('option') as FormGroup).addControl("option" + obj, this.formBuilder.control('', Validators.required));
-        }
+        let levels = new Set<number>();
+        this._trip.listOption.forEach(value => levels.add(value.level));
+
+        levels.forEach(level => {
+            (fg.get('option') as FormGroup).addControl("option" + level, this.formBuilder.control('', Validators.required));
+        });
 
         return fg;
     }
