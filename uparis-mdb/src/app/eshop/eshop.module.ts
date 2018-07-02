@@ -13,7 +13,6 @@ import {OptionSelectorComponent} from './option-selector.component';
 import {TripSelectorComponent} from './trip-selector.component';
 import {NumberPickerComponent} from './number-picker.component';
 import {PersonFormComponent} from './person-form.component';
-import {MatNativeDateModule} from "@angular/material";
 import {CheckoutStepperComponent} from './checkout-stepper.component';
 
 import {PersonCardComponent} from './person-card.component';
@@ -24,7 +23,6 @@ import {PersonCardComponent} from './person-card.component';
         FormsModule,
         ReactiveFormsModule,
         EshopRoutingModule,
-        MatNativeDateModule,
         MaterialModule,
     ],
     providers: [],

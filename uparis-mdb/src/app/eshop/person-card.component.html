@@ -46,7 +46,9 @@
         <p *ngFor="let option of _listOption">
             <i class="fa fa-lg col-2 fa-hand-o-right" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
             <span class="col-5">{{option.name}}</span>
-            <span class="col-5 text-right">{{option.priceFactor.value | currency: option.priceFactor.currency}}</span>
+            <ng-container *ngIf="option.priceFactor">
+                <span class="col-5 text-right">{{option.priceFactor.value | currency: option.priceFactor.currency}}</span>
+            </ng-container>
         </p>
     </div>
 </div>

@@ -72,11 +72,12 @@ export class OptionTableComponent implements OnInit {
         listOption.splice(listOption.indexOf(option), 1);
         this._mappedListOption[newLevel].push(option);
         option.level = newLevel;
-
-        console.info(this._listOption);
     }
 
-    onStockChange(newStock: Stock, option: Option) {
+    delete(option: Option): void {
+        let listOption = this._mappedListOption[option.level];
+        listOption.splice(listOption.indexOf(option), 1);
 
+        this._listOption.splice(this._listOption.indexOf(option), 1);
     }
 }

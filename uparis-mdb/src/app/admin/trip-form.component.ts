@@ -23,6 +23,9 @@ export class TripFormComponent implements OnInit {
     private _formHelper = new FormHelper();
     private _listStock: Stock[];
 
+    private _tripDateStart: Date;
+    private _tripDateEnd: Date;
+
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private snackBar: SnackBar,
@@ -43,8 +46,10 @@ export class TripFormComponent implements OnInit {
             this._trip.durationProduct = this._product.duration;
             this._trip.mainPrice = new Price();
             this._formHelper.disabled = false;
+            this._listStock = [];
         } else {
-            this.onDateStartChange(this.parseDate(this._trip.dateStart));
+            this._tripDateStart = new Date(this._trip.dateStart);
+            this._tripDateEnd = new Date(this._trip.dateEnd);
 
             let stockMap = new Map<number, Stock>();
             this._trip.listOption.filter(op => op.stock).forEach(
@@ -62,13 +67,9 @@ export class TripFormComponent implements OnInit {
     }
 
     onDateStartChange(dateStart: Date) {
-        this._trip.dateStart = dateStart.toLocaleDateString();
-        let dateEnd = new Date(dateStart.setDate(dateStart.getDate() + this._trip.durationProduct - 1));
-        this._trip.dateEnd = dateEnd.toLocaleDateString();
-    }
-
-    parseDate(date: string): Date {
-        return new Date(date);
+        this._tripDateStart = new Date(dateStart);
+        this._tripDateEnd = new Date(dateStart);
+        this._tripDateEnd.setDate(this._tripDateEnd.getDate() + this._trip.durationProduct - 1);
     }
 
     save(): void {
@@ -77,6 +78,9 @@ export class TripFormComponent implements OnInit {
 
         this._formHelper.submit();
         if (this._formHelper.isValid) {
+            this._trip.dateStart = this._tripDateStart.toLocaleDateString();
+            this._trip.dateEnd = this._tripDateEnd.toLocaleDateString();
+
             this.service.saveTrip(this._trip).subscribe(id => {
                 this.snackBar.openSuccessfulSave();
                 this._formHelper.disabled = true;

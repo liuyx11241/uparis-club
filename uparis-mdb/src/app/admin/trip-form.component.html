@@ -25,18 +25,17 @@
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <input matInput placeholder="出发日期" name="dateStart" [value]="parseDate(_trip.dateStart)"
-                       (dateChange)="onDateStartChange($event.value)" [matDatepicker]="picker" required
-                       [disabled]="_formHelper.disabled">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker color="primary"></mat-datepicker>
+                <input matInput placeholder="出发日期" [(ngModel)]="_tripDateStart" name="dateStart" (dateChange)="onDateStartChange($event.value)"
+                       [matDatepicker]="pickerStart" required [disabled]="_formHelper.disabled">
+                <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                <mat-datepicker #pickerStart color="primary"></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <input matInput placeholder="返回日期" [value]="parseDate(_trip.dateEnd)" name="dateEnd" disabled
-                       [matDatepicker]="picker2">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
+                <input matInput placeholder="返回日期" [(ngModel)]="_tripDateEnd" name="dateEnd" disabled
+                       [matDatepicker]="pickerEnd">
+                <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                <mat-datepicker #pickerEnd></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field class="col-12">
@@ -50,6 +49,9 @@
     <mat-tab-group color="primary">
         <mat-tab #tabOption>
             <ng-template mat-tab-label>
+                <ng-container *ngIf="_formHelper.lookup('option').invalid || _formHelper.lookup('stock').invalid">
+                    <span [matBadge]="1" matBadgePosition="above before" matBadgeColor="warn"></span>
+                </ng-container>
                 <mat-icon [class.amber-text]="tabOption.isActive">format_list_numbered</mat-icon>
                 <span [class.amber-text]="tabOption.isActive">选项</span>
             </ng-template>
@@ -60,13 +62,9 @@
         <mat-tab #tabPrice>
             <ng-template mat-tab-label>
                 <ng-container *ngIf="_formHelper.lookup('price').invalid">
-                    <mat-icon [matBadge]="1" matBadgePosition="above before" matBadgeColor="warn"
-                              [class.amber-text]="tabPrice.isActive">euro_symbol
-                    </mat-icon>
+                    <span [matBadge]="1" matBadgePosition="above before" matBadgeColor="warn"></span>
                 </ng-container>
-                <ng-container *ngIf="_formHelper.lookup('price').valid">
-                    <mat-icon [class.amber-text]="tabPrice.isActive">euro_symbol</mat-icon>
-                </ng-container>
+                <mat-icon [class.amber-text]="tabPrice.isActive">euro_symbol</mat-icon>
                 <span [class.amber-text]="tabPrice.isActive">价格</span>
             </ng-template>
             <uparis-price-table [formHelper]="_formHelper" [listPrice]="_trip.listPrice"

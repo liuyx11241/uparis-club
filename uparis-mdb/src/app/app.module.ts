@@ -7,7 +7,25 @@ import {EshopModule} from './eshop/eshop.module';
 import {RouterModule} from "@angular/router";
 import {AdminModule} from './admin/admin.module';
 import {ServiceModule} from "./service/service.module";
-import {MAT_DATE_LOCALE} from "@angular/material";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
+import {MatMomentDateModule, MomentDateAdapter} from "@angular/material-moment-adapter";
+
+import {registerLocaleData} from "@angular/common";
+import localeZh from '@angular/common/locales/zh';
+
+registerLocaleData(localeZh);
+
+export const UPARIS_DATE_FORMATS = {
+    parse: {
+        dateInput: 'L',
+    },
+    display: {
+        dateInput: 'L',
+        monthYearLabel: 'MMM YYYY',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'MMMM YYYY',
+    },
+};
 
 @NgModule({
     declarations: [
@@ -16,6 +34,7 @@ import {MAT_DATE_LOCALE} from "@angular/material";
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        MatMomentDateModule,
 
         ServiceModule,
         //custom module
@@ -32,6 +51,9 @@ import {MAT_DATE_LOCALE} from "@angular/material";
     providers: [
         {provide: LOCALE_ID, useValue: 'zh-cn'},
         {provide: MAT_DATE_LOCALE, useValue: 'zh-cn'},
+        {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+        {provide: MAT_DATE_FORMATS, useValue: UPARIS_DATE_FORMATS},
+
     ],
     schemas: [NO_ERRORS_SCHEMA],
     bootstrap: [AppComponent]

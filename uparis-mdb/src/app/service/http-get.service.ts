@@ -4,7 +4,7 @@ import {Product} from "../model/product.dto";
 import {Observable} from "rxjs/index";
 import {Trip} from "../model/trip.dto";
 import {ErrorHandler} from "./error.handler";
-import {catchError} from "rxjs/internal/operators";
+import {catchError, map} from "rxjs/internal/operators";
 
 
 @Injectable()
@@ -17,29 +17,31 @@ export class GetService {
     }
 
     public getAllProducts(): Observable<Product[]> {
-        return this.http.get<Product[]>("/api/product");
+        return this.http.get<Product[]>("/api/product").pipe(
+            map(value => value['content'])
+        );
     }
 
-    public getProducts(filter, pageIndex, pageSize, sort, direction): Observable<any> {
+    public getProducts(filter, pageIndex, pageSize, sort, direction): Observable<Product[]> {
         let httpParams = new HttpParams()
             .set('pageIndex', pageIndex.toString())
             .set('pageSize', pageSize.toString())
             .set('direction', direction)
             .set('sort', sort)
             .set('filter', filter);
-        return this.http.get(`/api/product`, {
+        return this.http.get<Product[]>(`/api/product`, {
             params: httpParams
         });
     };
 
-    public getTrips(filter, pageIndex, pageSize, sort, direction): Observable<any> {
+    public getTrips(filter, pageIndex, pageSize, sort, direction): Observable<Trip[]> {
         let httpParams = new HttpParams()
             .set('pageIndex', pageIndex.toString())
             .set('pageSize', pageSize.toString())
             .set('direction', direction)
             .set('filter', filter)
             .set('sort', sort);
-        return this.http.get(`/api/trip`, {
+        return this.http.get<Trip[]>(`/api/trip`, {
             params: httpParams
         });
     }

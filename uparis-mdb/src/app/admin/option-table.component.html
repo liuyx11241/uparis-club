@@ -37,10 +37,13 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field class="col-12">
+                <mat-form-field class="col-11">
                     <input matInput type="text" [(ngModel)]="option.description" name="description{{level}}{{index}}"
                            placeholder="描述" [disabled]="_formHelper.disabled">
                 </mat-form-field>
+                <button mat-icon-button class="close col-1" *ngIf="!_formHelper.disabled" (click)="delete(option)">
+                    <mat-icon>delete</mat-icon>
+                </button>
             </div>
         </div>
     </ng-container>
