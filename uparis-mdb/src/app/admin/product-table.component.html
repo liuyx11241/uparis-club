@@ -3,10 +3,6 @@
         <mat-icon>add_box</mat-icon>
         添加新产品
     </button>
-
-    <mat-form-field>
-        <input matInput type="text" placeholder="查找" #nameInput>
-    </mat-form-field>
 </mat-toolbar>
 
 <mat-table #table [dataSource]="_dataSource" matSort aria-label="Elements">
@@ -35,6 +31,9 @@
         <mat-cell *matCellDef="let row">
             <button mat-icon-button [routerLink]="['/admin/products', row.id]">
                 <mat-icon>search</mat-icon>
+            </button>
+            <button mat-icon-button (click)="createTrip(row)">
+                <mat-icon>playlist_add</mat-icon>
             </button>
         </mat-cell>
     </ng-container>

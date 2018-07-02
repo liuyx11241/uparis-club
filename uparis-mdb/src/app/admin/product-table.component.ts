@@ -2,6 +2,8 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
 import {ProductTableDataSource} from './product-table-datasource';
 import {GetService} from "../service/http-get.service";
+import {Router} from "@angular/router";
+import {Product} from "../model/product.dto";
 
 @Component({
     selector: 'admin/product-table',
@@ -14,7 +16,8 @@ export class ProductTableComponent implements OnInit, AfterViewInit {
 
     _displayedColumns = ['id', 'name', 'alias', 'duration', 'actions'];
 
-    constructor(private productService: GetService) {
+    constructor(private router: Router,
+                private productService: GetService) {
 
     }
 
@@ -36,4 +39,13 @@ export class ProductTableComponent implements OnInit, AfterViewInit {
         //     )
         //     .subscribe();
     }
+
+    createTrip(product: Product) {
+        this.router.navigate(['/admin/trips/new'], {
+            queryParams: {
+                idProduct: product.id
+            }
+        });
+    }
+
 }

@@ -11,6 +11,10 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>出发日期</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.dateStart}}</mat-cell>
     </ng-container>
+    <ng-container matColumnDef="dateEnd">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>返回日期</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.dateEnd}}</mat-cell>
+    </ng-container>
     <ng-container matColumnDef="stock">
         <mat-header-cell *matHeaderCellDef mat-sort-header>库存</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.stock}}</mat-cell>

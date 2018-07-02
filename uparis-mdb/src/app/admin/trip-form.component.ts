@@ -8,6 +8,7 @@ import {PostService} from "../service/http-post.service";
 import {SnackBar} from "./snack-bar";
 import {NgForm} from "@angular/forms";
 import {Stock} from "../model/stock.dto";
+import {DateFormatter} from "../service/date-formatter.util";
 
 @Component({
     selector: 'uparis-trip-form',
@@ -29,6 +30,7 @@ export class TripFormComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private snackBar: SnackBar,
+                private formatter: DateFormatter,
                 private service: PostService) {
     }
 
@@ -48,8 +50,8 @@ export class TripFormComponent implements OnInit {
             this._formHelper.disabled = false;
             this._listStock = [];
         } else {
-            this._tripDateStart = new Date(this._trip.dateStart);
-            this._tripDateEnd = new Date(this._trip.dateEnd);
+            this._tripDateStart = this.formatter.parse(this._trip.dateStart);
+            this._tripDateEnd = this.formatter.parse(this._trip.dateEnd);
 
             let stockMap = new Map<number, Stock>();
             this._trip.listOption.filter(op => op.stock).forEach(
@@ -67,7 +69,6 @@ export class TripFormComponent implements OnInit {
     }
 
     onDateStartChange(dateStart: Date) {
-        this._tripDateStart = new Date(dateStart);
         this._tripDateEnd = new Date(dateStart);
         this._tripDateEnd.setDate(this._tripDateEnd.getDate() + this._trip.durationProduct - 1);
     }
@@ -78,8 +79,8 @@ export class TripFormComponent implements OnInit {
 
         this._formHelper.submit();
         if (this._formHelper.isValid) {
-            this._trip.dateStart = this._tripDateStart.toLocaleDateString();
-            this._trip.dateEnd = this._tripDateEnd.toLocaleDateString();
+            this._trip.dateStart = this.formatter.format(this._tripDateStart);
+            this._trip.dateEnd = this.formatter.format(this._tripDateEnd);
 
             this.service.saveTrip(this._trip).subscribe(id => {
                 this.snackBar.openSuccessfulSave();

@@ -1,4 +1,4 @@
-<div class="z-depth-1 hoverable container" [formGroup]="_optionForm">
+<div class="z-depth-1 hoverable container" [formGroup]="_optionForm" *ngIf="getKeys().length>0">
     <p class="text-center text-md-left">自定义活动</p>
     <mat-form-field *ngFor="let key of getKeys()" class="col-12">
         <mat-select [formControlName]="'option'+key"
