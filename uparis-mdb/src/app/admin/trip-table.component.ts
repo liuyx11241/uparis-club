@@ -12,7 +12,7 @@ export class TripTableComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort) sort: MatSort;
     _dataSource: TripTableDataSource;
 
-    _displayedColumns = ['id', 'idProduct', 'dateStart', 'dateEnd', 'stock', 'mainPrice', 'actions'];
+    _displayedColumns = ['id', 'idProduct', 'dateStart', 'dateEnd', 'stock', 'price', 'priceVAT', 'actions'];
 
     constructor(private service: GetService) {
     }

@@ -11,40 +11,53 @@
 <ng-container ngForm #optionForm="ngForm">
     <ng-container *ngFor="let level of getOptionLevels()">
         <div class="card-header col-12">层级 {{level}}</div>
-        <div class="card-body col-12">
-            <div class="col-12 col-md-4 col-lg-3 float-left"
-                 *ngFor="let option of _mappedListOption[level];let index=index;">
-                <mat-form-field class="col-4">
-                    <input matInput type="text" [(ngModel)]="option.id" name="id{{level}}{{index}}" placeholder="ID" disabled>
-                </mat-form-field>
-                <mat-form-field class="col-8">
-                    <input matInput type="text" [(ngModel)]="option.name" name="name{{level}}{{index}}" placeholder="名称"
-                           required [disabled]="_formHelper.disabled">
-                </mat-form-field>
-                <mat-form-field class="col-4">
-                    <mat-select placeholder="层级" [ngModel]="option.level" name="level{{level}}{{index}}"
-                                (selectionChange)="onLevelChange($event.value, option)" required [disabled]="_formHelper.disabled">
-                        <mat-option *ngFor="let ol of getOptionLevels();let optionLevel=index" [value]="1+optionLevel">
-                            {{ol}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field class="col-8">
-                    <mat-select placeholder="库存" [(ngModel)]="option.stock" name="stock{{level}}{{index}}" [disabled]="_formHelper.disabled">
-                        <mat-option>-- None --</mat-option>
-                        <mat-option *ngFor="let stock of _listStock" [value]="stock">
-                            {{stock.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field class="col-11">
-                    <input matInput type="text" [(ngModel)]="option.description" name="description{{level}}{{index}}"
-                           placeholder="描述" [disabled]="_formHelper.disabled">
-                </mat-form-field>
-                <button mat-icon-button class="close col-1" *ngIf="!_formHelper.disabled" (click)="delete(option)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </div>
+        <div class="card-body col-12" *ngFor="let option of _mappedListOption[level];let index=index;">
+            <mat-form-field class="col-6 col-md-1">
+                <input matInput type="text" [(ngModel)]="option.id" name="id{{level}}{{index}}" placeholder="ID"
+                       disabled>
+            </mat-form-field>
+            <mat-form-field class="col-6 col-md-1">
+                <mat-select placeholder="层级" [ngModel]="option.level" name="level{{level}}{{index}}"
+                            (selectionChange)="onLevelChange($event.value, option)" required
+                            [disabled]="_formHelper.disabled">
+                    <mat-option *ngFor="let ol of getOptionLevels();let optionLevel=index" [value]="1+optionLevel">
+                        {{ol}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-6 col-md-2">
+                <input matInput type="text" [(ngModel)]="option.name" name="name{{level}}{{index}}" placeholder="名称"
+                       required [disabled]="_formHelper.disabled">
+            </mat-form-field>
+            <mat-form-field class="col-6 col-md-2">
+                <mat-select placeholder="库存" [(ngModel)]="option.stock" name="stock{{level}}{{index}}"
+                            [disabled]="_formHelper.disabled">
+                    <mat-option>-- None --</mat-option>
+                    <mat-option *ngFor="let stock of _listStock" [value]="stock">
+                        {{stock.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-6 col-md-1">
+                <input matInput type="number" placeholder="单价" [(ngModel)]="option.price"
+                       name="price{{level}}{{index}}"
+                       [disabled]="_formHelper.disabled" required min="0">
+            </mat-form-field>
+
+            <mat-form-field class="col-6 col-md-1">
+                <input matInput type="number" placeholder="增值税率" [(ngModel)]="option.priceVAT"
+                       name="priceVAT{{level}}{{index}}"
+                       [disabled]="_formHelper.disabled" min="0">
+            </mat-form-field>
+
+            <mat-form-field class="col-11 col-md-3">
+                <input matInput type="text" [(ngModel)]="option.description" name="description{{level}}{{index}}"
+                       placeholder="描述" [disabled]="_formHelper.disabled">
+            </mat-form-field>
+            <button mat-icon-button class="close col-1" *ngIf="!_formHelper.disabled" (click)="delete(option)">
+                <mat-icon>delete</mat-icon>
+            </button>
         </div>
     </ng-container>
 </ng-container>

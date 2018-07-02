@@ -1,5 +1,7 @@
 package com.uparis.dto;
 
+import java.math.BigDecimal;
+
 public class OptionDto extends AbstractDto {
 
     private Long idTrip;
@@ -12,7 +14,9 @@ public class OptionDto extends AbstractDto {
 
     private String description;
 
-    private PriceDto priceFactor;
+    private BigDecimal price;
+
+    private BigDecimal priceVAT;
 
     private StockDto stock;
 
@@ -56,12 +60,20 @@ public class OptionDto extends AbstractDto {
         this.numOrder = numOrder;
     }
 
-    public PriceDto getPriceFactor() {
-        return priceFactor;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setPriceFactor(PriceDto priceFactor) {
-        this.priceFactor = priceFactor;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPriceVAT() {
+        return priceVAT;
+    }
+
+    public void setPriceVAT(BigDecimal priceVAT) {
+        this.priceVAT = priceVAT;
     }
 
     public StockDto getStock() {

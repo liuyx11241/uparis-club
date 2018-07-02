@@ -1,4 +1,3 @@
-import {Price} from "./price.dto";
 import {Option} from "./option.dto";
 
 export class Trip {
@@ -16,9 +15,11 @@ export class Trip {
 
     stock: number;
 
-    mainPrice: Price;
+    price: number;
 
-    listPrice: Price[];
+    priceVAT: number;
+
+    currency: string;
 
     listOption: Option[];
 }

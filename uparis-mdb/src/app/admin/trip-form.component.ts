@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Trip} from "../model/trip.dto";
 import {FormHelper} from "./form-helper";
 import {Product} from "../model/product.dto";
-import {Price} from "../model/price.dto";
 import {PostService} from "../service/http-post.service";
 import {SnackBar} from "./snack-bar";
 import {NgForm} from "@angular/forms";
@@ -41,12 +40,10 @@ export class TripFormComponent implements OnInit {
         });
         if (!this._trip) {
             this._trip = new Trip();
-            this._trip.listPrice = [];
             this._trip.listOption = [];
             this._trip.idProduct = this._product.id;
             this._trip.nameProduct = this._product.name;
             this._trip.durationProduct = this._product.duration;
-            this._trip.mainPrice = new Price();
             this._formHelper.disabled = false;
             this._listStock = [];
         } else {

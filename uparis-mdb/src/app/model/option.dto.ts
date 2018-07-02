@@ -1,4 +1,3 @@
-import {Price} from "./price.dto";
 import {Stock} from "./stock.dto";
 
 export class Option {
@@ -14,7 +13,9 @@ export class Option {
 
     numOrder: number;
 
-    priceFactor: Price;
+    price: number;
+
+    priceVAT: number;
 
     stock: Stock;
 }

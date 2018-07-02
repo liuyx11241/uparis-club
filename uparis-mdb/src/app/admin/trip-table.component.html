@@ -19,9 +19,14 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>库存</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.stock}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="mainPrice">
+    <ng-container matColumnDef="price">
         <mat-header-cell *matHeaderCellDef mat-sort-header>价格</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.mainPrice?.value | currency: element.mainPrice?.currency}}
+        <mat-cell *matCellDef="let element">{{element.price | currency: element.currency}}
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="priceVAT">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>增值税率</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.priceVAT + '%'}}
         </mat-cell>
     </ng-container>
 

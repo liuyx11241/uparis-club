@@ -1,6 +1,9 @@
 package com.uparis.db.entity;
 
+import com.uparis.db.constant.TypeCurrency;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -15,11 +18,17 @@ public class TripPo extends AbstractPo {
     @Column(nullable = false)
     private Integer stock;
 
+    @Column(nullable = false)
+    private BigDecimal price;
+
+    private BigDecimal priceVAT;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TypeCurrency currency;
+
     @ManyToOne(optional = false)
     private ProductPo product;
-
-    @OneToMany(mappedBy = "trip")
-    private List<PricePo> listPrice;
 
     @OneToMany(mappedBy = "trip")
     @OrderBy("level asc, num_order asc")
@@ -62,20 +71,36 @@ public class TripPo extends AbstractPo {
         this.stock = stock;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPriceVAT() {
+        return priceVAT;
+    }
+
+    public void setPriceVAT(BigDecimal priceVAT) {
+        this.priceVAT = priceVAT;
+    }
+
+    public TypeCurrency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(TypeCurrency currency) {
+        this.currency = currency;
+    }
+
     public ProductPo getProduct() {
         return product;
     }
 
     public void setProduct(ProductPo product) {
         this.product = product;
-    }
-
-    public List<PricePo> getListPrice() {
-        return listPrice;
-    }
-
-    public void setListPrice(List<PricePo> listPrice) {
-        this.listPrice = listPrice;
     }
 
     public List<OptionPo> getListOption() {

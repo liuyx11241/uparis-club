@@ -1,5 +1,6 @@
 package com.uparis.dto;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +17,11 @@ public class TripDto extends AbstractDto {
 
     private Integer stock;
 
-    private PriceDto mainPrice;
+    private BigDecimal price;
 
-    private List<PriceDto> listPrice = new ArrayList<>();
+    private BigDecimal priceVAT;
+
+    private String currency;
 
     private List<OptionDto> listOption = new ArrayList<>();
 
@@ -46,6 +49,30 @@ public class TripDto extends AbstractDto {
         this.stock = stock;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPriceVAT() {
+        return priceVAT;
+    }
+
+    public void setPriceVAT(BigDecimal priceVAT) {
+        this.priceVAT = priceVAT;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
     public Long getIdProduct() {
         return idProduct;
     }
@@ -70,27 +97,11 @@ public class TripDto extends AbstractDto {
         this.durationProduct = durationProduct;
     }
 
-    public PriceDto getMainPrice() {
-        return mainPrice;
-    }
-
-    public void setMainPrice(PriceDto mainPrice) {
-        this.mainPrice = mainPrice;
-    }
-
     public List<OptionDto> getListOption() {
         return listOption;
     }
 
     public void setListOption(List<OptionDto> listOption) {
         this.listOption = listOption;
-    }
-
-    public List<PriceDto> getListPrice() {
-        return listPrice;
-    }
-
-    public void setListPrice(List<PriceDto> listPrice) {
-        this.listPrice = listPrice;
     }
 }

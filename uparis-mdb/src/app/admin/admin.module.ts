@@ -14,7 +14,6 @@ import {TripTableComponent} from './trip-table.component';
 import {TripFormComponent} from './trip-form.component';
 import {OptionTableComponent} from './option-table.component';
 import {StockTableComponent} from './stock-table.component';
-import {PriceTableComponent} from './price-table.component';
 import {MultimediaTableComponent} from './multimedia-table.component';
 import {SnackBar} from "./snack-bar";
 
@@ -38,7 +37,6 @@ import {SnackBar} from "./snack-bar";
         OptionTableComponent,
         StockTableComponent,
         MultimediaTableComponent,
-        PriceTableComponent,
     ],
     providers: [
         SnackBar,
