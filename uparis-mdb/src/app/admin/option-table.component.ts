@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Option} from "../model/option.dto";
 import {Stock} from "../model/stock.dto";
-import {Observable, of} from "rxjs/index";
 import {FormHelper} from "./form-helper";
 import {NgForm} from "@angular/forms";
 
@@ -18,7 +17,7 @@ export class OptionTableComponent implements OnInit {
 
     private _mappedListOption: object;
 
-    private _listStock: Observable<Stock[]>;
+    private _listStock: Stock[];
 
     private _formHelper: FormHelper;
 
@@ -38,13 +37,11 @@ export class OptionTableComponent implements OnInit {
             }
             this._mappedListOption[option.level].push(option);
         });
-        console.info(this._listOption);
-        console.info(this._mappedListOption);
     }
 
     @Input()
     set listStock(value: Stock[]) {
-        this._listStock = of(value);
+        this._listStock = value;
     }
 
     @Input()
@@ -77,5 +74,9 @@ export class OptionTableComponent implements OnInit {
         option.level = newLevel;
 
         console.info(this._listOption);
+    }
+
+    onStockChange(newStock: Stock, option: Option) {
+
     }
 }

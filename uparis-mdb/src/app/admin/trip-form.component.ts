@@ -8,7 +8,6 @@ import {PostService} from "../service/http-post.service";
 import {SnackBar} from "./snack-bar";
 import {NgForm} from "@angular/forms";
 import {Stock} from "../model/stock.dto";
-import {Option} from "../model/option.dto";
 
 @Component({
     selector: 'uparis-trip-form',
@@ -46,9 +45,17 @@ export class TripFormComponent implements OnInit {
             this._formHelper.disabled = false;
         } else {
             this.onDateStartChange(this.parseDate(this._trip.dateStart));
-            this._listStock = this._trip.listOption
-                .filter((option: Option) => option.stock !== null)
-                .map((option: Option) => option.stock);
+
+            let stockMap = new Map<number, Stock>();
+            this._trip.listOption.filter(op => op.stock).forEach(
+                op => {
+                    let stock = op.stock;
+                    if (!stockMap.has(stock.id)) {
+                        stockMap.set(stock.id, stock);
+                    }
+                    op.stock = stockMap.get(stock.id);
+                });
+            this._listStock = Array.from(stockMap.values());
         }
 
         this._formHelper.register('trip', this.tripForm);
@@ -66,6 +73,7 @@ export class TripFormComponent implements OnInit {
 
     save(): void {
         console.debug(this._formHelper);
+        console.debug(this._formHelper.isValid);
 
         this._formHelper.submit();
         if (this._formHelper.isValid) {

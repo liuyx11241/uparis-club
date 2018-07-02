@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <button mat-button (click)="add()">
+    <button mat-button (click)="add()" *ngIf="_formHelper.disabled">
         <mat-icon>add_box</mat-icon>
         添加新产品
     </button>

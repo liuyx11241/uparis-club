@@ -7,6 +7,7 @@ import {EshopModule} from './eshop/eshop.module';
 import {RouterModule} from "@angular/router";
 import {AdminModule} from './admin/admin.module';
 import {ServiceModule} from "./service/service.module";
+import {MAT_DATE_LOCALE} from "@angular/material";
 
 @NgModule({
     declarations: [
@@ -28,7 +29,10 @@ import {ServiceModule} from "./service/service.module";
             {useHash: false, enableTracing: false,}),
 
     ],
-    providers: [ { provide: LOCALE_ID, useValue: 'zh-cn' } ],
+    providers: [
+        {provide: LOCALE_ID, useValue: 'zh-cn'},
+        {provide: MAT_DATE_LOCALE, useValue: 'zh-cn'},
+    ],
     schemas: [NO_ERRORS_SCHEMA],
     bootstrap: [AppComponent]
 })

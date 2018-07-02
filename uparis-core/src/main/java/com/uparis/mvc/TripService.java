@@ -1,9 +1,6 @@
 package com.uparis.mvc;
 
-import com.uparis.db.entity.OptionPo;
-import com.uparis.db.entity.PricePo;
-import com.uparis.db.entity.StockPo;
-import com.uparis.db.entity.TripPo;
+import com.uparis.db.entity.*;
 import com.uparis.db.repo.OptionRepository;
 import com.uparis.db.repo.PriceRepository;
 import com.uparis.db.repo.StockRepository;
@@ -17,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,10 +47,27 @@ public class TripService {
     public Long deepCreateTrip(TripDto tripDto) {
         TripPo tripPo = repoTrip.saveAndFlush(mapTrip(tripDto));
         repoPrice.saveAll(
-                tripPo.getListPrice().stream()
-                        .peek(pricePo -> pricePo.setTrip(tripPo))
-                        .collect(Collectors.toList()));
+            tripPo.getListPrice().stream()
+                .peek(pricePo -> pricePo.setTrip(tripPo))
+                .collect(Collectors.toList()));
 
+        Map<String, StockPo> stockMap = new HashMap<>();
+        repoOption.saveAll(
+            tripDto.getListOption().stream()
+                .map(optionDto -> {
+                    OptionPo optionPo = mapOption(optionDto);
+                    optionPo.setTrip(tripPo);
+                    if (null != optionDto.getStock()) {
+                        String stockName = optionDto.getStock().getName();
+                        if (!stockMap.containsKey(stockName)) {
+                            StockPo stockPo = mapStock(optionDto.getStock());
+                            repoStock.save(stockPo);
+                            stockMap.put(stockPo.getName(), stockPo);
+                        }
+                        optionPo.setStock(stockMap.get(stockName));
+                    }
+                    return optionPo;
+                }).collect(Collectors.toList()));
         return tripPo.getId();
     }
 
@@ -60,12 +76,44 @@ public class TripService {
         TripPo tripPo = repoTrip.findById(tripDto.getId()).get();
 
         repoPrice.saveAll(
-                tripDto.getListPrice().stream().map(priceDto -> {
-                    PricePo pricePo = mapPrice(priceDto);
-                    pricePo.setTrip(tripPo);
-                    return pricePo;
-                }).collect(Collectors.toList())
-        );
+            tripDto.getListPrice().stream().map(priceDto -> {
+                PricePo pricePo = mapPrice(priceDto);
+                pricePo.setTrip(tripPo);
+                return pricePo;
+            }).collect(Collectors.toList()));
+
+        Map<Long, OptionPo> option2Delete =
+            tripPo.getListOption().stream().collect(Collectors.toMap(AbstractPo::getId, po -> po));
+
+        Map<String, StockPo> stockMap = new HashMap<>();
+
+        repoOption.saveAll(
+            tripDto.getListOption().stream()
+                .map(optionDto -> {
+                    OptionPo optionPo = mapOption(optionDto);
+                    optionPo.setTrip(tripPo);
+                    option2Delete.remove(optionPo.getId());
+                    if (null != optionDto.getStock()) {
+                        StockPo stockPo = mapStock(optionDto.getStock());
+                        if (stockPo.getId() == null) {
+                            if (!stockMap.containsKey(stockPo.getName())) {
+                                repoStock.save(stockPo);
+                                stockMap.put(stockPo.getName(), stockPo);
+                            }
+                            optionPo.setStock(stockMap.get(stockPo.getName()));
+                        } else {
+                            repoStock.save(stockPo);
+                            optionPo.setStock(stockPo);
+                        }
+                    } else {
+                        optionPo.setStock(null);
+                    }
+                    return optionPo;
+                }).collect(Collectors.toList()));
+
+        if (!option2Delete.isEmpty()) {
+            repoOption.deleteInBatch(option2Delete.values());
+        }
 
         modelMapper.map(tripDto, tripPo);
         repoTrip.save(tripPo);

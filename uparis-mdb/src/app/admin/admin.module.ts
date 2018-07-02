@@ -17,7 +17,6 @@ import {StockTableComponent} from './stock-table.component';
 import {PriceTableComponent} from './price-table.component';
 import {MultimediaTableComponent} from './multimedia-table.component';
 import {SnackBar} from "./snack-bar";
-import {MAT_DATE_LOCALE} from '@angular/material';
 
 @NgModule({
     imports: [
@@ -43,7 +42,6 @@ import {MAT_DATE_LOCALE} from '@angular/material';
     ],
     providers: [
         SnackBar,
-        {provide: MAT_DATE_LOCALE, useValue: 'zh-cn'},
     ],
     bootstrap: [AdminComponent]
 })

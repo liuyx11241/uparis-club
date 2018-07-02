@@ -33,12 +33,15 @@
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <input matInput placeholder="返回日期" [ngModel]="_trip.dateEnd" name="dateEnd" disabled>
+                <input matInput placeholder="返回日期" [value]="parseDate(_trip.dateEnd)" name="dateEnd" disabled
+                       [matDatepicker]="picker2">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field class="col-12">
                 <input matInput type="number" placeholder="库存" [(ngModel)]="_trip.stock" name="stock"
-                       [disabled]="_formHelper.disabled" required [min]="0">
+                       [disabled]="_formHelper.disabled" required min="0">
             </mat-form-field>
         </div>
     </div>
@@ -50,8 +53,8 @@
                 <mat-icon [class.amber-text]="tabOption.isActive">format_list_numbered</mat-icon>
                 <span [class.amber-text]="tabOption.isActive">选项</span>
             </ng-template>
-            <uparis-stock-table [formHelper]="_formHelper" [listStock]="_listStock"></uparis-stock-table>
-            <uparis-option-table [formHelper]="_formHelper" [listOption]="_trip.listOption"
+            <uparis-stock-table class="row w-100" [formHelper]="_formHelper" [listStock]="_listStock"></uparis-stock-table>
+            <uparis-option-table class="row w-100" [formHelper]="_formHelper" [listOption]="_trip.listOption"
                                  [listStock]="_listStock"></uparis-option-table>
         </mat-tab>
         <mat-tab #tabPrice>
