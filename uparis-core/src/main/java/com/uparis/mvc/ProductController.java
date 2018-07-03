@@ -15,32 +15,33 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
     @Autowired
-    private ProductRepository productRepo;
-
-    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
-    private ProductService productService;
+    private ProductRepository repoProduct;
 
     @GetMapping
     public Page<ProductDto> getProducts(
-            @RequestParam(value = "filter", required = false, defaultValue = "") String filter,
-            @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
-            @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
-            @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
-            @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
-        Page<ProductPo> productPoPage = productRepo.findAll(
-                PageRequest.of(
-                        pageIndex,
-                        pageSize,
-                        Sort.by(Sort.Direction.fromString(direction), sort)));
+        @RequestParam(value = "filter", required = false, defaultValue = "") String filter,
+        @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
+        @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
+        @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
+        @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
+        Page<ProductPo> productPoPage = repoProduct.findAll(
+            PageRequest.of(
+                pageIndex,
+                pageSize,
+                Sort.by(Sort.Direction.fromString(direction), sort)));
         return productPoPage.map(productPo -> modelMapper.map(productPo, ProductDto.class));
     }
 
     @GetMapping("/{id}")
     public ProductDto getProduct(@PathVariable("id") Long idProduct) {
-        return productService.deepGetProduct(idProduct);
+        ProductPo productPo = repoProduct.findById(idProduct).orElse(null);
+        if (productPo == null) {
+            return null;
+        }
+        return modelMapper.map(productPo, ProductDto.class);
     }
 
     @PostMapping
@@ -50,20 +51,29 @@ public class ProductController {
             itineraryDto.setId(null);
             itineraryDto.getListSchedule().forEach(scheduleDto -> scheduleDto.setId(null));
         });
-        return productService.deepCreateProduct(newProduct);
+        newProduct.getListMultimedia().forEach(multimediaDto -> multimediaDto.setId(null));
+
+        return updateProduct(newProduct);
     }
 
     @PutMapping
-    public Long updateProduct(@RequestBody ProductDto product) {
-        if (product.getId() == null) {
-            return createProduct(product);
-        }
-        return productService.deepUpdateProduct(product);
+    public Long updateProduct(@RequestBody ProductDto productDto) {
+        ProductPo productPo = modelMapper.map(productDto, ProductPo.class);
+        productPo.getListItinerary().forEach(itineraryPo -> {
+            itineraryPo.getListSchedule().forEach(schedulePo -> schedulePo.setItinerary(itineraryPo));
+            itineraryPo.setProduct(productPo);
+        });
+
+        productPo.getListMultimedia().forEach(multimediaPo -> multimediaPo.setProduct(productPo));
+
+        repoProduct.saveAndFlush(productPo);
+
+        return productPo.getId();
     }
 
     @DeleteMapping("/{id}")
     public Long deleteProduct(@PathVariable Long id) {
-        productRepo.deleteById(id);
+        repoProduct.deleteById(id);
         return id;
     }
 }

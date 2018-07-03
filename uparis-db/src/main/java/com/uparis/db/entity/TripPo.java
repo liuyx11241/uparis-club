@@ -30,7 +30,7 @@ public class TripPo extends AbstractPo {
     @ManyToOne(optional = false)
     private ProductPo product;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("level asc, num_order asc")
     private List<OptionPo> listOption;
 

@@ -1,6 +1,8 @@
 package com.uparis.mvc;
 
+import com.uparis.db.entity.StockPo;
 import com.uparis.db.entity.TripPo;
+import com.uparis.db.repo.StockRepository;
 import com.uparis.db.repo.TripRepository;
 import com.uparis.dto.TripDto;
 import org.modelmapper.ModelMapper;
@@ -11,6 +13,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/trip")
 public class TripController {
@@ -19,26 +24,30 @@ public class TripController {
     private TripRepository repoTrip;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private StockRepository repoStock;
 
     @Autowired
-    private TripService tripService;
+    private ModelMapper modelMapper;
 
     @GetMapping
     public Page<TripDto> getTrips(
-            @RequestParam(value = "filter", required = false, defaultValue = "") String filter,
-            @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
-            @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
-            @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
-            @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
+        @RequestParam(value = "filter", required = false, defaultValue = "") String filter,
+        @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
+        @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
+        @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
+        @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
         Page<TripPo> tripPoPage = repoTrip.findAll(PageRequest.of(
-                pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
+            pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
         return tripPoPage.map(tripPo -> modelMapper.map(tripPo, TripDto.class));
     }
 
     @GetMapping("/{id}")
     public TripDto getTrip(@PathVariable("id") Long idTrip) {
-        return tripService.deepGetTrip(idTrip);
+        TripPo tripPo = repoTrip.findById(idTrip).orElse(null);
+        if (tripPo == null) {
+            return null;
+        }
+        return modelMapper.map(tripPo, TripDto.class);
     }
 
     @PostMapping
@@ -56,14 +65,45 @@ public class TripController {
             }
         });
 
-        return ResponseEntity.ok(tripService.deepCreateTrip(newTrip));
+        return updateTrip(newTrip);
     }
 
     @PutMapping
     public ResponseEntity<Long> updateTrip(@RequestBody TripDto trip) {
-        if (trip.getId() == null) {
-            return createTrip(trip);
+        if (trip.getIdProduct() == null) {
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(tripService.deepUpdateTrip(trip));
+
+        TripPo tripPo = modelMapper.map(trip, TripPo.class);
+
+        Map<String, StockPo> stockMap = new HashMap<>();
+        tripPo.getListOption().forEach(optionPo -> {
+            optionPo.setTrip(tripPo);
+            if (null != optionPo.getStock()) {
+                StockPo stockPo = optionPo.getStock();
+                if (stockPo.getId() == null) {
+                    if (!stockMap.containsKey(stockPo.getName())) {
+                        repoStock.save(stockPo);
+                        stockMap.put(stockPo.getName(), stockPo);
+                    }
+                    optionPo.setStock(stockMap.get(stockPo.getName()));
+                } else {
+                    repoStock.save(stockPo);
+                    optionPo.setStock(stockPo);
+                }
+            } else {
+                optionPo.setStock(null);
+            }
+        });
+
+        repoTrip.saveAndFlush(tripPo);
+
+        return ResponseEntity.ok(tripPo.getId());
+    }
+
+    @DeleteMapping("/{id}")
+    public Long deleteTrip(@PathVariable Long id) {
+        repoTrip.deleteById(id);
+        return id;
     }
 }

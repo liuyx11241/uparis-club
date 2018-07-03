@@ -14,10 +14,10 @@ public class ItineraryPo extends AbstractPo {
     @Column(nullable = false)
     private Integer duration;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private ProductPo product;
 
-    @OneToMany(mappedBy = "itinerary")
+    @OneToMany(mappedBy = "itinerary", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("num_order asc")
     private List<SchedulePo> listSchedule;
 

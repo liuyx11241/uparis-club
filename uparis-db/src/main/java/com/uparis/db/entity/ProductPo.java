@@ -23,15 +23,15 @@ public class ProductPo extends AbstractPo {
     private Integer duration;
 
     // Relationship
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     @OrderBy("date_start")
     private List<TripPo> listTrip;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("day_start asc")
     private List<ItineraryPo> listItinerary;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MultimediaPo> listMultimedia;
 
     public ProductPo() {
