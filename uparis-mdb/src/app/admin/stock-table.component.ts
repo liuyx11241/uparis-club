@@ -1,30 +1,23 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Stock} from "../model/stock.dto";
-import {NgForm} from "@angular/forms";
+import {Component, Input} from '@angular/core';
+import {FormArray} from "@angular/forms";
 import {TripFormHelper} from "./trip-form.helper";
 
 @Component({
     selector: 'uparis-stock-table',
     templateUrl: './stock-table.component.html',
 })
-export class StockTableComponent implements OnInit {
-
-    @ViewChild('stockForm') stockForm: NgForm;
-
-    private _listStock: Stock[];
+export class StockTableComponent {
 
     private _formHelper: TripFormHelper;
+
+    private _listStockForm: FormArray;
 
     constructor() {
     }
 
-    ngOnInit() {
-    }
-
-
     @Input()
-    set listStock(value: Stock[]) {
-        this._listStock = value;
+    set listStockForm(value: FormArray) {
+        this._listStockForm = value;
     }
 
     @Input()
@@ -33,6 +26,6 @@ export class StockTableComponent implements OnInit {
     }
 
     add(): void {
-        this._listStock.push(new Stock());
+        this._listStockForm.push(this._formHelper.newStockForm());
     }
 }

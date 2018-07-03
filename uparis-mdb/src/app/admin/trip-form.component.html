@@ -13,54 +13,49 @@
     </button>
 </mat-toolbar>
 
-<div class="card-body">
-    <div ngForm #tripForm="ngForm" class="row">
+<div class="card-body" [formGroup]="_tripForm">
+    <div class="row">
         <div class="col-12 col-md-4 col-lg-3 hoverable">
             <mat-form-field class="col-12">
-                <input matInput placeholder="ID" [(ngModel)]="_trip.id" name="id" disabled>
+                <input matInput placeholder="ID" formControlName="id">
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <input matInput placeholder="产品" [(ngModel)]="_trip.nameProduct" name="nameProduct" disabled>
+                <input matInput placeholder="产品" formControlName="nameProduct">
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <input matInput placeholder="出发日期" [(ngModel)]="_tripDateStart" name="dateStart"
+                <input matInput placeholder="出发日期" formControlName="dateStart"
                        (dateChange)="onDateStartChange($event.value)"
-                       [matDatepicker]="pickerStart" required [disabled]="_formHelper.disabled">
+                       [matDatepicker]="pickerStart" required>
                 <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
                 <mat-datepicker #pickerStart color="primary"></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <input matInput placeholder="返回日期" [(ngModel)]="_tripDateEnd" name="dateEnd" disabled
+                <input matInput placeholder="返回日期" formControlName="dateEnd"
                        [matDatepicker]="pickerEnd">
                 <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
                 <mat-datepicker #pickerEnd></mat-datepicker>
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <input matInput type="number" placeholder="库存" [(ngModel)]="_trip.stock" name="stock"
-                       [disabled]="_formHelper.disabled" required min="0">
+                <input matInput type="number" placeholder="库存" formControlName="stock" required>
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <input matInput type="number" placeholder="单价" [(ngModel)]="_trip.price" name="price"
-                       [disabled]="_formHelper.disabled" required min="0">
+                <input matInput type="number" placeholder="单价" formControlName="price" required>
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <mat-select placeholder="货币" [(ngModel)]="_trip.currency" name="currency"
-                            [disabled]="_formHelper.disabled" required>
+                <mat-select placeholder="货币" formControlName="currency" required>
                     <mat-option value="EUR">EUR</mat-option>
                     <mat-option value="RMB">RMB</mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <input matInput type="number" placeholder="增值税率" [(ngModel)]="_trip.priceVAT"
-                       name="priceVAT"
-                       [disabled]="_formHelper.disabled" min="0">
+                <input matInput type="number" placeholder="增值税率" formControlName="priceVAT">
             </mat-form-field>
         </div>
     </div>
@@ -69,16 +64,14 @@
     <mat-tab-group color="primary">
         <mat-tab #tabOption>
             <ng-template mat-tab-label>
-                <ng-container *ngIf="_formHelper.lookup('option').invalid || _formHelper.lookup('stock').invalid">
-                    <span [matBadge]="1" matBadgePosition="above before" matBadgeColor="warn"></span>
-                </ng-container>
                 <mat-icon [class.amber-text]="tabOption.isActive">format_list_numbered</mat-icon>
                 <span [class.amber-text]="tabOption.isActive">选项</span>
             </ng-template>
             <uparis-stock-table class="row w-100" [formHelper]="_formHelper"
-                                [listStock]="_listStock"></uparis-stock-table>
-            <uparis-option-table class="row w-100" [formHelper]="_formHelper" [listOption]="_trip.listOption"
-                                 [listStock]="_listStock"></uparis-option-table>
+                                [listStockForm]="_formHelper.listStockform"></uparis-stock-table>
+            <uparis-option-table class="row w-100" [formHelper]="_formHelper"
+                                 [listStockForm]="_formHelper.listStockform"
+                                 [listOptionForm]="_formHelper.listOptionForm"></uparis-option-table>
         </mat-tab>
     </mat-tab-group>
 </div>

@@ -4,18 +4,17 @@
         添加新库存
     </button>
 </mat-toolbar>
-<div class="card-body" ngForm #stockForm="ngForm">
-    <div *ngFor="let stock of _listStock; let index=index;" class="hoverable col-12 col-md-3 col-lg-2 float-left pt-2">
+<div class="card-body">
+    <div *ngFor="let stock of _listStockForm.controls" [formGroup]="stock"
+         class="hoverable col-12 col-md-3 col-lg-2 float-left pt-2">
         <mat-form-field class="col-6">
-            <input matInput placeholder="ID" [(ngModel)]="stock.id" name="id{{index}}" disabled>
+            <input matInput placeholder="ID" formControlName="id">
         </mat-form-field>
         <mat-form-field class="col-6">
-            <input matInput type="number" placeholder="数量" [(ngModel)]="stock.quantity" name="quantity{{index}}"
-                   [disabled]="_formHelper.disabled" required min="0">
+            <input matInput type="number" placeholder="数量" formControlName="quantity" required>
         </mat-form-field>
         <mat-form-field class="col-12">
-            <input matInput placeholder="名称" [(ngModel)]="stock.name" name="name{{index}}"
-                   [disabled]="_formHelper.disabled" required>
+            <input matInput placeholder="名称" formControlName="name" required>
         </mat-form-field>
     </div>
 </div>

@@ -1,11 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Trip} from "../model/trip.dto";
 import {Product} from "../model/product.dto";
 import {PostService} from "../service/http-post.service";
 import {SnackBar} from "./snack-bar";
-import {FormBuilder, NgForm} from "@angular/forms";
-import {Stock} from "../model/stock.dto";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {DateFormatter} from "../service/date-formatter.util";
 import {TripFormHelper} from "./trip-form.helper";
 
@@ -15,16 +14,8 @@ import {TripFormHelper} from "./trip-form.helper";
     styles: []
 })
 export class TripFormComponent implements OnInit {
-
-    @ViewChild('tripForm') tripForm: NgForm;
-
-    private _trip: Trip;
-    private _product: Product;
     private _formHelper: TripFormHelper;
-    private _listStock: Stock[];
-
-    private _tripDateStart: Date;
-    private _tripDateEnd: Date;
+    private _tripForm: FormGroup;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -37,50 +28,36 @@ export class TripFormComponent implements OnInit {
 
     ngOnInit() {
         this.route.data.subscribe((data: { trip: Trip, product: Product }) => {
-            this._trip = data.trip;
-            this._product = data.product;
-        });
-        if (!this._trip) {
-            this._trip = new Trip();
-            this._trip.listOption = [];
-            this._trip.idProduct = this._product.id;
-            this._trip.nameProduct = this._product.name;
-            this._trip.durationProduct = this._product.duration;
-            this._formHelper.disabled = false;
-            this._listStock = [];
-        } else {
-            this._tripDateStart = this.formatter.parse(this._trip.dateStart);
-            this._tripDateEnd = this.formatter.parse(this._trip.dateEnd);
+            this._tripForm = this._formHelper.newTripForm(data.trip);
+            this._formHelper.disabled = !!data.trip;
 
-            let stockMap = new Map<number, Stock>();
-            this._trip.listOption.filter(op => op.stock).forEach(
-                op => {
-                    let stock = op.stock;
-                    if (!stockMap.has(stock.id)) {
-                        stockMap.set(stock.id, stock);
-                    }
-                    op.stock = stockMap.get(stock.id);
+            if (data.product) {
+                this._tripForm.patchValue({
+                    idProduct: data.product.id,
+                    nameProduct: data.product.name,
+                    durationProduct: data.product.duration,
                 });
-            this._listStock = Array.from(stockMap.values());
-        }
 
+            }
+        });
     }
 
     onDateStartChange(dateStart: Date) {
-        this._tripDateEnd = new Date(dateStart);
-        this._tripDateEnd.setDate(this._tripDateEnd.getDate() + this._trip.durationProduct - 1);
+
     }
 
     save(): void {
-        console.debug(this._formHelper);
+        console.debug(this._formHelper.isValid());
 
         // this._trip.dateStart = this.formatter.format(this._tripDateStart);
         // this._trip.dateEnd = this.formatter.format(this._tripDateEnd);
 
-        // this.service.saveTrip(this._trip).subscribe(id => {
-        //     this.snackBar.openSuccessfulSave();
-        //     this._formHelper.disabled = true;
-        //     this.router.navigate(['/admin/trips/', id]);
-        // });
+        if (this._formHelper.isValid()) {
+            this.service.saveTrip(this._tripForm.value).subscribe(id => {
+                this.snackBar.openSuccessfulSave();
+                this._formHelper.disabled = true;
+                this.router.navigate(['/admin/trips/', id]);
+            });
+        }
     }
 }
