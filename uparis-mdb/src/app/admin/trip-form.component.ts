@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Trip} from "../model/trip.dto";
-import {FormHelper} from "./form-helper";
 import {Product} from "../model/product.dto";
 import {PostService} from "../service/http-post.service";
 import {SnackBar} from "./snack-bar";
-import {NgForm} from "@angular/forms";
+import {FormBuilder, NgForm} from "@angular/forms";
 import {Stock} from "../model/stock.dto";
 import {DateFormatter} from "../service/date-formatter.util";
+import {TripFormHelper} from "./trip-form.helper";
 
 @Component({
     selector: 'uparis-trip-form',
@@ -20,7 +20,7 @@ export class TripFormComponent implements OnInit {
 
     private _trip: Trip;
     private _product: Product;
-    private _formHelper = new FormHelper();
+    private _formHelper: TripFormHelper;
     private _listStock: Stock[];
 
     private _tripDateStart: Date;
@@ -30,7 +30,9 @@ export class TripFormComponent implements OnInit {
                 private route: ActivatedRoute,
                 private snackBar: SnackBar,
                 private formatter: DateFormatter,
+                private fb: FormBuilder,
                 private service: PostService) {
+        this._formHelper = new TripFormHelper(fb);
     }
 
     ngOnInit() {
@@ -62,7 +64,6 @@ export class TripFormComponent implements OnInit {
             this._listStock = Array.from(stockMap.values());
         }
 
-        this._formHelper.register('trip', this.tripForm);
     }
 
     onDateStartChange(dateStart: Date) {
@@ -72,18 +73,14 @@ export class TripFormComponent implements OnInit {
 
     save(): void {
         console.debug(this._formHelper);
-        console.debug(this._formHelper.isValid);
 
-        this._formHelper.submit();
-        if (this._formHelper.isValid) {
-            this._trip.dateStart = this.formatter.format(this._tripDateStart);
-            this._trip.dateEnd = this.formatter.format(this._tripDateEnd);
+        // this._trip.dateStart = this.formatter.format(this._tripDateStart);
+        // this._trip.dateEnd = this.formatter.format(this._tripDateEnd);
 
-            this.service.saveTrip(this._trip).subscribe(id => {
-                this.snackBar.openSuccessfulSave();
-                this._formHelper.disabled = true;
-                this.router.navigate(['/admin/trips/', id]);
-            });
-        }
+        // this.service.saveTrip(this._trip).subscribe(id => {
+        //     this.snackBar.openSuccessfulSave();
+        //     this._formHelper.disabled = true;
+        //     this.router.navigate(['/admin/trips/', id]);
+        // });
     }
 }

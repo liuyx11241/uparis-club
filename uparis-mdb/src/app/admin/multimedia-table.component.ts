@@ -1,7 +1,7 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Multimedia} from "../model/multimedia.dto";
-import {FormHelper} from "./form-helper";
-import {NgForm} from "@angular/forms";
+import {ProductFormHelper} from "./product-form.helper";
+import {FormArray, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'uparis-multimedia-table',
@@ -9,11 +9,8 @@ import {NgForm} from "@angular/forms";
     styles: []
 })
 export class MultimediaTableComponent implements OnInit {
-
-    @ViewChild('multimediaForm') multimediaForm: NgForm;
-
-    private _listMultimedia: Multimedia[];
-    private _formHelper: FormHelper;
+    private _listMultimedia: FormArray;
+    private _formHelper: ProductFormHelper;
 
     constructor() {
     }
@@ -22,24 +19,22 @@ export class MultimediaTableComponent implements OnInit {
     }
 
     @Input()
-    set listMultimedia(value: Multimedia[]) {
-        this._listMultimedia = value;
+    set formHelper(value: ProductFormHelper) {
+        this._formHelper = value;
     }
 
     @Input()
-    set formHelper(value: FormHelper) {
-        this._formHelper = value;
-        this._formHelper.register('multimedia', this.multimediaForm);
+    set listMultimedia(value: FormArray) {
+        this._listMultimedia = value;
     }
 
     add(type: string): void {
         let multimedia = new Multimedia();
         multimedia.type = type.toUpperCase();
-        this._listMultimedia.push(multimedia);
     }
 
-    delete(media: Multimedia): void {
-        let index = this._listMultimedia.indexOf(media);
-        this._listMultimedia.splice(index, 1);
+    delete(media: FormGroup): void {
+        let index = this._listMultimedia.controls.indexOf(media);
+        this._listMultimedia.removeAt(index);
     }
 }

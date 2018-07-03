@@ -4,33 +4,26 @@
         添加新行程
     </button>
 </mat-toolbar>
-<ng-container ngForm #itineraryForm="ngForm">
-    <div class="z-depth-1 hoverable" *ngFor="let itinerary of _product.listItinerary; let index=index;">
-        <div class="card-header navbar-dark">
-            <mat-form-field class="col-4 col-md-1">
-                <input matInput type="number" [(ngModel)]="itinerary.id" name="id{{index}}" placeholder="ID"
-                       disabled>
-            </mat-form-field>
-            <mat-form-field class="col-4 col-md-1">
-                <input matInput type="number" [(ngModel)]="itinerary.dayStart" name="dayStart{{index}}"
-                       placeholder="起始日"
-                       required min="1" disabled>
-            </mat-form-field>
-            <mat-form-field class="col-4 col-md-1">
-                <input matInput type="number" [(ngModel)]="itinerary.duration" name="duration{{index}}" placeholder="天数"
-                       min="1" (change)="reorder()" [disabled]="_formHelper.disabled">
-            </mat-form-field>
+<div class="z-depth-1 hoverable" *ngFor="let itinerary of _listItinerary.controls" [formGroup]="itinerary">
+    <div class="card-header navbar-dark">
+        <mat-form-field class="col-4 col-md-1">
+            <input matInput type="number" formControlName="id" placeholder="ID">
+        </mat-form-field>
+        <mat-form-field class="col-4 col-md-1">
+            <input matInput type="number" formControlName="dayStart" placeholder="起始日" required min="1">
+        </mat-form-field>
+        <mat-form-field class="col-4 col-md-1">
+            <input matInput type="number" formControlName="duration" placeholder="天数" min="1" (change)="reorder()" required>
+        </mat-form-field>
 
-            <mat-form-field
-                [class.col-12]="_formHelper.disabled" [class.col-md-9]="_formHelper.disabled"
-                [class.col-11]="!_formHelper.disabled" [class.col-md-8]="!_formHelper.disabled">
-                <input matInput type="text" [(ngModel)]="itinerary.movement" name="movement{{index}}" placeholder="地点"
-                       [disabled]="_formHelper.disabled">
-            </mat-form-field>
-            <button mat-icon-button class="close col-1" *ngIf="!_formHelper.disabled" (click)="delete(itinerary)">
-                <mat-icon>delete</mat-icon>
-            </button>
-        </div>
-        <uparis-schedule-table [itinerary]="itinerary" [formHelper]="_formHelper"></uparis-schedule-table>
+        <mat-form-field
+            [class.col-12]="_formHelper.disabled" [class.col-md-9]="_formHelper.disabled"
+            [class.col-11]="!_formHelper.disabled" [class.col-md-8]="!_formHelper.disabled">
+            <input matInput type="text" formControlName="movement" placeholder="地点">
+        </mat-form-field>
+        <button mat-icon-button class="close col-1" *ngIf="!_formHelper.disabled" (click)="delete(itinerary)">
+            <mat-icon>delete</mat-icon>
+        </button>
     </div>
-</ng-container>
+    <uparis-schedule-table [formHelper]="_formHelper" [listSchedule]="itinerary.get('listSchedule')"></uparis-schedule-table>
+</div>

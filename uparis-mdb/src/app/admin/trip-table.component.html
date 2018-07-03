@@ -1,6 +1,6 @@
 <mat-table #table [dataSource]="_dataSource" matSort>
     <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header>活动ID</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="idProduct">
@@ -25,8 +25,8 @@
         </mat-cell>
     </ng-container>
     <ng-container matColumnDef="priceVAT">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>增值税率</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.priceVAT + '%'}}
+        <mat-header-cell *matHeaderCellDef mat-sort-header>增值税率(%)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.priceVAT}}
         </mat-cell>
     </ng-container>
 

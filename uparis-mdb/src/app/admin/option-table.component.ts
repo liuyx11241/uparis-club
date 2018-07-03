@@ -1,8 +1,9 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Option} from "../model/option.dto";
 import {Stock} from "../model/stock.dto";
-import {FormHelper} from "./form-helper";
+import {ProductFormHelper} from "./product-form.helper";
 import {NgForm} from "@angular/forms";
+import {TripFormHelper} from "./trip-form.helper";
 
 @Component({
     selector: 'uparis-option-table',
@@ -19,7 +20,7 @@ export class OptionTableComponent implements OnInit {
 
     private _listStock: Stock[];
 
-    private _formHelper: FormHelper;
+    private _formHelper: TripFormHelper;
 
     constructor() {
     }
@@ -45,9 +46,8 @@ export class OptionTableComponent implements OnInit {
     }
 
     @Input()
-    set formHelper(value: FormHelper) {
+    set formHelper(value: TripFormHelper) {
         this._formHelper = value;
-        this._formHelper.register('option', this.optionForm);
     }
 
     private getOptionLevels() {

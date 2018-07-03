@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Product} from "../model/product.dto";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MAT_LABEL_GLOBAL_OPTIONS} from "@angular/material";
-import {NgForm} from "@angular/forms";
-import {FormHelper} from "./form-helper";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {ProductFormHelper} from "./product-form.helper";
 import {PostService} from "../service/http-post.service";
 import {SnackBar} from "./snack-bar";
 
@@ -15,40 +15,33 @@ import {SnackBar} from "./snack-bar";
 })
 export class ProductFormComponent implements OnInit {
 
-    @ViewChild('productForm') productForm: NgForm;
+    _formHelper: ProductFormHelper;
 
-    _product: Product;
-
-    _formHelper: FormHelper;
+    _productForm: FormGroup;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
+                private fb: FormBuilder,
                 private snackBar: SnackBar,
                 private service: PostService) {
-        this._formHelper = new FormHelper();
+        this._formHelper = new ProductFormHelper(fb);
     }
 
 
     ngOnInit(): void {
         this.route.data.subscribe((data: { product: Product }) => {
-            this._product = data.product;
+            this._productForm = this._formHelper.newProductForm(data.product);
+            this._formHelper.disabled = !!data.product;
         });
-
-        if (!this._product) {
-            this.add();
-        }
-        this._formHelper.register('product', this.productForm);
     }
 
     add(): void {
         this._formHelper.disabled = false;
-        this._product = new Product();
     }
 
     save() {
-        this._formHelper.submit();
-        if (this._formHelper.isValid) {
-            this.service.saveProduct(this._product).subscribe((id: number) => {
+        if (this._formHelper.isValid()) {
+            this.service.saveProduct(this._productForm.value).subscribe((id: number) => {
                 this._formHelper.disabled = true;
                 this.snackBar.openSuccessfulSave();
                 this.router.navigate(['/admin/products', id]);
@@ -56,16 +49,15 @@ export class ProductFormComponent implements OnInit {
         }
     }
 
-    delete(form: NgForm) {
-        if (this._product) {
-        }
+    delete() {
+
     }
 
     createTrip() {
-        this.router.navigate(['/admin/trips/new'], {
-            queryParams: {
-                idProduct: this._product.id
-            }
-        });
+        // this.router.navigate(['/admin/trips/new'], {
+        //     queryParams: {
+        //         idProduct: this._product.id
+        //     }
+        // });
     }
 }

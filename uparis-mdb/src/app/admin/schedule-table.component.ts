@@ -1,10 +1,8 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Itinerary} from "../model/itinerary.dto";
-import {Schedule} from "../model/schedule.dto";
-import {FormHelper} from "./form-helper";
-import {NgForm} from "@angular/forms";
+import {Component, Input, OnInit} from '@angular/core';
+import {ProductFormHelper} from "./product-form.helper";
 import {DeleteService} from "../service/http-delete.service";
 import {SnackBar} from "./snack-bar";
+import {FormArray, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'uparis-schedule-table',
@@ -12,11 +10,9 @@ import {SnackBar} from "./snack-bar";
 })
 export class ScheduleTableComponent implements OnInit {
 
-    @ViewChild('scheduleForm') scheduleForm: NgForm;
+    private _formHelper: ProductFormHelper;
 
-    private _itinerary: Itinerary;
-
-    private _formHelper: FormHelper;
+    private _listSchedule: FormArray;
 
     private _availableTime: string[];
 
@@ -34,37 +30,30 @@ export class ScheduleTableComponent implements OnInit {
     }
 
     @Input()
-    set itinerary(value: Itinerary) {
-        this._itinerary = value;
+    set formHelper(value: ProductFormHelper) {
+        this._formHelper = value;
     }
 
     @Input()
-    set formHelper(value: FormHelper) {
-        this._formHelper = value;
-        this._formHelper.register(`schedule${this._itinerary.dayStart}`, this.scheduleForm);
+    set listSchedule(value: FormArray) {
+        this._listSchedule = value;
     }
 
     reorder(): void {
-        let numOrder = 0;
-        this._itinerary.listSchedule.forEach(value => {
-            value.numOrder = numOrder;
-            numOrder++;
-        });
+        let order = 0;
+        for (let schedule of this._listSchedule.controls) {
+            schedule.patchValue({numOrder: order});
+        }
     }
 
     add(): void {
-        if (!this._itinerary.listSchedule)
-            this._itinerary.listSchedule = [];
-        let schedule = new Schedule();
-        schedule.numOrder = 1 + this._itinerary.listSchedule.length;
-        schedule.idItinerary = this._itinerary.id;
-        this._itinerary.listSchedule.push(schedule);
+        this._listSchedule.push(this._formHelper.newScheduleForm());
         this.reorder();
     }
 
-    delete(schedule: Schedule): void {
-        let index = this._itinerary.listSchedule.indexOf(schedule);
-        this._itinerary.listSchedule.splice(index, 1);
+    delete(schedule: FormGroup): void {
+        let index = this._listSchedule.controls.indexOf(schedule);
+        this._listSchedule.removeAt(index);
         this.reorder();
     }
 }

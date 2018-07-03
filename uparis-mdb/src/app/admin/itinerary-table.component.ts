@@ -1,11 +1,9 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {Itinerary} from "../model/itinerary.dto";
-import {Product} from "../model/product.dto";
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {FormHelper} from "./form-helper";
-import {NgForm} from "@angular/forms";
+import {ProductFormHelper} from "./product-form.helper";
 import {DeleteService} from "../service/http-delete.service";
 import {SnackBar} from "./snack-bar";
+import {FormArray, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'uparis-itinerary-table',
@@ -13,11 +11,8 @@ import {SnackBar} from "./snack-bar";
     styles: [],
 })
 export class ItineraryTableComponent implements OnInit {
-
-    @ViewChild('itineraryForm') itineraryForm: NgForm;
-
-    private _product: Product;
-    private _formHelper: FormHelper;
+    private _formHelper: ProductFormHelper;
+    private _listItinerary: FormArray;
 
     constructor(private router: Router,
                 private snackBar: SnackBar,
@@ -27,38 +22,33 @@ export class ItineraryTableComponent implements OnInit {
     ngOnInit() {
     }
 
-
     @Input()
-    set product(value: Product) {
-        this._product = value;
+    set formHelper(value: ProductFormHelper) {
+        this._formHelper = value;
     }
 
+
     @Input()
-    set formHelper(value: FormHelper) {
-        this._formHelper = value;
-        this._formHelper.register('itinerary', this.itineraryForm);
+    set listItinerary(value: FormArray) {
+        this._listItinerary = value;
     }
 
     add(): void {
-        let itinerary = new Itinerary();
-        itinerary.dayStart = 1 + this._product.listItinerary.length;
-        itinerary.duration = 1;
-        itinerary.idProduct = this._product.id;
-        this._product.listItinerary.push(itinerary);
+        this._listItinerary.push(this._formHelper.newItineraryForm());
         this.reorder();
     }
 
-    delete(itinerary: Itinerary): void {
-        let index = this._product.listItinerary.indexOf(itinerary);
-        this._product.listItinerary.splice(index, 1);
+    delete(itinerary: FormGroup): void {
+        let index = this._listItinerary.controls.indexOf(itinerary);
+        this._listItinerary.removeAt(index);
         this.reorder();
     }
 
     reorder() {
         let dayStart = 1;
-        this._product.listItinerary.forEach((value: Itinerary) => {
-            value.dayStart = dayStart;
-            dayStart = dayStart + value.duration;
-        });
+        for (let itinerary of this._listItinerary.controls) {
+            itinerary.patchValue({dayStart: dayStart});
+            dayStart = dayStart + itinerary.value.duration;
+        }
     }
 }

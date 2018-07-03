@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Stock} from "../model/stock.dto";
-import {FormHelper} from "./form-helper";
 import {NgForm} from "@angular/forms";
+import {TripFormHelper} from "./trip-form.helper";
 
 @Component({
     selector: 'uparis-stock-table',
@@ -13,7 +13,7 @@ export class StockTableComponent implements OnInit {
 
     private _listStock: Stock[];
 
-    private _formHelper: FormHelper;
+    private _formHelper: TripFormHelper;
 
     constructor() {
     }
@@ -28,9 +28,8 @@ export class StockTableComponent implements OnInit {
     }
 
     @Input()
-    set formHelper(value: FormHelper) {
+    set formHelper(value: TripFormHelper) {
         this._formHelper = value;
-        this._formHelper.register('stock', this.stockForm);
     }
 
     add(): void {

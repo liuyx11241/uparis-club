@@ -8,37 +8,31 @@
         添加新视频
     </button>
 </mat-toolbar>
-<ng-container ngForm #multimediaForm="ngForm">
-    <div class="card-body z-depth-1" *ngFor="let media of _listMultimedia; let index=index;">
-        <mat-form-field class="col-6 col-md-2">
-            <input matInput [(ngModel)]="media.id" name="id{{index}}" disabled placeholder="ID">
-        </mat-form-field>
-        <mat-form-field class="col-6 col-md-2">
-            <mat-select [(ngModel)]="media.type" name="type{{index}}" placeholder="类型"
-                        readonly disabled>
-                <mat-option [value]="'PHOTO'">照片</mat-option>
-                <mat-option [value]="'VIDEO'">视频</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field [class.col-11]="!_formHelper.disabled" [class.col-md-7]="!_formHelper.disabled"
-                        [class.col-12]="_formHelper.disabled" [class.col-md-8]="_formHelper.disabled">
-            <input matInput type="url" [(ngModel)]="media.srcUrl" name="srcUrl{{index}}" placeholder="链接"
-                   [disabled]="_formHelper.disabled" required>
-        </mat-form-field>
-        <button mat-icon-button class="col-1" (click)="delete(media)" *ngIf="!_formHelper.disabled">
-            <mat-icon>delete</mat-icon>
-        </button>
-        <mat-form-field class="col-12 col-md-4">
-            <input matInput type="text" [(ngModel)]="media.altText" name="altText{{index}}" placeholder="替代文本"
-                   [disabled]="_formHelper.disabled">
-        </mat-form-field>
-        <mat-form-field class="col-12 col-md-4">
-            <input matInput type="text" [(ngModel)]="media.title" name="title{{index}}" placeholder="题目"
-                   [disabled]="_formHelper.disabled">
-        </mat-form-field>
-        <mat-form-field class="col-12 col-md-4">
-            <input matInput type="text" [(ngModel)]="media.description" name="description{{index}}" placeholder="描述"
-                   [disabled]="_formHelper.disabled">
-        </mat-form-field>
-    </div>
-</ng-container>
+
+<div class="card-body z-depth-1" *ngFor="let media of _listMultimedia.controls" [formGroup]="media">
+    <mat-form-field class="col-6 col-md-2">
+        <input matInput formControlName="id" disabled placeholder="ID">
+    </mat-form-field>
+    <mat-form-field class="col-6 col-md-2">
+        <mat-select formControlName="type" placeholder="类型" readonly disabled>
+            <mat-option [value]="'PHOTO'">照片</mat-option>
+            <mat-option [value]="'VIDEO'">视频</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field [class.col-11]="!_formHelper.disabled" [class.col-md-7]="!_formHelper.disabled"
+                    [class.col-12]="_formHelper.disabled" [class.col-md-8]="_formHelper.disabled">
+        <input matInput type="url" formControlName="srcUrl" placeholder="链接" required>
+    </mat-form-field>
+    <button mat-icon-button class="col-1" (click)="delete(media)" *ngIf="!_formHelper.disabled">
+        <mat-icon>delete</mat-icon>
+    </button>
+    <mat-form-field class="col-12 col-md-4">
+        <input matInput type="text" formControlName="altText" placeholder="替代文本">
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-4">
+        <input matInput type="text" formControlName="title" placeholder="题目">
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-4">
+        <input matInput type="text" formControlName="description" placeholder="描述">
+    </mat-form-field>
+</div>

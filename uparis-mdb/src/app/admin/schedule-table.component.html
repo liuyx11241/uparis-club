@@ -1,19 +1,17 @@
-<div ngForm #scheduleForm="ngForm" class="card-body">
-    <ng-container *ngFor="let schedule of _itinerary.listSchedule;let index=index;">
+<div class="card-body">
+    <ng-container *ngFor="let schedule of _listSchedule.controls" [formGroup]="schedule">
         <mat-form-field class="col-6 col-md-1">
-            <input matInput placeholder="ID" [(ngModel)]="schedule.id" name="id{{index}}" disabled>
+            <input matInput placeholder="ID" formControlName="id">
         </mat-form-field>
         <mat-form-field class="col-6 col-md-2">
             <!--<mat-select [(value)]="schedule.time" placeholder="时间">-->
             <!--<mat-option *ngFor="let time of _availableTime" [value]="time">{{time}}</mat-option>-->
             <!--</mat-select>-->
-            <input matInput type="text" placeholder="时间" [(ngModel)]="schedule.time" name="time{{index}}"
-                   [disabled]="_formHelper.disabled">
+            <input matInput type="text" placeholder="时间" formControlName="time">
         </mat-form-field>
         <mat-form-field [class.col-12]="_formHelper.disabled" [class.col-md-9]="_formHelper.disabled"
                         [class.col-11]="!_formHelper.disabled" [class.col-md-8]="!_formHelper.disabled">
-            <input matInput type="text" placeholder="行程" [(ngModel)]="schedule.activity" name="activity{{index}}"
-                   [disabled]="_formHelper.disabled" required>
+            <input matInput type="text" placeholder="行程" formControlName="activity" required>
         </mat-form-field>
         <button mat-icon-button class="close" *ngIf="!_formHelper.disabled" (click)="delete(schedule)">
             <mat-icon>delete</mat-icon>
