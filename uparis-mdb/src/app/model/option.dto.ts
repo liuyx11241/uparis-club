@@ -17,5 +17,7 @@ export class Option {
 
     priceVAT: number;
 
+    currencyTrip: string;
+
     stock: Stock;
 }

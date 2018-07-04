@@ -16,6 +16,9 @@ import {OptionTableComponent} from './option-table.component';
 import {StockTableComponent} from './stock-table.component';
 import {MultimediaTableComponent} from './multimedia-table.component';
 import {SnackBar} from "./snack-bar";
+import { OrderTableComponent } from './order-table.component';
+import { PersonTableComponent } from './person-table.component';
+import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 @NgModule({
     imports: [
@@ -24,6 +27,9 @@ import {SnackBar} from "./snack-bar";
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
     ],
     declarations: [
         AdminComponent,
@@ -37,6 +43,8 @@ import {SnackBar} from "./snack-bar";
         OptionTableComponent,
         StockTableComponent,
         MultimediaTableComponent,
+        OrderTableComponent,
+        PersonTableComponent,
     ],
     providers: [
         SnackBar,

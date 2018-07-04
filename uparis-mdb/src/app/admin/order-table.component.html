@@ -1,0 +1,63 @@
+<mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nameProductTrip">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>产品</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <a [routerLink]="['/admin/products/', row.idProductTrip]">{{row.nameProductTrip}}</a>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dateStartTrip">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>出发日期</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <a [routerLink]="['/admin/trips/', row.idTrip]">{{row.dateStartTrip}}</a>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="participant">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>队员</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.participant.lastName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="reference">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>订单号</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.reference}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="payer">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>付款人</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.payer?.lastName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="listOption">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>购买选项</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.listOption | json}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>总额</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.amount}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button mat-icon-button>
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator #paginator
+               [pageIndex]="0"
+               [pageSize]="50"
+               [pageSizeOptions]="[25, 50, 100, 250]">
+</mat-paginator>

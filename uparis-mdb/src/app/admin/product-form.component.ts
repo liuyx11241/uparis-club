@@ -54,10 +54,10 @@ export class ProductFormComponent implements OnInit {
     }
 
     createTrip() {
-        // this.router.navigate(['/admin/trips/new'], {
-        //     queryParams: {
-        //         idProduct: this._product.id
-        //     }
-        // });
+        this.router.navigate(['/admin/trips/new'], {
+            queryParams: {
+                idProduct: this._productForm.value.id
+            }
+        });
     }
 }

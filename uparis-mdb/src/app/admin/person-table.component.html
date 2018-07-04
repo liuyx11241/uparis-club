@@ -1,0 +1,80 @@
+<mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows>
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="gender">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>性别</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.gender}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>姓</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.lastName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>名</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.firstName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="birthday">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>生日</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.birthday}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="birthplace">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>出生地</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.birthplace}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="wechat">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>微信</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.wechat}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="telephone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>电话</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.telephone}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>邮箱</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
+    </ng-container>
+
+    <!--<ng-container matColumnDef="contact">-->
+        <!--<mat-cell *matCellDef="let row" [attr.colspan]="9">-->
+            <!--<p>{{row.addressComplement}} {{row.address}} {{row.zipCode}} {{row.city}} {{row.country}}</p>-->
+        <!--</mat-cell>-->
+    <!--</ng-container>-->
+
+    <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>地址</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.addressComplement}} {{row.address}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="zipCode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>邮编</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.zipCode}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>城市</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.city}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="country">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>国家</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.country}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <button mat-icon-button>
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <!--<mat-row *matRowDef="let row; columns: ['contact'];"></mat-row>-->
+</mat-table>
+
+<mat-paginator #paginator
+               [pageIndex]="0"
+               [pageSize]="50"
+               [pageSizeOptions]="[25, 50, 100, 250]">
+</mat-paginator>

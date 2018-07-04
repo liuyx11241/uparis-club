@@ -3,6 +3,8 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 import {Trip} from "../model/trip.dto";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Order} from "../model/order.dto";
+import {PostService} from "../service/http-post.service";
+import {DateFormatter} from "../service/date-formatter.util";
 
 @Component({
     selector: 'uparis-checkout-stepper',
@@ -15,7 +17,10 @@ export class CheckoutStepperComponent implements OnInit {
     _listCheckoutForm: FormArray;
     _listOrder: Order[];
 
-    constructor(private route: ActivatedRoute, private formBuilder: FormBuilder) {
+    constructor(private route: ActivatedRoute,
+                private formBuilder: FormBuilder,
+                private dateFormatter: DateFormatter,
+                private postService: PostService) {
         this._listCheckoutForm = this.formBuilder.array([]);
         this._listOrder = [];
     }
@@ -78,24 +83,42 @@ export class CheckoutStepperComponent implements OnInit {
         return fg;
     }
 
-    createNewOrder(event: any) {
+    subscribe() {
         this._listOrder = [];
         for (let checkoutForm of this._listCheckoutForm.controls) {
             let newOrder = new Order();
+            newOrder.idTrip = this._trip.id;
 
             const participant = checkoutForm.get('participant').value;
+            participant.birthday = this.dateFormatter.format(participant.birthday);
             newOrder.participant = participant;
 
             const listOption = checkoutForm.get('option').value;
             newOrder.listOption = [];
             Object.keys(listOption).map(opt => {
                 newOrder.listOption.push(listOption[opt])
-            })
+            });
 
             console.info(checkoutForm.get('participant').value);
             console.info(checkoutForm.get('option').value);
             console.info(newOrder);
             this._listOrder.push(newOrder);
         }
+    }
+
+    createOrders() {
+        this.postService.saveOrders(this._listOrder).subscribe((reference: string) => {
+            window.alert(reference);
+        });
+    }
+
+    get displayPayment(): boolean {
+        let amount = this._trip.price;
+        this._listOrder.forEach(order => {
+            order.listOption.forEach(option => {
+                amount = amount + option.price;
+            })
+        });
+        return amount !== 0;
     }
 }

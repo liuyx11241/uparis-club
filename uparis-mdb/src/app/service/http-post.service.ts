@@ -5,6 +5,7 @@ import {catchError} from "rxjs/internal/operators";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ErrorHandler} from "./error.handler";
 import {Trip} from "../model/trip.dto";
+import {Order} from "../model/order.dto";
 
 const httpOptions = {headers: new HttpHeaders({'ContentType': 'application/json'})}
 
@@ -47,5 +48,14 @@ export class PostService {
             );
         }
 
+    }
+
+    public saveOrders(value: Order[]): Observable<string> {
+        if (value == null && value.length == 0) {
+            return;
+        }
+        return this.http.post<string>(`/api/order`, value, httpOptions).pipe(
+            catchError(this.handler.handleError)
+        );
     }
 }

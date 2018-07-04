@@ -18,6 +18,8 @@ public class OptionDto extends AbstractDto {
 
     private BigDecimal priceVAT;
 
+    private String currencyTrip;
+
     private StockDto stock;
 
     public Long getIdTrip() {
@@ -74,6 +76,14 @@ public class OptionDto extends AbstractDto {
 
     public void setPriceVAT(BigDecimal priceVAT) {
         this.priceVAT = priceVAT;
+    }
+
+    public String getCurrencyTrip() {
+        return currencyTrip;
+    }
+
+    public void setCurrencyTrip(String currencyTrip) {
+        this.currencyTrip = currencyTrip;
     }
 
     public StockDto getStock() {

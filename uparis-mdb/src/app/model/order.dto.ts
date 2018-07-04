@@ -5,9 +5,19 @@ export class Order {
 
     id: number;
 
-    participant: Person;
+    reference: string;
 
     idTrip: number;
+
+    dateStartTrip: string;
+
+    idProductTrip: string;
+
+    nameProductTrip: string;
+
+    amount: number;
+
+    participant: Person;
 
     payer: Person;
 

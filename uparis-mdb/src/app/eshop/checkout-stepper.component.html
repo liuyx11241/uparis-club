@@ -3,7 +3,10 @@
     <div class="col-12 col-md-3 text-center text-md-left">{{_trip.dateStart}}
         <ng-container *ngIf="_trip.dateEnd != _trip.dateStart"> ~ {{_trip.dateEnd}}</ng-container>
     </div>
-    <div class="col-12 col-md-6 text-center text-md-right">
+    <div class="col-12 col-md-3 text-center text-md-left">
+        {{_trip.price | currency: _trip.currency}}
+    </div>
+    <div class="col-12 col-md-3 text-center text-md-right">
         <uparis-number-picker [initValue]="_number" [min]="1" [max]="_trip.stock"
                               (onChange)="number=$event" [enabled]="stepper.selectedIndex==0"
         ></uparis-number-picker>
@@ -15,7 +18,7 @@
         <div class="row">
             <form *ngFor="let checkoutForm of _listCheckoutForm.controls; let index=index;"
                   [formGroup]="checkoutForm"
-                  class="col-12 col-md-6 col-xl-4 card mx-auto">
+                  class="col-12 col-md-6 col-xl-4 card ">
                 <div class="card-body text-left">
                     <uparis-option-selector
                         [listOption]="_trip.listOption"
@@ -29,7 +32,7 @@
 
         <button mat-raised-button matStepperNext
                 class="mt-5"
-                color="primary" (click)="createNewOrder($event)">
+                color="primary" (click)="subscribe()">
             下一步<i class="fa fa-arrow-circle-right fa-lg"></i></button>
     </mat-step>
     <mat-step #stepConfirm>
@@ -37,14 +40,14 @@
         <div class="row">
             <uparis-person-card
                 *ngFor="let order of _listOrder"
-                class="col-12 col-md-6 col-xl-4 mx-auto"
+                class="col-12 col-md-6 col-xl-4 "
                 [person]="order.participant"
                 [listOption]="order.listOption"
             ></uparis-person-card>
         </div>
 
         <div class="row mt-5">
-            <mat-checkbox color="primary" class="col-12 mx-auto" #accept>
+            <mat-checkbox color="primary" class="col-12 " #accept>
                 我已认真阅读并接受使用此<a><u>服务协议</u></a>
             </mat-checkbox>
         </div>
@@ -53,7 +56,18 @@
             <i class="fa fa-arrow-circle-left fa-lg"></i>上一步
         </button>
         <button mat-raised-button matStepperNext class="mt-5" color="primary"
-                [disabled]="!accept.checked">
+                [disabled]="!accept.checked" (click)="createOrders()">
             下一步<i class="fa fa-arrow-circle-right fa-lg"></i></button>
+    </mat-step>
+    <mat-step #stepPayment *ngIf="displayPayment">
+        <ng-template matStepLabel>付款</ng-template>
+    </mat-step>
+    <mat-step #stepFailure>
+        <ng-template matStepLabel>失败</ng-template>
+
+    </mat-step>
+    <mat-step #stepSuccess>
+        <ng-template matStepLabel>成功</ng-template>
+
     </mat-step>
 </mat-horizontal-stepper>

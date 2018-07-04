@@ -44,7 +44,7 @@ export class TripFormComponent implements OnInit {
 
     onDateStartChange(dateStart: Date) {
         let dateEnd = new Date(dateStart);
-        dateEnd.setDate(dateEnd.getDate() + this._tripForm.get('durationProduct').value);
+        dateEnd.setDate(dateEnd.getDate() + this._tripForm.get('durationProduct').value - 1);
         this._tripForm.get('dateEnd').patchValue(dateEnd);
     }
 

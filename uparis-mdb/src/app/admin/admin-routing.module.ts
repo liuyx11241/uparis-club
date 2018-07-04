@@ -8,6 +8,8 @@ import {ProductResolver} from "../service/product.resolver";
 import {TripFormComponent} from "./trip-form.component";
 import {TripResolver} from "../service/trip.resolver";
 import {TripTableComponent} from "./trip-table.component";
+import {OrderTableComponent} from "./order-table.component";
+import {PersonTableComponent} from "./person-table.component";
 
 const routes: Routes = [
     {
@@ -31,6 +33,8 @@ const routes: Routes = [
                     trip:TripResolver
                 }
             },
+            {path: 'orders', component: OrderTableComponent},
+            {path: 'persons', component: PersonTableComponent},
         ]
     }
 ];
