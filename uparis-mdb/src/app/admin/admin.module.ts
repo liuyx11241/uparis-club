@@ -16,9 +16,10 @@ import {OptionTableComponent} from './option-table.component';
 import {StockTableComponent} from './stock-table.component';
 import {MultimediaTableComponent} from './multimedia-table.component';
 import {SnackBar} from "./snack-bar";
-import { OrderTableComponent } from './order-table.component';
-import { PersonTableComponent } from './person-table.component';
-import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import {OrderTableComponent} from './order-table.component';
+import {PersonTableComponent} from './person-table.component';
+import {GenderPipe} from "./gender.pipe";
+import { StatusPipe } from './status.pipe';
 
 @NgModule({
     imports: [
@@ -27,9 +28,7 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
+
     ],
     declarations: [
         AdminComponent,
@@ -45,6 +44,9 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
         MultimediaTableComponent,
         OrderTableComponent,
         PersonTableComponent,
+
+        GenderPipe,
+        StatusPipe,
     ],
     providers: [
         SnackBar,

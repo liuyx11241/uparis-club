@@ -6,7 +6,7 @@ import {GetService} from "../service/http-get.service";
 @Component({
     selector: 'uparis-admin/order-table',
     templateUrl: './order-table.component.html',
-    styles: []
+    styleUrls: ['./order-table.component.scss']
 })
 export class OrderTableComponent implements OnInit, AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -14,7 +14,7 @@ export class OrderTableComponent implements OnInit, AfterViewInit {
 
     dataSource: OrderTableDataSource;
 
-    displayedColumns = ['id', 'nameProductTrip', 'dateStartTrip', 'participant', 'reference', 'payer', 'listOption', 'amount', 'actions'];
+    displayedColumns = ['id', 'product', 'trip', 'participant', 'reference', 'status', 'payer', 'listOption', 'amount', 'actions'];
 
     constructor(private service: GetService) {
     }

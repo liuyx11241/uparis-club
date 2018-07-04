@@ -78,8 +78,7 @@ public class UparisCoreApplicationTests {
     @Test
     public void testHashCode() {
         for (int i = 0; i < 100; i++) {
-            String value =
-                    hashCodeService.generate(String.valueOf(i));
+            String value = hashCodeService.generate(16);
             System.out.println(value.matches("\\w+") + "\t" + value);
         }
     }

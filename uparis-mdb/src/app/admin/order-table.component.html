@@ -4,14 +4,14 @@
         <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="nameProductTrip">
+    <ng-container matColumnDef="product">
         <mat-header-cell *matHeaderCellDef mat-sort-header>产品</mat-header-cell>
         <mat-cell *matCellDef="let row">
             <a [routerLink]="['/admin/products/', row.idProductTrip]">{{row.nameProductTrip}}</a>
         </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="dateStartTrip">
+    <ng-container matColumnDef="trip">
         <mat-header-cell *matHeaderCellDef mat-sort-header>出发日期</mat-header-cell>
         <mat-cell *matCellDef="let row">
             <a [routerLink]="['/admin/trips/', row.idTrip]">{{row.dateStartTrip}}</a>
@@ -20,7 +20,7 @@
 
     <ng-container matColumnDef="participant">
         <mat-header-cell *matHeaderCellDef mat-sort-header>队员</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.participant.lastName}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.participant.lastName}} {{row.participant.firstName}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="reference">
@@ -28,9 +28,14 @@
         <mat-cell *matCellDef="let row">{{row.reference}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>状态</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.status | status}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="payer">
         <mat-header-cell *matHeaderCellDef mat-sort-header>付款人</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.payer?.lastName}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.payer?.lastName}}{{row.payer?.firstName}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="listOption">

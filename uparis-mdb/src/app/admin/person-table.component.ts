@@ -6,6 +6,7 @@ import {GetService} from "../service/http-get.service";
 @Component({
     selector: 'uparis-admin/person-table',
     templateUrl: './person-table.component.html',
+    styleUrls: ['./person-table.component.scss']
 })
 export class PersonTableComponent implements OnInit, AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -14,7 +15,7 @@ export class PersonTableComponent implements OnInit, AfterViewInit {
 
     /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
     displayedColumns = [
-        'id', 'gender', 'firstName', 'lastName', 'birthday', 'birthplace', 'wechat', 'telephone', 'email',
+        'id', 'gender', 'fullName', 'birthday', 'birthplace', 'wechat', 'telephone', 'email',
         'address', 'zipCode', 'city', 'country', 'actions'];
 
     constructor(private service: GetService) {
