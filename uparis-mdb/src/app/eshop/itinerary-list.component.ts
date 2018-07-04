@@ -5,7 +5,6 @@ import {Observable} from "rxjs/index";
 @Component({
     selector: 'uparis-itinerary-list',
     templateUrl: './itinerary-list.component.html',
-    styleUrls: ['./itinerary-list.component.scss']
 })
 export class ItineraryListComponent implements OnInit {
 

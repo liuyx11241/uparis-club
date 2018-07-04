@@ -14,6 +14,8 @@ public class OrderDto extends AbstractDto {
 
     private String nameProductTrip;
 
+    private String status;
+
     private BigDecimal amount;
 
     private PersonDto payer;
@@ -36,6 +38,14 @@ public class OrderDto extends AbstractDto {
 
     public void setPayer(PersonDto payer) {
         this.payer = payer;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public BigDecimal getAmount() {

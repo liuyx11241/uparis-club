@@ -7,6 +7,8 @@ export class Order {
 
     reference: string;
 
+    status: string;
+
     idTrip: number;
 
     dateStartTrip: string;

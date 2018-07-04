@@ -6,7 +6,6 @@ import {NavigationExtras, Router} from "@angular/router";
 @Component({
     selector: 'uparis-product-list',
     templateUrl: './product-list.component.html',
-    styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
     private _listProduct$: Product[];

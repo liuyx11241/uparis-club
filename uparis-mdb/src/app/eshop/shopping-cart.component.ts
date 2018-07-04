@@ -6,7 +6,6 @@ import {NavigationExtras, Router} from "@angular/router";
 @Component({
     selector: 'uparis-shopping-cart',
     templateUrl: './shopping-cart.component.html',
-    styleUrls: ['./shopping-cart.component.scss']
 })
 
 export class ShoppingCartComponent {

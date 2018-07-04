@@ -6,6 +6,7 @@ import com.uparis.db.entity.SchedulePo;
 import com.uparis.db.repo.ItineraryRepository;
 import com.uparis.db.repo.ProductRepository;
 import com.uparis.db.repo.ScheduleRepository;
+import com.uparis.util.HashCodeService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +28,9 @@ public class UparisCoreApplicationTests {
 
     @Autowired
     private ScheduleRepository scheduleRepository;
+
+    @Autowired
+    private HashCodeService hashCodeService;
 
     @Test
     public void contextLoads() {
@@ -69,5 +73,14 @@ public class UparisCoreApplicationTests {
 
         Assert.assertEquals(3, itineraryRepository.count());
         Assert.assertEquals(4, scheduleRepository.count());
+    }
+
+    @Test
+    public void testHashCode() {
+        for (int i = 0; i < 100; i++) {
+            String value =
+                    hashCodeService.generate(String.valueOf(i));
+            System.out.println(value.matches("\\w+") + "\t" + value);
+        }
     }
 }
