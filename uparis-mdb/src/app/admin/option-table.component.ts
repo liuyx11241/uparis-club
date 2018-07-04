@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {TripFormHelper} from "./trip-form.helper";
-import {FormArray, FormGroup} from "@angular/forms";
+import {AbstractControl, FormArray, FormGroup} from "@angular/forms";
+import {Stock} from "../model/stock.dto";
 
 @Component({
     selector: 'uparis-option-table',
@@ -9,7 +10,7 @@ import {FormArray, FormGroup} from "@angular/forms";
 })
 export class OptionTableComponent {
 
-    private _mappedListOption: Map<number, FormGroup[]>
+    private _mappedListOption: Map<number, AbstractControl[]>
 
     private _formHelper: TripFormHelper;
 
@@ -30,6 +31,12 @@ export class OptionTableComponent {
     @Input()
     set listOptionForm(value: FormArray) {
         this._listOptionForm = value;
+        this._listOptionForm.controls.forEach(optionForm => {
+            if (!this._mappedListOption.has(optionForm.value.level)) {
+                this._mappedListOption.set(optionForm.value.level, []);
+            }
+            this._mappedListOption.get(optionForm.value.level).push(optionForm);
+        });
     }
 
     @Input()
@@ -48,7 +55,7 @@ export class OptionTableComponent {
     addOption(): void {
         let level = this._mappedListOption.size;
         let optionForm = this._formHelper.newOptionForm();
-        optionForm.patchValue({level: level});
+        optionForm.patchValue({level: level, numOrder: this._listOptionForm.controls.length});
 
         this._mappedListOption.get(level).push(optionForm);
         this._listOptionForm.push(optionForm);
@@ -64,5 +71,11 @@ export class OptionTableComponent {
         let listOption = this._mappedListOption.get(option.value.level);
         listOption.splice(listOption.indexOf(option), 1);
         this._listOptionForm.removeAt(this._listOptionForm.controls.indexOf(option))
+    }
+
+    compareStock: ((s1: Stock, s2: Stock) => boolean) | null = this.compareStockById;
+
+    compareStockById(s1: Stock, s2: Stock): boolean {
+        return s1 && s2 && s1.id === s2.id;
     }
 }

@@ -43,16 +43,23 @@ export class TripFormComponent implements OnInit {
     }
 
     onDateStartChange(dateStart: Date) {
-
+        let dateEnd = new Date(dateStart);
+        dateEnd.setDate(dateEnd.getDate() + this._tripForm.get('durationProduct').value);
+        this._tripForm.get('dateEnd').patchValue(dateEnd);
     }
 
     save(): void {
         console.debug(this._formHelper.isValid());
+        console.debug(this._tripForm.value);
 
         // this._trip.dateStart = this.formatter.format(this._tripDateStart);
         // this._trip.dateEnd = this.formatter.format(this._tripDateEnd);
 
         if (this._formHelper.isValid()) {
+            let trip = this._tripForm.value;
+            trip.dateStart = this.formatter.format(trip.dateStart);
+            trip.dateEnd = this.formatter.format(trip.dateEnd);
+
             this.service.saveTrip(this._tripForm.value).subscribe(id => {
                 this.snackBar.openSuccessfulSave();
                 this._formHelper.disabled = true;

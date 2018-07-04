@@ -28,6 +28,8 @@ export class TripFormHelper {
 
     newTripForm(trip?: Trip): FormGroup {
         if (trip) {
+            trip.dateStart = new Date(trip.dateStart);
+            trip.dateEnd = new Date(trip.dateEnd);
             this._tripForm.patchValue(trip, {onlySelf: true});
             if (trip.listOption) {
                 trip.listOption.forEach(
@@ -50,13 +52,21 @@ export class TripFormHelper {
         });
 
         if (option && option.stock) {
-            this.listStockform.push(this.newStockForm(option.stock));
+            let stockForm = this.listStockform.controls.find(stockForm => stockForm.value.id === option.stock.id);
+            if (!stockForm) {
+                stockForm = this.newStockForm(option.stock);
+                this.listStockform.push(stockForm);
+            }
+            optionForm.patchValue({stock: stockForm.value});
         }
+        console.debug(optionForm.value.stock);
+        console.debug(optionForm.get('stock').value);
+        console.debug(optionForm.get('stock').value === optionForm.value.stock);
 
-        return optionForm
+        return optionForm;
     }
 
-    newStockForm(stock?: Stock) {
+    newStockForm(stock?: Stock): FormGroup {
         return this.formBuilder.group({
             id: this.formBuilder.control(stock ? stock.id : null),
             name: this.formBuilder.control(stock ? stock.name : null, Validators.required),
@@ -70,6 +80,7 @@ export class TripFormHelper {
 
     set disabled(value: boolean) {
         value ? this._tripForm.disable() : this._tripForm.enable();
+        value ? this._listStockForm.disable() : this._listStockForm.enable();
     }
 
     get listOptionForm(): FormArray {

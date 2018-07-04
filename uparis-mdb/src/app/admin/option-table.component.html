@@ -25,7 +25,7 @@
             <input matInput type="text" formControlName="name" placeholder="名称" required>
         </mat-form-field>
         <mat-form-field class="col-6 col-md-2">
-            <mat-select placeholder="库存" formControlName="stock">
+            <mat-select placeholder="库存" formControlName="stock" [compareWith]="compareStock" [value]="option.value.stock">
                 <mat-option>-- None --</mat-option>
                 <mat-option *ngFor="let stock of _listStockForm.controls" [value]="stock.value">
                     {{stock.value.name}}

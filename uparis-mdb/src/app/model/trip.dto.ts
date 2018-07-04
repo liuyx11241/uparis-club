@@ -9,9 +9,9 @@ export class Trip {
 
     durationProduct: number;
 
-    dateStart: string;
+    dateStart: string | Date;
 
-    dateEnd: string;
+    dateEnd: string | Date;
 
     stock: number;
 
