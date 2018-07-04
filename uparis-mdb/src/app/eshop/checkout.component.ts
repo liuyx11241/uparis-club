@@ -1,28 +1,28 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {Trip} from "../model/trip.dto";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Order} from "../model/order.dto";
 import {PostService} from "../service/http-post.service";
 import {DateFormatter} from "../service/date-formatter.util";
+import {FormHelper} from "../service/form-helper.util";
 
 @Component({
     selector: 'uparis-checkout-stepper',
-    templateUrl: './checkout-stepper.component.html',
+    templateUrl: './checkout.component.html',
 })
-export class CheckoutStepperComponent implements OnInit {
+export class CheckoutComponent implements OnInit {
     private _trip: Trip;
     private _number: number;
 
-    _listCheckoutForm: FormArray;
-    _listOrder: Order[];
+    _listOrderForm: FormArray;
 
-    constructor(private route: ActivatedRoute,
+    constructor(private router: Router,
+                private route: ActivatedRoute,
                 private formBuilder: FormBuilder,
                 private dateFormatter: DateFormatter,
                 private postService: PostService) {
-        this._listCheckoutForm = this.formBuilder.array([]);
-        this._listOrder = [];
+        this._listOrderForm = this.formBuilder.array([]);
     }
 
     ngOnInit() {
@@ -39,16 +39,17 @@ export class CheckoutStepperComponent implements OnInit {
     }
 
     set number(value: number) {
-        let newCheckoutForm = this.formBuilder.array([]);
         this._number = value;
-        for (var i = 0; i < this._number; i++) {
-            if (this._listCheckoutForm.at(i)) {
-                newCheckoutForm.push(this._listCheckoutForm.at(i))
-            } else {
-                newCheckoutForm.push(this.buildCheckoutForm());
+
+        if (this._listOrderForm.length < this._number) {
+            for (var i = this._listOrderForm.length; i < this._number; i++) {
+                this._listOrderForm.push(this.buildCheckoutForm());
+            }
+        } else {
+            for (var i = this._listOrderForm.length; i > this._number; i--) {
+                this._listOrderForm.removeAt(i - 1);
             }
         }
-        this._listCheckoutForm = newCheckoutForm;
     }
 
     private buildCheckoutForm(): FormGroup {
@@ -83,42 +84,36 @@ export class CheckoutStepperComponent implements OnInit {
         return fg;
     }
 
-    subscribe() {
-        this._listOrder = [];
-        for (let checkoutForm of this._listCheckoutForm.controls) {
-            let newOrder = new Order();
-            newOrder.idTrip = this._trip.id;
+    validate() {
+        FormHelper.markAsTouched(this._listOrderForm);
+        if (this._listOrderForm.valid) {
+            let listOrder = [];
 
-            const participant = checkoutForm.get('participant').value;
-            participant.birthday = this.dateFormatter.format(participant.birthday);
-            newOrder.participant = participant;
+            for (let checkoutForm of this._listOrderForm.controls) {
+                let newOrder = new Order();
+                newOrder.idTrip = this._trip.id;
 
-            const listOption = checkoutForm.get('option').value;
-            newOrder.listOption = [];
-            Object.keys(listOption).map(opt => {
-                newOrder.listOption.push(listOption[opt])
+                const participant = checkoutForm.get('participant').value;
+                participant.birthday = this.dateFormatter.format(participant.birthday);
+                newOrder.participant = participant;
+
+                const listOption = checkoutForm.get('option').value;
+                newOrder.listOption = [];
+                Object.keys(listOption).map(opt => {
+                    newOrder.listOption.push(listOption[opt])
+                });
+
+                listOrder.push(newOrder);
+            }
+
+            this.postService.saveOrders(listOrder).subscribe((reference: string) => {
+                console.info(reference);
+                this.router.navigate(['/eshop/payment'], {
+                    queryParams: {
+                        reference: reference
+                    }
+                });
             });
-
-            console.info(checkoutForm.get('participant').value);
-            console.info(checkoutForm.get('option').value);
-            console.info(newOrder);
-            this._listOrder.push(newOrder);
         }
-    }
-
-    createOrders() {
-        this.postService.saveOrders(this._listOrder).subscribe((reference: string) => {
-            window.alert(reference);
-        });
-    }
-
-    get displayPayment(): boolean {
-        let amount = this._trip.price;
-        this._listOrder.forEach(order => {
-            order.listOption.forEach(option => {
-                amount = amount + option.price;
-            })
-        });
-        return amount !== 0;
     }
 }

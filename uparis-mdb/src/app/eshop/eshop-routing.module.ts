@@ -4,8 +4,10 @@ import {EshopComponent} from "./eshop.component";
 import {ProductListComponent} from "./product-list.component";
 import {ProductDetailComponent} from "./product-detail.component";
 import {ProductResolver} from "../service/product.resolver";
-import {CheckoutStepperComponent} from "./checkout-stepper.component";
+import {CheckoutComponent} from "./checkout.component";
 import {TripResolver} from "../service/trip.resolver";
+import {PaymentComponent} from "./payment.component";
+import {OrderResolver} from "../service/order.resolver";
 
 const routes: Routes = [
   {
@@ -16,12 +18,14 @@ const routes: Routes = [
         {path: 'products/:idProduct', component: ProductDetailComponent, resolve: {
             product: ProductResolver
         }},
-        {path: 'checkout', component: CheckoutStepperComponent,
+        {path: 'checkout', component: CheckoutComponent,
             resolve: {trip: TripResolver}
         },
+        {path: 'payment', component: PaymentComponent,
+            resolve: {listOrder: OrderResolver}}
     ]
   },
-]
+];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

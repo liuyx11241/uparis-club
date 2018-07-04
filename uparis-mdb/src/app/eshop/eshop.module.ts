@@ -13,9 +13,10 @@ import {OptionSelectorComponent} from './option-selector.component';
 import {TripSelectorComponent} from './trip-selector.component';
 import {NumberPickerComponent} from './number-picker.component';
 import {PersonFormComponent} from './person-form.component';
-import {CheckoutStepperComponent} from './checkout-stepper.component';
+import {CheckoutComponent} from './checkout.component';
 
 import {PersonCardComponent} from './person-card.component';
+import {PaymentComponent} from './payment.component';
 
 @NgModule({
     imports: [
@@ -27,7 +28,7 @@ import {PersonCardComponent} from './person-card.component';
     ],
     providers: [],
     declarations: [
-        CheckoutStepperComponent,
+        CheckoutComponent,
         EshopComponent,
         ItineraryListComponent,
         OptionSelectorComponent,
@@ -38,6 +39,7 @@ import {PersonCardComponent} from './person-card.component';
         ShoppingCartComponent,
         TripSelectorComponent,
         NumberPickerComponent,
+        PaymentComponent,
     ],
     bootstrap: [EshopComponent]
 })

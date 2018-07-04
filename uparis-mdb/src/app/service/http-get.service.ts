@@ -81,4 +81,10 @@ export class GetService {
             catchError(this.handler.handleError)
         );
     }
+
+    public getOrder(reference: string): Observable<Order[]> {
+        return this.http.get<Order[]>(`/api/order/${reference}`).pipe(
+            catchError(this.handler.handleError)
+        );
+    }
 }

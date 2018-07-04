@@ -11,7 +11,8 @@ export class ErrorHandler {
         if (error.error instanceof ErrorEvent) {
             console.error(error.error.message);
         } else {
-            console.error(`Code : ${error.status}, Body : ${error.error}`);
+            console.error(`Code : ${error.status}, Body : `);
+            console.error(error.error);
         }
         return throwError("Please Try again later.");
     }

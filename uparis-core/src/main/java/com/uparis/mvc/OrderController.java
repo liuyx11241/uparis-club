@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,11 +49,17 @@ public class OrderController {
                         pageSize,
                         Sort.by(Sort.Direction.fromString(direction), sort)));
         return orderPoPage.map(orderPo -> modelMapper.map(orderPo, OrderDto.class));
+    }
 
+    @GetMapping("/{reference}")
+    public List<OrderDto> getOrders(@PathVariable String reference) {
+        return repoOrder.findByReference(reference).stream()
+                .map(orderPo -> modelMapper.map(orderPo, OrderDto.class))
+                .collect(Collectors.toList());
     }
 
     @PostMapping
-    public ResponseEntity<String> createOrder(@RequestBody List<OrderDto> listOrder) {
+    public String createOrder(@RequestBody List<OrderDto> listOrder) {
         String orderReference = hashCodeService.generate(referenceLength);
 
         List<OrderPo> orderPoList =
@@ -78,6 +83,6 @@ public class OrderController {
         }
         repoOrder.saveAll(orderPoList);
 
-        return ResponseEntity.ok(orderReference);
+        return orderReference;
     }
 }
