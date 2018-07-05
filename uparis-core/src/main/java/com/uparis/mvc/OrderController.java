@@ -53,7 +53,7 @@ public class OrderController {
 
     @GetMapping("/{reference}")
     public List<OrderDto> getOrders(@PathVariable String reference) {
-        return repoOrder.findByReference(reference).stream()
+        return repoOrder.findAllByReference(reference).stream()
                 .map(orderPo -> modelMapper.map(orderPo, OrderDto.class))
                 .collect(Collectors.toList());
     }
@@ -66,17 +66,10 @@ public class OrderController {
                 listOrder.stream().map(orderDto -> modelMapper.map(orderDto, OrderPo.class)).collect(Collectors.toList());
 
         for (OrderPo orderPo : orderPoList) {
-            PersonPo participant = orderPo.getParticipant();
-            PersonPo participantByWechat = repoPerson.findByWechat(participant.getWechat());
-            if (participantByWechat != null) {
-                orderPo.setParticipant(participantByWechat);
-            }
+            orderPo.setParticipant(repoPerson.findOptionalByWechat(orderPo.getParticipant().getWechat()).orElse(orderPo.getParticipant()));
             PersonPo payer = orderPo.getPayer();
             if (payer != null) {
-                PersonPo payerByWechat = repoPerson.findByWechat(payer.getWechat());
-                if (participantByWechat != null) {
-                    orderPo.setPayer(payerByWechat);
-                }
+                orderPo.setPayer(repoPerson.findOptionalByWechat(payer.getWechat()).orElse(payer));
             }
             orderPo.setReference(orderReference);
             orderPo.setStatus(TypeStatus.INIT);
