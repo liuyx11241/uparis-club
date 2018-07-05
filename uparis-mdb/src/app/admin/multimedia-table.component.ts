@@ -31,6 +31,7 @@ export class MultimediaTableComponent implements OnInit {
     add(type: string): void {
         let multimedia = new Multimedia();
         multimedia.type = type.toUpperCase();
+        this._listMultimedia.push(this._formHelper.newMultimediaForm(multimedia));
     }
 
     delete(media: FormGroup): void {

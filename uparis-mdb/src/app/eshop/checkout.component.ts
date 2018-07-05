@@ -4,11 +4,11 @@ import {Trip} from "../model/trip.dto";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Order} from "../model/order.dto";
 import {PostService} from "../service/http-post.service";
-import {DateFormatter} from "../service/date-formatter.util";
-import {FormHelper} from "../service/form-helper.util";
+import {DateFormatter} from "../model/date-formatter.util";
+import {FormHelper} from "../model/form-helper.util";
 
 @Component({
-    selector: 'uparis-checkout-stepper',
+    selector: 'uparis-checkout',
     templateUrl: './checkout.component.html',
 })
 export class CheckoutComponent implements OnInit {
@@ -20,7 +20,6 @@ export class CheckoutComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private formBuilder: FormBuilder,
-                private dateFormatter: DateFormatter,
                 private postService: PostService) {
         this._listOrderForm = this.formBuilder.array([]);
     }
@@ -55,23 +54,7 @@ export class CheckoutComponent implements OnInit {
     private buildCheckoutForm(): FormGroup {
         let fg = this.formBuilder.group({
             option: this.formBuilder.group([]),
-            participant: this.formBuilder.group({
-                    'gender': ['', Validators.required],
-                    'fullName': ['',],
-                    'firstName': ['', Validators.required],
-                    'lastName': ['', Validators.required],
-                    'birthday': ['', Validators.required],
-                    'birthplace': ['', Validators.required],
-                    'wechat': ['', Validators.required],
-                    'telephone': ['', Validators.required],
-                    'email': ['', [Validators.required, Validators.email]],
-                    'address': ['', Validators.required],
-                    'addressComplement': ['',],
-                    'zipCode': ['', Validators.required],
-                    'city': ['', Validators.required],
-                    'country': ['', Validators.required],
-                }
-            ),
+            participant: FormHelper.newPersonForm(this.formBuilder),
         });
 
         let levels = new Set<number>();
@@ -91,10 +74,10 @@ export class CheckoutComponent implements OnInit {
 
             for (let checkoutForm of this._listOrderForm.controls) {
                 let newOrder = new Order();
-                newOrder.idTrip = this._trip.id;
+                newOrder.trip = this._trip;
 
                 const participant = checkoutForm.get('participant').value;
-                participant.birthday = this.dateFormatter.format(participant.birthday);
+                participant.birthday = DateFormatter.format(participant.birthday);
                 newOrder.participant = participant;
 
                 const listOption = checkoutForm.get('option').value;
@@ -103,14 +86,16 @@ export class CheckoutComponent implements OnInit {
                     newOrder.listOption.push(listOption[opt])
                 });
 
+                console.info(newOrder.listOption);
+
                 listOrder.push(newOrder);
             }
 
-            this.postService.saveOrders(listOrder).subscribe((reference: string) => {
-                console.info(reference);
+            this.postService.saveOrders(listOrder).subscribe((order: Order) => {
+                console.info(order);
                 this.router.navigate(['/eshop/payment'], {
                     queryParams: {
-                        reference: reference
+                        reference: order.reference
                     }
                 });
             });

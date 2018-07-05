@@ -6,7 +6,6 @@ import {ProductResolver} from "./product.resolver";
 import {TripResolver} from "./trip.resolver";
 import {PostService} from "./http-post.service";
 import {DeleteService} from "./http-delete.service";
-import {DateFormatter} from "./date-formatter.util";
 import {OrderResolver} from "./order.resolver";
 
 @NgModule({
@@ -23,8 +22,6 @@ import {OrderResolver} from "./order.resolver";
         ProductResolver,
         TripResolver,
         OrderResolver,
-
-        DateFormatter,
     ]
 })
 export class ServiceModule {

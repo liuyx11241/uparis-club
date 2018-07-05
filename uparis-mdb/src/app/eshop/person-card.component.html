@@ -1,54 +1,43 @@
-<div class="card">
+<!--<ng-container *ngIf="_person?.portrait">-->
+<!--<div class="card-up indigo lighten-1"></div>-->
+<!--<div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg" class="rounded-circle"></div>-->
+<!--</ng-container>-->
 
-    <!--<ng-container *ngIf="_person?.portrait">-->
-    <!--<div class="card-up indigo lighten-1"></div>-->
-    <!--<div class="avatar mx-auto white"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg" class="rounded-circle"></div>-->
-    <!--</ng-container>-->
-
-    <div class="card-body text-left">
-        <h4 class="card-title">
-            <ng-container *ngIf="styleMale">
-                <i class="fa fa-male blue-text col-2"></i>
-            </ng-container>
-            <ng-container *ngIf="!styleMale">
-                <i class="fa fa-female red-text col-2"></i>
-            </ng-container>
-            <span class="col-10">{{_person?.lastName}} {{_person?.firstName}}</span>
-        </h4>
-        <hr>
-        <p><i class="fa fa-lg fa-birthday-cake col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
-            <span class="col-10">{{_person?.birthday | date : 'yyyy/MM/dd'}}</span>
-        </p>
-        <p><i class="fa fa-lg fa-map-signs col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
-            <span class="col-10">{{_person?.birthplace}}</span>
-        </p>
-        <p><i class="fa fa-lg fa-wechat col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
-            <span class="col-10">{{_person?.wechat}}</span>
-        </p>
-        <p><i class="fa fa-lg material-icons col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale">phone_iphone</i>
-            <span class="col-10">{{_person?.telephone}}</span>
-        </p>
-        <p><i class="fa fa-lg material-icons col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale">email</i>
-            <span class="col-10">{{_person?.email}}</span>
-        </p>
-        <ng-container *ngIf="_person?.addressComplement">
-            <div><i class="fa fa-lg col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
-                <span class="col-10">{{_person?.addressComplement}}</span>
-            </div>
+<div class="text-left">
+    <p class="card-title">
+        <ng-container *ngIf="styleMale">
+            <i class="fa fa-2x fa-male blue-text col-2"></i>
         </ng-container>
-        <div><i class="fa fa-lg material-icons col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale">home</i>
-            <span class="col-10">{{_person?.address}}</span>
-        </div>
+        <ng-container *ngIf="!styleMale">
+            <i class="fa fa-2x fa-female red-text col-2"></i>
+        </ng-container>
+        <span class="col-10 h4-responsive">{{_person?.lastName}} {{_person?.firstName}}</span>
+    </p>
+    <mat-divider class="mb-3"></mat-divider>
+    <p><i class="fa fa-lg fa-birthday-cake col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
+        <span class="col-10">{{_person?.birthday | date : 'yyyy/MM/dd'}}</span>
+    </p>
+    <p><i class="fa fa-lg fa-map-signs col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
+        <span class="col-10">{{_person?.birthplace}}</span>
+    </p>
+    <p><i class="fa fa-lg fa-wechat col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
+        <span class="col-10">{{_person?.wechat}}</span>
+    </p>
+    <p><i class="fa fa-lg material-icons col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale">phone_iphone</i>
+        <span class="col-10">{{_person?.telephone}}</span>
+    </p>
+    <p><i class="fa fa-lg material-icons col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale">email</i>
+        <span class="col-10">{{_person?.email}}</span>
+    </p>
+    <ng-container *ngIf="_person?.addressComplement">
         <div><i class="fa fa-lg col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
-            <span class="col-10">{{_person?.zipCode}} {{_person?.city}}, {{_person?.country | uppercase}}</span>
+            <span class="col-10">{{_person?.addressComplement}}</span>
         </div>
-        <hr>
-        <p *ngFor="let option of _listOption">
-            <i class="fa fa-lg col-2 fa-hand-o-right" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
-            <span class="col-10">{{option.name}}
-                <ng-container *ngIf="option.price > 0">+</ng-container>
-                {{option.price | currency: option.currencyTrip}}
-            </span>
-        </p>
+    </ng-container>
+    <div><i class="fa fa-lg material-icons col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale">home</i>
+        <span class="col-10">{{_person?.address}}</span>
+    </div>
+    <div><i class="fa fa-lg col-2" [class.red-text]="!styleMale" [class.blue-text]="styleMale"></i>
+        <span class="col-10">{{_person?.zipCode}} {{_person?.city}}, {{_person?.country | uppercase}}</span>
     </div>
 </div>

@@ -1,7 +1,8 @@
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Trip} from "../model/trip.dto";
 import {Option} from "../model/option.dto";
 import {Stock} from "../model/stock.dto";
+import {FormHelper} from "../model/form-helper.util";
 
 export class TripFormHelper {
 
@@ -10,19 +11,9 @@ export class TripFormHelper {
     private _listStockForm: FormArray;
 
     constructor(private formBuilder: FormBuilder) {
-        this._tripForm = this.formBuilder.group({
-            id: this.formBuilder.control(null),
-            idProduct: this.formBuilder.control(null, Validators.required),
-            nameProduct: this.formBuilder.control(null),
-            durationProduct: this.formBuilder.control(null),
-            dateStart: this.formBuilder.control(null, Validators.required),
-            dateEnd: this.formBuilder.control(null),
-            stock: this.formBuilder.control(null, [Validators.required, Validators.min(0)]),
-            price: this.formBuilder.control(null, [Validators.required, Validators.min(0)]),
-            priceVAT: this.formBuilder.control(null),
-            currency: this.formBuilder.control(null, Validators.required),
-            listOption: this.formBuilder.array([]),
-        });
+        this._tripForm = FormHelper.newTripForm(this.formBuilder);
+        this._tripForm.addControl('listOption', formBuilder.array([]));
+
         this._listStockForm = this.formBuilder.array([]);
     }
 
@@ -40,16 +31,7 @@ export class TripFormHelper {
     }
 
     newOptionForm(option?: Option): FormGroup {
-        let optionForm = this.formBuilder.group({
-            id: this.formBuilder.control(option ? option.id : null),
-            name: this.formBuilder.control(option ? option.name : null, Validators.required),
-            description: this.formBuilder.control(option ? option.description : null),
-            level: this.formBuilder.control(option ? option.level : null, [Validators.required, Validators.min(1)]),
-            numOrder: this.formBuilder.control(option ? option.numOrder : null, [Validators.required, Validators.min(0)]),
-            price: this.formBuilder.control(option ? option.price : null, [Validators.required, Validators.min(0)]),
-            priceVAT: this.formBuilder.control(option ? option.priceVAT : null),
-            stock: this.formBuilder.control(option ? option.stock : null),
-        });
+        let optionForm = FormHelper.newOptionForm(this.formBuilder, option);
 
         if (option && option.stock) {
             let stockForm = this.listStockform.controls.find(stockForm => stockForm.value.id === option.stock.id);
@@ -67,11 +49,7 @@ export class TripFormHelper {
     }
 
     newStockForm(stock?: Stock): FormGroup {
-        return this.formBuilder.group({
-            id: this.formBuilder.control(stock ? stock.id : null),
-            name: this.formBuilder.control(stock ? stock.name : null, Validators.required),
-            quantity: this.formBuilder.control(stock ? stock.quantity : 0, [Validators.required, Validators.min(0)]),
-        });
+        return FormHelper.newStockForm(this.formBuilder, stock);
     }
 
     get disabled(): boolean {

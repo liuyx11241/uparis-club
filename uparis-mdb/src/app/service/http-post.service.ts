@@ -50,11 +50,11 @@ export class PostService {
 
     }
 
-    public saveOrders(value: Order[]): Observable<string> {
+    public saveOrders(value: Order[]): Observable<Order> {
         if (value == null && value.length == 0) {
             return;
         }
-        return this.http.post<string>(`/api/order`, value, httpOptions).pipe(
+        return this.http.post<Order>(`/api/order`, value, httpOptions).pipe(
             catchError(this.handler.handleError)
         );
     }

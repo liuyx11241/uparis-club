@@ -16,7 +16,7 @@ export class OrderResolver implements Resolve<Order[]> {
 
         let orderRef = route.queryParamMap.get('reference');
 
-        this.service.getOrder(orderRef).pipe(
+        return this.service.getOrder(orderRef).pipe(
             take(1),
             map(listOrder => {
                 if (listOrder) {
@@ -27,7 +27,5 @@ export class OrderResolver implements Resolve<Order[]> {
                 }
             })
         );
-
-        return null;
     }
 }

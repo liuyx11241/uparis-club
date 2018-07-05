@@ -17,6 +17,8 @@ import {CheckoutComponent} from './checkout.component';
 
 import {PersonCardComponent} from './person-card.component';
 import {PaymentComponent} from './payment.component';
+import { OptionListComponent } from './option-list.component';
+import {ModelModule} from "../model/model.module";
 
 @NgModule({
     imports: [
@@ -25,6 +27,7 @@ import {PaymentComponent} from './payment.component';
         ReactiveFormsModule,
         EshopRoutingModule,
         MaterialModule,
+        ModelModule,
     ],
     providers: [],
     declarations: [
@@ -40,6 +43,7 @@ import {PaymentComponent} from './payment.component';
         TripSelectorComponent,
         NumberPickerComponent,
         PaymentComponent,
+        OptionListComponent,
     ],
     bootstrap: [EshopComponent]
 })

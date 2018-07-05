@@ -27,11 +27,11 @@ public class OrderPo extends AbstractPo {
 
     private String reference;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "R_ORDER_OPTION",
             joinColumns = @JoinColumn(name = "OPTION_ID"),
             inverseJoinColumns = @JoinColumn(name = "ORDER_ID"))
-    private List<OptionPo> listSelectedOption;
+    private List<OptionPo> listOption;
 
     public PersonPo getPayer() {
         return payer;
@@ -81,11 +81,11 @@ public class OrderPo extends AbstractPo {
         this.reference = reference;
     }
 
-    public List<OptionPo> getListSelectedOption() {
-        return listSelectedOption;
+    public List<OptionPo> getListOption() {
+        return listOption;
     }
 
-    public void setListSelectedOption(List<OptionPo> listSelectedOption) {
-        this.listSelectedOption = listSelectedOption;
+    public void setListOption(List<OptionPo> listOption) {
+        this.listOption = listOption;
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public String createOrder(@RequestBody List<OrderDto> listOrder) {
+    public ResponseEntity<OrderDto> createOrder(@RequestBody List<OrderDto> listOrder) {
         String orderReference = hashCodeService.generate(referenceLength);
 
         List<OrderPo> orderPoList =
@@ -72,10 +73,12 @@ public class OrderController {
                 orderPo.setPayer(repoPerson.findOptionalByWechat(payer.getWechat()).orElse(payer));
             }
             orderPo.setReference(orderReference);
-            orderPo.setStatus(TypeStatus.INIT);
+            orderPo.setStatus(TypeStatus.PENDING);
         }
         repoOrder.saveAll(orderPoList);
 
-        return orderReference;
+        OrderDto orderDto = new OrderDto();
+        orderDto.setReference(orderReference);
+        return ResponseEntity.ok(orderDto);
     }
 }

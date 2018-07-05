@@ -5,7 +5,7 @@ import {Product} from "../model/product.dto";
 import {PostService} from "../service/http-post.service";
 import {SnackBar} from "./snack-bar";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {DateFormatter} from "../service/date-formatter.util";
+import {DateFormatter} from "../model/date-formatter.util";
 import {TripFormHelper} from "./trip-form.helper";
 
 @Component({
@@ -20,7 +20,6 @@ export class TripFormComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private snackBar: SnackBar,
-                private formatter: DateFormatter,
                 private fb: FormBuilder,
                 private service: PostService) {
         this._formHelper = new TripFormHelper(fb);
@@ -57,8 +56,8 @@ export class TripFormComponent implements OnInit {
 
         if (this._formHelper.isValid()) {
             let trip = this._tripForm.value;
-            trip.dateStart = this.formatter.format(trip.dateStart);
-            trip.dateEnd = this.formatter.format(trip.dateEnd);
+            trip.dateStart = DateFormatter.format(trip.dateStart);
+            trip.dateEnd = DateFormatter.format(trip.dateEnd);
 
             this.service.saveTrip(this._tripForm.value).subscribe(id => {
                 this.snackBar.openSuccessfulSave();

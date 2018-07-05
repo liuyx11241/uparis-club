@@ -6,13 +6,7 @@ import java.util.List;
 public class OrderDto extends AbstractDto {
     private String reference;
 
-    private String idTrip;
-
-    private String dateStartTrip;
-
-    private String idProductTrip;
-
-    private String nameProductTrip;
+    private TripDto trip;
 
     private String status;
 
@@ -22,7 +16,7 @@ public class OrderDto extends AbstractDto {
 
     private PersonDto participant;
 
-    private List<OptionDto> listSelectedOption;
+    private List<OptionDto> listOption;
 
     public String getReference() {
         return reference;
@@ -64,43 +58,19 @@ public class OrderDto extends AbstractDto {
         this.participant = participant;
     }
 
-    public List<OptionDto> getListSelectedOption() {
-        return listSelectedOption;
+    public List<OptionDto> getListOption() {
+        return listOption;
     }
 
-    public void setListSelectedOption(List<OptionDto> listSelectedOption) {
-        this.listSelectedOption = listSelectedOption;
+    public void setListOption(List<OptionDto> listOption) {
+        this.listOption = listOption;
     }
 
-    public String getIdTrip() {
-        return idTrip;
+    public TripDto getTrip() {
+        return trip;
     }
 
-    public void setIdTrip(String idTrip) {
-        this.idTrip = idTrip;
-    }
-
-    public String getDateStartTrip() {
-        return dateStartTrip;
-    }
-
-    public void setDateStartTrip(String dateStartTrip) {
-        this.dateStartTrip = dateStartTrip;
-    }
-
-    public String getIdProductTrip() {
-        return idProductTrip;
-    }
-
-    public void setIdProductTrip(String idProductTrip) {
-        this.idProductTrip = idProductTrip;
-    }
-
-    public String getNameProductTrip() {
-        return nameProductTrip;
-    }
-
-    public void setNameProductTrip(String nameProductTrip) {
-        this.nameProductTrip = nameProductTrip;
+    public void setTrip(TripDto trip) {
+        this.trip = trip;
     }
 }

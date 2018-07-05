@@ -18,8 +18,7 @@ import {MultimediaTableComponent} from './multimedia-table.component';
 import {SnackBar} from "./snack-bar";
 import {OrderTableComponent} from './order-table.component';
 import {PersonTableComponent} from './person-table.component';
-import {GenderPipe} from "./gender.pipe";
-import { StatusPipe } from './status.pipe';
+import {ModelModule} from "../model/model.module";
 
 @NgModule({
     imports: [
@@ -28,7 +27,7 @@ import { StatusPipe } from './status.pipe';
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
-
+        ModelModule,
     ],
     declarations: [
         AdminComponent,
@@ -44,9 +43,6 @@ import { StatusPipe } from './status.pipe';
         MultimediaTableComponent,
         OrderTableComponent,
         PersonTableComponent,
-
-        GenderPipe,
-        StatusPipe,
     ],
     providers: [
         SnackBar,
