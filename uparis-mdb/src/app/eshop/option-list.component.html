@@ -1,6 +1,8 @@
+<!--<p>{{_trip.nameProduct}}</p>-->
+<!--<p>{{_trip.dateStart}}出发</p>-->
 <p class="d-flex">
     <i class="fa fa-lg col-2 fa-check-square-o pt-1 text-left" [class.red-text]="!_styleBlue" [class.blue-text]="_styleBlue" aria-hidden="true"></i>
-    <span class="col-5 text-left">{{_trip.nameProduct}}</span>
+    <span class="col-5 text-left">基本费用</span>
     <span class="col-5 text-right">
             {{_trip.price | currency:_trip.currency}}
     </span>

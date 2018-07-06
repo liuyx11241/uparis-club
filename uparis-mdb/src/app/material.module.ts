@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
     MatBadgeModule,
-    MatButtonModule,
+    MatButtonModule, MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
     MatDatepickerModule,
@@ -54,7 +54,7 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
         MatSnackBarModule,
         MatProgressSpinnerModule,
         MatDatepickerModule,
-        MatSlideToggleModule,
+        MatButtonToggleModule,
     ],
     exports: [
         MDBBootstrapModule,
@@ -81,7 +81,7 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
         MatSnackBarModule,
         MatProgressSpinnerModule,
         MatDatepickerModule,
-        MatSlideToggleModule,
+        MatButtonToggleModule,
     ]
 })
 export class MaterialModule {

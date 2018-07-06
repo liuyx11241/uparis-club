@@ -1,4 +1,4 @@
-<div class="z-depth-1 py-5 mb-5 px-5 row">
+<section class="z-depth-1 py-5 mb-5 px-5 row">
     <div class="col-12 col-md-3 text-center text-md-left">{{_trip.nameProduct}}</div>
     <div class="col-12 col-md-3 text-center text-md-left">{{_trip.dateStart}}
         <ng-container *ngIf="_trip.dateEnd != _trip.dateStart"> ~ {{_trip.dateEnd}}</ng-container>
@@ -10,8 +10,8 @@
         <uparis-number-picker [initValue]="_number" [min]="1" [max]="_trip.stock" (onChange)="number=$event"
         ></uparis-number-picker>
     </div>
-</div>
-<div class="row">
+</section>
+<section class="row">
     <div *ngFor="let checkoutForm of _listOrderForm.controls; let index=index;"
          [formGroup]="checkoutForm" class="col-12 col-md-6 col-xl-4">
         <div class="card">
@@ -26,14 +26,13 @@
                 [personForm]="checkoutForm.get('participant')"></uparis-person-form>
         </div>
     </div>
-</div>
-<div class="row mt-5">
+</section>
+<section class="row mt-5">
     <mat-checkbox color="primary" class="col-12 " #accept>
         我已认真阅读并接受使用此<a><u>服务协议</u></a>
     </mat-checkbox>
-</div>
-
-<button mat-raised-button class="row my-5" color="primary" type="submit"
+</section>
+<button mat-raised-button class="row mb-5" color="primary" type="submit"
         [disabled]="!accept.checked" (click)="validate()">确认
     <i class="fa fa-arrow-circle-right fa-lg"></i>
 </button>

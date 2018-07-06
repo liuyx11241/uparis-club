@@ -14,7 +14,7 @@ export class OrderResolver implements Resolve<Order[]> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Order[]> | Promise<Order[]> | Order[] {
 
-        let orderRef = route.queryParamMap.get('reference');
+        let orderRef = route.queryParamMap.get('reference') || route.paramMap.get('reference');
 
         return this.service.getOrder(orderRef).pipe(
             take(1),

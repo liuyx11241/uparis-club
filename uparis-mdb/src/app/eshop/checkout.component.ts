@@ -93,7 +93,7 @@ export class CheckoutComponent implements OnInit {
 
             this.postService.saveOrders(listOrder).subscribe((order: Order) => {
                 console.info(order);
-                this.router.navigate(['/eshop/payment'], {
+                this.router.navigate(['/eshop/order'], {
                     queryParams: {
                         reference: order.reference
                     }

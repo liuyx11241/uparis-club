@@ -7,14 +7,14 @@
     <ng-container matColumnDef="product">
         <mat-header-cell *matHeaderCellDef mat-sort-header>产品</mat-header-cell>
         <mat-cell *matCellDef="let row">
-            <a [routerLink]="['/admin/products/', row.idProductTrip]">{{row.nameProductTrip}}</a>
+            <a [routerLink]="['/admin/products/', row.trip.idProduct]">{{row.trip.nameProduct}}</a>
         </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="trip">
         <mat-header-cell *matHeaderCellDef mat-sort-header>出发日期</mat-header-cell>
         <mat-cell *matCellDef="let row">
-            <a [routerLink]="['/admin/trips/', row.idTrip]">{{row.dateStartTrip}}</a>
+            <a [routerLink]="['/admin/trips/', row.idTrip]">{{row.trip.dateStart}}</a>
         </mat-cell>
     </ng-container>
 
@@ -40,7 +40,9 @@
 
     <ng-container matColumnDef="listOption">
         <mat-header-cell *matHeaderCellDef mat-sort-header>购买选项</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.listOption | json}}</mat-cell>
+        <mat-cell *matCellDef="let row">
+            <li class="list-unstyled" *ngFor="let option of row.listOption">{{option.name}}</li>
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="amount">

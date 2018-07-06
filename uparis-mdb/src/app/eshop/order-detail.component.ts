@@ -7,11 +7,11 @@ import {MatSlideToggleChange} from "@angular/material";
 import {Person} from "../model/person.dto";
 
 @Component({
-    selector: 'uparis-payment-form',
-    templateUrl: './payment.component.html',
+    selector: 'uparis-order-detail',
+    templateUrl: './order-detail.component.html',
     styles: []
 })
-export class PaymentComponent implements OnInit {
+export class OrderDetailComponent implements OnInit {
     private _listOrder: Order[];
     private _payer: Person;
     private _payerForm: FormGroup;
