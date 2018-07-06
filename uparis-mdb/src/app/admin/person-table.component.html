@@ -7,7 +7,7 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>性别</mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.gender | gender}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="fullName">
+    <ng-container matColumnDef="lastName">
         <mat-header-cell *matHeaderCellDef mat-sort-header>姓名</mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.lastName}} {{row.firstName}}</mat-cell>
     </ng-container>

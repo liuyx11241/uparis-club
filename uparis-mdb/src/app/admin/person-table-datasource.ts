@@ -34,7 +34,7 @@ export class PersonTableDataSource extends DataSource<Person> {
         this.loadingSubject.complete();
     }
 
-    reload(filter = '') {
+    reload(filter = {}) {
         this.loadingSubject.next(true);
 
         this.service.getPersons(filter,

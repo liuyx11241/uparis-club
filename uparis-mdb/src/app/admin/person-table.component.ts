@@ -15,7 +15,7 @@ export class PersonTableComponent implements OnInit, AfterViewInit {
 
     /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
     displayedColumns = [
-        'id', 'gender', 'fullName', 'birthday', 'birthplace', 'wechat', 'telephone', 'email',
+        'id', 'gender', 'lastName', 'birthday', 'birthplace', 'wechat', 'telephone', 'email',
         'address', 'zipCode', 'city', 'country', 'actions'];
 
     constructor(private service: GetService) {

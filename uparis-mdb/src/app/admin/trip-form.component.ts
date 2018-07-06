@@ -48,12 +48,6 @@ export class TripFormComponent implements OnInit {
     }
 
     save(): void {
-        console.debug(this._formHelper.isValid());
-        console.debug(this._tripForm.value);
-
-        // this._trip.dateStart = this.formatter.format(this._tripDateStart);
-        // this._trip.dateEnd = this.formatter.format(this._tripDateEnd);
-
         if (this._formHelper.isValid()) {
             let trip = this._tripForm.value;
             trip.dateStart = DateFormatter.format(trip.dateStart);

@@ -1,5 +1,6 @@
-export class Schedule {
-    id: number;
+import {Abstract} from "./abstract.dto";
+
+export class Schedule extends Abstract {
     idItinerary: number;
     time: string;
     numOrder: number;

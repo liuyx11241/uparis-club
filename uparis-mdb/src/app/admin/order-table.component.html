@@ -4,7 +4,7 @@
         <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="product">
+    <ng-container matColumnDef="tripProduct">
         <mat-header-cell *matHeaderCellDef mat-sort-header>产品</mat-header-cell>
         <mat-cell *matCellDef="let row">
             <a [routerLink]="['/admin/products/', row.trip.idProduct]">{{row.trip.nameProduct}}</a>
@@ -47,7 +47,7 @@
 
     <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef mat-sort-header>总额</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.amount}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.amount | currency: row.trip.currency}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">

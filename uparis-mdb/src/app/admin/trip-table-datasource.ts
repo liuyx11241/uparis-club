@@ -40,7 +40,7 @@ export class TripTableDataSource extends DataSource<Trip> {
         this.loadingSubject.complete();
     }
 
-    reload(filter = '') {
+    reload(filter = {}) {
         this.loadingSubject.next(true);
 
         this.service.getTrips(filter,

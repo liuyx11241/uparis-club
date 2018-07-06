@@ -1,5 +1,6 @@
-export class Person {
-    id: number;
+import {Abstract} from "./abstract.dto";
+
+export class Person extends Abstract {
 
     gender: string;
 

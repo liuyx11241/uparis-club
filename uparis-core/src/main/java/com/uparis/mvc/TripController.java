@@ -31,13 +31,13 @@ public class TripController {
 
     @GetMapping
     public Page<TripDto> getTrips(
-        @RequestParam(value = "filter", required = false, defaultValue = "") String filter,
-        @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
-        @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
-        @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
-        @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
+            @RequestParam Map<String, String> filter,
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
+            @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
+            @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
         Page<TripPo> tripPoPage = repoTrip.findAll(PageRequest.of(
-            pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
+                pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
         return tripPoPage.map(tripPo -> modelMapper.map(tripPo, TripDto.class));
     }
 

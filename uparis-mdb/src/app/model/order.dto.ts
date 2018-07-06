@@ -1,10 +1,9 @@
 import {Person} from "./person.dto";
 import {Option} from "./option.dto";
 import {Trip} from "./trip.dto";
+import {Abstract} from "./abstract.dto";
 
-export class Order {
-    id: number;
-
+export class Order extends Abstract {
     reference: string;
 
     status: string;
@@ -16,6 +15,8 @@ export class Order {
     participant: Person;
 
     payer: Person;
+
+    paymentMode: string;
 
     listOption: Option[];
 }

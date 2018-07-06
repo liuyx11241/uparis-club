@@ -1,6 +1,6 @@
 package com.uparis.mvc;
 
-import com.uparis.db.constant.TypeStatus;
+import com.uparis.db.constant.TypeOrderStatus;
 import com.uparis.db.entity.OrderPo;
 import com.uparis.db.entity.PersonPo;
 import com.uparis.db.repo.OrderRepository;
@@ -16,7 +16,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -34,12 +36,15 @@ public class OrderController {
     @Autowired
     private HashCodeService hashCodeService;
 
+    @Autowired
+    private ControllerUtil util;
+
     @Value("${uparis.order.reference.length}")
     private int referenceLength;
 
     @GetMapping
     public Page<OrderDto> getOrders(
-            @RequestParam(value = "filter", required = false, defaultValue = "") String filter,
+            @RequestParam Map<String, String> filter,
             @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
             @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
             @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
@@ -67,13 +72,18 @@ public class OrderController {
                 listOrder.stream().map(orderDto -> modelMapper.map(orderDto, OrderPo.class)).collect(Collectors.toList());
 
         for (OrderPo orderPo : orderPoList) {
+            orderPo.setAmount(util.calculateAmount(orderPo));
             orderPo.setParticipant(repoPerson.findOptionalByWechat(orderPo.getParticipant().getWechat()).orElse(orderPo.getParticipant()));
             PersonPo payer = orderPo.getPayer();
             if (payer != null) {
                 orderPo.setPayer(repoPerson.findOptionalByWechat(payer.getWechat()).orElse(payer));
             }
             orderPo.setReference(orderReference);
-            orderPo.setStatus(TypeStatus.PENDING);
+            if (BigDecimal.ZERO.compareTo(orderPo.getAmount()) == 0) {
+                orderPo.setStatus(TypeOrderStatus.SUCCESS);
+            } else {
+                orderPo.setStatus(TypeOrderStatus.PENDING);
+            }
         }
         repoOrder.saveAll(orderPoList);
 

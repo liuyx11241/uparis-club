@@ -14,7 +14,7 @@ export class OrderTableComponent implements OnInit, AfterViewInit {
 
     dataSource: OrderTableDataSource;
 
-    displayedColumns = ['id', 'product', 'trip', 'participant', 'reference', 'status', 'payer', 'listOption', 'amount', 'actions'];
+    displayedColumns = ['id', 'tripProduct', 'trip', 'participant', 'reference', 'status', 'payer', 'listOption', 'amount', 'actions'];
 
     constructor(private service: GetService) {
     }

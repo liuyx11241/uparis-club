@@ -3,7 +3,6 @@ package com.uparis.db.entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.util.Date;
 import java.util.Objects;
 
 @MappedSuperclass
@@ -12,9 +11,9 @@ public abstract class AbstractPo {
     @GeneratedValue
     private Long id;
 
-    private Date dateCreated;
+    private String timeCreated;
 
-    private Date dateModified;
+    private String timeModified;
 
     public Long getId() {
         return id;
@@ -24,20 +23,20 @@ public abstract class AbstractPo {
         this.id = id;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
+    public String getTimeCreated() {
+        return timeCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setTimeCreated(String timeCreated) {
+        this.timeCreated = timeCreated;
     }
 
-    public Date getDateModified() {
-        return dateModified;
+    public String getTimeModified() {
+        return timeModified;
     }
 
-    public void setDateModified(Date dateModified) {
-        this.dateModified = dateModified;
+    public void setTimeModified(String timeModified) {
+        this.timeModified = timeModified;
     }
 
     @Override

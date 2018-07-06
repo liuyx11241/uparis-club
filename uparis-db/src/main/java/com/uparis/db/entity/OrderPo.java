@@ -1,6 +1,7 @@
 package com.uparis.db.entity;
 
-import com.uparis.db.constant.TypeStatus;
+import com.uparis.db.constant.TypeOrderStatus;
+import com.uparis.db.constant.TypePayment;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,13 +14,17 @@ public class OrderPo extends AbstractPo {
     @ManyToOne
     private PersonPo payer;
 
+    @Enumerated(EnumType.STRING)
+    private TypePayment paymentMode;
+
     @ManyToOne(optional = false)
     private TripPo trip;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private TypeStatus status;
+    private TypeOrderStatus status;
 
+    @Column(nullable = false)
     private BigDecimal amount;
 
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
@@ -41,6 +46,14 @@ public class OrderPo extends AbstractPo {
         this.payer = payer;
     }
 
+    public TypePayment getPaymentMode() {
+        return paymentMode;
+    }
+
+    public void setPaymentMode(TypePayment paymentMode) {
+        this.paymentMode = paymentMode;
+    }
+
     public TripPo getTrip() {
         return trip;
     }
@@ -49,11 +62,11 @@ public class OrderPo extends AbstractPo {
         this.trip = trip;
     }
 
-    public TypeStatus getStatus() {
+    public TypeOrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(TypeStatus status) {
+    public void setStatus(TypeOrderStatus status) {
         this.status = status;
     }
 

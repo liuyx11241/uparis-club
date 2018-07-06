@@ -10,16 +10,15 @@ import {ItineraryListComponent} from './itinerary-list.component';
 import {ShoppingCartComponent} from './shopping-cart.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OptionSelectorComponent} from './option-selector.component';
-import {TripSelectorComponent} from './trip-selector.component';
 import {NumberPickerComponent} from './number-picker.component';
 import {PersonFormComponent} from './person-form.component';
 import {CheckoutComponent} from './checkout.component';
 
 import {PersonCardComponent} from './person-card.component';
 import {OrderDetailComponent} from './order-detail.component';
-import { OptionListComponent } from './option-list.component';
+import {OptionListComponent} from './option-list.component';
 import {ModelModule} from "../model/model.module";
-import { PaymentFormComponent } from './payment-form.component';
+import {PaymentFormComponent} from './payment-form.component';
 
 @NgModule({
     imports: [
@@ -41,7 +40,6 @@ import { PaymentFormComponent } from './payment-form.component';
         PersonFormComponent,
         PersonCardComponent,
         ShoppingCartComponent,
-        TripSelectorComponent,
         NumberPickerComponent,
         OrderDetailComponent,
         OptionListComponent,

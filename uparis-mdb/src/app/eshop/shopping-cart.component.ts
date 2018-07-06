@@ -2,6 +2,9 @@ import {Component, Input} from '@angular/core';
 import {Product} from "../model/product.dto";
 import {Trip} from "../model/trip.dto";
 import {NavigationExtras, Router} from "@angular/router";
+import {groupBy, mergeMap, toArray} from "rxjs/internal/operators";
+import {from} from "rxjs/index";
+import {Option} from "../model/option.dto";
 
 @Component({
     selector: 'uparis-shopping-cart',
@@ -10,58 +13,73 @@ import {NavigationExtras, Router} from "@angular/router";
 
 export class ShoppingCartComponent {
 
-    private _product$: Product;
+    private _product: Product;
 
-    private _selectedTrip$: Trip;
+    private _minPrice: number;
 
-    // private _selectedOption$ = new Map();
+    private _maxPrice: number;
 
-    private _numberParticipant$ = 1;
+    private _selectedTrip: Trip;
+
+    private _numberParticipant = 1;
 
     constructor(private router: Router) {
 
     }
 
-    get product$(): Product {
-        return this._product$;
+    @Input()
+    set product(value: Product) {
+        this._product = value;
+        if (this._product.listTrip && this._product.listTrip.length > 0) {
+            this._selectedTrip = this._product.listTrip[0];
+        }
     }
 
-    @Input("product")
-    set product$(value: Product) {
-        this._product$ = value;
-    }
-
-    get selectedTrip$(): Trip {
-        return this._selectedTrip$;
-    }
-
-    get numberParticipant$(): number {
-        return this._numberParticipant$;
-    }
-
-    set numberParticipant$(value: number) {
-        this._numberParticipant$ = value;
-    }
-
-    selectTrip(value: Trip) {
-        this._selectedTrip$ = value;
-        // this._selectedOption$.clear();
+    set numberParticipant(value: number) {
+        this._numberParticipant = value;
     }
 
     calcStock(): number {
-        let stock = this.selectedTrip$ ? this.selectedTrip$.stock : 0;
-        return stock;
+        return this._selectedTrip ? this._selectedTrip.stock : 0;
+    }
+
+    calcMinPrice(): number {
+        let price = 0;
+        if (this._selectedTrip) {
+            price = this._selectedTrip.price;
+            from(this._selectedTrip.listOption).pipe(
+                groupBy((option: Option) => option.level),
+                mergeMap(group => group.pipe(toArray()))
+            ).subscribe(optionArray => {
+                price = price + Math.min.apply(Math, optionArray.map((option: Option) => option.price))
+            });
+        }
+        return price;
+    }
+
+    calcMaxPrice(): number {
+        let price = 0;
+        if (this._selectedTrip) {
+            price = this._selectedTrip.price;
+            from(this._selectedTrip.listOption).pipe(
+                groupBy((option: Option) => option.level),
+                mergeMap(group => group.pipe(toArray()))
+            ).subscribe(optionArray => {
+                price = price + Math.max.apply(Math, optionArray.map((option: Option) => option.price))
+            });
+        }
+        return price;
     }
 
     isTripValid(): boolean {
-        return this._selectedTrip$ && this._numberParticipant$ > 0;
+        return this._selectedTrip && this._numberParticipant > 0;
     }
 
     checkout() {
         let navigationExtras: NavigationExtras = {
             queryParams: {
-                'idTrip': this._selectedTrip$.id,
-                'number': this._numberParticipant$
+                'idTrip': this._selectedTrip.id,
+                'number': this._numberParticipant
             }
         };
         this.router.navigate(['/eshop/checkout'], navigationExtras);

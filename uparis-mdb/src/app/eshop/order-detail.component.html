@@ -1,5 +1,9 @@
 <section class="card mb-3 animated slideInDown">
     <div class="card-body row">
+        <div class="col-12 h5-responsive">
+            <span class="col-6">{{_order.trip?.nameProduct}}</span>
+            <span class="col-6">{{_order.trip?.dateStart}}出发</span>
+        </div>
         <div class="col-12 col-md-6 d-flex mt-3">
             <span class="col text-left">订单编号</span>
             <span class="col red text-white">{{_order.reference}}</span>
@@ -8,47 +12,45 @@
             <span class="col text-left">订单状态</span>
             <span class="col amber text-white">{{_order.status | status}}</span>
         </div>
-        <div class="col-12 h5-responsive">
-            <span class="col-6">{{_order.trip?.nameProduct}}</span>
-            <span class="col-6">{{_order.trip?.dateStart}}出发</span>
-        </div>
-        <div *ngIf="_order.status==='INIT'" class="col-12">
+        <div *ngIf="_order.status==='SUCCESS'" class="col-12 mt-3">
             <p>请扫描以下二维码加入微信群</p>
             <p>...</p>
         </div>
     </div>
 </section>
-<section class="row mb-3 animated bounceInLeft">
-    <div class="col-12 col-md-6 col-xl-4" *ngFor="let order of _listOrder">
+<section class="row animated bounceInLeft">
+    <div class="col-12 col-md-6 col-xl-4 mb-3" *ngFor="let order of _listOrder">
         <div class="card">
             <uparis-person-card
                 #person
                 class="card-body"
                 [person]="order.participant">
             </uparis-person-card>
-            <hr *ngIf="order.listOption">
-            <uparis-option-list
-                class="card-body"
-                [trip]="order.trip"
-                [listOption]="order.listOption"
-                [styleBlue]="person.styleMale">
-            </uparis-option-list>
-            <div class="card-body">
-                <mat-checkbox
-                    #slide
-                    color="primary"
-                    [checked]="_payer===order.participant"
-                    (change)="selectPayer($event, order.participant)"
-                    [class.red-text]="slide.checked && !person.styleMale"
-                    [class.blue-text]="slide.checked && person.styleMale">
-                    使用此人信息付款
-                </mat-checkbox>
-            </div>
+            <ng-container *ngIf="_order.status==='PENDING'">
+                <hr *ngIf="order.listOption.length">
+                <uparis-option-list
+                    class="card-body"
+                    [trip]="order.trip"
+                    [listOption]="order.listOption"
+                    [styleBlue]="person.styleMale">
+                </uparis-option-list>
+                <div class="card-body">
+                    <mat-checkbox
+                        #slide
+                        color="primary"
+                        [checked]="_payer===order.participant"
+                        (change)="selectPayer($event, order.participant)"
+                        [class.red-text]="slide.checked && !person.styleMale"
+                        [class.blue-text]="slide.checked && person.styleMale">
+                        使用此人信息付款
+                    </mat-checkbox>
+                </div>
+            </ng-container>
         </div>
     </div>
 </section>
-<section class="row mb-3 animated slideInUp">
-    <div class="col-12 col-md-8" *ngIf="!_payer">
+<section class="row animated slideInUp" *ngIf="_order.status==='PENDING'">
+    <div class="col-12 col-md-6 col-xl-8 mb-3" *ngIf="!_payer">
         <div class="card">
             <div class="card-header h5-responsive white">
                 付款人
@@ -57,7 +59,7 @@
         </div>
     </div>
 
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-6 col-xl-4 mb-3 mx-auto">
         <div class="card">
             <div class="card-header h5-responsive white">
                 付款方式

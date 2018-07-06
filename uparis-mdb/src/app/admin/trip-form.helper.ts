@@ -41,9 +41,6 @@ export class TripFormHelper {
             }
             optionForm.patchValue({stock: stockForm.value});
         }
-        console.debug(optionForm.value.stock);
-        console.debug(optionForm.get('stock').value);
-        console.debug(optionForm.get('stock').value === optionForm.value.stock);
 
         return optionForm;
     }

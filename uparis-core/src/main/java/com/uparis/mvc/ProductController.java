@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
@@ -22,16 +24,16 @@ public class ProductController {
 
     @GetMapping
     public Page<ProductDto> getProducts(
-        @RequestParam(value = "filter", required = false, defaultValue = "") String filter,
-        @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
-        @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
-        @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
-        @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
+            @RequestParam Map<String, String> filter,
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
+            @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
+            @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
         Page<ProductPo> productPoPage = repoProduct.findAll(
-            PageRequest.of(
-                pageIndex,
-                pageSize,
-                Sort.by(Sort.Direction.fromString(direction), sort)));
+                PageRequest.of(
+                        pageIndex,
+                        pageSize,
+                        Sort.by(Sort.Direction.fromString(direction), sort)));
         return productPoPage.map(productPo -> modelMapper.map(productPo, ProductDto.class));
     }
 

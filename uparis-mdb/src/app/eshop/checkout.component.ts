@@ -75,6 +75,7 @@ export class CheckoutComponent implements OnInit {
             for (let checkoutForm of this._listOrderForm.controls) {
                 let newOrder = new Order();
                 newOrder.trip = this._trip;
+                newOrder.amount = this._trip.price;
 
                 const participant = checkoutForm.get('participant').value;
                 participant.birthday = DateFormatter.format(participant.birthday);
@@ -84,6 +85,7 @@ export class CheckoutComponent implements OnInit {
                 newOrder.listOption = [];
                 Object.keys(listOption).map(opt => {
                     newOrder.listOption.push(listOption[opt])
+                    newOrder.amount = newOrder.amount + listOption[opt].price;
                 });
 
                 console.info(newOrder.listOption);

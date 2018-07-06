@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/person")
 public class PersonController {
@@ -25,16 +27,16 @@ public class PersonController {
 
     @GetMapping
     public Page<PersonDto> getPersons(
-        @RequestParam(value = "filter", required = false, defaultValue = "") String filter,
-        @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
-        @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
-        @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
-        @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
+            @RequestParam Map<String, String> filter,
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
+            @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
+            @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
         Page<PersonPo> personPoPage = repoPerson.findAll(
-            PageRequest.of(
-                pageIndex,
-                pageSize,
-                Sort.by(Sort.Direction.fromString(direction), sort)));
+                PageRequest.of(
+                        pageIndex,
+                        pageSize,
+                        Sort.by(Sort.Direction.fromString(direction), sort)));
         return personPoPage.map(personPo -> modelMapper.map(personPo, PersonDto.class));
     }
 }

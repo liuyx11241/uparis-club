@@ -1,5 +1,6 @@
-export class Multimedia {
-    id: number;
+import {Abstract} from "./abstract.dto";
+
+export class Multimedia extends Abstract {
     idProduct: number;
     srcUrl: string;
     type: string;

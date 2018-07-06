@@ -1,57 +1,68 @@
 <section class="ml-xl-0 ml-4">
-    <h2 class="h2-responsive text-center text-md-left font-weight-bold dark-grey-text">
-        <strong>{{product$.name}}</strong>
+    <h2 class="h2-responsive text-center text-md-left">
+        <strong>{{_product.name}}</strong>
     </h2>
 
-    <ng-container *ngIf="!product$.listTrip">
-        <span class="badge badge-danger">暂无活动安排</span>
+    <ng-container *ngIf="!_product.listTrip">
+        <span class="badge badge-info">暂无活动安排</span>
     </ng-container>
-    <span class="badge badge-success">tags</span>
+    <h5>
+        <span class="badge badge-info" *ngIf="calcMaxPrice()===0">免费</span>
+        <span class="badge badge-info">tags</span>
+    </h5>
 
-    <h4 class="h4-responsive text-center text-md-left mt-4">
-        <span class="amber-text font-weight-bold">
-            <strong>price range</strong>
-        </span>
+    <h4 class="h4-responsive text-center text-md-left mt-4" *ngIf="calcMaxPrice()>0">
+        <strong class="amber-text">
+            {{calcMinPrice()|currency: _selectedTrip.currency}}
+            <ng-container *ngIf="calcMaxPrice() > calcMinPrice()">
+                ~ {{calcMaxPrice()|currency: _selectedTrip.currency}}
+            </ng-container>
+        </strong>
     </h4>
 
-    <p>{{product$.longDescription}}</p>
+    <p>{{_product.longDescription}}</p>
 </section>
 
-<section *ngIf="product$.listTrip" class="mt-4 ml-xl-0 ml-4">
-    <p class="row" *ngFor="let trip of product$.listTrip">
-        <span class="col-6 text-left"><strong class="amber-text">{{trip.dateStart}}</strong>出发</span>
+<section *ngIf="_product.listTrip" class="mt-4 ml-xl-0 ml-4">
+    <p class="row" *ngFor="let trip of _product.listTrip">
+        <span class="col-6 text-left"><strong class="font-italic">{{trip.dateStart}}</strong>出发</span>
         <span class="col-6 text-right">
             <ng-container *ngIf="trip.stock===0">
-                <strong class="red">售罄</strong>
+                <strong class="badge badge-danger">售罄</strong>
             </ng-container>
             <ng-container *ngIf="trip.stock<10">
-                最后<strong class="red-text">{{trip.stock}}个</strong>名额
+                最后<strong class="red-text font-italic">{{trip.stock}}</strong>个名额
             </ng-container>
             <ng-container *ngIf="trip.stock>=10">
-                还有<strong class="amber-text">{{trip.stock}}个</strong>名额
+                还有<strong class="font-italic">{{trip.stock}}</strong>个名额
             </ng-container>
         </span>
     </p>
 
     <div class="row">
         <div class="col-12 text-right text-md-right">
-            <uparis-trip-selector
-                [placeholder$]="'活动时间'"
-                [listTrip$]="product$.listTrip"
-                (selection)="selectTrip($event)"
-            ></uparis-trip-selector>
+            <mat-form-field class="d-block mt-2">
+                <mat-select required placeholder="活动时间" [(value)]="_selectedTrip">
+                    <mat-option *ngFor="let trip of _product.listTrip" [value]="trip" [disabled]="trip.stock===0">
+                        {{trip.dateStart}}
+                        <ng-container *ngIf="trip.dateEnd != trip.dateStart">
+                            ~ {{trip.dateEnd}}
+                        </ng-container>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
     </div>
 
-    <div class="row ml-4 ml-xl-0 mt-4" *ngIf="selectedTrip$">
+    <div class="row ml-4 ml-xl-0 mt-4" *ngIf="_selectedTrip">
         <p class="text-center text-md-left">
             当前还有<span class="amber-text font-weight-bold"><strong>{{calcStock()}}</strong></span>个名额
         </p>
     </div>
     <div class="row">
         <div class="col-md-6 text-center text-md-left">
-            <uparis-number-picker [min]="1" [max]="selectedTrip$?.stock"
-                                  (onChange)="numberParticipant$=$event"></uparis-number-picker>
+            <uparis-number-picker [min]="1" [max]="_selectedTrip?.stock"
+                                  (onChange)="numberParticipant=$event"></uparis-number-picker>
         </div>
         <div class="col-md-6 text-center text-md-right mt-md-0 mt-4">
             <button mat-raised-button color="primary" [disabled]="!isTripValid()" (click)="checkout()">

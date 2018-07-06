@@ -1,7 +1,7 @@
 import {Stock} from "./stock.dto";
+import {Abstract} from "./abstract.dto";
 
-export class Option {
-    id: number;
+export class Option extends Abstract {
 
     idTrip: number;
 

@@ -37,7 +37,7 @@ export class OrderTableDataSource extends DataSource<Order> {
         this.loadingSubject.complete();
     }
 
-    reload(filter = ''): void {
+    reload(filter = {}): void {
         this.loadingSubject.next(true);
 
         this.service.getOrders(filter,

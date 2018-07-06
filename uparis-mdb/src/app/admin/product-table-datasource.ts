@@ -40,7 +40,7 @@ export class ProductTableDataSource extends DataSource<Product> {
         this.loadingSubject.complete();
     }
 
-    reload(filter = '') {
+    reload(filter = {}) {
         this.loadingSubject.next(true);
 
         this.service.getProducts(filter,

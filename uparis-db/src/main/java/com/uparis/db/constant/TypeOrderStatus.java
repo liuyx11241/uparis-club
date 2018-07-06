@@ -1,7 +1,7 @@
 package com.uparis.db.constant;
 
-public enum TypeStatus {
-    // 初建
+public enum TypeOrderStatus {
+    // 初始化
     INIT,
 
     // 等待付款
@@ -15,6 +15,7 @@ public enum TypeStatus {
 
     // 失败
     FAILURE,
+
     // 候补
     WAITING_LIST
 }

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-6">
             <mdb-carousel>
-                <mdb-slide *ngFor="let slide of product.listMultimedia">
+                <mdb-slide *ngFor="let slide of _product.listMultimedia">
                     <div class="view">
                         <img class="d-block w-100 rounded-circle" [src]="slide.srcUrl">
                         <div class="mask waves-light" mdbWavesEffect></div>
@@ -15,7 +15,7 @@
             </mdb-carousel>
         </div>
         <div class="col-lg-5 mx-3 text-center text-md-left">
-            <uparis-shopping-cart [product]="product"></uparis-shopping-cart>
+            <uparis-shopping-cart [product]="_product"></uparis-shopping-cart>
         </div>
     </div>
 </div>
@@ -26,7 +26,7 @@
             <span [class.amber-text]="tabSchedule.isActive">行程</span>
         </ng-template>
         <ng-template matTabContent>
-            <uparis-itinerary-list [listItinerary]="product.listItinerary"></uparis-itinerary-list>
+            <uparis-itinerary-list [listItinerary]="_product.listItinerary"></uparis-itinerary-list>
         </ng-template>
     </mat-tab>
     <mat-tab #tabPortrait>
