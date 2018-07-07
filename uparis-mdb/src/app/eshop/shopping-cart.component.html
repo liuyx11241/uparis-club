@@ -5,10 +5,10 @@
 
     <h5>
         <ng-container *ngIf="_product.listTrip.length===0">
-            <span class="badge badge-warning">暂无活动安排</span>
+            <span class="badge badge-pill red">暂无活动安排</span>
         </ng-container>
-        <span class="badge badge-info" *ngIf="calcMaxPrice()===0">免费</span>
-        <span class="badge badge-info">tags</span>
+        <span class="badge badge-pill badge-info" *ngIf="calcMaxPrice()===0">免费</span>
+        <span class="badge badge-pill badge-info">tags</span>
     </h5>
 
     <h4 class="h4-responsive text-center text-md-left mt-4" *ngIf="calcMaxPrice()>0">
@@ -26,7 +26,7 @@
 
 <section *ngIf="_product.listTrip.length > 0" class="mt-4 ml-xl-0 ml-4">
     <p class="row" *ngFor="let trip of _product.listTrip">
-        <span class="col-6 text-left"><strong class="font-italic">{{trip.dateStart}}</strong></span>
+        <span class="col-6 text-left"><strong class="font-italic mr-2">{{trip.dateStart}}</strong>出发</span>
         <span class="col-6 text-right">
             <ng-container *ngIf="trip.stock===0">
                 <strong class="badge badge-danger">售罄</strong>

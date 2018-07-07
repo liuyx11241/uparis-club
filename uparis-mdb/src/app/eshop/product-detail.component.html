@@ -1,4 +1,4 @@
-<div class="container z-depth-1 px-2 py-2 mb-3">
+<section class="container z-depth-1 px-2 py-2 mb-3 animated bounceInDown">
     <div class="row">
         <div class="col-lg-6">
             <mdb-carousel>
@@ -18,8 +18,8 @@
             <uparis-shopping-cart [product]="_product"></uparis-shopping-cart>
         </div>
     </div>
-</div>
-<mat-tab-group color="primary" class="mt-5" [style.minHeight.px]="500">
+</section>
+<mat-tab-group color="primary" class="mt-5 animated slideInUp" [style.minHeight.px]="500">
     <mat-tab #tabSchedule>
         <ng-template mat-tab-label>
             <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>

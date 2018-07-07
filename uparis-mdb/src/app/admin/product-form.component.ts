@@ -15,9 +15,11 @@ import {SnackBar} from "./snack-bar";
 })
 export class ProductFormComponent implements OnInit {
 
-    _formHelper: ProductFormHelper;
+    private _formHelper: ProductFormHelper;
 
-    _productForm: FormGroup;
+    private _productForm: FormGroup;
+
+    private _idProduct: number;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -31,6 +33,7 @@ export class ProductFormComponent implements OnInit {
     ngOnInit(): void {
         this.route.data.subscribe((data: { product: Product }) => {
             this._productForm = this._formHelper.newProductForm(data.product);
+            this._idProduct = data.product.id;
             this._formHelper.disabled = !!data.product;
         });
     }

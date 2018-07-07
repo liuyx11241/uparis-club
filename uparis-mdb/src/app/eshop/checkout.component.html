@@ -1,38 +1,41 @@
-<section class="z-depth-1 py-5 mb-3 px-5 row">
-    <div class="col-12 col-md-3 text-center text-md-left">{{_trip.nameProduct}}</div>
-    <div class="col-12 col-md-3 text-center text-md-left">{{_trip.dateStart}}
-        <ng-container *ngIf="_trip.dateEnd != _trip.dateStart"> ~ {{_trip.dateEnd}}</ng-container>
-    </div>
-    <div class="col-12 col-md-3 text-center text-md-left">
-        {{_trip.price | currency: _trip.currency}}
-    </div>
-    <div class="col-12 col-md-3 text-center text-md-right">
-        <uparis-number-picker [initValue]="_number" [min]="1" [max]="_trip.stock" (onChange)="number=$event"
+<section class="card mb-3 animated bounceInDown">
+    <div class="row card-body">
+        <span class="col-12 col-md-3 text-center align-middle mt-2">{{_trip.nameProduct}}</span>
+        <span class="col-12 col-md-3 text-center text-md-left align-middle mt-2">{{_trip.dateStart}}
+            <ng-container *ngIf="_trip.dateEnd != _trip.dateStart"> ~ {{_trip.dateEnd}}</ng-container>
+        </span>
+        <span class="col-12 col-md-3 text-center text-md-left align-middle mt-2">
+            {{_trip.price | currency: _trip.currency}}
+        </span>
+        <uparis-number-picker class="col-12 col-md-3 text-center text-md-right align-middle" [initValue]="_number"
+                              [min]="1" [max]="_trip.stock" (onChange)="number=$event"
         ></uparis-number-picker>
     </div>
 </section>
-<section class="row">
+<section class="row animated fadeInLeftBig">
     <div *ngFor="let checkoutForm of _listOrderForm.controls; let index=index;"
          [formGroup]="checkoutForm" class="col-12 col-md-6 col-xl-4">
-        <div class="card">
+        <div class="card mb-3">
             <uparis-option-selector
+                *ngIf="_trip.listOption.length>0"
                 class="card-body"
+                [trip]="_trip"
                 [listOption]="_trip.listOption"
                 [optionForm]="checkoutForm.get('option')">
             </uparis-option-selector>
-            <hr>
+            <hr *ngIf="_trip.listOption.length>0">
             <uparis-person-form
                 class="card-body"
                 [personForm]="checkoutForm.get('participant')"></uparis-person-form>
         </div>
     </div>
 </section>
-<section class="row mt-5">
+<section class="row mb-3 animated slideInUp">
     <mat-checkbox color="primary" class="col-12 " #accept>
         我已认真阅读并接受使用此<a><u>服务协议</u></a>
     </mat-checkbox>
 </section>
-<button mat-raised-button class="row mb-3" color="primary" type="submit"
+<button mat-raised-button class="row mb-3 animated slideInUp" color="primary" type="submit"
         [disabled]="!accept.checked" (click)="validate()">确认
-    <i class="fa fa-arrow-circle-right fa-lg"></i>
+    <i class="fa fa-check-circle fa-lg"></i>
 </button>

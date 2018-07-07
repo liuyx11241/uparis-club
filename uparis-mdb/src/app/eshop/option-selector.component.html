@@ -1,11 +1,23 @@
-<ng-container [formGroup]="_optionForm" *ngIf="getKeys().length>0">
-    <p class="col-12 text-center text-md-left">自定义活动</p>
+<ng-container [formGroup]="_optionForm">
+    <p class="col-12 text-center text-md-left">活动选项</p>
     <mat-form-field *ngFor="let key of getKeys()" class="col-12">
         <mat-select [formControlName]="'option'+key"
                     (valueChange)="selectOption($event)">
-            <mat-option *ngFor="let option of mappedListOption[key]"
+            <mat-select-trigger>
+                <span class="d-flex">
+                    {{selectedOption(key)?.name}}
+                    <strong class="col text-right">{{selectedOption(key)?.price | currency: _trip.currency}}</strong>
+                </span>
+            </mat-select-trigger>
+
+            <mat-option *ngFor="let option of _mappedListOption[key]"
                         [value]="option" [disabled]="option.stock?.quantity===0">
-                {{option.name}}
+                <span class="d-flex">
+                    {{option.name}}
+                    <strong class="col text-right">
+                        {{option.price | currency : _trip.currency}}
+                    </strong>
+                </span>
             </mat-option>
         </mat-select>
         <mat-hint *ngIf="selectedOption(key) && selectedOption(key).stock">

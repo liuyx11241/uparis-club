@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Option} from "../model/option.dto";
 import {FormGroup} from "@angular/forms";
+import {Trip} from "../model/trip.dto";
 
 @Component({
     selector: 'uparis-option-selector',
@@ -9,6 +10,8 @@ import {FormGroup} from "@angular/forms";
 export class OptionSelectorComponent {
 
     private _mappedListOption: object;
+
+    private _trip: Trip;
 
     private _selectedOption: Map<string, Option>;
 
@@ -27,8 +30,9 @@ export class OptionSelectorComponent {
     }
 
 
-    get mappedListOption(): object {
-        return this._mappedListOption;
+    @Input()
+    set trip(value: Trip) {
+        this._trip = value;
     }
 
     @Input()

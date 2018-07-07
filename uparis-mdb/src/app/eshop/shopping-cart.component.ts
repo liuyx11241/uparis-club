@@ -52,6 +52,7 @@ export class ShoppingCartComponent {
             ).subscribe(optionArray => {
                 price = price + Math.min.apply(Math, optionArray.map((option: Option) => option.price))
             });
+            return price;
         }
         return null;
     }
@@ -65,6 +66,7 @@ export class ShoppingCartComponent {
             ).subscribe(optionArray => {
                 price = price + Math.max.apply(Math, optionArray.map((option: Option) => option.price))
             });
+            return price;
         }
         return null;
     }

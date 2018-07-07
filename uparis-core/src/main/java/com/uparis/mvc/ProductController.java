@@ -4,6 +4,7 @@ import com.uparis.db.constant.TypeProductStatus;
 import com.uparis.db.entity.ProductPo;
 import com.uparis.db.repo.ProductRepository;
 import com.uparis.dto.ProductDto;
+import com.uparis.dto.ProductSimpleDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -25,7 +26,7 @@ public class ProductController {
     private ProductRepository repoProduct;
 
     @GetMapping
-    public Page<ProductDto> getProducts(
+    public Page<ProductSimpleDto> getProducts(
             @RequestParam Map<String, String> filter,
             @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
             @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
@@ -37,7 +38,7 @@ public class ProductController {
             example.getProbe().setStatus(TypeProductStatus.valueOf(filter.get("status").toUpperCase()));
         }
         Page<ProductPo> productPoPage = repoProduct.findAll(example, pageRequest);
-        return productPoPage.map(productPo -> modelMapper.map(productPo, ProductDto.class));
+        return productPoPage.map(productPo -> modelMapper.map(productPo, ProductSimpleDto.class));
     }
 
     @GetMapping("/{id}")

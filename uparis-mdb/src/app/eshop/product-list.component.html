@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-12 col-md-6 col-lg-4 mb-3 hoverable animated fadeInRightBig" *ngFor="let product of _listProduct; trackBy: trackByProducts;">
+    <div class="col-12 col-md-6 col-lg-4 mb-3 hoverable animated jackInTheBox" *ngFor="let product of _listProduct; trackBy: trackByProducts;">
         <mdb-carousel [isControls]="true" [animation]="'slide'" class="view hm-white-slight waves-light pt-2">
             <mdb-slide *ngFor="let slide of product.listMultimedia">
                 <img class="d-block w-100" [src]="slide.srcUrl" [alt]="slide.altText">

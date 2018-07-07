@@ -56,7 +56,7 @@
                 <mat-icon [class.amber-text]="tabTrip.isActive">directions_run</mat-icon>
                 <span [class.amber-text]="tabTrip.isActive">出队</span>
             </ng-template>
-            <uparis-trip-table [product]="_productForm.value"></uparis-trip-table>
+            <uparis-trip-table [idProduct]="_idProduct"></uparis-trip-table>
         </mat-tab>
         <mat-tab #tabSchedule>
             <ng-template mat-tab-label>
