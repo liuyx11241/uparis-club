@@ -11,20 +11,20 @@
 <ng-container *ngFor="let level of getOptionLevels()">
     <div class="card-header col-12">层级 {{level}}</div>
     <div class="card-body col-12" *ngFor="let option of _mappedListOption.get(level);" [formGroup]="option">
-        <mat-form-field class="col-6 col-md-1">
+        <mat-form-field class="col-6 col-md-2 col-lg-1">
             <input matInput type="text" formControlName="id" placeholder="ID">
         </mat-form-field>
-        <mat-form-field class="col-6 col-md-1">
+        <mat-form-field class="col-6 col-md-2 col-lg-1">
             <mat-select placeholder="层级" formControlName="level" (valueChange)="onLevelChange($event, option)" required>
                 <mat-option *ngFor="let optionLevel of getOptionLevels()" [value]="optionLevel">
                     {{optionLevel}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field class="col-6 col-md-2">
+        <mat-form-field class="col-6 col-md-4 col-lg-2">
             <input matInput type="text" formControlName="name" placeholder="名称" required>
         </mat-form-field>
-        <mat-form-field class="col-6 col-md-2">
+        <mat-form-field class="col-6 col-md-4 col-lg-2">
             <mat-select placeholder="库存" [value]="option.get('stock')" (selectionChange)="onStockChange($event, option)"
             [disabled]="_formHelper.disabled">
                 <mat-option>-- None --</mat-option>
@@ -34,15 +34,15 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="col-6 col-md-1">
+        <mat-form-field class="col-6 col-md-2 col-lg-1">
             <input matInput type="number" placeholder="单价" formControlName="price" required>
         </mat-form-field>
 
-        <mat-form-field class="col-6 col-md-1">
+        <mat-form-field class="col-6 col-md-4 col-lg-1">
             <input matInput type="number" placeholder="增值税率" formControlName="priceVAT">
         </mat-form-field>
 
-        <mat-form-field class="col-11 col-md-3">
+        <mat-form-field class="col-11 col-md-5 col-lg-3">
             <input matInput type="text" formControlName="description" placeholder="描述">
         </mat-form-field>
         <button mat-icon-button class="close col-1" *ngIf="!_formHelper.disabled" (click)="delete(option)">

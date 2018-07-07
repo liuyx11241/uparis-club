@@ -17,9 +17,9 @@
         添加出队
     </button>
 </mat-toolbar>
-<div class="card-body" [formGroup]="_productForm">
+<section class="card-body" [formGroup]="_productForm">
     <div class="row">
-        <div class="col-12 col-md-4 col-lg-3 hoverable">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 hoverable">
             <mat-form-field class="col-12">
                 <input type="text" matInput placeholder="产品ID" formControlName="id">
             </mat-form-field>
@@ -39,7 +39,7 @@
                 <input type="text" matInput placeholder="昵称" formControlName="alias">
             </mat-form-field>
         </div>
-        <div class="col-12 col-md-8 col-lg-9 hoverable">
+        <div class="col-12 col-md-6 col-lg-8 col-xl-9 hoverable">
             <mat-form-field class="col-12">
                 <textarea matInput placeholder="短介绍" formControlName="shortDescription" rows="3"></textarea>
             </mat-form-field>
@@ -75,4 +75,4 @@
                                      [listMultimedia]="_formHelper.listMultimediaForm"></uparis-multimedia-table>
         </mat-tab>
     </mat-tab-group>
-</div>
+</section>
