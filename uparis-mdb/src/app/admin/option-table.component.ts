@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {TripFormHelper} from "./trip-form.helper";
 import {AbstractControl, FormArray, FormGroup} from "@angular/forms";
 import {Stock} from "../model/stock.dto";
+import {MatSelectChange} from "@angular/material";
 
 @Component({
     selector: 'uparis-option-table',
@@ -77,5 +78,9 @@ export class OptionTableComponent {
 
     compareStockById(s1: Stock, s2: Stock): boolean {
         return s1 && s2 && s1.id === s2.id;
+    }
+
+    onStockChange($event: MatSelectChange, option: FormGroup) {
+        option.setControl('stock', $event.value);
     }
 }

@@ -84,7 +84,7 @@ export class FormHelper {
             numOrder: formBuilder.control(option ? option.numOrder : null, [Validators.required, Validators.min(0)]),
             price: formBuilder.control(option ? option.price : null, [Validators.required, Validators.min(0)]),
             priceVAT: formBuilder.control(option ? option.priceVAT : null),
-            stock: formBuilder.control(option ? option.stock : null),
+            stock: formBuilder.group({}),
         });
     }
 
@@ -92,7 +92,7 @@ export class FormHelper {
         return formBuilder.group({
             id: formBuilder.control(stock ? stock.id : null),
             name: formBuilder.control(stock ? stock.name : null, Validators.required),
-            quantity: formBuilder.control(stock ? stock.quantity : 0, [Validators.required, Validators.min(0)]),
+            quantity: formBuilder.control(stock ? stock.quantity : null, [Validators.required, Validators.min(0)]),
         });
     }
 

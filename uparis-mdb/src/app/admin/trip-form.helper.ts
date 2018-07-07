@@ -34,12 +34,12 @@ export class TripFormHelper {
         let optionForm = FormHelper.newOptionForm(this.formBuilder, option);
 
         if (option && option.stock) {
-            let stockForm = this.listStockform.controls.find(stockForm => stockForm.value.id === option.stock.id);
+            let stockForm = this.listStockForm.controls.find(stockForm => stockForm.value.id === option.stock.id);
             if (!stockForm) {
                 stockForm = this.newStockForm(option.stock);
-                this.listStockform.push(stockForm);
+                this.listStockForm.push(stockForm);
             }
-            optionForm.patchValue({stock: stockForm.value});
+            optionForm.setControl('stock', stockForm);
         }
 
         return optionForm;
@@ -62,7 +62,7 @@ export class TripFormHelper {
         return this._tripForm.get('listOption') as FormArray;
     }
 
-    get listStockform(): FormArray {
+    get listStockForm(): FormArray {
         return this._listStockForm;
     }
 
