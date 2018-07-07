@@ -24,6 +24,11 @@
         <mat-cell *matCellDef="let row">{{row.alias}}</mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>状态</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.status | status}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="duration">
         <mat-header-cell *matHeaderCellDef mat-sort-header>时长</mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.duration}}天</mat-cell>

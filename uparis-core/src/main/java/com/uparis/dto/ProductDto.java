@@ -16,6 +16,8 @@ public class ProductDto extends AbstractDto implements Serializable {
     @Length(max = 32)
     private String alias;
 
+    private String status;
+
     @Length(max = 128)
     private String shortDescription;
 
@@ -45,6 +47,14 @@ public class ProductDto extends AbstractDto implements Serializable {
 
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getShortDescription() {

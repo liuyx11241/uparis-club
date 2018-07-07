@@ -1,4 +1,4 @@
-<section class="z-depth-1 py-5 mb-5 px-5 row">
+<section class="z-depth-1 py-5 mb-3 px-5 row">
     <div class="col-12 col-md-3 text-center text-md-left">{{_trip.nameProduct}}</div>
     <div class="col-12 col-md-3 text-center text-md-left">{{_trip.dateStart}}
         <ng-container *ngIf="_trip.dateEnd != _trip.dateStart"> ~ {{_trip.dateEnd}}</ng-container>
@@ -32,7 +32,7 @@
         我已认真阅读并接受使用此<a><u>服务协议</u></a>
     </mat-checkbox>
 </section>
-<button mat-raised-button class="row mb-5" color="primary" type="submit"
+<button mat-raised-button class="row mb-3" color="primary" type="submit"
         [disabled]="!accept.checked" (click)="validate()">确认
     <i class="fa fa-arrow-circle-right fa-lg"></i>
 </button>

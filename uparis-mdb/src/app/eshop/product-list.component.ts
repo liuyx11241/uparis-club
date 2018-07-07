@@ -8,24 +8,24 @@ import {NavigationExtras, Router} from "@angular/router";
     templateUrl: './product-list.component.html',
 })
 export class ProductListComponent implements OnInit {
-    private _listProduct$: Product[];
+    private _listProduct: Product[];
 
     constructor(private service: GetService, private router: Router) {
     }
 
     ngOnInit() {
         this.service.getAllProducts().subscribe(data => {
-            this._listProduct$ = data;
+            this._listProduct = data;
         });
     }
 
     @Input()
-    set listProduct$(value: Product[]) {
-        this._listProduct$ = value;
+    set listProduct(value: Product[]) {
+        this._listProduct = value;
     }
 
-    get listProduct$(): Product[] {
-        return this._listProduct$;
+    get listProduct(): Product[] {
+        return this._listProduct;
     }
 
     trackByProducts(index: number, product: Product): number {

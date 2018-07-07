@@ -1,10 +1,12 @@
 package com.uparis.mvc;
 
+import com.uparis.db.constant.TypeProductStatus;
 import com.uparis.db.entity.ProductPo;
 import com.uparis.db.repo.ProductRepository;
 import com.uparis.dto.ProductDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -29,11 +31,12 @@ public class ProductController {
             @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
             @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
             @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
-        Page<ProductPo> productPoPage = repoProduct.findAll(
-                PageRequest.of(
-                        pageIndex,
-                        pageSize,
-                        Sort.by(Sort.Direction.fromString(direction), sort)));
+        PageRequest pageRequest = PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort));
+        Example<ProductPo> example = Example.of(new ProductPo());
+        if (filter.containsKey("status")) {
+            example.getProbe().setStatus(TypeProductStatus.valueOf(filter.get("status").toUpperCase()));
+        }
+        Page<ProductPo> productPoPage = repoProduct.findAll(example, pageRequest);
         return productPoPage.map(productPo -> modelMapper.map(productPo, ProductDto.class));
     }
 

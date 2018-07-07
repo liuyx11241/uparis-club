@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
 import {TripTableDataSource} from './trip-table-datasource';
 import {GetService} from "../service/http-get.service";
+import {Product} from "../model/product.dto";
 
 @Component({
     selector: 'uparis-trip-table',
@@ -14,6 +15,8 @@ export class TripTableComponent implements OnInit, AfterViewInit {
 
     _displayedColumns = ['id', 'idProduct', 'dateStart', 'dateEnd', 'stock', 'price', 'priceVAT', 'actions'];
 
+    private _product: Product;
+
     constructor(private service: GetService) {
     }
 
@@ -23,6 +26,11 @@ export class TripTableComponent implements OnInit, AfterViewInit {
 
 
     ngAfterViewInit(): void {
-        this._dataSource.reload();
+        this._dataSource.reload(this._product ? {idProduct: this._product.id} : {});
+    }
+
+    @Input()
+    set product(value: Product) {
+        this._product = value;
     }
 }

@@ -1,4 +1,4 @@
-<div class="container z-depth-1 px-2 py-2 mb-5">
+<div class="container z-depth-1 px-2 py-2 mb-3">
     <div class="row">
         <div class="col-lg-6">
             <mdb-carousel>
@@ -19,7 +19,7 @@
         </div>
     </div>
 </div>
-<mat-tab-group color="primary" class="mt-5">
+<mat-tab-group color="primary" class="mt-5" [style.minHeight.px]="500">
     <mat-tab #tabSchedule>
         <ng-template mat-tab-label>
             <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>

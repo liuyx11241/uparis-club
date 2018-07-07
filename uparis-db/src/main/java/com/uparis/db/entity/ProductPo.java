@@ -1,5 +1,7 @@
 package com.uparis.db.entity;
 
+import com.uparis.db.constant.TypeProductStatus;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,6 +14,10 @@ public class ProductPo extends AbstractPo {
 
     @Column(length = 32)
     private String alias;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TypeProductStatus status;
 
     @Column(length = 128)
     private String shortDescription;
@@ -61,6 +67,14 @@ public class ProductPo extends AbstractPo {
 
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    public TypeProductStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TypeProductStatus status) {
+        this.status = status;
     }
 
     public String getShortDescription() {

@@ -40,6 +40,7 @@ export class ProductFormComponent implements OnInit {
     }
 
     save() {
+        console.info(this._productForm);
         if (this._formHelper.isValid()) {
             this.service.saveProduct(this._productForm.value).subscribe((id: number) => {
                 this._formHelper.disabled = true;

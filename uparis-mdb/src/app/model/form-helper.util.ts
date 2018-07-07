@@ -28,6 +28,7 @@ export class FormHelper {
             id: formBuilder.control(product ? product.id : null),
             name: formBuilder.control(product ? product.name : null, Validators.required),
             alias: formBuilder.control(product ? product.alias : null),
+            status: formBuilder.control(product ? product.status : 'INACTIVE', Validators.required),
             shortDescription: formBuilder.control(product ? product.shortDescription : null, Validators.maxLength(128)),
             longDescription: formBuilder.control(product ? product.longDescription : null, Validators.maxLength(512)),
             duration: formBuilder.control(product ? product.duration : null, [Validators.required, Validators.min(1)]),

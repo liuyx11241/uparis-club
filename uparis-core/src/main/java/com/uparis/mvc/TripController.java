@@ -1,5 +1,6 @@
 package com.uparis.mvc;
 
+import com.uparis.db.entity.ProductPo;
 import com.uparis.db.entity.StockPo;
 import com.uparis.db.entity.TripPo;
 import com.uparis.db.repo.StockRepository;
@@ -7,6 +8,7 @@ import com.uparis.db.repo.TripRepository;
 import com.uparis.dto.TripDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -36,8 +38,15 @@ public class TripController {
             @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
             @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
             @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
-        Page<TripPo> tripPoPage = repoTrip.findAll(PageRequest.of(
-                pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
+
+        PageRequest pageRequest = PageRequest.of(
+                pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort));
+        Example<TripPo> example = Example.of(new TripPo());
+        if (filter.containsKey("idProduct")) {
+            example.getProbe().setProduct(new ProductPo());
+            example.getProbe().getProduct().setId(Long.valueOf(filter.get("idProduct")));
+        }
+        Page<TripPo> tripPoPage = repoTrip.findAll(example, pageRequest);
         return tripPoPage.map(tripPo -> modelMapper.map(tripPo, TripDto.class));
     }
 

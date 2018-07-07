@@ -44,9 +44,8 @@ export class ShoppingCartComponent {
     }
 
     calcMinPrice(): number {
-        let price = 0;
         if (this._selectedTrip) {
-            price = this._selectedTrip.price;
+            let price = this._selectedTrip.price;
             from(this._selectedTrip.listOption).pipe(
                 groupBy((option: Option) => option.level),
                 mergeMap(group => group.pipe(toArray()))
@@ -54,13 +53,12 @@ export class ShoppingCartComponent {
                 price = price + Math.min.apply(Math, optionArray.map((option: Option) => option.price))
             });
         }
-        return price;
+        return null;
     }
 
     calcMaxPrice(): number {
-        let price = 0;
         if (this._selectedTrip) {
-            price = this._selectedTrip.price;
+            let price = this._selectedTrip.price;
             from(this._selectedTrip.listOption).pipe(
                 groupBy((option: Option) => option.level),
                 mergeMap(group => group.pipe(toArray()))
@@ -68,7 +66,7 @@ export class ShoppingCartComponent {
                 price = price + Math.max.apply(Math, optionArray.map((option: Option) => option.price))
             });
         }
-        return price;
+        return null;
     }
 
     isTripValid(): boolean {

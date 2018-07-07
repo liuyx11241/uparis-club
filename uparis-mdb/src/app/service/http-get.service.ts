@@ -26,7 +26,9 @@ export class GetService {
     }
 
     public getAllProducts(): Observable<Product[]> {
-        return this.http.get<Product[]>("/api/product").pipe(
+        let httpParams = new HttpParams()
+            .set('status', 'ACTIVE');
+        return this.http.get<Product[]>("/api/product", {params: httpParams}).pipe(
             map(value => value['content'])
         );
     }

@@ -30,6 +30,12 @@
                 <input type="number" matInput placeholder="时长" formControlName="duration" required>
             </mat-form-field>
             <mat-form-field class="col-12">
+                <mat-select placeholder="状态" formControlName="status" required>
+                    <mat-option value="ACTIVE">{{'ACTIVE' | status}}</mat-option>
+                    <mat-option value="INACTIVE">{{'INACTIVE' | status}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-12">
                 <input type="text" matInput placeholder="昵称" formControlName="alias">
             </mat-form-field>
         </div>
@@ -45,26 +51,28 @@
 
     <hr>
     <mat-tab-group color="primary">
-        <mat-tab #tabTrip>
+        <mat-tab #tabTrip *ngIf="_formHelper.disabled">
             <ng-template mat-tab-label>
                 <mat-icon [class.amber-text]="tabTrip.isActive">directions_run</mat-icon>
                 <span [class.amber-text]="tabTrip.isActive">出队</span>
             </ng-template>
-            <uparis-trip-table></uparis-trip-table>
+            <uparis-trip-table [product]="_productForm.value"></uparis-trip-table>
         </mat-tab>
         <mat-tab #tabSchedule>
             <ng-template mat-tab-label>
                 <mat-icon [class.amber-text]="tabSchedule.isActive">schedule</mat-icon>
                 <span [class.amber-text]="tabSchedule.isActive">行程</span>
             </ng-template>
-            <uparis-itinerary-table [formHelper]="_formHelper" [listItinerary]="_formHelper.listItineraryForm"></uparis-itinerary-table>
+            <uparis-itinerary-table [formHelper]="_formHelper"
+                                    [listItinerary]="_formHelper.listItineraryForm"></uparis-itinerary-table>
         </mat-tab>
         <mat-tab #tabMultimedia>
             <ng-template mat-tab-label>
                 <mat-icon [class.amber-text]="tabMultimedia.isActive">photo_library</mat-icon>
                 <span [class.amber-text]="tabMultimedia.isActive">多媒体</span>
             </ng-template>
-            <uparis-multimedia-table [formHelper]="_formHelper" [listMultimedia]="_formHelper.listMultimediaForm"></uparis-multimedia-table>
+            <uparis-multimedia-table [formHelper]="_formHelper"
+                                     [listMultimedia]="_formHelper.listMultimediaForm"></uparis-multimedia-table>
         </mat-tab>
     </mat-tab-group>
 </div>

@@ -6,6 +6,7 @@ import {Abstract} from "./abstract.dto";
 export class Product extends Abstract {
     name: string;
     alias: string;
+    status: string;
     shortDescription: string;
     longDescription: string;
     duration: number;
