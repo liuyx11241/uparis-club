@@ -27,7 +27,7 @@ public class OrderPo extends AbstractPo {
     @Column(nullable = false)
     private BigDecimal amount;
 
-    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(optional = false)
     private PersonPo participant;
 
     private String reference;

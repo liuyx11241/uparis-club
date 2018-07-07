@@ -1,10 +1,11 @@
 package com.uparis.mvc;
 
 import com.uparis.db.constant.TypeOrderStatus;
-import com.uparis.db.entity.OrderPo;
-import com.uparis.db.entity.PersonPo;
+import com.uparis.db.entity.*;
 import com.uparis.db.repo.OrderRepository;
 import com.uparis.db.repo.PersonRepository;
+import com.uparis.db.repo.StockRepository;
+import com.uparis.db.repo.TripRepository;
 import com.uparis.dto.OrderDto;
 import com.uparis.util.HashCodeService;
 import org.modelmapper.ModelMapper;
@@ -14,8 +15,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -31,13 +34,16 @@ public class OrderController {
     private PersonRepository repoPerson;
 
     @Autowired
+    private StockRepository repoStock;
+
+    @Autowired
+    private TripRepository repoTrip;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Autowired
     private HashCodeService hashCodeService;
-
-    @Autowired
-    private ControllerUtil util;
 
     @Value("${uparis.order.reference.length}")
     private int referenceLength;
@@ -65,6 +71,7 @@ public class OrderController {
     }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<OrderDto> createOrder(@RequestBody List<OrderDto> listOrder) {
         String orderReference = hashCodeService.generate(referenceLength);
 
@@ -72,23 +79,73 @@ public class OrderController {
                 listOrder.stream().map(orderDto -> modelMapper.map(orderDto, OrderPo.class)).collect(Collectors.toList());
 
         for (OrderPo orderPo : orderPoList) {
-            orderPo.setAmount(util.calculateAmount(orderPo));
-            orderPo.setParticipant(repoPerson.findOptionalByWechat(orderPo.getParticipant().getWechat()).orElse(orderPo.getParticipant()));
-            PersonPo payer = orderPo.getPayer();
-            if (payer != null) {
-                orderPo.setPayer(repoPerson.findOptionalByWechat(payer.getWechat()).orElse(payer));
-            }
+            orderPo.setAmount(calculateOrderAmount(orderPo));
+            // todo : Detect duplicated Participant
+            PersonPo participant = repoPerson.findOptionalByBirthdayAndWechat(
+                    orderPo.getParticipant().getBirthday(),
+                    orderPo.getParticipant().getWechat()).orElse(orderPo.getParticipant());
+            orderPo.getParticipant().setId(participant.getId());
+            repoPerson.save(orderPo.getParticipant());
             orderPo.setReference(orderReference);
-            if (BigDecimal.ZERO.compareTo(orderPo.getAmount()) == 0) {
-                orderPo.setStatus(TypeOrderStatus.SUCCESS);
-            } else {
-                orderPo.setStatus(TypeOrderStatus.PENDING);
+            orderPo.setStatus(TypeOrderStatus.PENDING);
+        }
+
+        for (OrderPo orderPo : repoOrder.saveAll(orderPoList)) {
+            if (isZeroOrderAmount(orderPo)) {
+                updateOrderIntoSuccess(orderPo);
             }
         }
-        repoOrder.saveAll(orderPoList);
 
         OrderDto orderDto = new OrderDto();
         orderDto.setReference(orderReference);
         return ResponseEntity.ok(orderDto);
+    }
+
+    @PutMapping
+    @Transactional
+    public List<OrderDto> updateOrder(@RequestBody List<OrderDto> listOrder) {
+        List<OrderPo> orderPoList =
+                listOrder.stream().map(orderDto -> modelMapper.map(orderDto, OrderPo.class)).collect(Collectors.toList());
+
+        for (OrderPo orderPo : orderPoList) {
+            PersonPo payer = repoPerson.findOptionalByBirthdayAndWechat(
+                    orderPo.getPayer().getBirthday(),
+                    orderPo.getPayer().getWechat()).orElse(orderPo.getPayer());
+            repoPerson.save(orderPo.getPayer());
+
+            // todo check payment
+            updateOrderIntoSuccess(orderPo);
+        }
+
+        return orderPoList.stream().map(orderPo -> modelMapper.map(orderPo, OrderDto.class)).collect(Collectors.toList());
+    }
+
+    private boolean isZeroOrderAmount(@NotNull OrderPo orderPo) {
+        return BigDecimal.ZERO.compareTo(orderPo.getAmount()) == 0;
+    }
+
+    private BigDecimal calculateOrderAmount(@NotNull OrderPo orderPo) {
+        BigDecimal amount = BigDecimal.ZERO;
+        amount = amount.add(orderPo.getTrip().getPrice());
+        for (OptionPo optionPo : orderPo.getListOption()) {
+            amount = amount.add(optionPo.getPrice());
+        }
+        return amount;
+    }
+
+    private void updateOrderIntoSuccess(@NotNull OrderPo orderPo) {
+        for (OptionPo optionPo : orderPo.getListOption()) {
+            StockPo stockPo = optionPo.getStock();
+            if (null != stockPo) {
+                stockPo.setQuantity(stockPo.getQuantity() - 1);
+                repoStock.save(stockPo);
+            }
+        }
+        TripPo tripPo = orderPo.getTrip();
+        tripPo.setStock(tripPo.getStock() - 1);
+        repoTrip.save(tripPo);
+
+        orderPo.setStatus(TypeOrderStatus.SUCCESS);
+        repoOrder.save(orderPo);
     }
 }

@@ -1,3 +1,9 @@
+<mat-toolbar>
+    <button mat-icon-button (click)="dataSource.reload()">
+        <mat-icon>refresh</mat-icon>
+    </button>
+</mat-toolbar>
+
 <mat-table #table [dataSource]="_dataSource" matSort>
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>

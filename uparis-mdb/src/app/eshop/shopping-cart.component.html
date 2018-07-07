@@ -25,16 +25,16 @@
 
 <section *ngIf="_product.listTrip" class="mt-4 ml-xl-0 ml-4">
     <p class="row" *ngFor="let trip of _product.listTrip">
-        <span class="col-6 text-left"><strong class="font-italic">{{trip.dateStart}}</strong>出发</span>
+        <span class="col-6 text-left"><strong class="font-italic">{{trip.dateStart}}</strong></span>
         <span class="col-6 text-right">
             <ng-container *ngIf="trip.stock===0">
                 <strong class="badge badge-danger">售罄</strong>
             </ng-container>
-            <ng-container *ngIf="trip.stock<10">
+            <ng-container *ngIf="trip.stock<5">
                 最后<strong class="red-text font-italic">{{trip.stock}}</strong>个名额
             </ng-container>
-            <ng-container *ngIf="trip.stock>=10">
-                还有<strong class="font-italic">{{trip.stock}}</strong>个名额
+            <ng-container *ngIf="trip.stock>=5">
+                还有<strong class="font-italic amber-text">{{trip.stock}}</strong>个名额
             </ng-container>
         </span>
     </p>

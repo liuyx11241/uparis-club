@@ -18,6 +18,11 @@ export class FormHelper {
         }
     }
 
+    public static isValid(ctl: AbstractControl) {
+        FormHelper.markAsTouched(ctl);
+        return ctl.valid;
+    }
+
     public static newProductForm(formBuilder: FormBuilder, product?: Product): FormGroup {
         return formBuilder.group({
             id: formBuilder.control(product ? product.id : null),

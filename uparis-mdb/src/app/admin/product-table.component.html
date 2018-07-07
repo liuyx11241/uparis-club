@@ -1,4 +1,7 @@
 <mat-toolbar>
+    <button mat-icon-button (click)="dataSource.reload()">
+        <mat-icon>refresh</mat-icon>
+    </button>
     <button mat-button [routerLink]="['/admin/products', 'new']">
         <mat-icon>add_box</mat-icon>
         添加新产品

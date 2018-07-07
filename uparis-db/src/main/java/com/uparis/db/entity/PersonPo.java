@@ -5,7 +5,7 @@ import com.uparis.db.constant.TypeGender;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "T_PERSON")
+@Table(name = "T_PERSON", uniqueConstraints = {@UniqueConstraint(columnNames = {"wechat", "birthday"})})
 public class PersonPo extends AbstractPo {
 
     @Column(nullable = false)
@@ -26,7 +26,7 @@ public class PersonPo extends AbstractPo {
     @Column(nullable = false)
     private String birthplace;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String wechat;
 
     @Column(nullable = false)

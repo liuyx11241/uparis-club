@@ -34,9 +34,6 @@ public class TripPo extends AbstractPo {
     @OrderBy("level asc, num_order asc")
     private List<OptionPo> listOption;
 
-    @OneToMany(mappedBy = "trip")
-    private List<OrderPo> listOrder;
-
     @ManyToMany
     @JoinTable(name = "R_TRIP_LEADER",
             joinColumns = @JoinColumn(name = "ID_USER"),
@@ -109,13 +106,5 @@ public class TripPo extends AbstractPo {
 
     public void setListOption(List<OptionPo> listOption) {
         this.listOption = listOption;
-    }
-
-    public List<OrderPo> getListOrder() {
-        return listOrder;
-    }
-
-    public void setListOrder(List<OrderPo> listOrder) {
-        this.listOrder = listOrder;
     }
 }

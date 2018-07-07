@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Product} from "../model/product.dto";
-import {Observable} from "rxjs/index";
+import {Observable, of} from "rxjs/index";
 import {catchError} from "rxjs/internal/operators";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ErrorHandler} from "./error.handler";
@@ -50,12 +50,21 @@ export class PostService {
 
     }
 
-    public saveOrders(value: Order[]): Observable<Order> {
+    public createOrders(value: Order[]): Observable<Order> {
         if (value == null && value.length == 0) {
             return;
         }
         return this.http.post<Order>(`/api/order`, value, httpOptions).pipe(
             catchError(this.handler.handleError)
         );
+    }
+
+    public updateOrders(value: Order[]): Observable<Order[]> {
+        if (value == null && value.length == 0) {
+            return of([]);
+        }
+        return this.http.put<Order[]>(`/api/order`, value, httpOptions).pipe(
+            catchError(this.handler.handleError)
+        )
     }
 }

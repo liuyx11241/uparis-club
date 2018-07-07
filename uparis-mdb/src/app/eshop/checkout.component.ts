@@ -93,7 +93,7 @@ export class CheckoutComponent implements OnInit {
                 listOrder.push(newOrder);
             }
 
-            this.postService.saveOrders(listOrder).subscribe((order: Order) => {
+            this.postService.createOrders(listOrder).subscribe((order: Order) => {
                 console.info(order);
                 this.router.navigate(['/eshop/order'], {
                     queryParams: {

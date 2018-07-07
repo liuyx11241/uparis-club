@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'uparis-payment-form',
@@ -7,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PaymentFormComponent implements OnInit {
 
-    private _modePayment = 'CARD';
+    private _paymentForm: FormGroup
 
     constructor() {
     }
@@ -16,11 +17,8 @@ export class PaymentFormComponent implements OnInit {
 
     }
 
-    get modePayment(): string {
-        return this._modePayment;
-    }
-
-    set modePayment(value: string) {
-        this._modePayment = value;
+    @Input()
+    set paymentForm(value: FormGroup) {
+        this._paymentForm = value;
     }
 }

@@ -64,9 +64,9 @@
             <div class="card-header h5-responsive white">
                 付款方式
             </div>
-            <uparis-payment-form class="card-body"></uparis-payment-form>
+            <uparis-payment-form [paymentForm]="_paymentForm" class="card-body"></uparis-payment-form>
             <div class="card-footer white">
-                <button mat-raised-button color="primary">
+                <button mat-raised-button color="primary" (click)="pay()">
                     <mat-icon>payment</mat-icon>
                     确认付款
                 </button>
