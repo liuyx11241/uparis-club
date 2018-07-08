@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
 import {PersonTableDataSource} from './person-table-datasource';
 import {GetService} from "../service/http-get.service";
 
 @Component({
-    selector: 'uparis-admin/person-table',
+    selector: 'uparis-person-table',
     templateUrl: './person-table.component.html',
     styleUrls: ['./person-table.component.scss']
 })
@@ -18,6 +18,8 @@ export class PersonTableComponent implements OnInit, AfterViewInit {
         'id', 'gender', 'lastName', 'birthday', 'birthplace', 'wechat', 'telephone', 'email',
         'address', 'zipCode', 'city', 'country', 'actions'];
 
+    private _idTrip: number;
+
     constructor(private service: GetService) {
     }
 
@@ -27,6 +29,17 @@ export class PersonTableComponent implements OnInit, AfterViewInit {
 
 
     ngAfterViewInit(): void {
-        this.dataSource.reload();
+        if(!this._idTrip) {
+            this.dataSource.reload();
+        }
+    }
+
+    @Input()
+    set idTrip(value: number) {
+        this._idTrip = value;
+    }
+
+    reload(): void {
+        this.dataSource.reload(this._idTrip ? {idTrip: this._idTrip} : {});
     }
 }

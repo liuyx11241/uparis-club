@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<OrderPo, Long> {
     List<OrderPo> findAllByReference(String reference);
+
+    List<OrderPo> findAllByTrip_Id(Long idTrip);
 }

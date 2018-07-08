@@ -48,7 +48,6 @@ export class OrderTableDataSource extends DataSource<Order> {
                 finalize(() => this.loadingSubject.next(false))
             ).subscribe(
             res => {
-                console.info(res);
                 this.paginator.length = res['totalElements'];
                 this.subject.next(res['content']);
             });

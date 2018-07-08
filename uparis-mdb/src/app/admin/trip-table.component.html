@@ -11,7 +11,11 @@
     </ng-container>
     <ng-container matColumnDef="idProduct">
         <mat-header-cell *matHeaderCellDef mat-sort-header>产品</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.nameProduct}}</mat-cell>
+        <mat-cell *matCellDef="let element">
+            <a [routerLink]="['/admin/products', element.idProduct]">
+                {{element.nameProduct}}
+            </a>
+        </mat-cell>
     </ng-container>
     <ng-container matColumnDef="dateStart">
         <mat-header-cell *matHeaderCellDef mat-sort-header>出发日期</mat-header-cell>

@@ -50,13 +50,15 @@
     </div>
 
     <hr>
-    <mat-tab-group color="primary">
+    <mat-tab-group color="primary" [style.minHeight.px]="500">
         <mat-tab #tabTrip *ngIf="_formHelper.disabled">
             <ng-template mat-tab-label>
                 <mat-icon [class.amber-text]="tabTrip.isActive">directions_run</mat-icon>
                 <span [class.amber-text]="tabTrip.isActive">出队</span>
             </ng-template>
-            <uparis-trip-table [idProduct]="_idProduct"></uparis-trip-table>
+            <ng-template matTabContent>
+                <uparis-trip-table [idProduct]="_idProduct"></uparis-trip-table>
+            </ng-template>
         </mat-tab>
         <mat-tab #tabSchedule>
             <ng-template mat-tab-label>

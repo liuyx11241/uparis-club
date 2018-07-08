@@ -1,11 +1,13 @@
 package com.uparis.mvc;
 
 import com.uparis.db.entity.PersonPo;
+import com.uparis.db.repo.OrderRepository;
 import com.uparis.db.repo.PersonRepository;
 import com.uparis.dto.PersonDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,9 @@ public class PersonController {
     private PersonRepository repoPerson;
 
     @Autowired
+    private OrderRepository repoOrder;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping
@@ -32,11 +37,13 @@ public class PersonController {
             @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
             @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
             @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
+        if (filter.containsKey("idTrip")) {
+            return new PageImpl<>(repoOrder.findAllByTrip_Id(Long.valueOf(filter.get("idTrip"))))
+                    .map(personPo -> modelMapper.map(personPo, PersonDto.class));
+        }
+
         Page<PersonPo> personPoPage = repoPerson.findAll(
-                PageRequest.of(
-                        pageIndex,
-                        pageSize,
-                        Sort.by(Sort.Direction.fromString(direction), sort)));
+                PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
         return personPoPage.map(personPo -> modelMapper.map(personPo, PersonDto.class));
     }
 }

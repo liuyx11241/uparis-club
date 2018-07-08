@@ -15,7 +15,7 @@
 
 <section class="card-body" [formGroup]="_tripForm">
     <div class="row">
-        <div class="col-12 col-md-6 col-xl-4 hoverable">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 hoverable">
             <mat-form-field class="col-12">
                 <input matInput placeholder="ID" formControlName="id">
             </mat-form-field>
@@ -61,7 +61,27 @@
     </div>
 
     <hr>
-    <mat-tab-group color="primary">
+    <mat-tab-group color="primary" [style.minHeight.px]="500">
+        <mat-tab #tabOrder *ngIf="_formHelper.disabled">
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabOrder.isActive">library_books</mat-icon>
+                <span [class.amber-text]="tabOrder.isActive">相关订单</span>
+            </ng-template>
+            <ng-template matTabContent>
+                <uparis-order-table [idTrip]="_tripForm.value.id"></uparis-order-table>
+            </ng-template>
+        </mat-tab>
+
+        <mat-tab #tabParticipant *ngIf="_formHelper.disabled">
+            <ng-template mat-tab-label="">
+                <mat-icon [class.text-amber]="tabParticipant.isActive">person_outline</mat-icon>
+                <span [class.text-amber]="tabParticipant.isActive">队员名单</span>
+            </ng-template>
+            <ng-template matTabContent>
+                <uparis-person-table [idTrip]="_tripForm.value.id"></uparis-person-table>
+            </ng-template>
+        </mat-tab>
+
         <mat-tab #tabOption>
             <ng-template mat-tab-label>
                 <mat-icon [class.amber-text]="tabOption.isActive">format_list_numbered</mat-icon>

@@ -25,7 +25,9 @@ export class TripTableComponent implements OnInit, AfterViewInit {
 
 
     ngAfterViewInit(): void {
-        this.reload();
+        if(!this._idProduct) {
+            this.reload();
+        }
     }
 
     @Input()

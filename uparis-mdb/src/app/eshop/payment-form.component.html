@@ -1,10 +1,16 @@
 <ng-container [formGroup]="_paymentForm">
     <mat-radio-group class="col-12" formControlName="paymentMode">
         <div class="text-left pl-3">
-            <mat-radio-button color="primary" value="CARD" checked disableRipple>在线支付</mat-radio-button>
+            <mat-radio-button color="primary" value="CARD" checked>
+                在线支付
+            <i class="fa fa-cc-stripe"></i>
+            </mat-radio-button>
         </div>
         <div class="text-left pl-3">
-            <mat-radio-button color="primary" value="CASH">现金支付</mat-radio-button>
+            <mat-radio-button color="primary" value="CASH">
+                现金支付
+            <i class="fa fa-money"></i>
+            </mat-radio-button>
         </div>
     </mat-radio-group>
 

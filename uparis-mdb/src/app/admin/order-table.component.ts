@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
 import {OrderTableDataSource} from './order-table-datasource';
 import {GetService} from "../service/http-get.service";
 
 @Component({
-    selector: 'uparis-admin/order-table',
+    selector: 'uparis-order-table',
     templateUrl: './order-table.component.html',
     styleUrls: ['./order-table.component.scss']
 })
@@ -16,6 +16,8 @@ export class OrderTableComponent implements OnInit, AfterViewInit {
 
     displayedColumns = ['id', 'tripProduct', 'trip', 'participant', 'reference', 'status', 'payer', 'listOption', 'amount', 'actions'];
 
+    private _idTrip: number;
+
     constructor(private service: GetService) {
     }
 
@@ -24,6 +26,17 @@ export class OrderTableComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.dataSource.reload();
+        if(!this._idTrip) {
+            this.reload();
+        }
+    }
+
+    @Input()
+    set idTrip(value: number) {
+        this._idTrip = value;
+    }
+
+    reload(): void {
+        this.dataSource.reload(this._idTrip ? {idTrip: this._idTrip} : {});
     }
 }

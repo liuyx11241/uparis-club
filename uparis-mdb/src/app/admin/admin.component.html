@@ -5,7 +5,7 @@
                  fixedInViewport="true"
                  [mode]="(isHandset$ | async) ? 'over' : 'side'"
                  [opened]="(isHandset$ | async) ? false : true">
-        <mat-toolbar class="z-depth-1 black-text lighten-1 orange">Menu</mat-toolbar>
+        <mat-toolbar class="z-depth-1 black-text amber">Menu</mat-toolbar>
         <mat-nav-list>
             <a mat-list-item routerLink="/admin/products">产品</a>
             <a mat-list-item routerLink="/admin/trips">活动</a>
@@ -16,7 +16,7 @@
 
 
     <mat-sidenav-content>
-        <mat-toolbar class="topNav position-fixed z-depth-1 navbar-light white-text lighten-1 orange" [style.z-index]="2">
+        <mat-toolbar class="topNav position-fixed z-depth-1 navbar-light white-text amber" [style.z-index]="2">
             <button type="button" mat-icon-button
                     (click)="drawer.toggle()">
                 <mat-icon>menu</mat-icon>
