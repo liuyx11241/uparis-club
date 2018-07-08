@@ -4,14 +4,23 @@ import {Schedule} from "../model/schedule.dto";
 import {Product} from "../model/product.dto";
 import {Multimedia} from "../model/multimedia.dto";
 import {FormHelper} from "../model/form-helper.util";
+import {Tag} from "../model/tag.dto";
 
 export class ProductFormHelper {
     private _productForm: FormGroup;
+
+    private _inputTagForm: FormControl;
 
     constructor(private formBuilder: FormBuilder) {
         this._productForm = FormHelper.newProductForm(this.formBuilder);
         this._productForm.addControl('listItinerary', this.formBuilder.array([]));
         this._productForm.addControl('listMultimedia', this.formBuilder.array([]));
+        this._productForm.addControl('listTag', this.formBuilder.array([]));
+        this._inputTagForm = new FormControl();
+    }
+
+    get enabled(): boolean {
+        return this._productForm.enabled;
     }
 
     get disabled(): boolean {
@@ -20,6 +29,7 @@ export class ProductFormHelper {
 
     set disabled(value: boolean) {
         value ? this._productForm.disable() : this._productForm.enable();
+        value ? this._inputTagForm.disable() : this._inputTagForm.enable();
     }
 
     newProductForm(product?: Product): FormGroup {
@@ -30,6 +40,9 @@ export class ProductFormHelper {
             }
             if (product.listMultimedia) {
                 product.listMultimedia.forEach(media => this.listMultimediaForm.push(this.newMultimediaForm(media)));
+            }
+            if (product.listTag) {
+                product.listTag.forEach(tag => this.listTagForm.push(this.newTagForm(tag)));
             }
         } else {
             this._productForm.reset();
@@ -58,12 +71,24 @@ export class ProductFormHelper {
         return FormHelper.newMultimediaForm(this.formBuilder, media);
     }
 
+    newTagForm(tag: Tag) {
+        return FormHelper.newTagForm(this.formBuilder, tag);
+    }
+
     get listItineraryForm(): FormArray {
         return this._productForm.get('listItinerary') as FormArray;
     }
 
     get listMultimediaForm(): FormArray {
         return this._productForm.get('listMultimedia') as FormArray;
+    }
+
+    get listTagForm(): FormArray {
+        return this._productForm.get('listTag') as FormArray;
+    }
+
+    get inputTagForm(): FormControl {
+        return this._inputTagForm;
     }
 
     public isValid(): boolean {

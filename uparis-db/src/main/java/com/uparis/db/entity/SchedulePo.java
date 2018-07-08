@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "T_Schedule")
+@Table(name = "T_SCHEDULE")
 public class SchedulePo extends AbstractPo {
 
     private String time;

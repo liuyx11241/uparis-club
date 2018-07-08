@@ -40,6 +40,12 @@ public class ProductPo extends AbstractPo {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MultimediaPo> listMultimedia;
 
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "R_PRODUCT_TAG",
+            joinColumns = @JoinColumn(name = "PRODUCT_IT"),
+            inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
+    private List<TagPo> listTag;
+
     public ProductPo() {
         // Empty Constructor
     }
@@ -123,5 +129,13 @@ public class ProductPo extends AbstractPo {
 
     public void setListMultimedia(List<MultimediaPo> listMultimedia) {
         this.listMultimedia = listMultimedia;
+    }
+
+    public List<TagPo> getListTag() {
+        return listTag;
+    }
+
+    public void setListTag(List<TagPo> listTag) {
+        this.listTag = listTag;
     }
 }

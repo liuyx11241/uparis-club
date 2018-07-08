@@ -6,7 +6,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "T_User")
+@Table(name = "T_USER")
 public class UserPo extends AbstractPo {
     @OneToOne(optional = false, orphanRemoval = true)
     private PersonPo person;

@@ -12,7 +12,7 @@
         删除产品
     </button>
 
-    <button mat-button (click)="createTrip()" *ngIf="_formHelper.disabled">
+    <button mat-button (click)="addTrip()" *ngIf="_formHelper.disabled">
         <mat-icon>playlist_add</mat-icon>
         添加出队
     </button>
@@ -40,6 +40,29 @@
             </mat-form-field>
         </div>
         <div class="col-12 col-md-6 col-lg-8 col-xl-9 hoverable">
+            <mat-form-field class="col-12">
+                <mat-chip-list #tagList>
+                    <mat-chip *ngFor="let tag of _listTagForm.controls" [selectable]="tag.enabled"
+                              [removable]="tag.enabled" (removed)="removeTag(tag)" [disabled]="tag.disabled"
+                              [formGroup]="tag">
+                        {{tag.value.value}}
+                        <mat-icon matChipRemove *ngIf="tag.enabled">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="标签"
+                           [formControl]="_inputTagForm"
+                           [matChipInputFor]="tagList"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           [matChipInputAddOnBlur]="_formHelper.enabled"
+                           (matChipInputTokenEnd)="addTag($event)"
+                           [matAutocomplete]="auto">
+                </mat-chip-list>
+            </mat-form-field>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectTag($event)">
+                <mat-option *ngFor="let tag of _filteredTags$ | async" [value]="tag">
+                    {{ tag.value }}
+                </mat-option>
+            </mat-autocomplete>
+
             <mat-form-field class="col-12">
                 <textarea matInput placeholder="短介绍" formControlName="shortDescription" rows="3"></textarea>
             </mat-form-field>
@@ -76,5 +99,38 @@
             <uparis-multimedia-table [formHelper]="_formHelper"
                                      [listMultimedia]="_formHelper.listMultimediaForm"></uparis-multimedia-table>
         </mat-tab>
+
+        <mat-tab #tabPortrait>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabPortrait.isActive">portrait</mat-icon>
+                <span [class.amber-text]="tabPortrait.isActive">领队</span>
+            </ng-template>
+            <p>...</p>
+        </mat-tab>
+
+        <mat-tab #tabPrice>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabPrice.isActive">euro_symbol</mat-icon>
+                <span [class.amber-text]="tabPrice.isActive">费用</span>
+            </ng-template>
+            <p>...</p>
+        </mat-tab>
+
+        <mat-tab #tabEquipment>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabEquipment.isActive">card_travel</mat-icon>
+                <span [class.amber-text]="tabEquipment.isActive">装备</span>
+            </ng-template>
+            <p>...</p>
+        </mat-tab>
+
+        <mat-tab #tabInfo>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabInfo.isActive">info</mat-icon>
+                <span [class.amber-text]="tabInfo.isActive">其他信息</span>
+            </ng-template>
+            <p>...</p>
+        </mat-tab>
+
     </mat-tab-group>
 </section>

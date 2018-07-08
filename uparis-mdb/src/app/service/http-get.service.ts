@@ -7,6 +7,7 @@ import {ErrorHandler} from "./error.handler";
 import {catchError, map} from "rxjs/internal/operators";
 import {Person} from "../model/person.dto";
 import {Order} from "../model/order.dto";
+import {Tag} from "../model/tag.dto";
 
 
 @Injectable()
@@ -30,6 +31,12 @@ export class GetService {
             .set('status', 'ACTIVE');
         return this.http.get<Product[]>("/api/product", {params: httpParams}).pipe(
             map(value => value['content'])
+        );
+    }
+
+    public getAllTags(): Observable<Tag[]> {
+        return this.http.get<Tag[]>(`/api/tag`).pipe(
+            catchError(this.handler.handleError)
         );
     }
 

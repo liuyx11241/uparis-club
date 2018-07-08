@@ -29,6 +29,8 @@ public class ProductSimpleDto extends AbstractDto implements Serializable {
 
     private List<MultimediaDto> listMultimedia = new ArrayList<>();
 
+    private List<TagDto> listTag = new ArrayList<>();
+
     public String getName() {
         return name;
     }
@@ -83,5 +85,13 @@ public class ProductSimpleDto extends AbstractDto implements Serializable {
 
     public void setListMultimedia(List<MultimediaDto> listMultimedia) {
         this.listMultimedia = listMultimedia;
+    }
+
+    public List<TagDto> getListTag() {
+        return listTag;
+    }
+
+    public void setListTag(List<TagDto> listTag) {
+        this.listTag = listTag;
     }
 }

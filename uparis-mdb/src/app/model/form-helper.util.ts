@@ -7,6 +7,7 @@ import {Product} from "./product.dto";
 import {Trip} from "./trip.dto";
 import {Option} from "./option.dto";
 import {Stock} from "./stock.dto";
+import {Tag} from "./tag.dto";
 
 export class FormHelper {
     public static markAsTouched(ctl: AbstractControl) {
@@ -121,4 +122,10 @@ export class FormHelper {
         )
     }
 
+    public static newTagForm(formBuilder: FormBuilder, tag?: Tag): FormGroup {
+        return formBuilder.group({
+            id: formBuilder.control(tag ? tag.id : null),
+            value: formBuilder.control(tag ? tag.value : null, Validators.required)
+        });
+    }
 }
