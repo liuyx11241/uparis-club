@@ -79,6 +79,7 @@ export class FormHelper {
             price: formBuilder.control(trip ? trip.price : null, [Validators.required, Validators.min(0)]),
             priceVAT: formBuilder.control(trip ? trip.priceVAT : null),
             currency: formBuilder.control(trip ? trip.currency : null, Validators.required),
+            urlCodeQR: formBuilder.control(trip ? trip.urlCodeQR : null),
         });
     }
 

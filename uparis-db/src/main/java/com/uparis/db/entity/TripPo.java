@@ -23,6 +23,8 @@ public class TripPo extends AbstractPo {
 
     private BigDecimal priceVAT;
 
+    private String urlCodeQR;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TypeCurrency currency;
@@ -34,10 +36,10 @@ public class TripPo extends AbstractPo {
     @OrderBy("level asc, num_order asc")
     private List<OptionPo> listOption;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "R_TRIP_LEADER",
-            joinColumns = @JoinColumn(name = "ID_USER"),
-            inverseJoinColumns = @JoinColumn(name = "ID_TRIP"))
+        joinColumns = @JoinColumn(name = "ID_USER"),
+        inverseJoinColumns = @JoinColumn(name = "ID_TRIP"))
     private List<UserPo> listLeader;
 
     public TripPo() {
@@ -106,5 +108,13 @@ public class TripPo extends AbstractPo {
 
     public void setListOption(List<OptionPo> listOption) {
         this.listOption = listOption;
+    }
+
+    public String getUrlCodeQR() {
+        return urlCodeQR;
+    }
+
+    public void setUrlCodeQR(String urlCodeQR) {
+        this.urlCodeQR = urlCodeQR;
     }
 }

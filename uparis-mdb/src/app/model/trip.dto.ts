@@ -21,5 +21,7 @@ export class Trip extends Abstract {
 
     currency: string;
 
+    urlCodeQR: string;
+
     listOption: Option[];
 }

@@ -40,6 +40,11 @@
             </mat-form-field>
 
             <mat-form-field class="col-12">
+                <input matInput type="url" formControlName="urlCodeQR" placeholder="二维码链接">
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 hoverable">
+            <mat-form-field class="col-12">
                 <input matInput type="number" placeholder="库存" formControlName="stock" required>
             </mat-form-field>
 
@@ -57,6 +62,7 @@
             <mat-form-field class="col-12">
                 <input matInput type="number" placeholder="增值税率" formControlName="priceVAT">
             </mat-form-field>
+
         </div>
     </div>
 
@@ -92,6 +98,22 @@
             <uparis-option-table class="row w-100" [formHelper]="_formHelper"
                                  [listStockForm]="_formHelper.listStockForm"
                                  [listOptionForm]="_formHelper.listOptionForm"></uparis-option-table>
+        </mat-tab>
+
+        <mat-tab #tabPortrait>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabPortrait.isActive">portrait</mat-icon>
+                <span [class.amber-text]="tabPortrait.isActive">领队</span>
+            </ng-template>
+            <p>...</p>
+        </mat-tab>
+
+        <mat-tab #tabPrice>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabPrice.isActive">euro_symbol</mat-icon>
+                <span [class.amber-text]="tabPrice.isActive">费用</span>
+            </ng-template>
+            <p>...</p>
         </mat-tab>
     </mat-tab-group>
 </section>

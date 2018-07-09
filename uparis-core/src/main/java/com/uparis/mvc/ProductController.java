@@ -3,6 +3,7 @@ package com.uparis.mvc;
 import com.uparis.db.constant.TypeProductStatus;
 import com.uparis.db.entity.ProductPo;
 import com.uparis.db.repo.ProductRepository;
+import com.uparis.db.repo.TagRepository;
 import com.uparis.dto.ProductDto;
 import com.uparis.dto.ProductSimpleDto;
 import org.modelmapper.ModelMapper;
@@ -24,6 +25,9 @@ public class ProductController {
 
     @Autowired
     private ProductRepository repoProduct;
+
+    @Autowired
+    private TagRepository repoTag;
 
     @GetMapping
     public Page<ProductSimpleDto> getProducts(
@@ -72,7 +76,9 @@ public class ProductController {
 
         productPo.getListMultimedia().forEach(multimediaPo -> multimediaPo.setProduct(productPo));
 
-        repoProduct.saveAndFlush(productPo);
+        repoTag.saveAll(productPo.getListTag());
+
+        repoProduct.save(productPo);
 
         return productPo.getId();
     }

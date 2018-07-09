@@ -40,7 +40,7 @@ public class ProductPo extends AbstractPo {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MultimediaPo> listMultimedia;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "R_PRODUCT_TAG",
             joinColumns = @JoinColumn(name = "PRODUCT_IT"),
             inverseJoinColumns = @JoinColumn(name = "TAG_ID"))

@@ -23,6 +23,8 @@ public class TripDto extends AbstractDto {
 
     private String currency;
 
+    private String urlCodeQR;
+
     private List<OptionDto> listOption = new ArrayList<>();
 
     public String getDateStart() {
@@ -71,6 +73,14 @@ public class TripDto extends AbstractDto {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getUrlCodeQR() {
+        return urlCodeQR;
+    }
+
+    public void setUrlCodeQR(String urlCodeQR) {
+        this.urlCodeQR = urlCodeQR;
     }
 
     public Long getIdProduct() {

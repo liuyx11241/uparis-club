@@ -19,15 +19,12 @@ public class MultimediaPo extends AbstractPo {
 
     private String altText;
 
-    private String captionTitle;
+    private String title;
 
-    private String captionDescription;
+    private String description;
 
     @ManyToOne
     private ProductPo product;
-
-    @ManyToOne
-    private UserPo user;
 
     public String getSrcUrl() {
         return srcUrl;
@@ -53,20 +50,20 @@ public class MultimediaPo extends AbstractPo {
         this.altText = altText;
     }
 
-    public String getCaptionTitle() {
-        return captionTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setCaptionTitle(String captionTitle) {
-        this.captionTitle = captionTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getCaptionDescription() {
-        return captionDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCaptionDescription(String captionDescription) {
-        this.captionDescription = captionDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public ProductPo getProduct() {
@@ -75,13 +72,5 @@ public class MultimediaPo extends AbstractPo {
 
     public void setProduct(ProductPo product) {
         this.product = product;
-    }
-
-    public UserPo getUser() {
-        return user;
-    }
-
-    public void setUser(UserPo user) {
-        this.user = user;
     }
 }

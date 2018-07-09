@@ -12,9 +12,9 @@
             <span class="col text-left">订单状态</span>
             <span class="col amber text-white">{{_order.status | status}}</span>
         </div>
-        <div *ngIf="_order.status==='SUCCESS'" class="col-12 mt-3">
-            <p>请扫描以下二维码加入微信群</p>
-            <p>...</p>
+        <div *ngIf="_order.status==='SUCCESS'" class="col-12 mt-5">
+            <p class="text-success">请扫描二维码加入微信群</p>
+            <img [src]="_order.trip.urlCodeQR" class="img-fluid" alt="微信群二维码">
         </div>
     </div>
 </section>
