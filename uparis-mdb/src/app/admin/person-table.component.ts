@@ -29,7 +29,7 @@ export class PersonTableComponent implements OnInit, AfterViewInit {
 
 
     ngAfterViewInit(): void {
-        if(!this._idTrip) {
+        if (!this._idTrip) {
             this.dataSource.reload();
         }
     }
@@ -40,6 +40,9 @@ export class PersonTableComponent implements OnInit, AfterViewInit {
     }
 
     reload(): void {
-        this.dataSource.reload(this._idTrip ? {idTrip: this._idTrip} : {});
+        this.dataSource.reload(this._idTrip ? {
+            idTrip: this._idTrip,
+            orderStatus: 'SUCCESS'
+        } : {});
     }
 }

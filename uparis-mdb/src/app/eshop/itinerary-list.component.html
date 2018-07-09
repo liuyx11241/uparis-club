@@ -1,37 +1,32 @@
-<mat-accordion>
-    <mat-expansion-panel
-        *ngFor="let itinerary of listItinerary; let i = index"
-        [expanded]="currentIndex===i"
-        (opened)="currentIndex=i"
-        [hideToggle]="true">
-        <mat-expansion-panel-header class="row">
-            <mat-panel-title class="col-4 col-md-3 col-lg-2 px-0">
-                <mat-icon>date_range</mat-icon>
-                Day {{itinerary.dayStart}}
-                <ng-container *ngIf="itinerary.duration > 1">
-                    ~ Day {{itinerary.dayStart + itinerary.duration - 1}}
-                </ng-container>
-            </mat-panel-title>
-            <mat-panel-description class="col-8 col-md-9 col-lg-10 px-0">
-                <mat-icon>map</mat-icon>
-                {{itinerary.movement}}
-            </mat-panel-description>
-        </mat-expansion-panel-header>
+<mat-expansion-panel
+    *ngFor="let itinerary of listItinerary; let i = index" expanded [hideToggle]="true">
+    <mat-expansion-panel-header class="row">
+        <mat-panel-title class="col-4 col-md-3 col-lg-2 px-0">
+            <mat-icon>date_range</mat-icon>
+            Day {{itinerary.dayStart}}
+            <ng-container *ngIf="itinerary.duration > 1">
+                ~ Day {{itinerary.dayStart + itinerary.duration - 1}}
+            </ng-container>
+        </mat-panel-title>
+        <mat-panel-description class="col-8 col-md-9 col-lg-10 px-0">
+            <mat-icon>map</mat-icon>
+            {{itinerary.movement}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
 
-        <p *ngFor="let schedule of itinerary.listSchedule" class="text-left row">
-            <span class="col-4 col-md-3 col-lg-2">{{schedule.time}}</span>
-            <span class="col-8 col-md-9 col-lg-10">{{schedule.activity}}</span>
-        </p>
+    <p *ngFor="let schedule of itinerary.listSchedule" class="text-left row">
+        <span class="col-4 col-md-3 col-lg-2">{{schedule.time}}</span>
+        <span class="col-8 col-md-9 col-lg-10">{{schedule.activity}}</span>
+    </p>
 
-        <mat-action-row>
-            <div class="w-100 text-center text-md-right">
-                <button mat-button color="warn" (click)="prevDay()" [disabled]="i===0">
-                    <i class="fa fa-2x fa-arrow-circle-o-left"></i>
-                </button>
-                <button mat-button color="primary" (click)="nextDay()" [disabled]="i===listItinerary.length-1">
-                    <i class="fa fa-2x fa-arrow-circle-o-right"></i>
-                </button>
-            </div>
-        </mat-action-row>
-    </mat-expansion-panel>
-</mat-accordion>
+    <mat-action-row *ngIf="false">
+        <div class="w-100 text-center text-md-right">
+            <button mat-button color="warn" (click)="prevDay()" [disabled]="i===0">
+                <i class="fa fa-2x fa-arrow-circle-o-left"></i>
+            </button>
+            <button mat-button color="primary" (click)="nextDay()" [disabled]="i===listItinerary.length-1">
+                <i class="fa fa-2x fa-arrow-circle-o-right"></i>
+            </button>
+        </div>
+    </mat-action-row>
+</mat-expansion-panel>

@@ -1,7 +1,7 @@
 <mat-toolbar *ngIf="!_formHelper.disabled">
     <button mat-button (click)="add()">
         <mat-icon>add_box</mat-icon>
-        添加新行程
+        添加新日程
     </button>
 </mat-toolbar>
 <div class="z-depth-1 hoverable" *ngFor="let itinerary of _listItinerary.controls" [formGroup]="itinerary">

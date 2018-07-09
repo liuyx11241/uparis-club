@@ -80,7 +80,7 @@
                 <span [class.amber-text]="tabTrip.isActive">出队</span>
             </ng-template>
             <ng-template matTabContent>
-                <uparis-trip-table [idProduct]="_idProduct"></uparis-trip-table>
+                <uparis-trip-table [idProduct]="_productForm.value.id"></uparis-trip-table>
             </ng-template>
         </mat-tab>
         <mat-tab #tabSchedule>

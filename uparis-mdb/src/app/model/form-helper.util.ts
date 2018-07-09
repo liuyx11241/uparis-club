@@ -49,7 +49,7 @@ export class FormHelper {
         let itineraryForm = formBuilder.group({
             id: formBuilder.control(itinerary ? itinerary.id : null),
             dayStart: formBuilder.control(itinerary ? itinerary.dayStart : null, Validators.required),
-            duration: formBuilder.control(itinerary ? itinerary.duration : null, [Validators.required, Validators.min(1)]),
+            duration: formBuilder.control(itinerary ? itinerary.duration : 1, [Validators.required, Validators.min(1)]),
             movement: formBuilder.control(itinerary ? itinerary.movement : null),
         });
 
@@ -90,7 +90,7 @@ export class FormHelper {
             description: formBuilder.control(option ? option.description : null),
             level: formBuilder.control(option ? option.level : null, [Validators.required, Validators.min(1)]),
             numOrder: formBuilder.control(option ? option.numOrder : null, [Validators.required, Validators.min(0)]),
-            price: formBuilder.control(option ? option.price : null, [Validators.required, Validators.min(0)]),
+            price: formBuilder.control(option ? option.price : null, [Validators.required]),
             priceVAT: formBuilder.control(option ? option.priceVAT : null),
             stock: formBuilder.group({}),
         });

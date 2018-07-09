@@ -12,9 +12,11 @@ import {MatMomentDateModule, MomentDateAdapter} from "@angular/material-moment-a
 
 import {registerLocaleData} from "@angular/common";
 import localeZh from '@angular/common/locales/zh';
+import localeFr from '@angular/common/locales/fr';
 import {AdminLoginComponent} from "./admin/admin-login.component";
 
 registerLocaleData(localeZh);
+registerLocaleData(localeFr);
 
 export const UPARIS_DATE_FORMATS = {
     parse: {

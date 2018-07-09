@@ -1,0 +1,3 @@
+<span class="badge badge-pill"
+      [ngClass]="_randomBadgeColor[index]"
+      *ngFor="let tag of _listTag; let index=index">{{tag.value}}</span>

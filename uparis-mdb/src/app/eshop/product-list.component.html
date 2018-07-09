@@ -1,9 +1,10 @@
-<div class="row">
-    <div class="col-12 col-md-6 col-lg-4 mb-3 hoverable animated jackInTheBox" *ngFor="let product of _listProduct; trackBy: trackByProducts;">
+<section class="row">
+    <div class="col-12 col-md-6 col-lg-4 mb-3 hoverable animated jackInTheBox"
+         *ngFor="let product of _listProduct; trackBy: trackByProducts;">
         <mdb-carousel [isControls]="true" [animation]="'slide'" class="view hm-white-slight waves-light pt-2">
             <mdb-slide *ngFor="let slide of product.listMultimedia">
                 <img class="d-block w-100" [src]="slide.srcUrl" [alt]="slide.altText">
-                <!--<div class="mask flex-center rgba-orange-slight"></div>-->
+                <div class="mask flex-center rgba-yellow-slight"></div>
                 <div class="carousel-caption">
                     <h4>{{slide.title}}</h4>
                     <p>{{slide.description}}</p>
@@ -15,9 +16,11 @@
         <!--</div>-->
         <div class="card-body">
             <h4 class="card-title">{{product.name}}</h4>
+            <h5><uparis-tag-list [listTag]="product.listTag"></uparis-tag-list></h5>
             <p>{{product.shortDescription}}</p>
             <button mat-raised-button color="primary" class="btn waves-light hoverable"
-                    [routerLink]="['/eshop/products', product.id]">Details</button>
+                    [routerLink]="['/eshop/products', product.id]">Details
+            </button>
         </div>
     </div>
-</div>
+</section>

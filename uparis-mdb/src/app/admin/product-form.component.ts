@@ -50,12 +50,11 @@ export class ProductFormComponent implements OnInit {
             this._productForm = this._formHelper.newProductForm(data.product);
             this._listTagForm = this._formHelper.listTagForm;
             this._inputTagForm = this._formHelper.inputTagForm;
-            this._idProduct = data.product.id;
             this._formHelper.disabled = !!data.product;
-            this._filteredTags$ = this._formHelper.inputTagForm.valueChanges.pipe(
-                startWith(null),
-                map((tag: Tag | null) => tag ? this._filter(tag) : this._listAllTags.slice()));
         });
+        this._filteredTags$ = this._formHelper.inputTagForm.valueChanges.pipe(
+            startWith(null),
+            map((tag: Tag | null) => tag ? this._filter(tag) : this._listAllTags.slice()));
         this.getService.getAllTags().subscribe(data => this._listAllTags = data);
     }
 

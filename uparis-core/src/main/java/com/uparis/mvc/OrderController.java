@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -55,11 +56,13 @@ public class OrderController {
             @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
             @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
             @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
+        if (filter.containsKey("idTrip")) {
+            return new PageImpl<>(repoOrder.findAllByTrip_Id(Long.valueOf(filter.get("idTrip"))))
+                    .map(orderPo -> modelMapper.map(orderPo, OrderDto.class));
+        }
+
         Page<OrderPo> orderPoPage = repoOrder.findAll(
-                PageRequest.of(
-                        pageIndex,
-                        pageSize,
-                        Sort.by(Sort.Direction.fromString(direction), sort)));
+                PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
         return orderPoPage.map(orderPo -> modelMapper.map(orderPo, OrderDto.class));
     }
 

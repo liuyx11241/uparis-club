@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <button mat-icon-button (click)="dataSource.reload()">
+    <button mat-icon-button (click)="reload()">
         <mat-icon>refresh</mat-icon>
     </button>
 </mat-toolbar>
@@ -19,7 +19,7 @@
     <ng-container matColumnDef="trip">
         <mat-header-cell *matHeaderCellDef mat-sort-header>出发日期</mat-header-cell>
         <mat-cell *matCellDef="let row">
-            <a [routerLink]="['/admin/trips/', row.idTrip]">{{row.trip.dateStart}}</a>
+            <a [routerLink]="['/admin/trips/', row.trip.id]">{{row.trip.dateStart}}</a>
         </mat-cell>
     </ng-container>
 

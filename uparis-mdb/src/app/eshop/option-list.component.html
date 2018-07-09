@@ -12,8 +12,7 @@
     <i class="fa fa-lg col-2 fa-check-square-o pt-1 text-left" [class.red-text]="!_styleBlue" [class.blue-text]="_styleBlue" aria-hidden="true"></i>
     <span class="col-5 text-left">{{option.name}}</span>
     <span class="col-5 text-right">
-        <ng-container *ngIf="option.price > 0">+</ng-container>
-        {{option.price | currency: _trip.currency}}
+        <ng-container *ngIf="option.price > 0">+</ng-container>{{option.price | currency:_trip.currency}}
     </span>
 </p>
 <mat-divider></mat-divider>

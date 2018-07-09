@@ -1,5 +1,6 @@
 package com.uparis.mvc;
 
+import com.uparis.db.constant.TypeOrderStatus;
 import com.uparis.db.entity.PersonPo;
 import com.uparis.db.repo.OrderRepository;
 import com.uparis.db.repo.PersonRepository;
@@ -38,8 +39,10 @@ public class PersonController {
             @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
             @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
         if (filter.containsKey("idTrip")) {
-            return new PageImpl<>(repoOrder.findAllByTrip_Id(Long.valueOf(filter.get("idTrip"))))
-                    .map(personPo -> modelMapper.map(personPo, PersonDto.class));
+            return new PageImpl<>(repoOrder.findAllByStatusEqualsAndTrip_Id(
+                    TypeOrderStatus.valueOf(filter.get("orderStatus")),
+                    Long.valueOf(filter.get("idTrip")))
+            ).map(orderPo -> modelMapper.map(orderPo.getParticipant(), PersonDto.class));
         }
 
         Page<PersonPo> personPoPage = repoPerson.findAll(
