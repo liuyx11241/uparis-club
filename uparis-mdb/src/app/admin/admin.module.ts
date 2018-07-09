@@ -19,6 +19,7 @@ import {SnackBar} from "./snack-bar";
 import {OrderTableComponent} from './order-table.component';
 import {PersonTableComponent} from './person-table.component';
 import {ModelModule} from "../model/model.module";
+import {AdminLoginComponent} from './admin-login.component';
 
 @NgModule({
     imports: [
@@ -43,11 +44,13 @@ import {ModelModule} from "../model/model.module";
         MultimediaTableComponent,
         OrderTableComponent,
         PersonTableComponent,
+        AdminLoginComponent,
     ],
     providers: [
         SnackBar,
     ],
-    bootstrap: [AdminComponent]
+    bootstrap: [AdminComponent],
+    exports: [AdminLoginComponent]
 })
 export class AdminModule {
 }

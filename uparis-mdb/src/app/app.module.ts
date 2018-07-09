@@ -12,6 +12,7 @@ import {MatMomentDateModule, MomentDateAdapter} from "@angular/material-moment-a
 
 import {registerLocaleData} from "@angular/common";
 import localeZh from '@angular/common/locales/zh';
+import {AdminLoginComponent} from "./admin/admin-login.component";
 
 registerLocaleData(localeZh);
 
@@ -42,6 +43,7 @@ export const UPARIS_DATE_FORMATS = {
         EshopModule,
 
         RouterModule.forRoot([
+                {path: 'admin/login', component: AdminLoginComponent},
                 {path: '', redirectTo: '/eshop', pathMatch: 'full'},
                 {path: '**', redirectTo: '/eshop'},
             ],

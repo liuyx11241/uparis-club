@@ -5,6 +5,7 @@ import {NavigationExtras, Router} from "@angular/router";
 import {groupBy, mergeMap, toArray} from "rxjs/internal/operators";
 import {from} from "rxjs/index";
 import {Option} from "../model/option.dto";
+import {ColorHelper} from "../model/color-helper.util";
 
 @Component({
     selector: 'uparis-shopping-cart',
@@ -15,13 +16,11 @@ export class ShoppingCartComponent {
 
     private _product: Product;
 
-    private _minPrice: number;
-
-    private _maxPrice: number;
-
     private _selectedTrip: Trip;
 
     private _numberParticipant = 1;
+
+    private _randomBadgeColor: any[];
 
     constructor(private router: Router) {
 
@@ -33,6 +32,10 @@ export class ShoppingCartComponent {
         if (this._product.listTrip && this._product.listTrip.length > 0) {
             this._selectedTrip = this._product.listTrip[0];
         }
+        this._randomBadgeColor = [];
+        this._product.listTag.forEach(
+            tag => this._randomBadgeColor.push([ColorHelper.randomBadgeColor(), ColorHelper.randomBadgeTone()])
+        );
     }
 
     set numberParticipant(value: number) {
@@ -41,6 +44,12 @@ export class ShoppingCartComponent {
 
     calcStock(): number {
         return this._selectedTrip ? this._selectedTrip.stock : 0;
+    }
+
+    calcTotalStock(): number {
+        return this._product.listTrip.map(
+            trip => trip.stock
+        ).reduce((previousValue, currentValue) => previousValue + currentValue);
     }
 
     calcMinPrice(): number {

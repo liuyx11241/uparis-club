@@ -2,20 +2,32 @@
     <h2 class="h2-responsive text-center text-md-left">
         <strong>{{_product.name}}</strong>
     </h2>
+              <!--[class.purple]="index%7===0"-->
+              <!--[class.deep-purple]="index%7===1"-->
+              <!--[class.indigo]="index%7===2"-->
+              <!--[class.blue]="index%7===3"-->
+              <!--[class.light-blue]="index%7===4"-->
+              <!--[class.cyan]="index%7===5"-->
+              <!--[class.teal]="index%7===6"-->
+              <!--[class.lighten-4]="index%13===0"-->
+              <!--[class.darken-1]="index%13===1"-->
+              <!--[class.accent-1]="index%13===2"-->
+              <!--[class.lighten-3]="index%13===3"-->
+              <!--[class.darken-2]="index%13===4"-->
+              <!--[class.accent-2]="index%13===5"-->
+              <!--[class.lighten-2]="index%13===7"-->
+              <!--[class.darken-3]="index%13===8"-->
+              <!--[class.accent-3]="index%13===9"-->
+              <!--[class.lighten-1]="index%13===10"-->
+              <!--[class.darken-4]="index%13===11"-->
+              <!--[class.accent-4]="index%13===12"-->
 
     <h5>
-        <span class="badge badge-pill badge-danger" *ngIf="_product.listTrip.length===0">暂无活动安排</span>
-        <span class="badge badge-pill badge-success" *ngIf="calcMaxPrice()===0">免费</span>
+        <span class="badge badge-pill badge-info darken-4" *ngIf="_product.listTrip.length===0">暂无活动安排</span>
+        <span class="badge badge-pill badge-danger darken-4" *ngIf="calcTotalStock()===0">全部售罄</span>
+        <span class="badge badge-pill badge-success darken-4" *ngIf="calcMaxPrice()===0">免费</span>
         <span class="badge badge-pill"
-              [class.red]="index%9===0"
-              [class.pink]="index%9===1"
-              [class.purple]="index%9===2"
-              [class.deep-purple]="index%9===3"
-              [class.indigo]="index%9===4"
-              [class.blue]="index%9===5"
-              [class.light-blue]="index%9===6"
-              [class.cyan]="index%9===7"
-              [class.teal]="index%9===8"
+              [ngClass]="_randomBadgeColor[index]"
               *ngFor="let tag of _product.listTag; let index=index">{{tag.value}}</span>
     </h5>
 
@@ -32,14 +44,14 @@
     <p>{{_product.longDescription}}</p>
 </section>
 
-<section *ngIf="_product.listTrip.length > 0" class="mt-4 ml-xl-0 ml-4">
+<section *ngIf="_product.listTrip.length > 1" class="mt-4 ml-xl-0 ml-4">
     <p class="row" *ngFor="let trip of _product.listTrip">
         <span class="col-6 text-left"><strong class="font-italic mr-2">{{trip.dateStart}}</strong>出发</span>
         <span class="col-6 text-right">
             <ng-container *ngIf="trip.stock===0">
                 <strong class="badge badge-danger">售罄</strong>
             </ng-container>
-            <ng-container *ngIf="trip.stock<5">
+            <ng-container *ngIf="trip.stock < 5 && trip.stock > 0">
                 最后<strong class="red-text font-italic">{{trip.stock}}</strong>个名额
             </ng-container>
             <ng-container *ngIf="trip.stock>=5">
@@ -47,7 +59,8 @@
             </ng-container>
         </span>
     </p>
-
+</section>
+<section *ngIf="calcTotalStock()>0">
     <div class="row">
         <div class="col-12 text-right text-md-right">
             <mat-form-field class="d-block mt-2">
