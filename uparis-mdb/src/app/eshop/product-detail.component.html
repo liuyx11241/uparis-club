@@ -34,7 +34,11 @@
             <mat-icon [class.amber-text]="tabPortrait.isActive">portrait</mat-icon>
             <span [class.amber-text]="tabPortrait.isActive">领队</span>
         </ng-template>
-        <p>...</p>
+        <section class="d-flex mt-3">
+            <uparis-leader-card class="col-12 col-md-6 col-lg-4"></uparis-leader-card>
+            <uparis-leader-card class="col-12 col-md-6 col-lg-4"></uparis-leader-card>
+            <uparis-leader-card class="col-12 col-md-6 col-lg-4"></uparis-leader-card>
+        </section>
     </mat-tab>
     <mat-tab #tabPrice>
         <ng-template mat-tab-label>

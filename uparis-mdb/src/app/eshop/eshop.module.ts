@@ -19,7 +19,8 @@ import {OrderDetailComponent} from './order-detail.component';
 import {OptionListComponent} from './option-list.component';
 import {ModelModule} from "../model/model.module";
 import {PaymentFormComponent} from './payment-form.component';
-import { TagListComponent } from './tag-list.component';
+import {TagListComponent} from './tag-list.component';
+import {LeaderCardComponent} from './leader-card.component';
 
 @NgModule({
     imports: [
@@ -46,6 +47,7 @@ import { TagListComponent } from './tag-list.component';
         OptionListComponent,
         PaymentFormComponent,
         TagListComponent,
+        LeaderCardComponent,
     ],
     bootstrap: [EshopComponent]
 })
