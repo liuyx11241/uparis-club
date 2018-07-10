@@ -8,7 +8,7 @@ export class AuthService {
 
     authenticated = false;
 
-    private redirectUrl: string;
+    redirectUrl: string;
 
     constructor(private http: HttpClient) {
     }
@@ -17,7 +17,7 @@ export class AuthService {
         let httpParams = new HttpParams()
             .set('username', credentials['username'])
             .set('password', credentials['password']);
-        return this.http.post(`/api/auth/login`, httpParams).subscribe(value => {
+        this.http.post(`/api/auth/login`, httpParams).subscribe(value => {
             this.authenticated = true;
             successHandler && successHandler(this.redirectUrl);
         }, error => {
