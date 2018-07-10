@@ -59,8 +59,7 @@ export const UPARIS_DATE_FORMATS = {
         {provide: MAT_DATE_LOCALE, useValue: 'zh-cn'},
         {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
         {provide: MAT_DATE_FORMATS, useValue: UPARIS_DATE_FORMATS},
-        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
-
+        // {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
     ],
     schemas: [NO_ERRORS_SCHEMA],
     bootstrap: [AppComponent]

@@ -46,7 +46,9 @@
     <ng-container matColumnDef="listOption">
         <mat-header-cell *matHeaderCellDef mat-sort-header>购买选项</mat-header-cell>
         <mat-cell *matCellDef="let row">
-            <li class="list-unstyled" *ngFor="let option of row.listOption">{{option.name}}</li>
+            <ul class="list-unstyled my-0">
+                <li *ngFor="let option of row.listOption">{{option.name}}</li>
+            </ul>
         </mat-cell>
     </ng-container>
 
