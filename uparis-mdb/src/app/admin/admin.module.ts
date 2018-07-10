@@ -20,6 +20,7 @@ import {OrderTableComponent} from './order-table.component';
 import {PersonTableComponent} from './person-table.component';
 import {ModelModule} from "../model/model.module";
 import {AdminLoginComponent} from './admin-login.component';
+import {AuthGuard} from "../service/auth.guard";
 
 @NgModule({
     imports: [
@@ -48,6 +49,7 @@ import {AdminLoginComponent} from './admin-login.component';
     ],
     providers: [
         SnackBar,
+        AuthGuard
     ],
     bootstrap: [AdminComponent],
     exports: [AdminLoginComponent]

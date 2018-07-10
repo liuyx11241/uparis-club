@@ -14,6 +14,8 @@ import {registerLocaleData} from "@angular/common";
 import localeZh from '@angular/common/locales/zh';
 import localeFr from '@angular/common/locales/fr';
 import {AdminLoginComponent} from "./admin/admin-login.component";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./service/auth.interceptor";
 
 registerLocaleData(localeZh);
 registerLocaleData(localeFr);
@@ -57,6 +59,7 @@ export const UPARIS_DATE_FORMATS = {
         {provide: MAT_DATE_LOCALE, useValue: 'zh-cn'},
         {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
         {provide: MAT_DATE_FORMATS, useValue: UPARIS_DATE_FORMATS},
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
 
     ],
     schemas: [NO_ERRORS_SCHEMA],

@@ -10,31 +10,38 @@ import {TripResolver} from "../service/trip.resolver";
 import {TripTableComponent} from "./trip-table.component";
 import {OrderTableComponent} from "./order-table.component";
 import {PersonTableComponent} from "./person-table.component";
+import {AuthGuard} from "../service/auth.guard";
 
 const routes: Routes = [
     {
-        path: 'admin', component: AdminComponent,
+        path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
         children: [
-            {path: '', component: DashboardComponent},
-            {path: 'products', component: ProductTableComponent},
-            {path: 'products/new', component: ProductFormComponent},
-            {path: 'products/:idProduct', component: ProductFormComponent,
-                resolve:{
-                    product: ProductResolver
-                }},
-            {path: 'trips', component: TripTableComponent},
-            {path: 'trips/new', component: TripFormComponent,
-                resolve: {
-                    product: ProductResolver
-                }
+            {
+                path: '',
+                canActivateChild: [AuthGuard],
+                children:[
+                    {path: 'products', component: ProductTableComponent},
+                    {path: 'products/new', component: ProductFormComponent},
+                    {path: 'products/:idProduct', component: ProductFormComponent,
+                        resolve:{
+                            product: ProductResolver
+                        }},
+                    {path: 'trips', component: TripTableComponent},
+                    {path: 'trips/new', component: TripFormComponent,
+                        resolve: {
+                            product: ProductResolver
+                        }
+                    },
+                    {path: 'trips/:idTrip', component: TripFormComponent,
+                        resolve:{
+                            trip:TripResolver
+                        }
+                    },
+                    {path: 'orders', component: OrderTableComponent},
+                    {path: 'persons', component: PersonTableComponent},
+                    {path: '', component: DashboardComponent}
+                ]
             },
-            {path: 'trips/:idTrip', component: TripFormComponent,
-                resolve:{
-                    trip:TripResolver
-                }
-            },
-            {path: 'orders', component: OrderTableComponent},
-            {path: 'persons', component: PersonTableComponent},
         ]
     }
 ];
