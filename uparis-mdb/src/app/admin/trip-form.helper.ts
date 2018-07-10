@@ -2,7 +2,7 @@ import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup} from "@
 import {Trip} from "../model/trip.dto";
 import {Option} from "../model/option.dto";
 import {Stock} from "../model/stock.dto";
-import {FormHelper} from "../model/form-helper.util";
+import {FormHelper} from "../util/form-helper.util";
 
 export class TripFormHelper {
 

@@ -5,7 +5,7 @@ import {Product} from "../model/product.dto";
 import {PostService} from "../service/http-post.service";
 import {SnackBar} from "./snack-bar";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {DateFormatter} from "../model/date-formatter.util";
+import {DateFormatter} from "../util/date-formatter.util";
 import {TripFormHelper} from "./trip-form.helper";
 
 @Component({

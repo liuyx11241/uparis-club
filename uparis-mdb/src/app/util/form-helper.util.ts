@@ -1,13 +1,13 @@
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Person} from "./person.dto";
-import {Itinerary} from "./itinerary.dto";
-import {Schedule} from "./schedule.dto";
-import {Multimedia} from "./multimedia.dto";
-import {Product} from "./product.dto";
-import {Trip} from "./trip.dto";
-import {Option} from "./option.dto";
-import {Stock} from "./stock.dto";
-import {Tag} from "./tag.dto";
+import {Person} from "../model/person.dto";
+import {Itinerary} from "../model/itinerary.dto";
+import {Schedule} from "../model/schedule.dto";
+import {Multimedia} from "../model/multimedia.dto";
+import {Product} from "../model/product.dto";
+import {Trip} from "../model/trip.dto";
+import {Option} from "../model/option.dto";
+import {Stock} from "../model/stock.dto";
+import {Tag} from "../model/tag.dto";
 
 export class FormHelper {
     public static markAsTouched(ctl: AbstractControl) {

@@ -3,7 +3,7 @@ import {Itinerary} from "../model/itinerary.dto";
 import {Schedule} from "../model/schedule.dto";
 import {Product} from "../model/product.dto";
 import {Multimedia} from "../model/multimedia.dto";
-import {FormHelper} from "../model/form-helper.util";
+import {FormHelper} from "../util/form-helper.util";
 import {Tag} from "../model/tag.dto";
 
 export class ProductFormHelper {

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Tag} from "../model/tag.dto";
-import {ColorHelper} from "../model/color-helper.util";
+import {ColorHelper} from "../util/color-helper.util";
 
 @Component({
     selector: 'uparis-tag-list',

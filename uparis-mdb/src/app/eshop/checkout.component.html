@@ -5,7 +5,7 @@
             <ng-container *ngIf="_trip.dateEnd != _trip.dateStart"> ~ {{_trip.dateEnd}}</ng-container>
         </span>
         <span class="col-12 col-md-3 text-center text-md-left align-middle mt-2">
-            {{_trip.price | currency: _trip.currency}}
+            {{_trip.price | money: _trip.currency}}
         </span>
         <uparis-number-picker class="col-12 col-md-3 text-center text-md-right align-middle" [initValue]="_number"
                               [min]="1" [max]="_trip.stock" (onChange)="number=$event"

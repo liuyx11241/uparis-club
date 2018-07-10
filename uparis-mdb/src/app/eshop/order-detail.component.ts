@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Order} from "../model/order.dto";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {FormHelper} from "../model/form-helper.util";
+import {FormHelper} from "../util/form-helper.util";
 import {MatSlideToggleChange} from "@angular/material";
 import {Person} from "../model/person.dto";
 import {PostService} from "../service/http-post.service";

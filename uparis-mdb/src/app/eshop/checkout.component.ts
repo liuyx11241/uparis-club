@@ -4,8 +4,8 @@ import {Trip} from "../model/trip.dto";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Order} from "../model/order.dto";
 import {PostService} from "../service/http-post.service";
-import {DateFormatter} from "../model/date-formatter.util";
-import {FormHelper} from "../model/form-helper.util";
+import {DateFormatter} from "../util/date-formatter.util";
+import {FormHelper} from "../util/form-helper.util";
 
 @Component({
     selector: 'uparis-checkout',

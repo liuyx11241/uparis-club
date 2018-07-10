@@ -24,7 +24,8 @@ export class ColorHelper {
     }
 
     public static randomBadgeColor(): string {
-        return ColorHelper.BADGE_COLORS[ColorHelper.getRandomInt(ColorHelper.BADGE_COLORS.length)];
+        const listColors = ColorHelper.ALL_COLORS;
+        return listColors[ColorHelper.getRandomInt(listColors.length)];
     }
 
     public static randomBadgeTone(): string {

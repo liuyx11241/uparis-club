@@ -12,9 +12,9 @@
 
     <h4 class="h4-responsive text-center text-md-left mt-4" *ngIf="calcMaxPrice()>0">
         <strong class="amber-text">
-            {{calcMinPrice()|currency: _selectedTrip.currency}}
+            {{calcMinPrice()|money: _selectedTrip.currency}}
             <ng-container *ngIf="calcMaxPrice() > calcMinPrice()">
-                ~ {{calcMaxPrice()|currency: _selectedTrip.currency}}
+                ~ {{calcMaxPrice()|money: _selectedTrip.currency}}
             </ng-container>
         </strong>
     </h4>

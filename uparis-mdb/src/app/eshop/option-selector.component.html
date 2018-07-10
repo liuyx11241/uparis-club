@@ -6,7 +6,7 @@
             <mat-select-trigger>
                 <span class="d-flex">
                     {{selectedOption(key)?.name}}
-                    <strong class="col text-right">{{selectedOption(key)?.price | currency: _trip.currency}}</strong>
+                    <strong class="col text-right">{{selectedOption(key)?.price | money: _trip.currency}}</strong>
                 </span>
             </mat-select-trigger>
 
@@ -15,7 +15,7 @@
                 <span class="d-flex">
                     {{option.name}}
                     <strong class="col text-right">
-                        {{option.price | currency : _trip.currency}}
+                        {{option.price | money : _trip.currency}}
                     </strong>
                 </span>
             </mat-option>

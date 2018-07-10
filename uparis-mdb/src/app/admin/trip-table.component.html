@@ -31,7 +31,7 @@
     </ng-container>
     <ng-container matColumnDef="price">
         <mat-header-cell *matHeaderCellDef mat-sort-header>价格</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.price | currency: element.currency}}
+        <mat-cell *matCellDef="let element">{{element.price | money: element.currency}}
         </mat-cell>
     </ng-container>
     <ng-container matColumnDef="priceVAT">

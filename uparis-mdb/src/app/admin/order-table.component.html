@@ -52,7 +52,7 @@
 
     <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef mat-sort-header>总额</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.amount | currency: row.trip.currency}}</mat-cell>
+        <mat-cell *matCellDef="let row">{{row.amount | money: row.trip.currency}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
