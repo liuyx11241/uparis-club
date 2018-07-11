@@ -11,7 +11,7 @@ export class Trip extends Abstract {
 
     dateStart: any | string | Date;
 
-    dateEnd: any | string | Date;
+    dateEnd: string;
 
     stock: number;
 

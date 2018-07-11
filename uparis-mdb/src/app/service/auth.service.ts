@@ -25,4 +25,15 @@ export class AuthService {
             errorHandler && errorHandler(error);
         });
     }
+
+    unauthenticate(successHandler?: () => void, errorHandler?: (error: any) => void): void {
+        this.http.post(`/api/auth/logout`, null).subscribe(value => {
+            this.authenticated = false;
+            successHandler && successHandler();
+        }, error => {
+            this.authenticated = false;
+            console.error(error);
+            errorHandler && errorHandler(error);
+        })
+    }
 }

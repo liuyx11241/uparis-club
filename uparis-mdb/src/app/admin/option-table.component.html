@@ -12,7 +12,7 @@
     <div class="card-header col-12">层级 {{level}}</div>
     <div class="card-body col-12" *ngFor="let option of _mappedListOption.get(level);" [formGroup]="option">
         <mat-form-field class="col-6 col-md-2 col-lg-1">
-            <input matInput type="text" formControlName="id" placeholder="ID">
+            <input matInput type="text" formControlName="id" placeholder="ID" readonly>
         </mat-form-field>
         <mat-form-field class="col-6 col-md-2 col-lg-1">
             <mat-select placeholder="层级" formControlName="level" (valueChange)="onLevelChange($event, option)" required>

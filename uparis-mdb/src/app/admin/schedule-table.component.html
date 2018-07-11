@@ -1,7 +1,7 @@
 <div class="card-body">
     <ng-container *ngFor="let schedule of _listSchedule.controls" [formGroup]="schedule">
         <mat-form-field class="col-6 col-md-1">
-            <input matInput placeholder="ID" formControlName="id">
+            <input matInput placeholder="ID" formControlName="id" readonly>
         </mat-form-field>
         <mat-form-field class="col-6 col-md-2">
             <!--<mat-select [(value)]="schedule.time" placeholder="时间">-->

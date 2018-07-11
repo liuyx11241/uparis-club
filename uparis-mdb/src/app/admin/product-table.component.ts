@@ -4,6 +4,7 @@ import {ProductTableDataSource} from './product-table-datasource';
 import {GetService} from "../service/http-get.service";
 import {Router} from "@angular/router";
 import {Product} from "../model/product.dto";
+import {AuthService} from "../service/auth.service";
 
 @Component({
     selector: 'admin/product-table',
@@ -17,7 +18,8 @@ export class ProductTableComponent implements OnInit, AfterViewInit {
     _displayedColumns = ['id', 'name', 'alias', 'status', 'duration', 'actions'];
 
     constructor(private router: Router,
-                private productService: GetService) {
+                private productService: GetService,
+                private auth: AuthService) {
 
     }
 
@@ -27,17 +29,9 @@ export class ProductTableComponent implements OnInit, AfterViewInit {
 
 
     ngAfterViewInit(): void {
-        this._dataSource.reload();
-        // fromEvent(this.input.nativeElement,'keyup')
-        //     .pipe(
-        //         debounceTime(150),
-        //         distinctUntilChanged(),
-        //         tap(() => {
-        //             this.paginator.pageIndex = 0;
-        //             this.loadLessonsPage();
-        //         })
-        //     )
-        //     .subscribe();
+        if (this.auth.authenticated) {
+            this._dataSource.reload();
+        }
     }
 
     createTrip(product: Product) {

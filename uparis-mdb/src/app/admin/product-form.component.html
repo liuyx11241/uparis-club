@@ -1,27 +1,27 @@
 <mat-toolbar>
     <button mat-button (click)="save()" *ngIf="!_formHelper.disabled">
         <mat-icon>save</mat-icon>
-        保存修改
+        保存
     </button>
     <button mat-button (click)="_formHelper.disabled=false" *ngIf="_formHelper.disabled">
         <mat-icon>edit</mat-icon>
-        修改产品
+        修改
     </button>
     <button mat-button (click)="delete()">
         <mat-icon>delete</mat-icon>
-        删除产品
+        删除
     </button>
 
     <button mat-button (click)="addTrip()" *ngIf="_formHelper.disabled">
         <mat-icon>playlist_add</mat-icon>
-        添加出队
+        出队
     </button>
 </mat-toolbar>
 <section class="card-body" [formGroup]="_productForm">
     <div class="row">
         <div class="col-12 col-md-6 col-lg-4 col-xl-3 hoverable">
             <mat-form-field class="col-12">
-                <input type="text" matInput placeholder="产品ID" formControlName="id">
+                <input type="text" matInput placeholder="ID" formControlName="id" readonly>
             </mat-form-field>
             <mat-form-field class="col-12">
                 <input type="text" matInput placeholder="产品名" formControlName="name" required>

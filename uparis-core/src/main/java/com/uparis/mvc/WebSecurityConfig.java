@@ -49,14 +49,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler((request, response, authentication) -> response.setStatus(200))
-                .failureUrl("/admin/login?error=failed")
                 .failureHandler((request, response, exception) -> response.sendError(HttpServletResponse.SC_FORBIDDEN, exception.getMessage()))
+                .failureUrl("/admin/login?error=failed")
 
                 .and()
                 .logout()
                 .logoutUrl("/api/auth/logout")
-                .logoutSuccessHandler((request, response, authentication) -> response.setStatus(200));
-
+                .logoutSuccessHandler((request, response, authentication) -> response.setStatus(200))
+                .logoutSuccessUrl("admin/login");
     }
 
     @Override

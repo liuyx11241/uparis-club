@@ -1,15 +1,15 @@
 <mat-toolbar>
     <button mat-button (click)="save()" *ngIf="!_formHelper.disabled">
         <mat-icon>save</mat-icon>
-        保存修改
+        保存
     </button>
     <button mat-button (click)="_formHelper.disabled=false" *ngIf="_formHelper.disabled">
         <mat-icon>edit</mat-icon>
-        修改活动
+        修改
     </button>
     <button mat-button (click)="delete()">
         <mat-icon>delete</mat-icon>
-        删除活动
+        删除
     </button>
 </mat-toolbar>
 
@@ -17,11 +17,11 @@
     <div class="row">
         <div class="col-12 col-md-6 col-lg-4 col-xl-3 hoverable">
             <mat-form-field class="col-12">
-                <input matInput placeholder="ID" formControlName="id">
+                <input matInput placeholder="ID" formControlName="id" readonly>
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <input matInput placeholder="产品" formControlName="nameProduct">
+                <input matInput placeholder="产品" formControlName="nameProduct" readonly>
             </mat-form-field>
 
             <mat-form-field class="col-12">
@@ -33,10 +33,7 @@
             </mat-form-field>
 
             <mat-form-field class="col-12">
-                <input matInput placeholder="返回日期" formControlName="dateEnd"
-                       [matDatepicker]="pickerEnd">
-                <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
-                <mat-datepicker #pickerEnd></mat-datepicker>
+                <input matInput placeholder="返回日期" formControlName="dateEnd" readonly>
             </mat-form-field>
 
             <mat-form-field class="col-12">
@@ -71,7 +68,7 @@
         <mat-tab #tabOrder *ngIf="_formHelper.disabled">
             <ng-template mat-tab-label>
                 <mat-icon [class.amber-text]="tabOrder.isActive">library_books</mat-icon>
-                <span [class.amber-text]="tabOrder.isActive">相关订单</span>
+                <span [class.amber-text]="tabOrder.isActive">订单</span>
             </ng-template>
             <ng-template matTabContent>
                 <uparis-order-table [idTrip]="_tripForm.value.id"></uparis-order-table>
@@ -81,7 +78,7 @@
         <mat-tab #tabParticipant *ngIf="_formHelper.disabled">
             <ng-template mat-tab-label="">
                 <mat-icon [class.text-amber]="tabParticipant.isActive">person_outline</mat-icon>
-                <span [class.text-amber]="tabParticipant.isActive">队员名单</span>
+                <span [class.text-amber]="tabParticipant.isActive">队员</span>
             </ng-template>
             <ng-template matTabContent>
                 <uparis-person-table [idTrip]="_tripForm.value.id"></uparis-person-table>

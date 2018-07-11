@@ -20,7 +20,6 @@ export class TripFormHelper {
     newTripForm(trip?: Trip): FormGroup {
         if (trip) {
             trip.dateStart = new Date(trip.dateStart);
-            trip.dateEnd = new Date(trip.dateEnd);
             this._tripForm.patchValue(trip, {onlySelf: true});
             if (trip.listOption) {
                 trip.listOption.forEach(

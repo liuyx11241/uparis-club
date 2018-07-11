@@ -11,10 +11,10 @@
 
 <div class="card-body z-depth-1" *ngFor="let media of _listMultimedia.controls" [formGroup]="media">
     <mat-form-field class="col-6 col-md-2">
-        <input matInput formControlName="id" disabled placeholder="ID">
+        <input matInput formControlName="id" disabled placeholder="ID" readonly>
     </mat-form-field>
     <mat-form-field class="col-6 col-md-2">
-        <mat-select formControlName="type" placeholder="类型" readonly disabled>
+        <mat-select formControlName="type" placeholder="类型" readonly>
             <mat-option [value]="'PHOTO'">照片</mat-option>
             <mat-option [value]="'VIDEO'">视频</mat-option>
         </mat-select>
