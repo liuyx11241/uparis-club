@@ -1,8 +1,9 @@
 package com.uparis.db.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import com.uparis.db.util.DateTimeFormatter;
+
+import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Objects;
 
 @MappedSuperclass
@@ -11,9 +12,21 @@ public abstract class AbstractPo {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false, updatable = false)
     private String timeCreated;
 
+    @Column(nullable = false)
     private String timeModified;
+
+    @PrePersist
+    private void preInsert() {
+        this.timeModified = this.timeCreated = DateTimeFormatter.format(Calendar.getInstance().getTime());
+    }
+
+    @PreUpdate
+    private void preUpdate() {
+        this.timeModified = DateTimeFormatter.format(Calendar.getInstance().getTime());
+    }
 
     public Long getId() {
         return id;

@@ -12,7 +12,7 @@ export class TripTableComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort) sort: MatSort;
     _dataSource: TripTableDataSource;
 
-    _displayedColumns = ['id', 'idProduct', 'dateStart', 'dateEnd', 'stock', 'price', 'priceVAT', 'actions'];
+    _displayedColumns = ['id', 'idProduct', 'dateStart', 'dateEnd', 'stock', 'price', 'priceVAT', 'timeCreated', 'timeModified', 'actions'];
 
     private _idProduct: number;
 
@@ -25,7 +25,7 @@ export class TripTableComponent implements OnInit, AfterViewInit {
 
 
     ngAfterViewInit(): void {
-        if(!this._idProduct) {
+        if (!this._idProduct) {
             this.reload();
         }
     }

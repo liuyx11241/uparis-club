@@ -39,6 +39,15 @@
         <mat-cell *matCellDef="let element">{{element.priceVAT}}
         </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="timeCreated">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>创建</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.timeCreated}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="timeModified">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>上次修改</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.timeModified}}</mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>

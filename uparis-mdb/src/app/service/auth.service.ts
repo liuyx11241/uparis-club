@@ -27,13 +27,13 @@ export class AuthService {
     }
 
     unauthenticate(successHandler?: () => void, errorHandler?: (error: any) => void): void {
-        this.http.post(`/api/auth/logout`, null).subscribe(value => {
-            this.authenticated = false;
+        this.http.post(`/api/auth/logout`, {}).subscribe(value => {
             successHandler && successHandler();
         }, error => {
-            this.authenticated = false;
             console.error(error);
             errorHandler && errorHandler(error);
+        }, () => {
+            this.authenticated = false;
         })
     }
 }

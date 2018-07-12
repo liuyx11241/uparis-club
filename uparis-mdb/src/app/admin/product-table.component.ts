@@ -15,7 +15,7 @@ export class ProductTableComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort) sort: MatSort;
     _dataSource: ProductTableDataSource;
 
-    _displayedColumns = ['id', 'name', 'alias', 'status', 'duration', 'actions'];
+    _displayedColumns = ['id', 'name', 'alias', 'status', 'duration', 'timeCreated', 'timeModified', 'actions'];
 
     constructor(private router: Router,
                 private productService: GetService,

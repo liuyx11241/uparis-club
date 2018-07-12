@@ -1,7 +1,7 @@
 export class Abstract {
     id: number;
 
-    timeCreated: any | string | Date;
+    timeCreated: string;
 
-    timeModified: any | string | Date;
+    timeModified: string;
 }
