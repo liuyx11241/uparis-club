@@ -36,10 +36,13 @@ public class TripPo extends AbstractPo {
     @OrderBy("level asc, num_order asc")
     private List<OptionPo> listOption;
 
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<QuestionPo> listQuestion;
+
     @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "R_TRIP_LEADER",
-        joinColumns = @JoinColumn(name = "ID_USER"),
-        inverseJoinColumns = @JoinColumn(name = "ID_TRIP"))
+            joinColumns = @JoinColumn(name = "ID_USER"),
+            inverseJoinColumns = @JoinColumn(name = "ID_TRIP"))
     private List<UserPo> listLeader;
 
     public TripPo() {
@@ -108,6 +111,14 @@ public class TripPo extends AbstractPo {
 
     public void setListOption(List<OptionPo> listOption) {
         this.listOption = listOption;
+    }
+
+    public List<QuestionPo> getListQuestion() {
+        return listQuestion;
+    }
+
+    public void setListQuestion(List<QuestionPo> listQuestion) {
+        this.listQuestion = listQuestion;
     }
 
     public String getUrlCodeQR() {

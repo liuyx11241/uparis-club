@@ -1,5 +1,6 @@
 import {Option} from "./option.dto";
 import {Abstract} from "./abstract.dto";
+import {Question} from "./question.dto";
 
 export class Trip extends Abstract {
 
@@ -24,4 +25,6 @@ export class Trip extends Abstract {
     urlCodeQR: string;
 
     listOption: Option[];
+
+    listQuestion: Question[];
 }

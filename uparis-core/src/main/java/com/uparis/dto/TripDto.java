@@ -27,6 +27,8 @@ public class TripDto extends AbstractDto {
 
     private List<OptionDto> listOption = new ArrayList<>();
 
+    private List<QuestionDto> listQuestion = new ArrayList<>();
+
     public String getDateStart() {
         return dateStart;
     }
@@ -113,5 +115,13 @@ public class TripDto extends AbstractDto {
 
     public void setListOption(List<OptionDto> listOption) {
         this.listOption = listOption;
+    }
+
+    public List<QuestionDto> getListQuestion() {
+        return listQuestion;
+    }
+
+    public void setListQuestion(List<QuestionDto> listQuestion) {
+        this.listQuestion = listQuestion;
     }
 }

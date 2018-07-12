@@ -97,6 +97,15 @@
                                  [listOptionForm]="_formHelper.listOptionForm"></uparis-option-table>
         </mat-tab>
 
+        <mat-tab #tabQuestion>
+            <ng-template mat-tab-label>
+                <mat-icon [class.amber-text]="tabQuestion.isActive">translate</mat-icon>
+                <span [class.amber-text]="tabQuestion.isActive">报名表</span>
+            </ng-template>
+            <uparis-question-table class="row w-100" [formHelper]="_formHelper"
+                                   [listQuestionForm]="_formHelper.listQuestionForm"></uparis-question-table>
+        </mat-tab>
+
         <mat-tab #tabPortrait>
             <ng-template mat-tab-label>
                 <mat-icon [class.amber-text]="tabPortrait.isActive">portrait</mat-icon>

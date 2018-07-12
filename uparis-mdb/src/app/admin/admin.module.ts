@@ -21,7 +21,8 @@ import {PersonTableComponent} from './person-table.component';
 import {ModelModule} from "../model/model.module";
 import {AdminLoginComponent} from './admin-login.component';
 import {AuthGuard} from "../service/auth.guard";
-import { PersonFormComponent } from './person-form.component';
+import {PersonFormComponent} from './person-form.component';
+import {QuestionTableComponent} from './question-table.component';
 
 @NgModule({
     imports: [
@@ -48,6 +49,7 @@ import { PersonFormComponent } from './person-form.component';
         PersonTableComponent,
         AdminLoginComponent,
         PersonFormComponent,
+        QuestionTableComponent,
     ],
     providers: [
         SnackBar,

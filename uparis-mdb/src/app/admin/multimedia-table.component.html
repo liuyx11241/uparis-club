@@ -11,7 +11,7 @@
 
 <div class="card-body z-depth-1" *ngFor="let media of _listMultimedia.controls" [formGroup]="media">
     <mat-form-field class="col-6 col-md-2">
-        <input matInput formControlName="id" disabled placeholder="ID" readonly>
+        <input matInput formControlName="id" placeholder="ID" readonly>
     </mat-form-field>
     <mat-form-field class="col-6 col-md-2">
         <mat-select formControlName="type" placeholder="类型" readonly>

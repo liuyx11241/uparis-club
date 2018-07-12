@@ -8,6 +8,7 @@ import {Trip} from "../model/trip.dto";
 import {Option} from "../model/option.dto";
 import {Stock} from "../model/stock.dto";
 import {Tag} from "../model/tag.dto";
+import {Question} from "../model/question.dto";
 
 export class FormHelper {
     public static markAsTouched(ctl: AbstractControl) {
@@ -101,6 +102,15 @@ export class FormHelper {
             id: formBuilder.control(stock ? stock.id : null),
             name: formBuilder.control(stock ? stock.name : null, Validators.required),
             quantity: formBuilder.control(stock ? stock.quantity : null, [Validators.required, Validators.min(0)]),
+        });
+    }
+
+    public static newQuestionForm(formBuilder: FormBuilder, question?: Question): FormGroup {
+        return formBuilder.group({
+            id: formBuilder.control(question ? question.id : null),
+            key: formBuilder.control(question ? question.key : null, Validators.required),
+            label: formBuilder.control(question ? question.label : null, Validators.required),
+            typeControl: formBuilder.control(question ? question.typeControl : null, Validators.required),
         });
     }
 

@@ -1,0 +1,29 @@
+<mat-toolbar *ngIf="!_formHelper.disabled">
+    <button mat-button (click)="add($event)">
+        <mat-icon>add_box</mat-icon>
+        添加新问题
+    </button>
+</mat-toolbar>
+
+<div class="card-body z-depth-1" *ngFor="let question of _listQuestionForm.controls" [formGroup]="question">
+    <mat-form-field class="col-6 col-md-2">
+        <input matInput formControlName="id" placeholder="ID" readonly>
+    </mat-form-field>
+    <mat-form-field class="col-6 col-md-2">
+        <mat-select formControlName="typeControl" required>
+            <mat-option value="STRING">文字</mat-option>
+            <mat-option value="NUMBER">数字</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-4">
+        <input matInput type="text" formControlName="key" placeholder="主键" required>
+    </mat-form-field>
+    <mat-form-field
+        [class.col-12]="_formHelper.disabled" [class.col-md-4]="_formHelper.disabled"
+        [class.col-11]="!_formHelper.disabled" [class.col-md-3]="!_formHelper.disabled">
+        <input matInput type="text" formControlName="label" placeholder="描述" required>
+    </mat-form-field>
+    <button mat-icon-button class="col-1" (click)="delete(question)" *ngIf="!_formHelper.disabled">
+        <mat-icon>delete</mat-icon>
+    </button>
+</div>
