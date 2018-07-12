@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from "@angular/router";
 import {Observable} from "rxjs/index";
 import {GetService} from "./http-get.service";
+import {Person} from "../model/person.dto";
 import {map, take} from "rxjs/internal/operators";
-import {Person} from "../model/Person.dto";
 
 @Injectable()
 export class PersonResolver implements Resolve<Person> {

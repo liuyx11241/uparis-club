@@ -8,6 +8,7 @@ import {PostService} from "./http-post.service";
 import {DeleteService} from "./http-delete.service";
 import {OrderResolver} from "./order.resolver";
 import {PersonResolver} from "./person.resolver";
+import {AuthService} from "./auth.service";
 
 @NgModule({
     imports: [
@@ -20,6 +21,8 @@ import {PersonResolver} from "./person.resolver";
         GetService,
         PostService,
         DeleteService,
+        AuthService,
+
         ProductResolver,
         TripResolver,
         OrderResolver,

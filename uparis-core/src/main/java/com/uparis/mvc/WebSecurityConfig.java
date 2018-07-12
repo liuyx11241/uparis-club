@@ -39,8 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/eshop").permitAll()
                 //EShop关于订单的操作
                 .antMatchers("/api/order").permitAll()
-                //Admin登陆的操作
-                .antMatchers("/admin/login").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
@@ -55,8 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/api/auth/logout")
-                .logoutSuccessHandler((request, response, authentication) -> response.setStatus(200))
-                .logoutSuccessUrl("/admin/login");
+                .logoutSuccessHandler((request, response, authentication) -> response.setStatus(200));
     }
 
     @Override

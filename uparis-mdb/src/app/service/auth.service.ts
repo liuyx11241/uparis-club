@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
     authenticated = false;
@@ -26,14 +24,13 @@ export class AuthService {
         });
     }
 
-    unauthenticate(successHandler?: () => void, errorHandler?: (error: any) => void): void {
+    unauthenticate(callback?: () => void): void {
         this.http.post(`/api/auth/logout`, {}).subscribe(value => {
-            successHandler && successHandler();
         }, error => {
             console.error(error);
-            errorHandler && errorHandler(error);
         }, () => {
             this.authenticated = false;
+            callback && callback();
         })
     }
 }
