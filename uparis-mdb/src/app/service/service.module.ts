@@ -7,6 +7,7 @@ import {TripResolver} from "./trip.resolver";
 import {PostService} from "./http-post.service";
 import {DeleteService} from "./http-delete.service";
 import {OrderResolver} from "./order.resolver";
+import {PersonResolver} from "./person.resolver";
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import {OrderResolver} from "./order.resolver";
         ProductResolver,
         TripResolver,
         OrderResolver,
+        PersonResolver,
     ]
 })
 export class ServiceModule {

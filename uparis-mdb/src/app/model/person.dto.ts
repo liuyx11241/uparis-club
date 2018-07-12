@@ -10,7 +10,7 @@ export class Person extends Abstract {
 
     lastName: string;
 
-    birthday: string;
+    birthday: any | string | Date;
 
     birthplace: string;
 

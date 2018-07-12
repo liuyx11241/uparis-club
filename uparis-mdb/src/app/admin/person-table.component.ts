@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
 import {PersonTableDataSource} from './person-table-datasource';
 import {GetService} from "../service/http-get.service";
@@ -8,15 +8,14 @@ import {GetService} from "../service/http-get.service";
     templateUrl: './person-table.component.html',
     styleUrls: ['./person-table.component.scss']
 })
-export class PersonTableComponent implements OnInit, AfterViewInit {
+export class PersonTableComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
     dataSource: PersonTableDataSource;
 
     /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
     displayedColumns = [
-        'id', 'gender', 'lastName', 'birthday', 'birthplace', 'wechat', 'telephone', 'email',
-        'address', 'zipCode', 'city', 'country', 'actions'];
+        'id', 'gender', 'lastName', 'birthday', 'birthplace', 'wechat', 'telephone', 'email', 'address', 'actions'];
 
     private _idTrip: number;
 
@@ -25,13 +24,6 @@ export class PersonTableComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.dataSource = new PersonTableDataSource(this.paginator, this.sort, this.service);
-    }
-
-
-    ngAfterViewInit(): void {
-        if (!this._idTrip) {
-            this.dataSource.reload();
-        }
     }
 
     @Input()

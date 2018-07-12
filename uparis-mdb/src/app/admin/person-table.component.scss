@@ -1,13 +1,18 @@
 .mat-column-id,
 .mat-column-gender,
-.mat-column-zipCode,
-.mat-column-city,
-.mat-column-country,
-.mat-column-actions {
-    max-width: 48px;
+.mat-column-lastName,
+.mat-column-wechat,
+.mat-column-telephone,
+.mat-column-birthday {
+    flex-grow: 1;
 }
 
-.mat-column-fullName,
-.mat-column-telephone {
-    max-width: 96px;
+.mat-column-birthplace,
+.mat-column-actions,
+.mat-column-email {
+    flex-grow: 2;
+}
+
+.mat-column-address {
+    flex-grow: 3;
 }

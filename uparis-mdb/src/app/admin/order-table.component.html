@@ -25,7 +25,11 @@
 
     <ng-container matColumnDef="participant">
         <mat-header-cell *matHeaderCellDef mat-sort-header>队员</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.participant.lastName}} {{row.participant.firstName}}</mat-cell>
+        <mat-cell *matCellDef="let row">
+            <a [routerLink]="['/admin/persons', row.participant.id]">
+                {{row.participant.lastName}} {{row.participant.firstName}}
+            </a>
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="reference">
@@ -40,7 +44,11 @@
 
     <ng-container matColumnDef="payer">
         <mat-header-cell *matHeaderCellDef mat-sort-header>付款人</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row.payer?.lastName}}{{row.payer?.firstName}}</mat-cell>
+        <mat-cell *matCellDef="let row">
+            <a *ngIf="row.payer" [routerLink]="['/admin/persons', row.payer.id]">
+                {{row.payer.lastName}}{{row.payer.firstName}}
+            </a>
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="listOption">

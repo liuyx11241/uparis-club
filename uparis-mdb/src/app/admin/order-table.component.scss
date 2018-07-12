@@ -1,19 +1,18 @@
 .mat-column-id,
-.mat-column-actions {
-    max-width: 64px;
-}
-
+.mat-column-trip,
 .mat-column-status,
+.mat-column-actions,
 .mat-column-amount {
-    max-width: 96px;
+    flex-grow: 1;
 }
 
-.mat-column-product,
-.mat-column-trip {
-    max-width: 128px;
-}
-
+.mat-column-payer,
+.mat-column-participant,
 .mat-column-reference,
+.mat-column-tripProduct {
+    flex-grow: 2;
+}
+
 .mat-column-listOption {
-    min-width: 160px;
+    flex-grow: 3;
 }

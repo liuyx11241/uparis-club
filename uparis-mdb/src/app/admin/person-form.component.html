@@ -1,0 +1,75 @@
+<mat-toolbar>
+    <button mat-button>
+        <mat-icon>edit</mat-icon>
+        修改
+    </button>
+</mat-toolbar>
+
+<section class="card-body white" [formGroup]="_personForm">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 hoverable">
+            <mat-form-field class="col-12">
+                <input matInput="" formControlName="id" placeholder="ID" readonly>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <mat-select formControlName="gender" placeholder="性别" required>
+                    <mat-option value="MALE">男</mat-option>
+                    <mat-option value="FEMALE">女</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <input matInput type="text" placeholder="姓" formControlName="lastName" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <input matInput type="text" placeholder="名" formControlName="firstName" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <input matInput placeholder="出生日期" formControlName="birthday" required [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker color="primary"></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 hoverable">
+            <mat-form-field class="col-12">
+                <input matInput type="text" placeholder="出生地" formControlName="birthplace" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <input matInput type="text" placeholder="微信ID" formControlName="wechat" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <input matInput type="tel" placeholder="联系电话" formControlName="telephone" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <input matInput type="email" placeholder="电子邮箱" formControlName="email" required>
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 hoverable">
+            <mat-form-field class="col-12">
+                <input matInput type="text" placeholder="联系地址" formControlName="address" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <input matInput type="text" placeholder="补充地址" formControlName="addressComplement">
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <input matInput type="text" placeholder="邮编" formControlName="zipCode" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <input matInput type="text" placeholder="城市" formControlName="city" required>
+            </mat-form-field>
+
+            <mat-form-field class="col-12">
+                <input matInput type="text" placeholder="国家" formControlName="country" required>
+            </mat-form-field>
+        </div>
+    </div>
+</section>

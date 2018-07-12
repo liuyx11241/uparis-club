@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
 import {TripTableDataSource} from './trip-table-datasource';
 import {GetService} from "../service/http-get.service";
@@ -7,7 +7,7 @@ import {GetService} from "../service/http-get.service";
     selector: 'uparis-trip-table',
     templateUrl: './trip-table.component.html',
 })
-export class TripTableComponent implements OnInit, AfterViewInit {
+export class TripTableComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
     _dataSource: TripTableDataSource;
@@ -21,13 +21,6 @@ export class TripTableComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this._dataSource = new TripTableDataSource(this.paginator, this.sort, this.service);
-    }
-
-
-    ngAfterViewInit(): void {
-        if (!this._idProduct) {
-            this.reload();
-        }
     }
 
     @Input()

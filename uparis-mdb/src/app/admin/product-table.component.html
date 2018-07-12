@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <button mat-icon-button (click)="reload()">
+    <button mat-icon-button (click)="_dataSource.reload()">
         <mat-icon>refresh</mat-icon>
     </button>
     <button mat-button [routerLink]="['/admin/products', 'new']">

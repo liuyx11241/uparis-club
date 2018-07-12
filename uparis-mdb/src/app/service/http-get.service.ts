@@ -99,4 +99,10 @@ export class GetService {
             catchError(this.handler.handleError)
         );
     }
+
+    public getPerson(idPerson: string): Observable<Person> {
+        return this.http.get<Person>(`/api/person/${idPerson}`).pipe(
+            catchError(this.handler.handleError)
+        );
+    }
 }

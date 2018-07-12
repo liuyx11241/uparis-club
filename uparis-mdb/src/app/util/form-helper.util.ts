@@ -106,6 +106,7 @@ export class FormHelper {
 
     public static newPersonForm(formBuilder: FormBuilder, person?: Person): FormGroup {
         return formBuilder.group({
+                'id': [person ? person.id : null],
                 'gender': [person ? person.gender : null, Validators.required],
                 'firstName': [person ? person.firstName : null, Validators.required],
                 'lastName': [person ? person.lastName : null, Validators.required],

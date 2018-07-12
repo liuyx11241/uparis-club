@@ -11,10 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -30,6 +27,11 @@ public class PersonController {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @GetMapping("/{idPerson}")
+    public PersonDto getPerson(@PathVariable Long idPerson) {
+        return repoPerson.findById(idPerson).map(personPo -> modelMapper.map(personPo, PersonDto.class)).orElse(null);
+    }
 
     @GetMapping
     public Page<PersonDto> getPersons(

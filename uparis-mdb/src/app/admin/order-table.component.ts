@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
 import {OrderTableDataSource} from './order-table-datasource';
 import {GetService} from "../service/http-get.service";
@@ -8,7 +8,7 @@ import {GetService} from "../service/http-get.service";
     templateUrl: './order-table.component.html',
     styleUrls: ['./order-table.component.scss']
 })
-export class OrderTableComponent implements OnInit, AfterViewInit {
+export class OrderTableComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
@@ -23,12 +23,6 @@ export class OrderTableComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.dataSource = new OrderTableDataSource(this.paginator, this.sort, this.service);
-    }
-
-    ngAfterViewInit(): void {
-        if(!this._idTrip) {
-            this.reload();
-        }
     }
 
     @Input()

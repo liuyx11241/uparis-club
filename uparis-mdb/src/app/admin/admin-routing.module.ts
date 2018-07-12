@@ -11,6 +11,8 @@ import {TripTableComponent} from "./trip-table.component";
 import {OrderTableComponent} from "./order-table.component";
 import {PersonTableComponent} from "./person-table.component";
 import {AuthGuard} from "../service/auth.guard";
+import {PersonFormComponent} from "./person-form.component";
+import {PersonResolver} from "../service/person.resolver";
 
 const routes: Routes = [
     {
@@ -39,6 +41,11 @@ const routes: Routes = [
                     },
                     {path: 'orders', component: OrderTableComponent},
                     {path: 'persons', component: PersonTableComponent},
+                    {path: 'persons/:idPerson', component: PersonFormComponent,
+                        resolve: {
+                            person: PersonResolver
+                        }
+                    },
                     {path: '', component: DashboardComponent}
                 ]
             },
