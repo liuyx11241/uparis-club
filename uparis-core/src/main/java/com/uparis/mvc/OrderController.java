@@ -51,26 +51,26 @@ public class OrderController {
 
     @GetMapping
     public Page<OrderDto> getOrders(
-            @RequestParam Map<String, String> filter,
-            @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
-            @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
-            @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
-            @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
+        @RequestParam Map<String, String> filter,
+        @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
+        @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
+        @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
+        @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
         if (filter.containsKey("idTrip")) {
             return new PageImpl<>(repoOrder.findAllByTrip_Id(Long.valueOf(filter.get("idTrip"))))
-                    .map(orderPo -> modelMapper.map(orderPo, OrderDto.class));
+                .map(orderPo -> modelMapper.map(orderPo, OrderDto.class));
         }
 
         Page<OrderPo> orderPoPage = repoOrder.findAll(
-                PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
+            PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
         return orderPoPage.map(orderPo -> modelMapper.map(orderPo, OrderDto.class));
     }
 
     @GetMapping("/{reference}")
     public List<OrderDto> getOrders(@PathVariable String reference) {
         return repoOrder.findAllByReference(reference).stream()
-                .map(orderPo -> modelMapper.map(orderPo, OrderDto.class))
-                .collect(Collectors.toList());
+            .map(orderPo -> modelMapper.map(orderPo, OrderDto.class))
+            .collect(Collectors.toList());
     }
 
     @PostMapping
@@ -79,18 +79,22 @@ public class OrderController {
         String orderReference = hashCodeService.generate(referenceLength);
 
         List<OrderPo> orderPoList =
-                listOrder.stream().map(orderDto -> modelMapper.map(orderDto, OrderPo.class)).collect(Collectors.toList());
+            listOrder.stream().map(orderDto -> modelMapper.map(orderDto, OrderPo.class)).collect(Collectors.toList());
 
         for (OrderPo orderPo : orderPoList) {
             orderPo.setAmount(calculateOrderAmount(orderPo));
             // todo : Detect duplicated Participant
             PersonPo participant = repoPerson.findOptionalByBirthdayAndWechat(
-                    orderPo.getParticipant().getBirthday(),
-                    orderPo.getParticipant().getWechat()).orElse(orderPo.getParticipant());
+                orderPo.getParticipant().getBirthday(),
+                orderPo.getParticipant().getWechat()).orElse(orderPo.getParticipant());
             orderPo.getParticipant().setId(participant.getId());
             repoPerson.save(orderPo.getParticipant());
             orderPo.setReference(orderReference);
             orderPo.setStatus(TypeOrderStatus.PENDING);
+
+            orderPo.getListAnswer().forEach(answerPo -> answerPo.setOrder(orderPo));
+
+            orderPo.getTrip().getListQuestion().forEach(questionPo -> questionPo.setTrip(orderPo.getTrip()));
         }
 
         for (OrderPo orderPo : repoOrder.saveAll(orderPoList)) {
@@ -108,13 +112,13 @@ public class OrderController {
     @Transactional
     public List<OrderDto> updateOrder(@RequestBody List<OrderDto> listOrder) {
         List<OrderPo> orderPoList =
-                listOrder.stream().map(orderDto -> modelMapper.map(orderDto, OrderPo.class)).collect(Collectors.toList());
+            listOrder.stream().map(orderDto -> modelMapper.map(orderDto, OrderPo.class)).collect(Collectors.toList());
 
         for (OrderPo orderPo : orderPoList) {
             PersonPo payer = repoPerson.findOptionalByBirthdayAndWechat(
-                    orderPo.getPayer().getBirthday(),
-                    orderPo.getPayer().getWechat()).orElse(orderPo.getPayer());
-            repoPerson.save(orderPo.getPayer());
+                orderPo.getPayer().getBirthday(),
+                orderPo.getPayer().getWechat()).orElse(orderPo.getPayer());
+            repoPerson.save(payer);
 
             // todo check payment
             updateOrderIntoSuccess(orderPo);
@@ -146,9 +150,11 @@ public class OrderController {
         }
         TripPo tripPo = orderPo.getTrip();
         tripPo.setStock(tripPo.getStock() - 1);
+        tripPo.getListQuestion().forEach(questionPo -> questionPo.setTrip(tripPo));
         repoTrip.save(tripPo);
 
         orderPo.setStatus(TypeOrderStatus.SUCCESS);
+        orderPo.getListAnswer().forEach(answerPo -> answerPo.setOrder(orderPo));
         repoOrder.save(orderPo);
     }
 }

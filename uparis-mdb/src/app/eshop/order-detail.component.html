@@ -26,8 +26,15 @@
                 class="card-body"
                 [person]="order.participant">
             </uparis-person-card>
+
+            <uparis-answer-list
+                *ngIf="order.listAnswer.length>0"
+                class="card-body"
+                [styleBlue]="person.styleMale"
+                [listAnswer]="order.listAnswer"
+            ></uparis-answer-list>
+
             <ng-container *ngIf="_order.status==='PENDING'">
-                <hr *ngIf="order.listOption.length">
                 <uparis-option-list
                     class="card-body"
                     [trip]="order.trip"

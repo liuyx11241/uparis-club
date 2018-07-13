@@ -74,6 +74,8 @@ public class TripController {
             }
         });
 
+        newTrip.getListQuestion().forEach(questionDto -> questionDto.setId(null));
+
         return updateTrip(newTrip);
     }
 
@@ -104,6 +106,8 @@ public class TripController {
                 optionPo.setStock(null);
             }
         });
+
+        tripPo.getListQuestion().forEach(questionPo -> questionPo.setTrip(tripPo));
 
         repoTrip.saveAndFlush(tripPo);
 

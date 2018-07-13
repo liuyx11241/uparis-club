@@ -34,9 +34,12 @@ public class OrderPo extends AbstractPo {
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "R_ORDER_OPTION",
-            joinColumns = @JoinColumn(name = "OPTION_ID"),
-            inverseJoinColumns = @JoinColumn(name = "ORDER_ID"))
+        joinColumns = @JoinColumn(name = "OPTION_ID"),
+        inverseJoinColumns = @JoinColumn(name = "ORDER_ID"))
     private List<OptionPo> listOption;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", orphanRemoval = true)
+    private List<AnswerPo> listAnswer;
 
     public PersonPo getPayer() {
         return payer;
@@ -100,5 +103,13 @@ public class OrderPo extends AbstractPo {
 
     public void setListOption(List<OptionPo> listOption) {
         this.listOption = listOption;
+    }
+
+    public List<AnswerPo> getListAnswer() {
+        return listAnswer;
+    }
+
+    public void setListAnswer(List<AnswerPo> listAnswer) {
+        this.listAnswer = listAnswer;
     }
 }

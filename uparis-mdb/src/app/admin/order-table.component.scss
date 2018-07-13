@@ -1,11 +1,11 @@
 .mat-column-id,
-.mat-column-trip,
 .mat-column-status,
 .mat-column-actions,
 .mat-column-amount {
     flex-grow: 1;
 }
 
+.mat-column-trip,
 .mat-column-payer,
 .mat-column-participant,
 .mat-column-reference,
@@ -13,6 +13,7 @@
     flex-grow: 2;
 }
 
+.mat-column-listAnswer,
 .mat-column-listOption {
     flex-grow: 3;
 }

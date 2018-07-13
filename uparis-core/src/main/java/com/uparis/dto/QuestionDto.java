@@ -4,33 +4,43 @@ import com.uparis.db.entity.AbstractPo;
 
 public class QuestionDto extends AbstractPo {
 
-    private String key;
+    private String question;
 
-    private String label;
+    private String type;
 
-    private String typeControl;
+    private String value;
 
-    public String getKey() {
-        return key;
+    private String hint;
+
+    public String getQuestion() {
+        return question;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public String getLabel() {
-        return label;
+    public String getType() {
+        return type;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getTypeControl() {
-        return typeControl;
+    public String getValue() {
+        return value;
     }
 
-    public void setTypeControl(String typeControl) {
-        this.typeControl = typeControl;
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
     }
 }

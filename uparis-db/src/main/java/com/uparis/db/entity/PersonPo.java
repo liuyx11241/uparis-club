@@ -24,9 +24,6 @@ public class PersonPo extends AbstractPo {
     private String birthday;
 
     @Column(nullable = false)
-    private String birthplace;
-
-    @Column(nullable = false)
     private String wechat;
 
     @Column(nullable = false)
@@ -87,14 +84,6 @@ public class PersonPo extends AbstractPo {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
-    }
-
-    public String getBirthplace() {
-        return birthplace;
-    }
-
-    public void setBirthplace(String birthplace) {
-        this.birthplace = birthplace;
     }
 
     public String getWechat() {

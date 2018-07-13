@@ -12,8 +12,6 @@ export class Person extends Abstract {
 
     birthday: any | string | Date;
 
-    birthplace: string;
-
     wechat: string;
 
     telephone: string;

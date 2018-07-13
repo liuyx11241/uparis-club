@@ -6,6 +6,7 @@ import {Order} from "../model/order.dto";
 import {PostService} from "../service/http-post.service";
 import {DateFormatter} from "../util/date-formatter.util";
 import {FormHelper} from "../util/form-helper.util";
+import {Answer} from "../model/answer.dto";
 
 @Component({
     selector: 'uparis-checkout',
@@ -64,6 +65,14 @@ export class CheckoutComponent implements OnInit {
             (fg.get('option') as FormGroup).addControl("option" + level, this.formBuilder.control('', Validators.required));
         });
 
+        if (this._trip.listQuestion.length > 0) {
+            let questionForm = this.formBuilder.group({});
+            this._trip.listQuestion.forEach(q => {
+                questionForm.addControl(q.id.toString(), this.formBuilder.control(null, Validators.required));
+            });
+            fg.addControl('listQuestion', questionForm);
+        }
+
         return fg;
     }
 
@@ -88,7 +97,22 @@ export class CheckoutComponent implements OnInit {
                     newOrder.amount = newOrder.amount + listOption[opt].price;
                 });
 
+                newOrder.listAnswer = [];
+                const questionForm = checkoutForm.get('listQuestion');
+                this._trip.listQuestion.forEach(q => {
+                    let answer = new Answer();
+                    answer.question = q.question;
+                    if (q.type === 'date') {
+                        answer.answer = DateFormatter.format(questionForm.get(q.id.toString()).value);
+                    } else {
+                        answer.answer = questionForm.get(q.id.toString()).value;
+                    }
+
+                    newOrder.listAnswer.push(answer);
+                });
+
                 console.info(newOrder.listOption);
+                console.info(newOrder.listAnswer);
 
                 listOrder.push(newOrder);
             }

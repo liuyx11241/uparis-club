@@ -12,8 +12,6 @@ public class PersonDto extends AbstractDto {
 
     private String birthday;
 
-    private String birthplace;
-
     private String wechat;
 
     private String telephone;
@@ -68,14 +66,6 @@ public class PersonDto extends AbstractDto {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
-    }
-
-    public String getBirthplace() {
-        return birthplace;
-    }
-
-    public void setBirthplace(String birthplace) {
-        this.birthplace = birthplace;
     }
 
     public String getWechat() {

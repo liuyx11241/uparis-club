@@ -1,7 +1,8 @@
 import {Abstract} from "./abstract.dto";
 
 export class Question extends Abstract {
-    key: string;
-    label: string;
-    typeControl: string
+    question: string;
+    type: string;
+    value: string;
+    hint: string;
 }

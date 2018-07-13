@@ -20,6 +20,8 @@ public class OrderDto extends AbstractDto {
 
     private List<OptionDto> listOption;
 
+    private List<AnswerDto> listAnswer;
+
     public String getReference() {
         return reference;
     }
@@ -74,6 +76,14 @@ public class OrderDto extends AbstractDto {
 
     public void setListOption(List<OptionDto> listOption) {
         this.listOption = listOption;
+    }
+
+    public List<AnswerDto> getListAnswer() {
+        return listAnswer;
+    }
+
+    public void setListAnswer(List<AnswerDto> listAnswer) {
+        this.listAnswer = listAnswer;
     }
 
     public TripDto getTrip() {

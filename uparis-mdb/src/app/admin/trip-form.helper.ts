@@ -27,6 +27,11 @@ export class TripFormHelper {
                 trip.listOption.forEach(
                     option => this.listOptionForm.push(this.newOptionForm(option)));
             }
+
+            if (trip.listQuestion) {
+                trip.listQuestion.forEach(
+                    question => this.listQuestionForm.push(this.newQuestionForm(question)));
+            }
         }
         return this._tripForm;
     }

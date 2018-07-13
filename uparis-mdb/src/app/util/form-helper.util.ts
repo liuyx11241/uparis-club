@@ -15,8 +15,11 @@ export class FormHelper {
         if (ctl instanceof FormControl) {
             ctl.markAsTouched();
         }
-        if (ctl instanceof FormGroup || ctl instanceof FormArray) {
-            (<any>Object).values(ctl.controls).forEach(control => FormHelper.markAsTouched(control));
+        if (ctl instanceof FormGroup) {
+            Object.keys(ctl).map(key => ctl.get(key)).forEach(control => FormHelper.markAsTouched(control))
+        }
+        if (ctl instanceof FormArray) {
+            (ctl as FormArray).controls.forEach(control => FormHelper.markAsTouched(control))
         }
     }
 
@@ -108,9 +111,10 @@ export class FormHelper {
     public static newQuestionForm(formBuilder: FormBuilder, question?: Question): FormGroup {
         return formBuilder.group({
             id: formBuilder.control(question ? question.id : null),
-            key: formBuilder.control(question ? question.key : null, Validators.required),
-            label: formBuilder.control(question ? question.label : null, Validators.required),
-            typeControl: formBuilder.control(question ? question.typeControl : null, Validators.required),
+            question: formBuilder.control(question ? question.question : null, Validators.required),
+            type: formBuilder.control(question ? question.type : null, Validators.required),
+            value: formBuilder.control(question ? question.value : null),
+            hint: formBuilder.control(question ? question.hint : null),
         });
     }
 
@@ -121,7 +125,6 @@ export class FormHelper {
                 'firstName': [person ? person.firstName : null, Validators.required],
                 'lastName': [person ? person.lastName : null, Validators.required],
                 'birthday': [person ? person.birthday : null, Validators.required],
-                'birthplace': [person ? person.birthplace : null, Validators.required],
                 'wechat': [person ? person.wechat : null, Validators.required],
                 'telephone': [person ? person.telephone : null, Validators.required],
                 'email': [person ? person.email : null, [Validators.required, Validators.email]],

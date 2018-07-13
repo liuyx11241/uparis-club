@@ -1,0 +1,5 @@
+<p *ngFor="let answer of _listAnswer" class="d-flex">
+    <i class="fa fa-lg col-2 material-icons pt-1 text-left" [class.red-text]="!_styleBlue" [class.blue-text]="_styleBlue" aria-hidden="true">question_answer</i>
+    <span class="col-5 text-left">{{answer.question}}</span>
+    <span class="col-5 text-right">{{answer.answer}}</span>
+</p>

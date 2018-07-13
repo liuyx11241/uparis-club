@@ -60,6 +60,15 @@
         </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="listAnswer">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>问题回答</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <ul class="list-unstyled my-0">
+                <li *ngFor="let answer of row.listAnswer">{{answer.question}} - {{answer.answer}}</li>
+            </ul>
+        </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef mat-sort-header>总额</mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.amount | money: row.trip.currency}}</mat-cell>

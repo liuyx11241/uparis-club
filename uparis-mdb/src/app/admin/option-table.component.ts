@@ -23,7 +23,6 @@ export class OptionTableComponent {
         this._mappedListOption = new Map<number, FormGroup[]>();
     }
 
-
     @Input()
     set listStockForm(value: FormArray) {
         this._listStockForm = value;

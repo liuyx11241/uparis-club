@@ -2,6 +2,7 @@ import {Person} from "./person.dto";
 import {Option} from "./option.dto";
 import {Trip} from "./trip.dto";
 import {Abstract} from "./abstract.dto";
+import {Answer} from "./answer.dto";
 
 export class Order extends Abstract {
     reference: string;
@@ -19,4 +20,6 @@ export class Order extends Abstract {
     paymentMode: string;
 
     listOption: Option[];
+
+    listAnswer: Answer[];
 }

@@ -10,39 +10,32 @@ import javax.persistence.Table;
 public class QuestionPo extends AbstractPo {
 
     @Column(nullable = false)
-    private String questionKey;
+    private String question;
 
     @Column(nullable = false)
-    private String questionLabel;
+    private String type;
 
-    @Column(nullable = false)
-    private String typeControl;
+    private String value;
+
+    private String hint;
 
     @ManyToOne(optional = false)
     private TripPo trip;
 
-    public String getQuestionKey() {
-        return questionKey;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setQuestionKey(String questionKey) {
-        this.questionKey = questionKey;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public String getQuestionLabel() {
-        return questionLabel;
+    public String getType() {
+        return type;
     }
 
-    public void setQuestionLabel(String questionLabel) {
-        this.questionLabel = questionLabel;
-    }
-
-    public String getTypeControl() {
-        return typeControl;
-    }
-
-    public void setTypeControl(String typeControl) {
-        this.typeControl = typeControl;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public TripPo getTrip() {
@@ -51,5 +44,21 @@ public class QuestionPo extends AbstractPo {
 
     public void setTrip(TripPo trip) {
         this.trip = trip;
+    }
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }

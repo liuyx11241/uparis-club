@@ -21,15 +21,10 @@
     </mat-form-field>
     <mat-form-field class="col-12">
         <input matInput placeholder="出生日期" formControlName="birthday" required
-               [matDatepicker]="picker">
+               [matDatepicker]="picker" (focus)="picker.opened=true">
         <i class="fa fa-lg fa-birthday-cake col-1" matPrefix></i>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker color="primary"></mat-datepicker>
-    </mat-form-field>
-
-    <mat-form-field class="col-12">
-        <input matInput type="text" placeholder="出生地" formControlName="birthplace" required>
-        <i class="fa fa-lg fa-map-signs col-1" matPrefix></i>
     </mat-form-field>
 
     <mat-form-field class="col-12">

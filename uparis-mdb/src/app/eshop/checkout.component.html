@@ -27,6 +27,13 @@
             <uparis-person-form
                 class="card-body"
                 [personForm]="checkoutForm.get('participant')"></uparis-person-form>
+            <hr *ngIf="_trip.listQuestion.length>0">
+            <uparis-question-selector
+                *ngIf="_trip.listQuestion.length>0"
+                class="card-body"
+                [questionForm]="checkoutForm.get('listQuestion')"
+                [listQuestion]="_trip.listQuestion"
+            ></uparis-question-selector>
         </div>
     </div>
 </section>

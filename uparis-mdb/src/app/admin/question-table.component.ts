@@ -32,7 +32,7 @@ export class QuestionTableComponent implements OnInit {
     }
 
     add(event: Event): void {
-        this._listQuestionForm.push(FormHelper.newQuestionForm(this.fb));
+        this._listQuestionForm.push(this._formHelper.newQuestionForm());
     }
 
     delete(question: FormGroup): void {

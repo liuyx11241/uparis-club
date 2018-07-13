@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -18,10 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
+
     private final PasswordEncoder passwordEncoder;
 
     public WebSecurityConfig(
-            UserService userDetailsService, PasswordEncoder passwordEncoder) {
+        UserService userDetailsService, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -29,31 +31,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // todo : define security rules
-        http.httpBasic().disable()
-                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+        http.httpBasic().disable();
+        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 
-                .and().authorizeRequests()
-                //所有的读取操作
-                .antMatchers(HttpMethod.GET).permitAll()
-                //所有来自EShop的操作
-                .antMatchers("/eshop").permitAll()
-                //EShop关于订单的操作
-                .antMatchers("/api/order").permitAll()
-                .anyRequest().authenticated()
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+            .sessionFixation().migrateSession();
 
-                .and()
-                .formLogin()
-                .loginPage("/admin/login")
-                .loginProcessingUrl("/api/auth/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .successHandler((request, response, authentication) -> response.setStatus(200))
-                .failureHandler((request, response, exception) -> response.sendError(HttpServletResponse.SC_FORBIDDEN, exception.getMessage()))
+        http.authorizeRequests()
+            //所有的读取操作
+            .antMatchers(HttpMethod.GET).permitAll()
+            //所有来自EShop的操作
+            .antMatchers("/eshop").permitAll()
+            //EShop关于订单的操作
+            .antMatchers("/api/order").permitAll()
+            .anyRequest().authenticated();
 
-                .and()
-                .logout()
-                .logoutUrl("/api/auth/logout")
-                .logoutSuccessHandler((request, response, authentication) -> response.setStatus(200));
+        http.formLogin()
+            .loginPage("/admin/login")
+            .loginProcessingUrl("/api/auth/login")
+            .usernameParameter("username")
+            .passwordParameter("password")
+            .successHandler((request, response, authentication) -> response.setStatus(200))
+            .failureHandler((request, response, exception) -> response.sendError(HttpServletResponse.SC_FORBIDDEN, exception.getMessage()));
+
+        http.logout()
+            .logoutUrl("/api/auth/logout")
+            .logoutSuccessHandler((request, response, authentication) -> response.setStatus(200));
     }
 
     @Override
@@ -64,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider =
-                new DaoAuthenticationProvider();
+            new DaoAuthenticationProvider();
         authenticationProvider.setPasswordEncoder(passwordEncoder);
         authenticationProvider.setUserDetailsService(userDetailsService);
         return authenticationProvider;
