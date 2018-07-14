@@ -22,8 +22,6 @@ export class AdminComponent {
     }
 
     logout() {
-        this.auth.unauthenticate(() => {
-            this.router.navigate(['/admin/login']);
-        });
+        this.auth.logout();
     }
 }

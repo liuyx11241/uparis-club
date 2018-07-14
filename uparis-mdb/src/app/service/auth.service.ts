@@ -1,36 +1,31 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
 
-    authenticated = false;
-
-    redirectUrl: string;
-
     constructor(private http: HttpClient) {
+
     }
 
-    authenticate(credentials?: any, successHandler?: (url: string) => void, errorHandler?: (error: any) => void): void {
-        let httpParams = new HttpParams()
-            .set('username', credentials['username'])
-            .set('password', credentials['password']);
-        this.http.post(`/api/auth/login`, httpParams).subscribe(value => {
-            this.authenticated = true;
-            successHandler && successHandler(this.redirectUrl);
-        }, error => {
-            console.error(error);
-            errorHandler && errorHandler(error);
-        });
+    get authenticated(): boolean {
+        return !!localStorage.getItem('currentUser');
     }
 
-    unauthenticate(callback?: () => void): void {
-        this.http.post(`/api/auth/logout`, {}).subscribe(value => {
-        }, error => {
-            console.error(error);
-        }, () => {
-            this.authenticated = false;
-            callback && callback();
-        })
+    login(username: string, password: string) {
+        return this.http.post<any>('/api/authenticate', {username: username, password: password})
+            .pipe(map((res: any) => {
+                // login successful if there's a jwt token in the response
+                if (res && res.token) {
+                    // store username and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('currentUser', JSON.stringify({username, token: res.token}));
+                }
+            }));
+    }
+
+    logout() {
+        // remove user from local storage to log user out
+        localStorage.removeItem('currentUser');
     }
 }
