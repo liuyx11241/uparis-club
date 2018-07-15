@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../service/auth.service";
 import {FormHelper} from "../util/form-helper.util";
-import {ActivatedRoute, Router} from "@angular/router";
-import {first} from "rxjs/internal/operators";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'uparis-admin-login',
@@ -12,11 +11,9 @@ import {first} from "rxjs/internal/operators";
 export class AdminLoginComponent implements OnInit {
 
     private _loginForm: FormGroup;
-    returnUrl: string;
 
     constructor(private fb: FormBuilder,
                 private router: Router,
-                private route: ActivatedRoute,
                 private auth: AuthService) {
         this._loginForm = this.fb.group({
             username: this.fb.control(null, Validators.required),
@@ -26,7 +23,6 @@ export class AdminLoginComponent implements OnInit {
 
     ngOnInit(): void {
         this.auth.logout();
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/admin';
     }
 
     onSubmit() {
@@ -35,9 +31,10 @@ export class AdminLoginComponent implements OnInit {
             return;
         }
         this.auth.login(this._loginForm.value.username, this._loginForm.value.password)
-            .pipe(first())
-            .subscribe(data => {
-                    this.router.navigate([this.returnUrl]);
+            .subscribe(result => {
+                    if (result) {
+                        this.router.navigateByUrl(this.auth.redirectUrl);
+                    }
                 },
                 error => {
                     this._loginForm.setErrors(error, error);

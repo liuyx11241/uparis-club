@@ -1,31 +1,55 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {OAUTH2_ACCESS_TOKEN, OAUTH2_TOKEN_PASSWORD, OAUTH2_TOKEN_USERNAME} from "./service.constants";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {tap} from "rxjs/internal/operators";
+import {Observable} from "rxjs/index";
 
 @Injectable()
 export class AuthService {
+    private _jwtHelper = new JwtHelperService();
+
+    redirectUrl: string;
 
     constructor(private http: HttpClient) {
 
     }
 
     get authenticated(): boolean {
-        return !!localStorage.getItem('currentUser');
+        return localStorage.getItem(OAUTH2_ACCESS_TOKEN)
+            && !this._jwtHelper.isTokenExpired(localStorage.getItem(OAUTH2_ACCESS_TOKEN));
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>('/oauth/token', {username: username, password: password})
-            .pipe(map((res: any) => {
-                // login successful if there's a jwt token in the response
-                if (res && res.token) {
-                    // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify({username, token: res.token}));
-                }
-            }));
+    login(username: string, password: string): Observable<any> {
+        const body = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&grant_type=password`;
+
+        const headers = new HttpHeaders()
+            .append('Content-Type', 'application/x-www-form-urlencoded')
+            .append('Authorization', 'Basic ' + btoa(OAUTH2_TOKEN_USERNAME + ':' + OAUTH2_TOKEN_PASSWORD));
+
+        return this.http.post<any>('/oauth/token', body, {headers: headers})
+            .pipe(
+                map(res => res.json()),
+                tap(res => console.info(res)),
+                map((res: any) => {
+                    if (res.access_token) {
+                        this._login(res);
+                        return res.access_token;
+                    }
+                    return null;
+                })
+            );
+    }
+
+
+    private _login(accessToken: string) {
+        const decodedToken = this._jwtHelper.decodeToken(accessToken);
+        console.log(decodedToken);
+        localStorage.setItem(OAUTH2_ACCESS_TOKEN, accessToken);
     }
 
     logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem(OAUTH2_ACCESS_TOKEN);
     }
 }
