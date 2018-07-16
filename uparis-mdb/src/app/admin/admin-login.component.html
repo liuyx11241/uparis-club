@@ -21,7 +21,7 @@
                     </mat-form-field>
                 </div>
 
-                <p class="font-small red-text d-flex justify-content-center" *ngIf="_loginForm.hasError('401')">您的帐号或密码错误</p>
+                <p class="font-small red-text d-flex justify-content-center" *ngIf="_loginForm.hasError('invalid_grant')">您的帐号或密码错误</p>
                 <p class="font-small amber-text d-flex justify-content-end">
                     <span class="ml-1">忘记密码</span>
                 </p>

@@ -32,13 +32,14 @@ export class AdminLoginComponent implements OnInit {
         }
         this.auth.login(this._loginForm.value.username, this._loginForm.value.password)
             .subscribe(result => {
-                    console.info(`result : ${result}`);
                     if (result) {
                         this.router.navigateByUrl(this.auth.redirectUrl);
                     }
                 },
                 error => {
-                    this._loginForm.setErrors(error, error);
+                    let formErr = {};
+                    formErr[error.error] = error.error_description;
+                    this._loginForm.setErrors(formErr);
                 })
     }
 }

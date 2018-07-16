@@ -23,5 +23,6 @@ export class AdminComponent {
 
     logout() {
         this.auth.logout();
+        this.router.navigateByUrl('/admin/login');
     }
 }

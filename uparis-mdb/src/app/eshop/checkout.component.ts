@@ -111,14 +111,10 @@ export class CheckoutComponent implements OnInit {
                     newOrder.listAnswer.push(answer);
                 });
 
-                console.info(newOrder.listOption);
-                console.info(newOrder.listAnswer);
-
                 listOrder.push(newOrder);
             }
 
             this.postService.createOrders(listOrder).subscribe((order: Order) => {
-                console.info(order);
                 this.router.navigate(['/eshop/order'], {
                     queryParams: {
                         reference: order.reference

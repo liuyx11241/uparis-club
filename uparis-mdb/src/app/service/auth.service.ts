@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {OAUTH2_ACCESS_TOKEN, OAUTH2_TOKEN_PASSWORD, OAUTH2_TOKEN_USERNAME} from "./service.constants";
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {tap} from "rxjs/internal/operators";
-import {Observable} from "rxjs/index";
+import {Observable, throwError} from "rxjs/index";
+import {catchError} from "rxjs/internal/operators";
 
 @Injectable()
 export class AuthService {
@@ -28,10 +28,7 @@ export class AuthService {
 
         return this.http.post<any>('http://localhost:8080/oauth/token', body, {headers: headers})
             .pipe(
-                // map(res => res.json()),
-                tap(res => console.info(res)),
                 map((res: any) => {
-                    console.info(res[OAUTH2_ACCESS_TOKEN]);
                     if (res[OAUTH2_ACCESS_TOKEN]) {
                         this._login(res[OAUTH2_ACCESS_TOKEN]);
                         return res[OAUTH2_ACCESS_TOKEN];
@@ -42,13 +39,13 @@ export class AuthService {
     }
 
 
-    private _login(accessToken: string) {
-        const decodedToken = this.jwtHelper.decodeToken(accessToken);
-        console.log(decodedToken);
+    private _login(accessToken: string): void {
+        // const decodedToken = this.jwtHelper.decodeToken(accessToken);
+        // console.log(decodedToken);
         localStorage.setItem(OAUTH2_ACCESS_TOKEN, accessToken);
     }
 
-    logout() {
+    logout(): void {
         localStorage.removeItem(OAUTH2_ACCESS_TOKEN);
     }
 }

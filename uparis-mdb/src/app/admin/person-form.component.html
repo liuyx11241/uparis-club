@@ -1,7 +1,11 @@
 <mat-toolbar>
-    <button mat-button>
+    <button mat-button (click)="_personForm.disable()" *ngIf="_personForm.disabled">
         <mat-icon>edit</mat-icon>
         修改
+    </button>
+    <button mat-button (click)="save()" *ngIf="_personForm.enabled">
+        <mat-icon>save</mat-icon>
+        保存
     </button>
 </mat-toolbar>
 

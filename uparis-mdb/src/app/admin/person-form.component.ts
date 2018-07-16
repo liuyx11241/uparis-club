@@ -19,13 +19,20 @@ export class PersonFormComponent implements OnInit {
 
     ngOnInit() {
         this.route.data.subscribe((data: { person: Person }) => {
-            data.person.birthday = new Date(data.person.birthday);
-            this._personForm.patchValue(data.person);
+            if (data.person) {
+                this._personForm.disable();
+                data.person.birthday = new Date(data.person.birthday);
+                this._personForm.patchValue(data.person);
+            }
         });
     }
 
     @Input()
     set personForm(value: FormGroup) {
         this._personForm = value;
+    }
+
+    save(): void {
+
     }
 }

@@ -46,7 +46,7 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>付款人</mat-header-cell>
         <mat-cell *matCellDef="let row">
             <a *ngIf="row.payer" [routerLink]="['/admin/persons', row.payer.id]">
-                {{row.payer.lastName}}{{row.payer.firstName}}
+                {{row.payer.lastName}} {{row.payer.firstName}}
             </a>
         </mat-cell>
     </ng-container>
