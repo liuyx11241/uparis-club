@@ -17,6 +17,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                 location.reload(true);
             }
 
+            if (err.error instanceof ErrorEvent) {
+                console.error(err.error.message);
+            } else {
+                console.error(`Code : ${err.status}, Body : `);
+                console.error(err.error);
+            }
             const error = err.error.message || err.statusText;
             return throwError(error);
         }))

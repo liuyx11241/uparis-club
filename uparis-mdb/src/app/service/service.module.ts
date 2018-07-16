@@ -11,12 +11,22 @@ import {PersonResolver} from "./person.resolver";
 import {AuthService} from "./auth.service";
 import {ErrorInterceptor} from "./error.interceptor";
 import {JwtInterceptor} from "./jwt.interceptor";
+import {JwtModule} from "@auth0/angular-jwt";
+import {OAUTH2_ACCESS_TOKEN} from "./service.constants";
 
 @NgModule({
     imports: [
         CommonModule,
         HttpClientModule,
         HttpClientXsrfModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: () => {
+                    return localStorage.getItem(OAUTH2_ACCESS_TOKEN)
+                },
+                whitelistedDomains: ['localhost:8080', 'localhost:4200']
+            }
+        })
     ],
     declarations: [],
     providers: [

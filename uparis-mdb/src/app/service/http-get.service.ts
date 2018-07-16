@@ -3,8 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Product} from "../model/product.dto";
 import {Observable} from "rxjs/index";
 import {Trip} from "../model/trip.dto";
-import {ErrorHandler} from "./error.handler";
-import {catchError, map} from "rxjs/internal/operators";
+import {map} from "rxjs/internal/operators";
 import {Person} from "../model/person.dto";
 import {Order} from "../model/order.dto";
 import {Tag} from "../model/tag.dto";
@@ -12,8 +11,6 @@ import {Tag} from "../model/tag.dto";
 
 @Injectable()
 export class GetService {
-
-    private handler: ErrorHandler = ErrorHandler.errorHandler;
 
     constructor(private http: HttpClient) {
 
@@ -35,9 +32,7 @@ export class GetService {
     }
 
     public getAllTags(): Observable<Tag[]> {
-        return this.http.get<Tag[]>(`/api/tag`).pipe(
-            catchError(this.handler.handleError)
-        );
+        return this.http.get<Tag[]>(`/api/tag`);
     }
 
     public getProducts(filter: { [key: string]: any }, pageIndex, pageSize, sort, direction): Observable<Product[]> {
@@ -89,20 +84,14 @@ export class GetService {
     }
 
     public getTrip(id: string): Observable<Trip> {
-        return this.http.get<Trip>(`/api/trip/${id}`).pipe(
-            catchError(this.handler.handleError)
-        );
+        return this.http.get<Trip>(`/api/trip/${id}`);
     }
 
     public getOrder(reference: string): Observable<Order[]> {
-        return this.http.get<Order[]>(`/api/order/${reference}`).pipe(
-            catchError(this.handler.handleError)
-        );
+        return this.http.get<Order[]>(`/api/order/${reference}`);
     }
 
     public getPerson(idPerson: string): Observable<Person> {
-        return this.http.get<Person>(`/api/person/${idPerson}`).pipe(
-            catchError(this.handler.handleError)
-        );
+        return this.http.get<Person>(`/api/person/${idPerson}`);
     }
 }

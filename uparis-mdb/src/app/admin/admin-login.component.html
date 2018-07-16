@@ -1,4 +1,4 @@
-<section class="row">
+<section class="d-flex">
     <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-3 mx-auto my-5">
         <div class="card">
             <!--Header-->
@@ -13,11 +13,11 @@
             <div class="card-body mx-4">
                 <div [formGroup]="_loginForm">
                     <mat-form-field class="col-12">
-                        <input type="text" formControlName="username" matInput placeholder="账号" required (focus)="_loginForm.setErrors()" (keyup.enter)="login()">
+                        <input type="text" formControlName="username" matInput placeholder="账号" required (focus)="_loginForm.setErrors()" (keyup.enter)="onSubmit()">
                     </mat-form-field>
 
                     <mat-form-field class="col-12">
-                        <input type="password" formControlName="password" matInput placeholder="密码" required (focus)="_loginForm.setErrors()" (keyup.enter)="login()">
+                        <input type="password" formControlName="password" matInput placeholder="密码" required (focus)="_loginForm.setErrors()" (keyup.enter)="onSubmit()">
                     </mat-form-field>
                 </div>
 

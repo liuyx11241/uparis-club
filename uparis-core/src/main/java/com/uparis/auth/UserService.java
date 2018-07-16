@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -25,7 +25,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if ("admin".equals(username)) {
-            return new User("admin", passwordEncoder().encode("admin"), new ArrayList<>());
+            return new User("admin", passwordEncoder().encode("admin"), Arrays.asList(EnumRole.values()));
         }
         throw new UsernameNotFoundException(String.format("User not found : %s", username));
     }

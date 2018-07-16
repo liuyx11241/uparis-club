@@ -8,17 +8,15 @@ import {Observable} from "rxjs/index";
 
 @Injectable()
 export class AuthService {
-    private _jwtHelper = new JwtHelperService();
+    redirectUrl = '/admin';
 
-    redirectUrl: string;
-
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
 
     }
 
     get authenticated(): boolean {
         return localStorage.getItem(OAUTH2_ACCESS_TOKEN)
-            && !this._jwtHelper.isTokenExpired(localStorage.getItem(OAUTH2_ACCESS_TOKEN));
+            && !this.jwtHelper.isTokenExpired(localStorage.getItem(OAUTH2_ACCESS_TOKEN));
     }
 
     login(username: string, password: string): Observable<any> {
@@ -28,14 +26,15 @@ export class AuthService {
             .append('Content-Type', 'application/x-www-form-urlencoded')
             .append('Authorization', 'Basic ' + btoa(OAUTH2_TOKEN_USERNAME + ':' + OAUTH2_TOKEN_PASSWORD));
 
-        return this.http.post<any>('/oauth/token', body, {headers: headers})
+        return this.http.post<any>('http://localhost:8080/oauth/token', body, {headers: headers})
             .pipe(
-                map(res => res.json()),
+                // map(res => res.json()),
                 tap(res => console.info(res)),
                 map((res: any) => {
-                    if (res.access_token) {
-                        this._login(res);
-                        return res.access_token;
+                    console.info(res[OAUTH2_ACCESS_TOKEN]);
+                    if (res[OAUTH2_ACCESS_TOKEN]) {
+                        this._login(res[OAUTH2_ACCESS_TOKEN]);
+                        return res[OAUTH2_ACCESS_TOKEN];
                     }
                     return null;
                 })
@@ -44,7 +43,7 @@ export class AuthService {
 
 
     private _login(accessToken: string) {
-        const decodedToken = this._jwtHelper.decodeToken(accessToken);
+        const decodedToken = this.jwtHelper.decodeToken(accessToken);
         console.log(decodedToken);
         localStorage.setItem(OAUTH2_ACCESS_TOKEN, accessToken);
     }

@@ -32,6 +32,7 @@ export class AdminLoginComponent implements OnInit {
         }
         this.auth.login(this._loginForm.value.username, this._loginForm.value.password)
             .subscribe(result => {
+                    console.info(`result : ${result}`);
                     if (result) {
                         this.router.navigateByUrl(this.auth.redirectUrl);
                     }
