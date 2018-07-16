@@ -143,4 +143,14 @@ export class FormHelper {
             value: formBuilder.control(tag ? tag.value : null, Validators.required)
         });
     }
+
+    public static newCardPaymentForm(formBuilder: FormBuilder): FormGroup {
+        return formBuilder.group({
+            cardNumber: formBuilder.control(null, [Validators.required]),
+            holder: formBuilder.control(null),
+            expiryMonth: formBuilder.control(null, [Validators.required, Validators.maxLength(2)]),
+            expiryYear: formBuilder.control(null, Validators.maxLength(2)),
+            cardVerificationValue: formBuilder.control(null, Validators.maxLength(3)),
+        });
+    }
 }

@@ -8,6 +8,7 @@ import com.uparis.db.repo.StockRepository;
 import com.uparis.db.repo.TripRepository;
 import com.uparis.dto.OrderDto;
 import com.uparis.util.HashCodeService;
+import com.uparis.util.StripeClient;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,6 +49,9 @@ public class OrderController {
 
     @Value("${uparis.order.reference.length}")
     private int referenceLength;
+
+    @Autowired
+    private StripeClient stripeClient;
 
     @GetMapping
     public Page<OrderDto> getOrders(
@@ -121,6 +125,7 @@ public class OrderController {
             repoPerson.save(payer);
 
             // todo check payment
+            // todo stripeClient.chargeCreditCard();
             updateOrderIntoSuccess(orderPo);
         }
 

@@ -3,34 +3,34 @@
         <div class="text-left pl-3">
             <mat-radio-button color="primary" value="CARD" checked>
                 在线支付
-            <i class="fa fa-cc-stripe"></i>
+                <i class="fa fa-cc-stripe"></i>
             </mat-radio-button>
         </div>
         <div class="text-left pl-3">
             <mat-radio-button color="primary" value="CASH">
                 现金支付
-            <i class="fa fa-money"></i>
+                <i class="fa fa-money"></i>
             </mat-radio-button>
         </div>
     </mat-radio-group>
 
     <section [ngSwitch]="_paymentForm.value.paymentMode">
-        <ng-container *ngSwitchCase="'CARD'">
+        <ng-container *ngSwitchCase="'CARD'" [formGroup]="_cardForm">
             <mat-form-field class="col-12">
-                <input matInput placeholder="卡号">
+                <input matInput placeholder="卡号" formControlName="cardNumber">
             </mat-form-field>
             <mat-form-field class="col-12">
-                <input matInput placeholder="持卡人">
+                <input matInput placeholder="持卡人" formControlName="holder">
             </mat-form-field>
             <mat-form-field class="col-3 pr-0">
-                <input matInput placeholder="MM">
+                <input matInput placeholder="MM" formControlName="expiryMonth">
                 <span matSuffix>/</span>
             </mat-form-field>
             <mat-form-field class="col-3 pl-0">
-                <input matInput placeholder="YY">
+                <input matInput placeholder="YY" formControlName="expiryYear">
             </mat-form-field>
             <mat-form-field class="col-6">
-                <input matInput placeholder="CVV">
+                <input matInput placeholder="CVV" formControlName="cardVerificationValue">
             </mat-form-field>
         </ng-container>
         <ng-container *ngSwitchCase="'CASH'">
