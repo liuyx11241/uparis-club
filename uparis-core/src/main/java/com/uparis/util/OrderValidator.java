@@ -24,7 +24,6 @@ public class OrderValidator {
         if (CollectionUtils.isEmpty(listOrder)) {
             return false;
         }
-        Map<Long, Integer> stockMap = new HashMap<>();
         for (OrderPo orderPo : listOrder) {
             // trip
             if (Objects.isNull(orderPo.getTrip()) || Objects.isNull(orderPo.getTrip().getId())) {
@@ -80,7 +79,17 @@ public class OrderValidator {
                         .map(optionPo -> repoOption.getOne(optionPo.getId()))
                         .collect(Collectors.toList()));
             }
+        }
+        return true;
+    }
 
+    public boolean validateStock(@NotNull List<OrderPo> listOrder) {
+        if (CollectionUtils.isEmpty(listOrder)) {
+            return false;
+        }
+        Map<Long, Integer> stockMap = new HashMap<>();
+        for (OrderPo orderPo : listOrder) {
+            TripPo tripPo = orderPo.getTrip();
             // check stock
             stockMap.putIfAbsent(tripPo.getId(), tripPo.getStock());
             stockMap.compute(tripPo.getId(), (key, stock) -> stock - 1);
@@ -100,6 +109,7 @@ public class OrderValidator {
                 }
             }
         }
+
         return true;
     }
 }

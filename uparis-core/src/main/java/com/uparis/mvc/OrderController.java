@@ -8,6 +8,7 @@ import com.uparis.db.repo.StockRepository;
 import com.uparis.db.repo.TripRepository;
 import com.uparis.dto.OrderDto;
 import com.uparis.util.HashCodeService;
+import com.uparis.util.OrderValidator;
 import com.uparis.util.StripeClient;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -47,11 +49,14 @@ public class OrderController {
     @Autowired
     private HashCodeService hashCodeService;
 
-    @Value("${uparis.order.reference.length}")
-    private int referenceLength;
+    @Autowired
+    private OrderValidator orderValidator;
 
     @Autowired
     private StripeClient stripeClient;
+
+    @Value("${uparis.order.reference.length}")
+    private int referenceLength;
 
     @GetMapping
     public Page<OrderDto> getOrders(
@@ -80,11 +85,17 @@ public class OrderController {
     @PostMapping
     @Transactional
     public ResponseEntity<OrderDto> createOrder(@RequestBody List<OrderDto> listOrder) {
-        String orderReference = hashCodeService.generate(referenceLength);
-
         List<OrderPo> orderPoList =
             listOrder.stream().map(orderDto -> modelMapper.map(orderDto, OrderPo.class)).collect(Collectors.toList());
+        if (!orderValidator.validateAndRefactorOrder(orderPoList)) {
+            return ResponseEntity.badRequest().build();
+        }
 
+        if (!orderValidator.validateStock(orderPoList)) {
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).build();
+        }
+
+        String orderReference = hashCodeService.generate(referenceLength);
         for (OrderPo orderPo : orderPoList) {
             orderPo.setAmount(calculateOrderAmount(orderPo));
             // todo : Detect duplicated Participant
@@ -93,11 +104,11 @@ public class OrderController {
                 orderPo.getParticipant().getWechat()).orElse(orderPo.getParticipant());
             orderPo.getParticipant().setId(participant.getId());
             repoPerson.save(orderPo.getParticipant());
+
             orderPo.setReference(orderReference);
             orderPo.setStatus(TypeOrderStatus.PENDING);
 
             orderPo.getListAnswer().forEach(answerPo -> answerPo.setOrder(orderPo));
-
             orderPo.getTrip().getListQuestion().forEach(questionPo -> questionPo.setTrip(orderPo.getTrip()));
         }
 
@@ -107,9 +118,9 @@ public class OrderController {
             }
         }
 
-        OrderDto orderDto = new OrderDto();
-        orderDto.setReference(orderReference);
-        return ResponseEntity.ok(orderDto);
+        OrderDto response = new OrderDto();
+        response.setReference(orderReference);
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping
