@@ -34,25 +34,24 @@
                 [listAnswer]="order.listAnswer"
             ></uparis-answer-list>
 
-            <ng-container *ngIf="_order.status==='PENDING'">
-                <uparis-option-list
-                    class="card-body"
-                    [trip]="order.trip"
-                    [listOption]="order.listOption"
-                    [styleBlue]="person.styleMale">
-                </uparis-option-list>
-                <div class="card-body">
-                    <mat-checkbox
-                        #slide
-                        color="primary"
-                        [checked]="_payer===order.participant"
-                        (change)="selectPayer($event, order.participant)"
-                        [class.red-text]="slide.checked && !person.styleMale"
-                        [class.blue-text]="slide.checked && person.styleMale">
-                        使用此人信息付款
-                    </mat-checkbox>
-                </div>
-            </ng-container>
+            <uparis-option-list
+                *ngIf="order.listOption.length>0"
+                class="card-body"
+                [trip]="order.trip"
+                [listOption]="order.listOption"
+                [styleBlue]="person.styleMale">
+            </uparis-option-list>
+            <div class="card-body" *ngIf="_order.status==='PENDING'">
+                <mat-checkbox
+                    #slide
+                    color="primary"
+                    [checked]="_payer===order.participant"
+                    (change)="selectPayer($event, order.participant)"
+                    [class.red-text]="slide.checked && !person.styleMale"
+                    [class.blue-text]="slide.checked && person.styleMale">
+                    使用此人信息付款
+                </mat-checkbox>
+            </div>
         </div>
     </div>
 </section>

@@ -14,7 +14,7 @@
         </div>
     </mat-radio-group>
 
-    <section [ngSwitch]="_paymentForm.value.paymentMode">
+    <section [ngSwitch]="_paymentForm.value.paymentMode" class="text-left">
         <ng-container *ngSwitchCase="'STRIPE'" [formGroup]="_cardForm">
             <mat-form-field class="col-12">
                 <input matInput placeholder="卡号" formControlName="cardNumber" required>
@@ -33,10 +33,14 @@
                 <input matInput placeholder="CVV" formControlName="cardVerificationValue" required>
             </mat-form-field>
 
-            <span *ngIf="_paymentForm.hasError('402')" class="red-text font-small">您的银行卡信息有误，请检查后重新输入</span>
+            <span *ngIf="_paymentForm.hasError('402')" class="col-12 red-text font-small">您的银行卡信息有误，请检查后重新输入</span>
         </ng-container>
         <ng-container *ngSwitchCase="'CASH'">
-            <span>您已选择现金付款，请于24小时内前往巴黎户外大本营付款</span>
+            <div class="col-12">
+                <p>您已选择现金付款，请于<strong class="amber-text">48小时</strong>内前往巴黎户外大本营(地址：22 rue lahire 75013 Paris France)付款。</p>
+                <p></p>
+                <p class="text-danger font-small">请注意，在您付款成功前，您的名额将无法得到保证。</p>
+            </div>
         </ng-container>
     </section>
 </ng-container>

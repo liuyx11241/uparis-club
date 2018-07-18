@@ -1,5 +1,5 @@
-<header class="h-100">
-    <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar"
+<header>
+    <mdb-navbar SideClass="navbar fixed-top navbar-expand-sm navbar-light white scrolling-navbar"
                 [containerInside]="true">
         <logo>
             <a class="logo navbar-brand" href="#"><strong>UPARIS</strong></a>
@@ -23,162 +23,35 @@
         </links>
     </mdb-navbar>
 </header>
-<main class="text-center container" [style.marginTop.px]="90">
+<main id="main" class="text-center container" [style.marginTop.px]="90">
     <router-outlet></router-outlet>
 </main>
 
 <footer id="footer" class="page-footer center-on-small-only pt-0">
     <div class="text-center py-4 amber darken-1">
 
-        <a href="/angular/newsletter/" class="border rounded p-2 px-3 mr-4 d-none d-md-inline-block">Newsletter
+        <a class="border rounded p-2 px-3 mr-4 d-none d-md-inline-block">Newsletter
             <i class="fa fa-envelope white-text ml-2"> </i>
         </a>
-        <a href="/mdb-affiliate-program/" class="border rounded p-2 px-3 mr-4 d-none d-md-inline-block">Affiliate
-            program
-            <i class="fa fa-money white-text ml-2"> </i>
-        </a>
-        <a href="/contact" data-toggle="modal" data-target="#contactForm"
+        <a data-toggle="modal" data-target="#contactForm"
            class="border rounded p-2 px-3 mr-4 d-none d-md-inline-block">Contact
             <i class="fa fa-envelope white-text ml-2"> </i>
         </a>
-        <a href="https://github.com/mdbootstrap/Angular-Bootstrap-with-Material-Design">
-            <i class="fa fa-github white-text mr-4"> </i>
-        </a>
-        <a href="https://www.youtube.com/watch?v=cXTThxoywNQ">
-            <i class="fa fa-youtube white-text mr-4"> </i>
-        </a>
-        <a href="https://www.facebook.com/mdbootstrap">
-            <i class="fa fa-facebook white-text mr-4"> </i>
-        </a>
-        <a href="https://twitter.com/MDBootstrap">
-            <i class="fa fa-twitter white-text mr-4"> </i>
-        </a>
+        <a><i class="fa fa-github white-text mr-4"> </i></a>
+        <a><i class="fa fa-youtube white-text mr-4"> </i></a>
+        <a><i class="fa fa-facebook white-text mr-4"> </i></a>
+        <a><i class="fa fa-twitter white-text mr-4"> </i></a>
     </div>
 
-    <div *ngIf="false" class="container mt-5 mb-4 text-center text-md-left">
-        <div class="row mt-3">
-
-            <!--First column-->
-            <div class="col-md-3 col-lg-4 col-xl-3 mb-r">
-                <h6 class="spacing font-weight-bold">
-                    <strong>Useful links</strong>
-                </h6>
-                <hr class="info-color mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <a href="/angular/faq/">Frequently Asked Questions</a>
-                </p>
-                <p>
-                    <a href="/browsers-and-devices/">Browsers and devices</a>
-                </p>
-                <p>
-                    <a href="/license/">License</a>
-                </p>
-                <p>
-                    <a href="/angular/changelog/">ChangeLog</a>
-                </p>
-                <p>
-                    <a href="/privacy-policy/">Privacy Policy</a>
-                </p>
-                <p>
-                    <a href="/return-refund-policy/">Return/Refund policy</a>
-                </p>
-                <p>
-                    <a href="/mdb-academy/">Students and universities</a>
-                </p>
-            </div>
-            <!--/.First column-->
-
-            <!--Second column-->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-r">
-                <h6 class="spacing font-weight-bold">
-                    <strong>Resources</strong>
-                </h6>
-                <hr class="info-color mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <a href="/material-design-for-bootstrap/">MDB jQuery</a>
-                </p>
-                <p>
-                    <a href="/angular/">MDB Angular</a>
-                </p>
-                <p>
-                    <a href="/react/">MDB React</a>
-                </p>
-                <p>
-                    <a href="/vue/">MDB Vue</a>
-                </p>
-                <p>
-                    <a href="/automated-app-start/">MDB BrandFlow</a>
-                </p>
-                <p>
-                    <a href="/freebies/">Free templates</a>
-                </p>
-                <p>
-                    <a href="/templates/">Premium templates</a>
-                </p>
-            </div>
-            <!--/.Second column-->
-
-            <!--Third column-->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-r">
-                <h6 class="spacing font-weight-bold">
-                    <strong>Free tutorials</strong>
-                </h6>
-                <hr class="info-color mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <a href="/bootstrap-tutorial/">Bootstrap &amp; web design</a>
-                </p>
-                <p>
-                    <a href="/wordpress-tutorial/">WordPress</a>
-                </p>
-                <p>
-                    <a href="/angular/angular-tutorial/">Angular</a>
-                </p>
-                <p>
-                    <a href="/automated-app-start/">Automation</a>
-                </p>
-                <p>
-                    <a href="/web-push-start/">Web Push Notifications</a>
-                </p>
-                <p>
-                    <a href="/bootstrap-gulp-tutorial/">Gulp &amp; customization</a>
-                </p>
-                <p>
-                    <a href="/mdbootstrap-webpack-tutorial">Webpack</a>
-                </p>
-            </div>
-
-            <!--Fourth column-->
-            <div class="col-md-4 col-lg-3 col-xl-3">
-                <h6 class="spacing font-weight-bold">
-                    <strong>Company</strong>
-                </h6>
-                <hr class="info-color mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>
-                    <i class="fa fa-envelope mr-3"></i> contact@mdbootstrap.com</p>
-                <!-- <p>
-                      <i class="fa fa-building mr-3"></i> Our story</p> -->
-                <p>
-                    <a href="/our-team/">
-                        <i class="fa fa-users mr-3"></i> Our team</a>
-                </p>
-                <p>
-                    <a href="/contact/">
-                        <i class="fa fa-bullhorn mr-3"></i> Company data</a>
-                </p>
-                <p>
-                    <a href="/mdbootstrap-press-pack/">
-                        <i class="fa fa-bullhorn mr-3"></i> For media</a>
-                </p>
-            </div>
-            <!--/.Fourth column-->
-
+    <div class="footer-copyright py-1 text-center amber darken-2 position-sticky ">
+        <p>
+            © 2013-2018 Copyright:
+            <a href="https://www.uparisclub.com">
+                <strong>uparisclub.com</strong>
+            </a>
+        </p>
+        <div class="font-small font-italic">
+            Version 1.0.0-beta, built and designed by <strong>LIU Yanxi</strong>
         </div>
-    </div>
-
-    <div class="footer-copyright py-1 text-center amber darken-2">
-        © 2018 Copyright:
-        <a href="https://www.uparisclub.com">
-            <strong>uparisclub.com</strong>
-        </a>
     </div>
 </footer>
