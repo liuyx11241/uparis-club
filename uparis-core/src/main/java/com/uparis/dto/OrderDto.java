@@ -16,6 +16,8 @@ public class OrderDto extends AbstractDto {
 
     private String paymentMode;
 
+    private String paymentToken;
+
     private PersonDto participant;
 
     private List<OptionDto> listOption;
@@ -44,6 +46,14 @@ public class OrderDto extends AbstractDto {
 
     public void setPaymentMode(String paymentMode) {
         this.paymentMode = paymentMode;
+    }
+
+    public String getPaymentToken() {
+        return paymentToken;
+    }
+
+    public void setPaymentToken(String paymentToken) {
+        this.paymentToken = paymentToken;
     }
 
     public String getStatus() {

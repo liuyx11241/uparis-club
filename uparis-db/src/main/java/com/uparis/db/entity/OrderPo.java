@@ -17,6 +17,8 @@ public class OrderPo extends AbstractPo {
     @Enumerated(EnumType.STRING)
     private TypePayment paymentMode;
 
+    private String paymentToken;
+
     @ManyToOne(optional = false)
     private TripPo trip;
 
@@ -55,6 +57,14 @@ public class OrderPo extends AbstractPo {
 
     public void setPaymentMode(TypePayment paymentMode) {
         this.paymentMode = paymentMode;
+    }
+
+    public String getPaymentToken() {
+        return paymentToken;
+    }
+
+    public void setPaymentToken(String paymentToken) {
+        this.paymentToken = paymentToken;
     }
 
     public TripPo getTrip() {

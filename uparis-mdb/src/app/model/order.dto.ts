@@ -19,6 +19,8 @@ export class Order extends Abstract {
 
     paymentMode: string;
 
+    paymentToken: string;
+
     listOption: Option[];
 
     listAnswer: Answer[];

@@ -1,5 +1,6 @@
 package com.uparis.util;
 
+import com.uparis.db.constant.TypePayment;
 import com.uparis.db.entity.*;
 import com.uparis.db.repo.OptionRepository;
 import com.uparis.db.repo.TripRepository;
@@ -110,6 +111,34 @@ public class OrderValidator {
             }
         }
 
+        return true;
+    }
+
+    public boolean validateParticipant(@NotNull List<OrderPo> listOrder) {
+        for (OrderPo orderPo : listOrder) {
+            PersonPo participant = orderPo.getParticipant();
+            if (!validatePerson(participant)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean validatePerson(PersonPo person) {
+        return Objects.nonNull(person)
+            && Objects.nonNull(person.getFirstName())
+            && Objects.nonNull(person.getLastName())
+            && Objects.nonNull(person.getBirthday())
+            && Objects.nonNull(person.getWechat())
+            && Objects.nonNull(person.getTelephone())
+            && Objects.nonNull(person.getEmail())
+            && Objects.nonNull(person.getAddress())
+            && Objects.nonNull(person.getCity())
+            && Objects.nonNull(person.getZipCode())
+            && Objects.nonNull(person.getCountry());
+    }
+
+    public boolean validatePayment(TypePayment typePayment, String paymentToken) {
         return true;
     }
 }
