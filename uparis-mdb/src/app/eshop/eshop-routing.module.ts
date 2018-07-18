@@ -8,6 +8,7 @@ import {CheckoutComponent} from "./checkout.component";
 import {TripResolver} from "../service/trip.resolver";
 import {OrderDetailComponent} from "./order-detail.component";
 import {OrderResolver} from "../service/order.resolver";
+import {OrderSearchComponent} from "./order-search.component";
 
 const routes: Routes = [
   {
@@ -21,10 +22,8 @@ const routes: Routes = [
         {path: 'checkout', component: CheckoutComponent,
             resolve: {trip: TripResolver}
         },
-        {path: 'order', component: OrderDetailComponent,
-            resolve: {listOrder: OrderResolver}
-        },
-        {path: 'order/:reference', component: OrderDetailComponent,
+        {path: 'orders', component: OrderSearchComponent},
+        {path: 'orders/:reference', component: OrderDetailComponent,
             resolve: {listOrder: OrderResolver}
         }
     ]

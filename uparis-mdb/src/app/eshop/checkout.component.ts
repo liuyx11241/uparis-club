@@ -115,11 +115,7 @@ export class CheckoutComponent implements OnInit {
             }
 
             this.postService.createOrders(listOrder).subscribe((order: Order) => {
-                this.router.navigate(['/eshop/order'], {
-                    queryParams: {
-                        reference: order.reference
-                    }
-                });
+                this.router.navigate(['/eshop/orders', order.reference]);
             });
         }
     }

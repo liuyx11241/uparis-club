@@ -18,8 +18,9 @@
             <h4 class="card-title">{{product.name}}</h4>
             <h5><uparis-tag-list [listTag]="product.listTag"></uparis-tag-list></h5>
             <p>{{product.shortDescription}}</p>
-            <button mat-raised-button color="primary" class="btn waves-light hoverable"
-                    [routerLink]="['/eshop/products', product.id]">Details
+            <button mat-raised-button="" color="primary" class="btn waves-light hoverable"
+                    [routerLink]="['/eshop/products', product.id]">
+                <mat-icon>navigate_next</mat-icon>详情
             </button>
         </div>
     </div>

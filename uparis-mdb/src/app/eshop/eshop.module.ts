@@ -23,6 +23,7 @@ import {TagListComponent} from './tag-list.component';
 import {LeaderCardComponent} from './leader-card.component';
 import { QuestionSelectorComponent } from './question-selector.component';
 import { AnswerListComponent } from './answer-list.component';
+import { OrderSearchComponent } from './order-search.component';
 
 @NgModule({
     imports: [
@@ -52,6 +53,7 @@ import { AnswerListComponent } from './answer-list.component';
         LeaderCardComponent,
         QuestionSelectorComponent,
         AnswerListComponent,
+        OrderSearchComponent,
     ],
     bootstrap: [EshopComponent]
 })

@@ -10,7 +10,6 @@ import {OrderResolver} from "./order.resolver";
 import {PersonResolver} from "./person.resolver";
 import {AuthService} from "./auth.service";
 import {ErrorInterceptor} from "./error.interceptor";
-import {JwtInterceptor} from "./jwt.interceptor";
 import {JwtModule} from "@auth0/angular-jwt";
 import {OAUTH2_ACCESS_TOKEN} from "./service.constants";
 
@@ -40,7 +39,6 @@ import {OAUTH2_ACCESS_TOKEN} from "./service.constants";
         OrderResolver,
         PersonResolver,
 
-        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     ]
 })
