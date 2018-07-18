@@ -1,7 +1,7 @@
 <ng-container [formGroup]="_paymentForm">
-    <mat-radio-group class="col-12" formControlName="paymentMode">
+    <mat-radio-group class="col-12" formControlName="paymentMode" (change)="onPaymentModeChange($event)">
         <div class="text-left pl-3">
-            <mat-radio-button color="primary" value="CARD" checked>
+            <mat-radio-button color="primary" value="STRIPE" checked>
                 在线支付
                 <i class="fa fa-cc-stripe"></i>
             </mat-radio-button>
@@ -15,23 +15,25 @@
     </mat-radio-group>
 
     <section [ngSwitch]="_paymentForm.value.paymentMode">
-        <ng-container *ngSwitchCase="'CARD'" [formGroup]="_cardForm">
+        <ng-container *ngSwitchCase="'STRIPE'" [formGroup]="_cardForm">
             <mat-form-field class="col-12">
-                <input matInput placeholder="卡号" formControlName="cardNumber">
+                <input matInput placeholder="卡号" formControlName="cardNumber" required>
             </mat-form-field>
             <mat-form-field class="col-12">
                 <input matInput placeholder="持卡人" formControlName="holder">
             </mat-form-field>
             <mat-form-field class="col-3 pr-0">
-                <input matInput placeholder="MM" formControlName="expiryMonth">
+                <input matInput placeholder="MM" formControlName="expiryMonth" required>
                 <span matSuffix>/</span>
             </mat-form-field>
             <mat-form-field class="col-3 pl-0">
-                <input matInput placeholder="YY" formControlName="expiryYear">
+                <input matInput placeholder="YY" formControlName="expiryYear" required>
             </mat-form-field>
             <mat-form-field class="col-6">
-                <input matInput placeholder="CVV" formControlName="cardVerificationValue">
+                <input matInput placeholder="CVV" formControlName="cardVerificationValue" required>
             </mat-form-field>
+
+            <span *ngIf="_paymentForm.hasError('402')" class="red-text font-small">您的银行卡信息有误，请检查后重新输入</span>
         </ng-container>
         <ng-container *ngSwitchCase="'CASH'">
             <span>您已选择现金付款，请于24小时内前往巴黎户外大本营付款</span>

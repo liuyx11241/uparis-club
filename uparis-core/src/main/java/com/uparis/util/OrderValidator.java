@@ -30,7 +30,7 @@ public class OrderValidator {
             if (Objects.isNull(orderPo.getTrip()) || Objects.isNull(orderPo.getTrip().getId())) {
                 return false;
             }
-            Optional<TripPo> tripPoOptional = repoTrip.findById(orderPo.getId());
+            Optional<TripPo> tripPoOptional = repoTrip.findById(orderPo.getTrip().getId());
             if (!tripPoOptional.isPresent()) {
                 return false;
             }

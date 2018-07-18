@@ -24,7 +24,7 @@ export class OrderDetailComponent implements OnInit {
     constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private service: PostService) {
         this._payerForm = FormHelper.newPersonForm(formBuilder);
         this._paymentForm = this.formBuilder.group({
-            paymentMode: this.formBuilder.control('CARD', Validators.required)
+            paymentMode: this.formBuilder.control('STRIPE', Validators.required)
         });
     }
 
@@ -55,12 +55,57 @@ export class OrderDetailComponent implements OnInit {
     }
 
     pay() {
-        if ((this._payer || FormHelper.isValid(this._payerForm)) && FormHelper.isValid(this._paymentForm)) {
-            this._listOrder.forEach(order => {
-                order.payer = this._payer ? this._payer : this._payerForm.value;
-                order.paymentMode = this._paymentForm.value.paymentMode;
-            });
-            this.service.updateOrders(this._listOrder).subscribe(data => this.init(data))
+        FormHelper.markAsTouched(this._paymentForm);
+        if (!this._payer) {
+            FormHelper.markAsTouched(this._payerForm);
         }
+
+        if ((this._payer || FormHelper.isValid(this._payerForm)) && FormHelper.isValid(this._paymentForm)) {
+            const orderRef = new Order();
+            orderRef.reference = this._order.reference;
+            orderRef.payer = this._payer ? this._payer : this._payerForm.value;
+            orderRef.paymentMode = this._paymentForm.value.paymentMode;
+            if ('STRIPE' === orderRef.paymentMode) {
+                this._payByStripe(this._paymentForm.get('stripe') as FormGroup, (status: number, response: any) => {
+                    if (status === 200) {
+                        orderRef.paymentToken = response.id;
+                        this.service.payOrders(orderRef).subscribe(
+                            (valud: Order) => {
+                                location.reload(true);
+                            },
+                            (error: string) => {
+                                switch (error) {
+                                    case '402': // payment failed
+                                        break;
+                                    case '408': // Time out
+                                        break;
+                                    case '412': // no stock
+                                        break;
+                                    case '400': //bad request
+                                        break;
+                                    case '500': //internal server
+                                        break;
+                                }
+                            });
+                    } else {
+                        this._paymentForm.setErrors({'402': response.error.message}, {emitEvent: true});
+                        console.log(response.error.message);
+                    }
+                });
+            }
+        }
+    }
+
+
+    private _payByStripe(stripeForm: FormGroup, callback: (status: number, response: any) => void): void {
+        let card = stripeForm.value;
+
+        (<any>window).Stripe.card.createToken({
+            number: card.cardNumber,
+            name: card.holder,
+            exp_month: card.expiryMonth,
+            exp_year: card.expiryYear,
+            cvc: card.cardVerificationValue
+        }, callback);
     }
 }

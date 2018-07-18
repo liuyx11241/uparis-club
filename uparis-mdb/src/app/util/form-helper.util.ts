@@ -16,7 +16,7 @@ export class FormHelper {
             ctl.markAsTouched();
         }
         if (ctl instanceof FormGroup) {
-            Object.keys(ctl).map(key => ctl.get(key)).forEach(control => FormHelper.markAsTouched(control))
+            Object.keys(ctl.controls).map(key => ctl.get(key)).forEach(control => FormHelper.markAsTouched(control))
         }
         if (ctl instanceof FormArray) {
             (ctl as FormArray).controls.forEach(control => FormHelper.markAsTouched(control))
@@ -149,8 +149,8 @@ export class FormHelper {
             cardNumber: formBuilder.control(null, [Validators.required]),
             holder: formBuilder.control(null),
             expiryMonth: formBuilder.control(null, [Validators.required, Validators.maxLength(2)]),
-            expiryYear: formBuilder.control(null, Validators.maxLength(2)),
-            cardVerificationValue: formBuilder.control(null, Validators.maxLength(3)),
+            expiryYear: formBuilder.control(null, [Validators.required, Validators.maxLength(2)]),
+            cardVerificationValue: formBuilder.control(null, [Validators.required, Validators.maxLength(3)]),
         });
     }
 }

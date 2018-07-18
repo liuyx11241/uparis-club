@@ -1,5 +1,6 @@
 package com.uparis.mvc;
 
+import com.stripe.exception.*;
 import com.stripe.model.Charge;
 import com.uparis.db.constant.TypeCurrency;
 import com.uparis.db.constant.TypeOrderStatus;
@@ -142,7 +143,7 @@ public class OrderController {
         if (Objects.isNull(reference)
             || !orderValidator.validatePerson(payer)
             || !orderValidator.validatePayment(typePayment, paymentToken)) {
-            return ResponseEntity.badRequest().body(orderRef);
+            return ResponseEntity.badRequest().build();
         }
 
         List<OrderPo> orderPoList = repoOrder.findAllByReference(reference);
@@ -166,14 +167,28 @@ public class OrderController {
             Charge charge = stripeClient.chargeCreditCard(paymentToken, totalAmount, currency.name());
             if (charge.getPaid()) {
                 updateOrderIntoSuccess(orderPoList);
-                return ResponseEntity.ok(orderRef);
+                OrderDto response = new OrderDto();
+                response.setReference(orderRef.getReference());
+                return ResponseEntity.ok(response);
             } else {
                 updateOrderIntoFailure(orderPoList);
-                return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(orderRef);
+                return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).build();
             }
-        } catch (Exception e) {
-            LOGGER.error("payment error", e);
-            return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(orderRef);
+        } catch (APIConnectionException e) {
+            LOGGER.error("APIConnectionException", e);
+            return ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).build();
+        } catch (InvalidRequestException e) {
+            LOGGER.error("InvalidRequestException", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (AuthenticationException e) {
+            LOGGER.error("AuthenticationException", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (APIException e) {
+            LOGGER.error("APIException", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (CardException e) {
+            LOGGER.error("CardException", e);
+            return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).build();
         }
     }
 

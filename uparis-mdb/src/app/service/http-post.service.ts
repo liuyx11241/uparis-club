@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Trip} from "../model/trip.dto";
 import {Order} from "../model/order.dto";
 
-const httpOptions = {headers: new HttpHeaders({'ContentType': 'application/json'})}
+const httpOptions = {headers: new HttpHeaders({'ContentType': 'application/json'})};
 
 @Injectable()
 export class PostService {
@@ -45,10 +45,10 @@ export class PostService {
         return this.http.post<Order>(`/api/order`, value, httpOptions);
     }
 
-    public updateOrders(value: Order[]): Observable<Order[]> {
-        if (value == null && value.length == 0) {
-            return of([]);
+    public payOrders(value: Order): Observable<Order> {
+        if (!value) {
+            return of();
         }
-        return this.http.put<Order[]>(`/api/order`, value, httpOptions);
+        return this.http.put<Order>(`/api/order`, value, httpOptions);
     }
 }

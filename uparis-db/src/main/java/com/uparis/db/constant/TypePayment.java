@@ -1,8 +1,8 @@
 package com.uparis.db.constant;
 
 public enum TypePayment {
-    // 信用卡在线支付
-    CARD,
+    // STRIPE在线支付
+    STRIPE,
     // 现金支付
     CASH,
     //todo Paypal支付

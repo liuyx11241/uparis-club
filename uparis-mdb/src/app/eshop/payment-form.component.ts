@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {FormHelper} from "../util/form-helper.util";
+import {MatRadioChange} from "@angular/material";
 
 @Component({
     selector: 'uparis-payment-form',
@@ -24,33 +25,14 @@ export class PaymentFormComponent implements OnInit {
     @Input()
     set paymentForm(value: FormGroup) {
         this._paymentForm = value;
+        this._paymentForm.addControl('stripe', this._cardForm);
     }
 
-    byCreditCard(): void {
-        FormHelper.markAsTouched(this._cardForm);
-        if (this._cardForm.invalid) {
-            return;
+    onPaymentModeChange($event: MatRadioChange) {
+        if ('STRIPE' === $event.value) {
+            this._paymentForm.addControl('stripe', this._cardForm);
+        } else {
+            this._paymentForm.removeControl('stripe');
         }
-
-        let card = this._cardForm.value;
-
-        (<any>window).Stripe.card.createToken({
-            number: card.cardNumber,
-            name: card.holder,
-            exp_month: card.expiryMonth,
-            exp_year: card.expiryYear,
-            cvc: card.cardVerificationValue
-        }, (status: number, response: any) => {
-            if (status === 200) {
-                let token = response.id;
-                this.chargeCard(token);
-            } else {
-                console.log(response.error.message);
-            }
-        });
-    }
-
-    chargeCard(token: string): void {
-        const headers = new Headers({'token': token, 'amount': 100});
     }
 }
