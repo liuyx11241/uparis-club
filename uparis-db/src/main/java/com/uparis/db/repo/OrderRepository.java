@@ -12,4 +12,6 @@ public interface OrderRepository extends JpaRepository<OrderPo, Long> {
     List<OrderPo> findAllByTrip_Id(Long idTrip);
 
     List<OrderPo> findAllByStatusEqualsAndTrip_Id(TypeOrderStatus status, Long idTrip);
+
+    long countByReferenceAndParticipant_BirthdayAndParticipant_Wechat(String reference, String birtyday, String wechat);
 }

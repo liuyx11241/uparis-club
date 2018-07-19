@@ -38,7 +38,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Value("${uparis.security.oauth2.refresh-token-validity}")
     private int refreshTokenValidity;
 
-    @Value("${uparis.security.signing-key}")
+    @Value("${uparis.security.oauth2.signing-key}")
     private String signingKey;
 
     @Autowired

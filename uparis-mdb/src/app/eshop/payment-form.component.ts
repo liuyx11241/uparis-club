@@ -6,7 +6,7 @@ import {MatRadioChange} from "@angular/material";
 @Component({
     selector: 'uparis-payment-form',
     templateUrl: './payment-form.component.html',
-    styles: []
+    // providers: [{provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'never'}}]
 })
 export class PaymentFormComponent implements OnInit {
 

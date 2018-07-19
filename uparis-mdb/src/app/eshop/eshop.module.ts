@@ -21,9 +21,9 @@ import {ModelModule} from "../model/model.module";
 import {PaymentFormComponent} from './payment-form.component';
 import {TagListComponent} from './tag-list.component';
 import {LeaderCardComponent} from './leader-card.component';
-import { QuestionSelectorComponent } from './question-selector.component';
-import { AnswerListComponent } from './answer-list.component';
-import { OrderSearchComponent } from './order-search.component';
+import {QuestionSelectorComponent} from './question-selector.component';
+import {AnswerListComponent} from './answer-list.component';
+import {OrderSearchFormComponent} from './order-search-form.component';
 
 @NgModule({
     imports: [
@@ -53,7 +53,7 @@ import { OrderSearchComponent } from './order-search.component';
         LeaderCardComponent,
         QuestionSelectorComponent,
         AnswerListComponent,
-        OrderSearchComponent,
+        OrderSearchFormComponent,
     ],
     bootstrap: [EshopComponent]
 })

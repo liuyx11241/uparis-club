@@ -3,23 +3,23 @@
     <!--<mat-radio-button color="primary" value="MALE">男</mat-radio-button>-->
     <!--<mat-radio-button color="primary" value="FEMALE">女</mat-radio-button>-->
     <!--</mat-radio-group>-->
-    <mat-form-field class="col-12">
+    <mat-form-field class="col-12" [appearance]="_appearance">
         <mat-select formControlName="gender" placeholder="性别" required>
             <mat-option value="MALE"><i class="fa fa-lg fa-male" matPrefix></i>男</mat-option>
             <mat-option value="FEMALE"><i class="fa fa-lg fa-female" matPrefix></i>女</mat-option>
         </mat-select>
         <i class="fa fa-lg material-icons col-1" matPrefix>face</i>
     </mat-form-field>
-    <mat-form-field class="col-7">
+    <mat-form-field class="col-7" [appearance]="_appearance">
         <!--<i class="fa fa-envelope" matPrefix></i>-->
         <input matInput type="text" placeholder="姓" formControlName="lastName" required>
         <i class="fa fa-lg material-icons col-1" matPrefix>account_box</i>
     </mat-form-field>
 
-    <mat-form-field class="col-5 pl-0">
+    <mat-form-field class="col-5 pl-0" [appearance]="_appearance">
         <input matInput type="text" placeholder="名" formControlName="firstName" required>
     </mat-form-field>
-    <mat-form-field class="col-12">
+    <mat-form-field class="col-12" [appearance]="_appearance">
         <input matInput placeholder="出生日期" formControlName="birthday" required
                [matDatepicker]="picker" (focus)="picker.opened=true">
         <i class="fa fa-lg fa-birthday-cake col-1" matPrefix></i>
@@ -27,42 +27,42 @@
         <mat-datepicker #picker color="primary"></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field class="col-12">
+    <mat-form-field class="col-12" [appearance]="_appearance">
         <input matInput type="text" placeholder="微信ID" formControlName="wechat" required>
         <i class="fa fa-lg fa-wechat col-1" matPrefix></i>
     </mat-form-field>
 
-    <mat-form-field class="col-12">
+    <mat-form-field class="col-12"[appearance]="_appearance">
         <input matInput type="tel" placeholder="联系电话" formControlName="telephone" required>
         <i class="fa fa-lg material-icons col-1" matPrefix>phone_iphone</i>
     </mat-form-field>
 
-    <mat-form-field class="col-12">
+    <mat-form-field class="col-12" [appearance]="_appearance">
         <input matInput type="email" placeholder="电子邮箱" formControlName="email" required>
         <i class="fa fa-lg material-icons col-1" matPrefix>email</i>
         <mat-error>请输入有效电子邮箱</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="col-12">
+    <mat-form-field class="col-12" [appearance]="_appearance">
         <input matInput type="text" placeholder="联系地址" formControlName="address" required>
         <i class="fa fa-lg material-icons col-1" matPrefix>home</i>
     </mat-form-field>
 
-    <mat-form-field class="col-7">
+    <mat-form-field class="col-7" [appearance]="_appearance">
         <input matInput type="text" placeholder="补充地址" formControlName="addressComplement">
         <i class="fa fa-lg material-icons col-1 transparent-bd" matPrefix>home</i>
     </mat-form-field>
 
-    <mat-form-field class="col-5 pl-0">
+    <mat-form-field class="col-5 pl-0" [appearance]="_appearance">
         <input matInput type="text" placeholder="邮编" formControlName="zipCode" required>
     </mat-form-field>
 
-    <mat-form-field class="col-7">
+    <mat-form-field class="col-7" [appearance]="_appearance">
         <input matInput type="text" placeholder="城市" formControlName="city" required>
         <i class="fa fa-lg material-icons col-1 transparent-bd" matPrefix>home</i>
     </mat-form-field>
 
-    <mat-form-field class="col-5 pl-0">
+    <mat-form-field class="col-5 pl-0" [appearance]="_appearance">
         <input matInput type="text" placeholder="国家" formControlName="country" required>
     </mat-form-field>
 </ng-container>

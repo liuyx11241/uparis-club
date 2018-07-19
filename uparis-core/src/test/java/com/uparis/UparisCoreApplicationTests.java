@@ -21,7 +21,7 @@ public class UparisCoreApplicationTests {
     @Test
     public void testHashCode() {
         for (int i = 0; i < 100; i++) {
-            String value = hashCodeService.generate(16);
+            String value = hashCodeService.generate();
             System.out.println(value.matches("\\w+") + "\t" + value);
         }
     }

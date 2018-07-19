@@ -1,0 +1,28 @@
+<section class="row animated bounceInDown ">
+    <div class="col-12 col-md-6 col-xl-4 mb-3 mx-auto card">
+        <div class="card-header h5-responsive white">
+            查询订单
+        </div>
+        <div class="card-body" [formGroup]="_orderForm">
+            <mat-form-field class="col-12">
+                <input matInput type="text" placeholder="订单编号" formControlName="reference" required>
+            </mat-form-field>
+            <mat-form-field class="col-12">
+                <input matInput placeholder="队员生日" [matDatepicker]="picker" (focus)="picker.opened=true" formControlName="birthday"
+                       required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker color="primary"></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-12">
+                <input matInput type="text" placeholder="队员微信" formControlName="wechat" required>
+            </mat-form-field>
+            <p class="text-danger font-small" *ngIf="_orderNotFound">您查询的订单不存在</p>
+            <button mat-raised-button color="primary" (click)="searchOrder()">
+                <mat-icon>search</mat-icon>
+                查询
+            </button>
+        </div>
+    </div>
+</section>
+
+<section class="row"></section>

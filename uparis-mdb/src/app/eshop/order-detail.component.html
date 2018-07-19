@@ -14,7 +14,7 @@
         </div>
         <div *ngIf="_order.status==='SUCCESS'" class="col-12 mt-5">
             <p class="text-success">请扫描二维码加入微信群</p>
-            <img [src]="_order.trip.urlCodeQR" class="img-fluid" alt="微信群二维码">
+            <img *ngIf="_order.trip.urlCodeQR" [src]="_order.trip.urlCodeQR" class="img-fluid" alt="微信群二维码">
         </div>
     </div>
 </section>
@@ -74,7 +74,7 @@
             <div class="card-footer white">
                 <button mat-raised-button color="primary" (click)="pay()">
                     <mat-icon>payment</mat-icon>
-                    确认付款
+                    确认
                 </button>
             </div>
         </div>

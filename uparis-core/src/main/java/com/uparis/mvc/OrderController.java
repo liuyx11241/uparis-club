@@ -18,13 +18,14 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,12 +63,13 @@ public class OrderController {
     @Autowired
     private StripeClient stripeClient;
 
-    @Value("${uparis.order.reference.length}")
-    private int referenceLength;
+    @Autowired
+    private TextEncryptor textEncryptor;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'LEADER')")
     public Page<OrderDto> getOrders(
         @RequestParam Map<String, String> filter,
         @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
@@ -85,10 +87,30 @@ public class OrderController {
     }
 
     @GetMapping("/{reference}")
-    public List<OrderDto> getOrders(@PathVariable String reference) {
-        return repoOrder.findAllByReference(reference).stream()
-            .map(orderPo -> modelMapper.map(orderPo, OrderDto.class))
-            .collect(Collectors.toList());
+    public ResponseEntity<List<OrderDto>> getOrders(@PathVariable String reference) {
+        String decrypt;
+        try {
+            decrypt = textEncryptor.decrypt(reference);
+        } catch (Exception e) {
+            LOGGER.error("receive a illegal reference");
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.ok(repoOrder.findAllByReference(decrypt).stream()
+                                     .map(orderPo -> modelMapper.map(orderPo, OrderDto.class))
+                                     .collect(Collectors.toList()));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<OrderDto> searchOrder(
+        @RequestParam(value = "reference") String reference,
+        @RequestParam(value = "birthday") String birthday,
+        @RequestParam(value = "wechat") String wechat) {
+        OrderDto response = new OrderDto();
+        if (repoOrder.countByReferenceAndParticipant_BirthdayAndParticipant_Wechat(reference, birthday, wechat) > 0) {
+            response.setReference(textEncryptor.encrypt(reference));
+        }
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
@@ -105,7 +127,7 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).build();
         }
 
-        String orderReference = hashCodeService.generate(referenceLength);
+        String orderReference = hashCodeService.generate();
         for (OrderPo orderPo : orderPoList) {
             orderPo.setAmount(calculateOrderAmount(orderPo));
             // todo : Detect duplicated Participant
@@ -128,7 +150,7 @@ public class OrderController {
         }
 
         OrderDto response = new OrderDto();
-        response.setReference(orderReference);
+        response.setReference(textEncryptor.encrypt(orderReference));
         return ResponseEntity.ok(response);
     }
 

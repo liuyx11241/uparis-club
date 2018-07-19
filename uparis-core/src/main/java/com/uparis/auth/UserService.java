@@ -14,7 +14,7 @@ import java.util.Arrays;
 @Service
 public class UserService implements UserDetailsService {
 
-    @Value("${uparis.security.encoding-strength}")
+    @Value("${uparis.security.oauth2.encoding-strength}")
     private int encodingStrength;
 
     @Bean

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -29,26 +30,28 @@ public class PersonController {
     private ModelMapper modelMapper;
 
     @GetMapping("/{idPerson}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'LEADER')")
     public PersonDto getPerson(@PathVariable Long idPerson) {
         return repoPerson.findById(idPerson).map(personPo -> modelMapper.map(personPo, PersonDto.class)).orElse(null);
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'LEADER')")
     public Page<PersonDto> getPersons(
-            @RequestParam Map<String, String> filter,
-            @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
-            @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
-            @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
-            @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
+        @RequestParam Map<String, String> filter,
+        @RequestParam(value = "pageIndex", required = false, defaultValue = "0") Integer pageIndex,
+        @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize,
+        @RequestParam(value = "sort", required = false, defaultValue = "id") String sort,
+        @RequestParam(value = "direction", required = false, defaultValue = "ASC") String direction) {
         if (filter.containsKey("idTrip")) {
             return new PageImpl<>(repoOrder.findAllByStatusEqualsAndTrip_Id(
-                    TypeOrderStatus.valueOf(filter.get("orderStatus")),
-                    Long.valueOf(filter.get("idTrip")))
+                TypeOrderStatus.valueOf(filter.get("orderStatus")),
+                Long.valueOf(filter.get("idTrip")))
             ).map(orderPo -> modelMapper.map(orderPo.getParticipant(), PersonDto.class));
         }
 
         Page<PersonPo> personPoPage = repoPerson.findAll(
-                PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
+            PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
         return personPoPage.map(personPo -> modelMapper.map(personPo, PersonDto.class));
     }
 }

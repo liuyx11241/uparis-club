@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Value("${uparis.security.security-realm}")
+    @Value("${uparis.security.oauth2.security-realm}")
     private String securityRealm;
 
     public WebSecurityConfig(UserService userDetailsService) {

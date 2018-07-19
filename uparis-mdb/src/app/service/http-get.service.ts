@@ -91,6 +91,12 @@ export class GetService {
         return this.http.get<Order[]>(`/api/order/${reference}`);
     }
 
+    public searchOrder(criteria: { reference: string, birtyday: string, wechat: string }): Observable<Order> {
+        return this.http.get<Order>(`/api/order/search`, {
+            params: criteria
+        });
+    }
+
     public getPerson(idPerson: string): Observable<Person> {
         return this.http.get<Person>(`/api/person/${idPerson}`);
     }
