@@ -23,14 +23,6 @@ export class GetService {
         return httpParams;
     }
 
-    public getAllProducts(): Observable<Product[]> {
-        let httpParams = new HttpParams()
-            .set('status', 'ACTIVE');
-        return this.http.get<Product[]>("/api/product", {params: httpParams}).pipe(
-            map(value => value['content'])
-        );
-    }
-
     public getAllTags(): Observable<Tag[]> {
         return this.http.get<Tag[]>(`/api/tag`);
     }
