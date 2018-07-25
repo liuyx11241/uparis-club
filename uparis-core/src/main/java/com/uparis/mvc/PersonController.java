@@ -50,8 +50,25 @@ public class PersonController {
             ).map(orderPo -> modelMapper.map(orderPo.getParticipant(), PersonDto.class));
         }
 
-        Page<PersonPo> personPoPage = repoPerson.findAll(
-            PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
+        PageRequest pageable = PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort));
+        if (filter.containsKey("grantedAuthority")) {
+            return repoPerson.findAllByListGrantedAuthority(filter.get("grantedAuthority"), pageable)
+                .map(personPo -> modelMapper.map(personPo, PersonDto.class));
+        }
+
+        Page<PersonPo> personPoPage = repoPerson.findAll(pageable);
         return personPoPage.map(personPo -> modelMapper.map(personPo, PersonDto.class));
+    }
+
+    @PostMapping
+    public Long createPerson(@RequestBody PersonDto personDto) {
+        personDto.setId(null);
+        return updatePerson(personDto);
+    }
+
+    @PutMapping
+    public Long updatePerson(@RequestBody PersonDto personDto) {
+        PersonPo personPo = modelMapper.map(personDto, PersonPo.class);
+        return repoPerson.save(personPo).getId();
     }
 }

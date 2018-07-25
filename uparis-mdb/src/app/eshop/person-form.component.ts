@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FormGroup} from "@angular/forms";
-import {MAT_LABEL_GLOBAL_OPTIONS} from "@angular/material";
+import {MAT_LABEL_GLOBAL_OPTIONS, MatAutocompleteSelectedEvent} from "@angular/material";
 
 @Component({
     selector: 'uparis-person-form',
@@ -25,5 +25,9 @@ export class PersonFormComponent {
     @Input()
     set appearance(value: string) {
         this._appearance = value;
+    }
+
+    selectCountry($event: MatAutocompleteSelectedEvent) {
+        this._personForm.patchValue({'country': $event.option.value}, {onlySelf: true});
     }
 }

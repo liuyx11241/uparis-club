@@ -12,13 +12,13 @@ public class OrderDto extends AbstractDto {
 
     private BigDecimal amount;
 
-    private PersonDto payer;
+    private PersonSimpleDto payer;
 
     private String paymentMode;
 
     private String paymentToken;
 
-    private PersonDto participant;
+    private PersonSimpleDto participant;
 
     private List<OptionDto> listOption;
 
@@ -32,11 +32,11 @@ public class OrderDto extends AbstractDto {
         this.reference = reference;
     }
 
-    public PersonDto getPayer() {
+    public PersonSimpleDto getPayer() {
         return payer;
     }
 
-    public void setPayer(PersonDto payer) {
+    public void setPayer(PersonSimpleDto payer) {
         this.payer = payer;
     }
 
@@ -72,11 +72,11 @@ public class OrderDto extends AbstractDto {
         this.amount = amount;
     }
 
-    public PersonDto getParticipant() {
+    public PersonSimpleDto getParticipant() {
         return participant;
     }
 
-    public void setParticipant(PersonDto participant) {
+    public void setParticipant(PersonSimpleDto participant) {
         this.participant = participant;
     }
 

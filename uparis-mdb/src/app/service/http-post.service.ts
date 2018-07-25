@@ -4,6 +4,7 @@ import {Observable, of} from "rxjs/index";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Trip} from "../model/trip.dto";
 import {Order} from "../model/order.dto";
+import {Person} from "../model/person.dto";
 
 const httpOptions = {headers: new HttpHeaders({'ContentType': 'application/json'})};
 
@@ -36,6 +37,17 @@ export class PostService {
             return this.http.post<number>(`/api/trip`, value, httpOptions);
         }
 
+    }
+
+    public savePerson(value: Person): Observable<number> {
+        if (value == null) {
+            return of();
+        }
+        if (value.id) {
+            return this.http.put<number>(`/api/person`, value, httpOptions);
+        } else {
+            return this.http.post<number>(`/api/person`, value, httpOptions);
+        }
     }
 
     public createOrders(value: Order[]): Observable<Order> {

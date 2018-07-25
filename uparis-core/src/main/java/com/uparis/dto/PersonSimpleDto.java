@@ -1,66 +1,38 @@
-package com.uparis.db.entity;
+package com.uparis.dto;
 
-import com.uparis.db.constant.TypeGender;
+public class PersonSimpleDto extends AbstractDto {
 
-import javax.persistence.*;
-import java.util.List;
-
-@Entity
-@Table(name = "T_PERSON", uniqueConstraints = {@UniqueConstraint(columnNames = {"wechat", "birthday"})})
-public class PersonPo extends AbstractPo {
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TypeGender gender;
+    private String gender;
 
     private String fullName;
 
-    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
     private String birthday;
 
-    @Column(nullable = false)
     private String wechat;
 
-    @Column(nullable = false)
     private String telephone;
 
-    @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
     private String address;
 
     private String addressComplement;
 
-    @Column(nullable = false)
     private String zipCode;
 
-    @Column(nullable = false)
     private String city;
 
-    @Column(nullable = false)
     private String country;
 
-    private String portraitUrl;
-
-    private String selfDescription;
-
-    @ElementCollection
-    @CollectionTable(name = "R_PERSON_GRANTED_AUTHORITY")
-    @Column(name = "GRANTED_AUTHORITY")
-    private List<String> listGrantedAuthority;
-
-    public TypeGender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(TypeGender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -158,29 +130,5 @@ public class PersonPo extends AbstractPo {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public String getPortraitUrl() {
-        return portraitUrl;
-    }
-
-    public void setPortraitUrl(String portraitUrl) {
-        this.portraitUrl = portraitUrl;
-    }
-
-    public String getSelfDescription() {
-        return selfDescription;
-    }
-
-    public void setSelfDescription(String selfDescription) {
-        this.selfDescription = selfDescription;
-    }
-
-    public List<String> getListGrantedAuthority() {
-        return listGrantedAuthority;
-    }
-
-    public void setListGrantedAuthority(List<String> listGrantedAuthority) {
-        this.listGrantedAuthority = listGrantedAuthority;
     }
 }

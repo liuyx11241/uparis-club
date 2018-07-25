@@ -39,12 +39,6 @@ public class TripPo extends AbstractPo {
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<QuestionPo> listQuestion;
 
-    @ManyToMany(cascade = {CascadeType.MERGE})
-    @JoinTable(name = "R_TRIP_LEADER",
-            joinColumns = @JoinColumn(name = "ID_USER"),
-            inverseJoinColumns = @JoinColumn(name = "ID_TRIP"))
-    private List<UserPo> listLeader;
-
     public TripPo() {
         // Empty Constructor
     }

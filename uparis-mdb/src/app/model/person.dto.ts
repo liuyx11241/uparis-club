@@ -28,4 +28,9 @@ export class Person extends Abstract {
 
     country: string;
 
+    portraitUrl: string;
+
+    selfDescription: string;
+
+    listGrantedAuthority: string[];
 }

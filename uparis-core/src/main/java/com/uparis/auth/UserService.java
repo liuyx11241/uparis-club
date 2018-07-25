@@ -17,6 +17,12 @@ public class UserService implements UserDetailsService {
     @Value("${uparis.security.oauth2.encoding-strength}")
     private int encodingStrength;
 
+    @Value("${uparis.security.oauth2.admin-username}")
+    private String adminUsername;
+
+    @Value("${uparis.security.oauth2.admin-password}")
+    private String adminPassword;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -24,8 +30,8 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if ("admin".equals(username)) {
-            return new User("admin", passwordEncoder().encode("admin"), Arrays.asList(EnumRole.values()));
+        if (adminUsername.equals(username)) {
+            return new User(username, passwordEncoder().encode(adminPassword), Arrays.asList(EnumRole.values()));
         }
         throw new UsernameNotFoundException(String.format("User not found : %s", username));
     }

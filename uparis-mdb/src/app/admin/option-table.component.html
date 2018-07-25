@@ -1,11 +1,11 @@
 <mat-toolbar *ngIf="!_formHelper.disabled">
     <button type="button" mat-button (click)="addLevel()">
         <mat-icon>add_box</mat-icon>
-        添加新层级
+        新层级
     </button>
     <button type="button" mat-button (click)="addOption()" *ngIf="getOptionLevels().length > 0">
         <mat-icon>add_circle_outline</mat-icon>
-        添加新选项
+        新选项
     </button>
 </mat-toolbar>
 <ng-container *ngFor="let level of getOptionLevels()">

@@ -81,8 +81,13 @@ public class OrderController {
                 .map(orderPo -> modelMapper.map(orderPo, OrderDto.class));
         }
 
-        Page<OrderPo> orderPoPage = repoOrder.findAll(
-            PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort)));
+        PageRequest pageable = PageRequest.of(pageIndex, pageSize, Sort.by(Sort.Direction.fromString(direction), sort));
+        if (filter.containsKey("idParticipant")) {
+            return repoOrder.findAllByParticipant_Id(Long.valueOf(filter.get("idParticipant")), pageable)
+                .map(orderPo -> modelMapper.map(orderPo, OrderDto.class));
+        }
+
+        Page<OrderPo> orderPoPage = repoOrder.findAll(pageable);
         return orderPoPage.map(orderPo -> modelMapper.map(orderPo, OrderDto.class));
     }
 

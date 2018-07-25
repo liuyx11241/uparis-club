@@ -2,6 +2,10 @@
     <button mat-icon-button (click)="reload()">
         <mat-icon>refresh</mat-icon>
     </button>
+    <button mat-button [routerLink]="['/admin/persons', 'new']" *ngIf="!_idTrip">
+        <mat-icon>add_box</mat-icon>
+        新用户
+    </button>
 </mat-toolbar>
 <mat-table #table [dataSource]="dataSource" matSort multiTemplateDataRows>
     <ng-container matColumnDef="id">
@@ -36,6 +40,23 @@
     <ng-container matColumnDef="address">
         <mat-header-cell *matHeaderCellDef mat-sort-header>地址</mat-header-cell>
         <mat-cell *matCellDef="let row">{{row.addressComplement}} {{row.address}} {{row.zipCode}} {{row.city}} {{row.country}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="listGrantedAuthority">
+        <mat-header-cell *matHeaderCellDef>
+            <mat-select (selectionChange)="onSelectionChange($event)" *ngIf="!_idTrip">
+                <mat-option>全部</mat-option>
+                <mat-option value="ROLE_ADMIN">管理员</mat-option>
+                <mat-option value="ROLE_LEADER">领队</mat-option>
+                <mat-option value="ROLE_CLIENT">普通用户</mat-option>
+            </mat-select>
+            <ng-container *ngIf="_idTrip">授权</ng-container>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <ul class="list-unstyled my-0">
+                <li *ngFor="let authority of row.listGrantedAuthority">{{authority | role}}</li>
+            </ul>
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">

@@ -70,10 +70,11 @@ export class OrderDetailComponent implements OnInit {
                     if (status === 200) {
                         orderRef.paymentToken = response.id;
                         this.service.payOrders(orderRef).subscribe(
-                            (valud: Order) => {
+                            (value: Order) => {
                                 location.reload(true);
                             },
                             (error: string) => {
+                                console.info(error);
                                 switch (error) {
                                     case '402': // payment failed
                                         break;
@@ -81,9 +82,9 @@ export class OrderDetailComponent implements OnInit {
                                         break;
                                     case '412': // no stock
                                         break;
-                                    case '400': //bad request
+                                    case '400': // bajd request
                                         break;
-                                    case '500': //internal server
+                                    case '500': // internal server
                                         break;
                                 }
                             });

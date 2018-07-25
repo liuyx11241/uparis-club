@@ -2,7 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {GenderPipe} from "./gender.pipe";
 import {StatusPipe} from "./status.pipe";
-import { MoneyPipe } from './money.pipe';
+import {MoneyPipe} from './money.pipe';
+import {RolePipe} from "./role.pipe";
 
 @NgModule({
     imports: [
@@ -11,12 +12,14 @@ import { MoneyPipe } from './money.pipe';
     declarations: [
         GenderPipe,
         StatusPipe,
-        MoneyPipe
+        MoneyPipe,
+        RolePipe,
     ],
     exports: [
         GenderPipe,
         StatusPipe,
-        MoneyPipe
+        MoneyPipe,
+        RolePipe,
     ]
 
 })

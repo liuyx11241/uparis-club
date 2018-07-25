@@ -41,6 +41,7 @@ const routes: Routes = [
                     },
                     {path: 'orders', component: OrderTableComponent},
                     {path: 'persons', component: PersonTableComponent},
+                    {path: 'persons/new', component: PersonFormComponent},
                     {path: 'persons/:idPerson', component: PersonFormComponent,
                         resolve: {
                             person: PersonResolver

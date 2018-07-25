@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort} from '@angular/material';
+import {MatPaginator, MatSelectChange, MatSort} from '@angular/material';
 import {PersonTableDataSource} from './person-table-datasource';
 import {GetService} from "../service/http-get.service";
 import {AuthService} from "../service/auth.service";
@@ -16,7 +16,7 @@ export class PersonTableComponent implements OnInit, AfterViewInit {
 
     /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
     displayedColumns = [
-        'id', 'gender', 'lastName', 'birthday', 'wechat', 'telephone', 'email', 'address', 'actions'];
+        'id', 'gender', 'lastName', 'birthday', 'wechat', 'telephone', 'email', 'address', 'listGrantedAuthority', 'actions'];
 
     private _idTrip: number;
 
@@ -43,5 +43,15 @@ export class PersonTableComponent implements OnInit, AfterViewInit {
             idTrip: this._idTrip,
             orderStatus: 'SUCCESS'
         } : {});
+    }
+
+    onSelectionChange(event: MatSelectChange): void {
+        if (event.value) {
+            this.dataSource.reload({
+                grantedAuthority: event.value
+            });
+        } else {
+            this.reload();
+        }
     }
 }

@@ -28,8 +28,9 @@
     </mat-form-field>
 
     <mat-form-field class="col-12" [appearance]="_appearance">
-        <input matInput type="text" placeholder="微信ID" formControlName="wechat" required>
+        <input matInput type="text" placeholder="微信号" formControlName="wechat" required>
         <i class="fa fa-lg fa-wechat col-1" matPrefix></i>
+        <mat-hint align="end">请填写<strong>微信号</strong>而非微信昵称</mat-hint>
     </mat-form-field>
 
     <mat-form-field class="col-12"[appearance]="_appearance">
@@ -40,7 +41,7 @@
     <mat-form-field class="col-12" [appearance]="_appearance">
         <input matInput type="email" placeholder="电子邮箱" formControlName="email" required>
         <i class="fa fa-lg material-icons col-1" matPrefix>email</i>
-        <mat-error>请输入有效电子邮箱</mat-error>
+        <mat-hint align="end">someone@example.com</mat-hint>
     </mat-form-field>
 
     <mat-form-field class="col-12" [appearance]="_appearance">
@@ -63,6 +64,9 @@
     </mat-form-field>
 
     <mat-form-field class="col-5 pl-0" [appearance]="_appearance">
-        <input matInput type="text" placeholder="国家" formControlName="country" required>
+        <input matInput type="text" placeholder="国家" formControlName="country" required [matAutocomplete]="auto">
     </mat-form-field>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectCountry($event)">
+        <mat-option value="FRANCE">FRANCE</mat-option>
+    </mat-autocomplete>
 </ng-container>

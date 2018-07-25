@@ -126,7 +126,7 @@ export class FormHelper {
                 'lastName': [person ? person.lastName : null, Validators.required],
                 'birthday': [person ? person.birthday : null, Validators.required],
                 'wechat': [person ? person.wechat : null, Validators.required],
-                'telephone': [person ? person.telephone : null, Validators.required],
+                'telephone': [person ? person.telephone : null, [Validators.required, Validators.pattern('\\\+?[0-9]+')]],
                 'email': [person ? person.email : null, [Validators.required, Validators.email]],
                 'address': [person ? person.address : null, Validators.required],
                 'addressComplement': [person ? person.addressComplement : null,],

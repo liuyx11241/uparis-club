@@ -19,6 +19,8 @@ export class OrderTableComponent implements OnInit, AfterViewInit {
 
     private _idTrip: number;
 
+    private _idParticipant: number;
+
     constructor(private service: GetService, private auth: AuthService) {
     }
 
@@ -27,7 +29,7 @@ export class OrderTableComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        if (this.auth.authenticated && !this._idTrip) {
+        if (this.auth.authenticated && !this._idTrip && !this._idParticipant) {
             this.reload();
         }
     }
@@ -37,7 +39,19 @@ export class OrderTableComponent implements OnInit, AfterViewInit {
         this._idTrip = value;
     }
 
+    @Input()
+    set idParticipant(value: number) {
+        this._idParticipant = value;
+    }
+
     reload(): void {
-        this.dataSource.reload(this._idTrip ? {idTrip: this._idTrip} : {});
+        let filter = {};
+        if (this._idTrip) {
+            filter['idTrip'] = this._idTrip;
+        } else if (this._idParticipant) {
+            filter['idParticipant'] = this._idParticipant;
+        }
+
+        this.dataSource.reload(filter);
     }
 }

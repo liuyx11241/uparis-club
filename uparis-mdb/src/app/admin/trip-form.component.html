@@ -99,7 +99,7 @@
 
         <mat-tab #tabQuestion>
             <ng-template mat-tab-label>
-                <mat-icon [class.amber-text]="tabQuestion.isActive">translate</mat-icon>
+                <i [class.amber-text]="tabQuestion.isActive" class="fa fa-lg fa-question-circle-o mr-1"></i>
                 <span [class.amber-text]="tabQuestion.isActive">报名表</span>
             </ng-template>
             <uparis-question-table class="row w-100" [formHelper]="_formHelper"
