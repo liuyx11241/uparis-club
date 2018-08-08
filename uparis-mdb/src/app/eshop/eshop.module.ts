@@ -24,6 +24,7 @@ import {LeaderCardComponent} from './leader-card.component';
 import {QuestionSelectorComponent} from './question-selector.component';
 import {AnswerListComponent} from './answer-list.component';
 import {OrderSearchFormComponent} from './order-search-form.component';
+import {ServiceAgreementComponent} from './service-agreement.component';
 
 @NgModule({
     imports: [
@@ -54,6 +55,10 @@ import {OrderSearchFormComponent} from './order-search-form.component';
         QuestionSelectorComponent,
         AnswerListComponent,
         OrderSearchFormComponent,
+        ServiceAgreementComponent,
+    ],
+    entryComponents: [
+        ServiceAgreementComponent,
     ],
     bootstrap: [EshopComponent]
 })

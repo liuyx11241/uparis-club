@@ -3,9 +3,10 @@ import {CommonModule} from '@angular/common';
 import {
     MatAutocompleteModule,
     MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule, MatChipsModule,
+    MatCheckboxModule,
+    MatChipsModule,
     MatDatepickerModule,
+    MatDialogModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
@@ -19,7 +20,6 @@ import {
     MatSidenavModule,
     MatSnackBarModule,
     MatSortModule,
-    MatStepperModule,
     MatTableModule,
     MatTabsModule,
     MatToolbarModule
@@ -52,7 +52,7 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
         MatDatepickerModule,
         MatChipsModule,
         MatAutocompleteModule,
-
+        MatDialogModule,
     ],
     exports: [
         MDBBootstrapModule,
@@ -78,6 +78,7 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
         MatDatepickerModule,
         MatChipsModule,
         MatAutocompleteModule,
+        MatDialogModule
     ]
 })
 export class MaterialModule {

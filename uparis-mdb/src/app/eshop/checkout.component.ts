@@ -7,6 +7,8 @@ import {PostService} from "../service/http-post.service";
 import {DateFormatter} from "../util/date-formatter.util";
 import {FormHelper} from "../util/form-helper.util";
 import {Answer} from "../model/answer.dto";
+import {MatDialog} from "@angular/material";
+import {ServiceAgreementComponent} from "./service-agreement.component";
 
 @Component({
     selector: 'uparis-checkout',
@@ -21,7 +23,8 @@ export class CheckoutComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private formBuilder: FormBuilder,
-                private postService: PostService) {
+                private postService: PostService,
+                private dialog: MatDialog) {
         this._listOrderForm = this.formBuilder.array([]);
     }
 
@@ -118,5 +121,9 @@ export class CheckoutComponent implements OnInit {
                 this.router.navigate(['/eshop/orders', order.reference]);
             });
         }
+    }
+
+    optionServiceAgreement(): void {
+        const dialogRef = this.dialog.open(ServiceAgreementComponent);
     }
 }

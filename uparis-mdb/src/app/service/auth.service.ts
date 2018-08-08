@@ -3,8 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {OAUTH2_ACCESS_TOKEN, OAUTH2_TOKEN_PASSWORD, OAUTH2_TOKEN_USERNAME} from "./service.constants";
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {Observable, throwError} from "rxjs/index";
-import {catchError} from "rxjs/internal/operators";
+import {Observable} from "rxjs/index";
 
 @Injectable()
 export class AuthService {
